@@ -18,7 +18,7 @@ const Index = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg
+          backgroundImage: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg"
         }}
       >
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
@@ -29,7 +29,7 @@ const Index = () => {
         <div className="flex items-center space-x-4">
           <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
             <img 
-              src=' https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg'
+              src=" https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg"
               alt="Amblé Radio" 
               className="w-10 h-8 object-contain"
             />
