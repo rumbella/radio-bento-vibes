@@ -29,7 +29,7 @@ const Index = () => {
         <div className="flex items-center space-x-4">
           <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
             <img 
-              src="/lovable-uploads/298d2b4c-882d-4699-ae78-2ef0a6515c91.png" 
+              src=' https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg'
               alt="Amblé Radio" 
               className="w-10 h-8 object-contain"
             />
