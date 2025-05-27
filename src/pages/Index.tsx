@@ -29,7 +29,7 @@ const Index = () => {
         <div className="flex items-center space-x-4">
           <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
             <img 
-              src="https://images.squarespace-cdn.com/content/v1/5c94e9bd51f4d461df990539/1564051525149-H1I5HXV8ZIOCETKQK2SY/amble-logo.png?format=500w"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s"
               alt="Amblé Radio" 
               className="w-10 h-8 object-contain"
             />
