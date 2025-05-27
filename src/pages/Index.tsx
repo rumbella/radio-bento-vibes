@@ -21,7 +21,7 @@ const Index = () => {
           backgroundImage: "url('https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg')"
         }}
       >
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"></div>
       </div>
 
       {/* Header */}
@@ -48,194 +48,175 @@ const Index = () => {
         </nav>
       </header>
 
-      {/* Main Content Grid - Left and Right Sides */}
-      <div className="relative z-10 p-6 grid grid-cols-12 gap-6 h-[calc(100vh-200px)]">
+      {/* Main Content Grid - Reduced Width for More Background Visibility */}
+      <div className="relative z-10 flex justify-between h-[calc(100vh-200px)] px-12">
         
-        {/* Left Side */}
-        <div className="col-span-6 grid grid-cols-6 gap-6 h-full">
+        {/* Left Side - Reduced to 25% of screen */}
+        <div className="w-1/4 grid grid-cols-2 gap-4">
           
-          {/* Current Show - Narrower Card */}
-          <Card className="col-span-4 row-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-6 flex flex-col justify-between">
+          {/* Current Show - Spanning full width */}
+          <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4 flex flex-col justify-between">
             <div>
               <div className="flex items-center space-x-2 mb-2">
                 <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                <span className="text-red-400 text-sm font-medium">LIVE NOW</span>
+                <span className="text-red-400 text-xs font-medium">LIVE NOW</span>
               </div>
-              <h2 className="text-white text-3xl font-bold mb-2">{currentShow}</h2>
-              <p className="text-white/70 text-lg mb-4">with Marco & Sofia</p>
-              <p className="text-white/60">Wake up with the best mix of indie, electronic, and emerging artists. Live from Milano.</p>
+              <h2 className="text-white text-xl font-bold mb-1">{currentShow}</h2>
+              <p className="text-white/70 text-sm mb-2">with Marco & Sofia</p>
+              <p className="text-white/60 text-xs">Wake up with the best mix of indie, electronic.</p>
             </div>
             
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <Button 
-                  onClick={togglePlay}
-                  className="w-16 h-16 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600"
-                >
-                  {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-1" />}
-                </Button>
-                <div className="text-white">
-                  <p className="text-sm opacity-70">Currently Playing</p>
-                  <p className="font-medium">Tame Impala - The Less I Know</p>
-                </div>
-              </div>
-              <Button variant="ghost" className="text-white hover:bg-white/10">
-                <Heart className="w-5 h-5" />
+            <div className="flex items-center justify-between mt-4">
+              <Button 
+                onClick={togglePlay}
+                className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600"
+              >
+                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
               </Button>
+              <div className="text-white flex-1 ml-3">
+                <p className="text-xs opacity-70">Now Playing</p>
+                <p className="font-medium text-sm">Tame Impala</p>
+              </div>
             </div>
           </Card>
 
           {/* Stats Cards */}
-          <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4">
-            <div className="flex items-center space-x-3 mb-2">
-              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <Users className="w-4 h-4 text-blue-400" />
+          <Card className="bg-black/30 backdrop-blur-lg border-white/10 p-3">
+            <div className="flex items-center space-x-2 mb-2">
+              <div className="w-6 h-6 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                <Users className="w-3 h-3 text-blue-400" />
               </div>
-              <span className="text-white/70 text-sm">Listeners</span>
+              <span className="text-white/70 text-xs">Listeners</span>
             </div>
-            <p className="text-white text-2xl font-bold">2,847</p>
-            <p className="text-green-400 text-xs">+12% vs yesterday</p>
+            <p className="text-white text-lg font-bold">2,847</p>
+            <p className="text-green-400 text-xs">+12%</p>
           </Card>
 
-          <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4">
-            <div className="flex items-center space-x-3 mb-2">
-              <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                <Mic className="w-4 h-4 text-purple-400" />
+          <Card className="bg-black/30 backdrop-blur-lg border-white/10 p-3">
+            <div className="flex items-center space-x-2 mb-2">
+              <div className="w-6 h-6 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                <Mic className="w-3 h-3 text-purple-400" />
               </div>
-              <span className="text-white/70 text-sm">Shows Today</span>
+              <span className="text-white/70 text-xs">Shows</span>
             </div>
-            <p className="text-white text-2xl font-bold">8</p>
-            <p className="text-white/50 text-xs">Live & Recorded</p>
+            <p className="text-white text-lg font-bold">8</p>
+            <p className="text-white/50 text-xs">Today</p>
           </Card>
 
           {/* Popular Podcasts */}
-          <Card className="col-span-6 bg-black/30 backdrop-blur-lg border-white/10 p-4">
-            <h3 className="text-white font-semibold mb-4">Popular Podcasts</h3>
+          <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-3">
+            <h3 className="text-white font-semibold mb-3 text-sm">Popular Podcasts</h3>
             
-            <div className="grid grid-cols-3 gap-4">
-              <div className="bg-white/5 rounded-lg p-3 hover:bg-white/10 transition-colors cursor-pointer">
-                <div className="w-full h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-2"></div>
-                <p className="text-white text-sm font-medium">Tech & Innovation</p>
-                <p className="text-white/60 text-xs">24 episodes</p>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-colors cursor-pointer">
+                <div className="w-full h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-1"></div>
+                <p className="text-white text-xs font-medium">Tech & Innovation</p>
+                <p className="text-white/60 text-xs">24 ep</p>
               </div>
               
-              <div className="bg-white/5 rounded-lg p-3 hover:bg-white/10 transition-colors cursor-pointer">
-                <div className="w-full h-20 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg mb-2"></div>
-                <p className="text-white text-sm font-medium">Culture & Arts</p>
-                <p className="text-white/60 text-xs">18 episodes</p>
-              </div>
-              
-              <div className="bg-white/5 rounded-lg p-3 hover:bg-white/10 transition-colors cursor-pointer">
-                <div className="w-full h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg mb-2"></div>
-                <p className="text-white text-sm font-medium">Music Stories</p>
-                <p className="text-white/60 text-xs">32 episodes</p>
+              <div className="bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-colors cursor-pointer">
+                <div className="w-full h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg mb-1"></div>
+                <p className="text-white text-xs font-medium">Culture & Arts</p>
+                <p className="text-white/60 text-xs">18 ep</p>
               </div>
             </div>
           </Card>
         </div>
 
-        {/* Right Side */}
-        <div className="col-span-6 grid grid-cols-6 gap-6 h-full">
+        {/* Right Side - Reduced to 25% of screen */}
+        <div className="w-1/4 grid grid-cols-2 gap-4">
           
           {/* Schedule */}
-          <Card className="col-span-4 row-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4">
-            <div className="flex items-center space-x-2 mb-4">
-              <Clock className="w-5 h-5 text-white" />
-              <h3 className="text-white font-semibold">Today's Schedule</h3>
+          <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4">
+            <div className="flex items-center space-x-2 mb-3">
+              <Clock className="w-4 h-4 text-white" />
+              <h3 className="text-white font-semibold text-sm">Today's Schedule</h3>
             </div>
             
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/10">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg border border-white/10">
                 <div>
-                  <p className="text-white font-medium">Morning Vibes</p>
-                  <p className="text-white/60 text-sm">Marco & Sofia</p>
+                  <p className="text-white font-medium text-sm">Morning Vibes</p>
+                  <p className="text-white/60 text-xs">Marco & Sofia</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-white text-sm">06:00 - 10:00</p>
+                  <p className="text-white text-xs">06:00 - 10:00</p>
                   <div className="w-2 h-2 bg-green-500 rounded-full ml-auto"></div>
                 </div>
               </div>
               
-              <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+              <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg">
                 <div>
-                  <p className="text-white font-medium">Tech Talk</p>
-                  <p className="text-white/60 text-sm">Alessandro R.</p>
+                  <p className="text-white font-medium text-sm">Tech Talk</p>
+                  <p className="text-white/60 text-xs">Alessandro R.</p>
                 </div>
-                <p className="text-white/60 text-sm">10:00 - 12:00</p>
+                <p className="text-white/60 text-xs">10:00 - 12:00</p>
               </div>
               
-              <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+              <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg">
                 <div>
-                  <p className="text-white font-medium">Lunch Beats</p>
-                  <p className="text-white/60 text-sm">DJ Luna</p>
+                  <p className="text-white font-medium text-sm">Lunch Beats</p>
+                  <p className="text-white/60 text-xs">DJ Luna</p>
                 </div>
-                <p className="text-white/60 text-sm">12:00 - 14:00</p>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                <div>
-                  <p className="text-white font-medium">Afternoon Stories</p>
-                  <p className="text-white/60 text-sm">Giulia M.</p>
-                </div>
-                <p className="text-white/60 text-sm">14:00 - 16:00</p>
+                <p className="text-white/60 text-xs">12:00 - 14:00</p>
               </div>
             </div>
           </Card>
 
           {/* More Stats */}
-          <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4">
-            <div className="flex items-center space-x-3 mb-2">
-              <div className="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
-                <Radio className="w-4 h-4 text-green-400" />
+          <Card className="bg-black/30 backdrop-blur-lg border-white/10 p-3">
+            <div className="flex items-center space-x-2 mb-2">
+              <div className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
+                <Radio className="w-3 h-3 text-green-400" />
               </div>
-              <span className="text-white/70 text-sm">Live Hours</span>
+              <span className="text-white/70 text-xs">Live Hours</span>
             </div>
-            <p className="text-white text-2xl font-bold">18</p>
-            <p className="text-green-400 text-xs">Daily average</p>
+            <p className="text-white text-lg font-bold">18</p>
+            <p className="text-green-400 text-xs">Daily avg</p>
           </Card>
 
-          <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4">
-            <div className="flex items-center space-x-3 mb-2">
-              <div className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                <Heart className="w-4 h-4 text-orange-400" />
+          <Card className="bg-black/30 backdrop-blur-lg border-white/10 p-3">
+            <div className="flex items-center space-x-2 mb-2">
+              <div className="w-6 h-6 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                <Heart className="w-3 h-3 text-orange-400" />
               </div>
-              <span className="text-white/70 text-sm">Favorites</span>
+              <span className="text-white/70 text-xs">Favorites</span>
             </div>
-            <p className="text-white text-2xl font-bold">1.2k</p>
+            <p className="text-white text-lg font-bold">1.2k</p>
             <p className="text-orange-400 text-xs">This month</p>
           </Card>
 
           {/* Recent Activity */}
-          <Card className="col-span-6 bg-black/30 backdrop-blur-lg border-white/10 p-4">
-            <h3 className="text-white font-semibold mb-4">Recent Activity</h3>
+          <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-3">
+            <h3 className="text-white font-semibold mb-3 text-sm">Recent Activity</h3>
             
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center">
-                  <Radio className="w-4 h-4 text-white" />
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <div className="w-6 h-6 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center">
+                  <Radio className="w-3 h-3 text-white" />
                 </div>
                 <div>
-                  <p className="text-white text-sm">New episode available</p>
-                  <p className="text-white/60 text-xs">Tech & Innovation - 2 hours ago</p>
+                  <p className="text-white text-xs">New episode available</p>
+                  <p className="text-white/60 text-xs">Tech & Innovation - 2h ago</p>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                  <Users className="w-4 h-4 text-white" />
+              <div className="flex items-center space-x-2">
+                <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                  <Users className="w-3 h-3 text-white" />
                 </div>
                 <div>
-                  <p className="text-white text-sm">1000+ new followers</p>
+                  <p className="text-white text-xs">1000+ new followers</p>
                   <p className="text-white/60 text-xs">This week</p>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center">
-                  <Heart className="w-4 h-4 text-white" />
+              <div className="flex items-center space-x-2">
+                <div className="w-6 h-6 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center">
+                  <Heart className="w-3 h-3 text-white" />
                 </div>
                 <div>
-                  <p className="text-white text-sm">Most liked show</p>
+                  <p className="text-white text-xs">Most liked show</p>
                   <p className="text-white/60 text-xs">Morning Vibes - Today</p>
                 </div>
               </div>
