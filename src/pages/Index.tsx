@@ -16,7 +16,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-orange-900 via-red-900 to-purple-900 relative overflow-hidden">
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="relative inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg"
         }}
