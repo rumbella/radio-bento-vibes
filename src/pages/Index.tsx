@@ -81,27 +81,9 @@ const Index = () => {
           </Card>
 
           {/* Stats Cards */}
-          <Card className="bg-black/30 backdrop-blur-lg border-white/10 p-3">
-            <div className="flex items-center space-x-2 mb-2">
-              <div className="w-6 h-6 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <Users className="w-3 h-3 text-blue-400" />
-              </div>
-              <span className="text-white/70 text-xs">Listeners</span>
-            </div>
-            <p className="text-white text-lg font-bold">2,847</p>
-            <p className="text-green-400 text-xs">+12%</p>
-          </Card>
+    
 
-          <Card className="bg-black/30 backdrop-blur-lg border-white/10 p-3">
-            <div className="flex items-center space-x-2 mb-2">
-              <div className="w-6 h-6 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                <Mic className="w-3 h-3 text-purple-400" />
-              </div>
-              <span className="text-white/70 text-xs">Shows</span>
-            </div>
-            <p className="text-white text-lg font-bold">8</p>
-            <p className="text-white/50 text-xs">Today</p>
-          </Card>
+         
 
           {/* Popular Podcasts */}
           <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-3">
@@ -109,13 +91,17 @@ const Index = () => {
             
             <div className="grid grid-cols-2 gap-2">
               <div className="bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-colors cursor-pointer">
-                <div className="w-full h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-1"></div>
+                <div className="w-full h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-1">
+                  <img class="rounded-lg" src="https://placehold.co/400x100/cccccc/FFFFFF/png"
+                </div>
                 <p className="text-white text-xs font-medium">Tech & Innovation</p>
                 <p className="text-white/60 text-xs">24 ep</p>
               </div>
               
               <div className="bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-colors cursor-pointer">
-                <div className="w-full h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg mb-1"></div>
+                <div className="w-full h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-1">
+                  <img class="rounded-lg" src="https://placehold.co/400x100/cccccc/FFFFFF/png"
+                </div>
                 <p className="text-white text-xs font-medium">Culture & Arts</p>
                 <p className="text-white/60 text-xs">18 ep</p>
               </div>
