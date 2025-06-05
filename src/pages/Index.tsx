@@ -228,7 +228,7 @@ const Index = () => {
             <div className="grid grid-cols-2 gap-2">
               <div className="bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-colors cursor-pointer">
                 <div className="w-full h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-1">
-                  <img class="rounded-lg" src="https://placehold.co/400x100/cccccc/FFFFFF/png"
+                  <img className="rounded-lg" src="https://placehold.co/400x100/cccccc/FFFFFF/png" />
                 </div>
                 <p className="text-white text-xs font-medium">Tech & Innovation</p>
                 <p className="text-white/60 text-xs">24 ep</p>
@@ -236,7 +236,7 @@ const Index = () => {
               
               <div className="bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-colors cursor-pointer">
                 <div className="w-full h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-1">
-                  <img class="rounded-lg" src="https://placehold.co/400x100/cccccc/FFFFFF/png"
+                  <img className="rounded-lg" src="https://placehold.co/400x100/cccccc/FFFFFF/png" />
                 </div>
                 <p className="text-white text-xs font-medium">Culture & Arts</p>
                 <p className="text-white/60 text-xs">18 ep</p>
