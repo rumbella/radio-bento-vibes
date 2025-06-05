@@ -4,15 +4,22 @@ import ReactPlayer from 'react-player';
 import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Heart, Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { Program } from "@/pages/Index"; // Assuming Program interface is exported from Index.tsx or a types file
+import { Program } from "@/pages/Index"; // Assuming Program interface is exported
+import { Playlist } from "@/data/playlists"; // Import Playlist interface
 
 export interface RadioPageLayoutProps {
   backgroundElement: ReactNode;
   children: ReactNode;
-  currentProgramForPlayer: Program | null;
-  headerActions?: ReactNode; // For test buttons or other page-specific header items
-  isPlaying: boolean; // Controlled from the page (e.g., Index.tsx)
-  onTogglePlay: () => void; // Callback to toggle play state in the page
+  currentProgramForPlayer?: Program | null; // Optional if in playlist mode
+  headerActions?: ReactNode;
+  isPlaying: boolean;
+  onTogglePlay: () => void;
+
+  playerMode?: 'live' | 'playlist'; // Defaults to 'live'
+  playlist?: Playlist | null;
+  currentTrackIndexInPlaylist?: number;
+  onNextTrack?: () => void;
+  onPrevTrack?: () => void;
 }
 
 const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
@@ -22,6 +29,11 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
   headerActions,
   isPlaying,
   onTogglePlay,
+  playerMode = 'live', // Default to 'live'
+  playlist,
+  currentTrackIndexInPlaylist,
+  onNextTrack,
+  onPrevTrack,
 }) => {
   const playerRef = useRef<ReactPlayer>(null);
   const [volume, setVolume] = useState(0.8);
@@ -40,6 +52,32 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
     }
   };
 
+  let audioUrl = "";
+  let currentTrackTitle = currentProgramForPlayer?.name || "Live Stream";
+  let currentTrackArtist = currentProgramForPlayer?.host || "Radio Amblé";
+
+  if (
+    playerMode === 'playlist' &&
+    playlist &&
+    currentTrackIndexInPlaylist !== undefined &&
+    currentTrackIndexInPlaylist >= 0 &&
+    currentTrackIndexInPlaylist < playlist.tracks.length
+  ) {
+    const track = playlist.tracks[currentTrackIndexInPlaylist];
+    audioUrl = track.audioUrl;
+    currentTrackTitle = track.title;
+    currentTrackArtist = track.artist;
+  } else {
+    audioUrl = currentProgramForPlayer?.audioUrl || "";
+  }
+
+  const handleEnded = () => {
+    if (playerMode === 'playlist' && onNextTrack) {
+      onNextTrack();
+    }
+    // In 'live' mode, it just stops, or ReactPlayer might have its own loop/behavior for streams
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-900 via-red-900 to-purple-900 relative overflow-hidden">
       {/* Background Element is rendered first */}
@@ -49,15 +87,16 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
 
       <ReactPlayer
         ref={playerRef}
-        url={currentProgramForPlayer ? currentProgramForPlayer.audioUrl : ""}
+        url={audioUrl}
         playing={isPlaying}
         volume={volume}
         muted={muted}
         controls={false}
         width="0px"
         height="0px"
-        onPlay={() => { if (!isPlaying) onTogglePlay(); }} // Sync if external play happens
-        onPause={() => { if (isPlaying) onTogglePlay(); }} // Sync if external pause happens
+        onPlay={() => { if (!isPlaying) onTogglePlay(); }}
+        onPause={() => { if (isPlaying) onTogglePlay(); }}
+        onEnded={handleEnded}
       />
 
       {/* Header */}
@@ -84,6 +123,7 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
           <Link to="/"><Button variant="ghost" className="text-white hover:bg-white/10">Image BG</Button></Link>
           <Link to="/sponsor-video"><Button variant="ghost" className="text-white hover:bg-white/10">Video BG</Button></Link>
           <Link to="/program-slideshow"><Button variant="ghost" className="text-white hover:bg-white/10">Slideshow BG</Button></Link>
+          <Link to="/playlist"><Button variant="ghost" className="text-white hover:bg-white/10">Playlist</Button></Link>
 
           {headerActions} {/* Existing page-specific test buttons */}
           <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full"></div>
@@ -103,13 +143,19 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
               <Radio className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-white font-medium">{currentProgramForPlayer ? currentProgramForPlayer.name : "Live Stream"}</p>
-              <p className="text-white/60 text-sm">{currentProgramForPlayer ? currentProgramForPlayer.host : "Amblé Radio"}</p>
+              <p className="text-white font-medium truncate w-48" title={currentTrackTitle}>{currentTrackTitle}</p>
+              <p className="text-white/60 text-sm truncate w-48" title={currentTrackArtist}>{currentTrackArtist}</p>
             </div>
           </div>
 
           <div className="flex items-center space-x-6">
-            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-white hover:bg-white/10"
+              onClick={playerMode === 'playlist' ? onPrevTrack : undefined}
+              disabled={playerMode !== 'playlist' || !onPrevTrack}
+            >
               <SkipBack className="w-5 h-5" />
             </Button>
             <Button
@@ -118,7 +164,13 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
             >
               {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
             </Button>
-            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-white hover:bg-white/10"
+              onClick={playerMode === 'playlist' ? onNextTrack : undefined}
+              disabled={playerMode !== 'playlist' || !onNextTrack}
+            >
               <SkipForward className="w-5 h-5" />
             </Button>
           </div>
