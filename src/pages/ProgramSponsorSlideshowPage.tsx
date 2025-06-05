@@ -119,7 +119,7 @@ const ProgramSponsorSlideshowPage = () => {
         height: '100%',
         top: 0,
         left: 0,
-        zIndex: -1, // Behind the layout's overlay
+        // zIndex: -1, // Removed: z-index is handled by RadioPageLayout's overlay
       }}
     >
       <img
@@ -134,7 +134,7 @@ const ProgramSponsorSlideshowPage = () => {
           opacity: isFading ? 0 : 1,
         }}
       />
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"></div> {/* The overlay from original Index.tsx BG */}
+      {/* Inner overlay div removed, global overlay is in RadioPageLayout */}
     </div>
   );
 

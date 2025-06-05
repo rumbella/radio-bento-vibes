@@ -125,11 +125,10 @@ const Index = () => {
     <RadioPageLayout
       backgroundElement={
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat" // Ensured w-full h-full
           style={{ backgroundImage: `url('${currentBackgroundImage}')` }}
-        >
-          <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" />
-        </div>
+          // The inner overlay div has been removed.
+        />
       }
       currentProgramForPlayer={currentProgram}
       headerActions={headerActionButtons}

@@ -95,7 +95,7 @@ const SponsorVideoPage = () => {
         objectFit: 'cover',
         top: 0,
         left: 0,
-        zIndex: -1, // Behind the layout's overlay
+        // zIndex: -1, // Removed: z-index is handled by RadioPageLayout's overlay
       }}
       src={videoBackgroundUrl}
     >
