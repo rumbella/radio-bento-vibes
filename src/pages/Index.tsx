@@ -1,24 +1,124 @@
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import ReactPlayer from 'react-player';
 import { Play, Pause, SkipBack, SkipForward, Volume2, Heart, Mic, Radio, Users, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
+// Define Interfaces
+interface Program {
+  id: string;
+  name: string;
+  host: string;
+  imageUrl: string;
+  audioUrl: string;
+}
+
+interface Advertisement {
+  id: string;
+  name: string;
+  imageUrl: string;
+  videoUrl?: string;
+  targetUrl: string;
+}
+
+// Mock Data
+const mockPrograms: Program[] = [
+  {
+    id: "program1",
+    name: "Morning Vibes",
+    host: "Marco & Sofia",
+    imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  },
+  {
+    id: "program2",
+    name: "Tech Talk",
+    host: "Alessandro R.",
+    imageUrl: "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+  },
+  {
+    id: "program3",
+    name: "Lunch Beats",
+    host: "DJ Luna",
+    imageUrl: "https://images.pexels.com/photos/1762578/pexels-photo-1762578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+  },
+];
+
+const mockAdvertisements: Advertisement[] = [
+  {
+    id: "ad1",
+    name: "Awesome Product",
+    imageUrl: "https://placehold.co/600x400/E74C3C/FFFFFF/png?text=Ad+1",
+    targetUrl: "https://example.com/product",
+  },
+  {
+    id: "ad2",
+    name: "Amazing Service",
+    imageUrl: "https://placehold.co/600x400/3498DB/FFFFFF/png?text=Ad+2",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    targetUrl: "https://example.com/service",
+  },
+];
+
 const Index = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentShow, setCurrentShow] = useState("Morning Vibes");
+  const playerRef = useRef<ReactPlayer>(null);
+  const [currentBackgroundImage, setCurrentBackgroundImage] = useState(mockPrograms[0].imageUrl); // Initialize with first program's image
+  const [currentProgram, setCurrentProgram] = useState<Program | null>(null);
+  const [currentAdvertisement, setCurrentAdvertisement] = useState<Advertisement | null>(mockAdvertisements[0]); // Initialize with first ad
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
   };
 
+  const setBackground = (url: string) => {
+    setCurrentBackgroundImage(url);
+  };
+
+  const setCurrentProgramById = (id: string) => {
+    const program = mockPrograms.find(p => p.id === id);
+    if (program) {
+      setCurrentProgram(program);
+    }
+  };
+
+  const setCurrentAdvertisementById = (id: string) => {
+    const ad = mockAdvertisements.find(a => a.id === id);
+    if (ad) {
+      setCurrentAdvertisement(ad);
+    }
+  };
+
+  useEffect(() => {
+    // Set initial program when component mounts
+    if (mockPrograms.length > 0) {
+      setCurrentProgram(mockPrograms[0]);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (currentProgram) {
+      setBackground(currentProgram.imageUrl);
+      // The ReactPlayer URL will be directly bound to currentProgram.audioUrl in the JSX
+    }
+  }, [currentProgram]);
+
+  useEffect(() => {
+    if (currentAdvertisement && currentAdvertisement.videoUrl) {
+      console.log("Current advertisement has video: ", currentAdvertisement.videoUrl);
+    }
+  }, [currentAdvertisement]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-900 via-red-900 to-purple-900 relative overflow-hidden">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg')"
+          backgroundImage: `url('${currentBackgroundImage}')`
         }}
       >
         <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"></div>
@@ -28,9 +128,9 @@ const Index = () => {
       <header className="relative z-10 flex items-center justify-between p-6">
         <div className="flex items-center space-x-4">
           <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-            <img 
+            <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s"
-              alt="Amblé Radio" 
+              alt="Amblé Radio"
               className="w-10 h-8 object-contain"
             />
           </div>
@@ -39,14 +139,49 @@ const Index = () => {
             <p className="text-white/70 text-sm">Fresh Sound & Podcasts</p>
           </div>
         </div>
-        
+
         <nav className="flex items-center space-x-6">
           <Button variant="ghost" className="text-white hover:bg-white/10">Live</Button>
           <Button variant="ghost" className="text-white hover:bg-white/10">Podcasts</Button>
           <Button variant="ghost" className="text-white hover:bg-white/10">Schedule</Button>
+          {/* Test button for changing program */}
+          <Button
+            onClick={() => setCurrentProgramById("program2")}
+            className="text-white hover:bg-white/10"
+          >
+            Set P2
+          </Button>
+          <Button
+            onClick={() => setCurrentProgramById("program3")}
+            className="text-white hover:bg-white/10"
+          >
+            Set P3
+          </Button>
+          <Button
+            onClick={() => setCurrentAdvertisementById("ad1")}
+            className="text-white hover:bg-white/10"
+          >
+            Set Ad1
+          </Button>
+          <Button
+            onClick={() => setCurrentAdvertisementById("ad2")}
+            className="text-white hover:bg-white/10"
+          >
+            Set Ad2
+          </Button>
           <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full"></div>
         </nav>
       </header>
+
+      <ReactPlayer
+        ref={playerRef}
+        url={currentProgram ? currentProgram.audioUrl : ""}
+        playing={isPlaying}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        width="0" // Hidden player
+        height="0" // Hidden player
+      />
 
       {/* Main Content Grid - Reduced Width for More Background Visibility */}
       <div className="relative z-10 flex justify-between h-[calc(100vh-200px)] px-12">
@@ -61,9 +196,10 @@ const Index = () => {
                 <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                 <span className="text-red-400 text-xs font-medium">LIVE NOW</span>
               </div>
-              <h2 className="text-white text-xl font-bold mb-1">{currentShow}</h2>
-              <p className="text-white/70 text-sm mb-2">with Marco & Sofia</p>
-              <p className="text-white/60 text-xs">Wake up with the best mix of indie, electronic.</p>
+              <h2 className="text-white text-xl font-bold mb-1">{currentProgram ? currentProgram.name : "Loading..."}</h2>
+              <p className="text-white/70 text-sm mb-2">with {currentProgram ? currentProgram.host : "..."}</p>
+              {/* Assuming a generic description for now, can be added to Program interface later */}
+              <p className="text-white/60 text-xs">Broadcasting live with the latest hits and talks.</p>
             </div>
             
             <div className="flex items-center justify-between mt-4">
@@ -110,10 +246,33 @@ const Index = () => {
         </div>
 
         {/* Right Side - Reduced to 25% of screen */}
-        <div className="w-1/4 grid grid-cols-2 gap-4">
+        <div className="w-1/4 grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Adjusted grid for ad card */}
           
+          {/* Advertisement Card */}
+          {currentAdvertisement && (
+            <Card className="col-span-1 md:col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-0 overflow-hidden"> {/* Adjusted span for responsiveness */}
+              <a href={currentAdvertisement.targetUrl} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={currentAdvertisement.imageUrl}
+                  alt={currentAdvertisement.name}
+                  className="w-full h-auto object-cover"
+                />
+              </a>
+              <div className="p-3">
+                <p className="text-white text-xs font-medium truncate" title={currentAdvertisement.name}>
+                  {currentAdvertisement.name}
+                </p>
+              </div>
+            </Card>
+          )}
+          {!currentAdvertisement && (
+             <Card className="col-span-1 md:col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4 flex items-center justify-center">
+              <p className="text-white/70 text-sm">No advertisement to display.</p>
+            </Card>
+          )}
+
           {/* Schedule */}
-          <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4">
+          <Card className="col-span-1 md:col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4"> {/* Adjusted span */}
             <div className="flex items-center space-x-2 mb-3">
               <Clock className="w-4 h-4 text-white" />
               <h3 className="text-white font-semibold text-sm">Today's Schedule</h3>
@@ -221,8 +380,8 @@ const Index = () => {
               <Radio className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-white font-medium">Tame Impala - The Less I Know</p>
-              <p className="text-white/60 text-sm">Morning Vibes • Amblé Radio</p>
+              <p className="text-white font-medium">{currentProgram ? currentProgram.name : "Live Stream"}</p>
+              <p className="text-white/60 text-sm">{currentProgram ? currentProgram.host : "Amblé Radio"}</p>
             </div>
           </div>
 
