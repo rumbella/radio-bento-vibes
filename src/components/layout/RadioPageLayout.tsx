@@ -42,7 +42,10 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-900 via-red-900 to-purple-900 relative overflow-hidden">
+      {/* Background Element is rendered first */}
       {backgroundElement}
+      {/* Global Overlay, rendered on top of backgroundElement */}
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px] z-0"></div>
 
       <ReactPlayer
         ref={playerRef}
