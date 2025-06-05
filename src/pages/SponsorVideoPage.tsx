@@ -41,7 +41,7 @@ const mockAdvertisements: Advertisement[] = [
 
 const SponsorVideoPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [videoBackgroundUrl, setVideoBackgroundUrl] = useState(mockAdvertisements[1]?.videoUrl || "https://www.w3schools.com/html/mov_bbb.mp4");
+  const [videoBackgroundUrl, setVideoBackgroundUrl] = useState("https://res.cloudinary.com/thinkdigital/video/upload/v1749120441/4916813-hd_1920_1080_30fps_rp1dpq.mp4");
   const [currentProgram, setCurrentProgram] = useState<Program | null>(null);
   const [currentAdvertisement, setCurrentAdvertisement] = useState<Advertisement | null>(null);
 
