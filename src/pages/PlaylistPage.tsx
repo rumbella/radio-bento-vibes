@@ -12,7 +12,7 @@ const PlaylistPage = () => {
   const [currentProgram, setCurrentProgram] = useState<Program | null>(null); // Fallback for 'live' mode or if no playlist track
   const [currentAdvertisement, setCurrentAdvertisement] = useState<Advertisement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentBackgroundImage, setCurrentBackgroundImage] = useState(mockPrograms[0]?.imageUrl || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg");
+  const [currentBackgroundImage, setCurrentBackgroundImage] = useState(mockPrograms[0]?.imageUrl || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg");
 
   const [playerMode, setPlayerMode] = useState<'live' | 'playlist'>('playlist'); // Default to playlist mode for this page
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
