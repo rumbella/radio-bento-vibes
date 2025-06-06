@@ -109,7 +109,7 @@ const ProgramSponsorSlideshowPage = () => {
           });
         });
       }, 3000); // Changed to 3s for fade-out
-    }, 10000); // Changed to 10 seconds total cycle time (3s fade + 4s visible + 3s fade)
+    }, 5000); // Changed to 10 seconds total cycle time (3s fade + 4s visible + 3s fade)
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount
   }, [programImageUrl, sponsorImageUrl]);
