@@ -24,7 +24,7 @@ export interface Advertisement {
 }
 
 // Mock Data
-const mockPrograms: Program[] = [
+export const mockPrograms: Program[] = [
   {
     id: "program1",
     name: "Morning Vibes",
@@ -48,7 +48,7 @@ const mockPrograms: Program[] = [
   },
 ];
 
-const mockAdvertisements: Advertisement[] = [
+export const mockAdvertisements: Advertisement[] = [
   {
     id: "ad1",
     name: "Awesome Product",
