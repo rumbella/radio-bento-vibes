@@ -99,8 +99,8 @@ const ProgramSponsorSlideshowPage = () => {
           prevImage === programImageUrl ? sponsorImageUrl : programImageUrl
         );
         setIsFading(false);
-      }, 2000); // Updated to 2s for fade-out, matches CSS transition
-    }, 8000); // Updated to 8 seconds total cycle time (2s fade + 6s visible)
+      }, 3000); // Changed to 3s for fade-out
+    }, 10000); // Changed to 10 seconds total cycle time (3s fade + 4s visible + 3s fade)
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount
   }, [programImageUrl, sponsorImageUrl]);
@@ -130,7 +130,7 @@ const ProgramSponsorSlideshowPage = () => {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          transition: 'opacity 2s ease-in-out', // Updated transition duration
+          transition: 'opacity 3s ease-in-out', // Changed transition duration
           opacity: isFading ? 0 : 1,
         }}
       />
