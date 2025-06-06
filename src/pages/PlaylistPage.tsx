@@ -107,7 +107,6 @@ const PlaylistPage = () => {
             {selectedPlaylist ? (
               <ScrollArea className="h-[calc(100vh-300px)]"> {/* Adjust height as needed */}
                 <div className="space-y-3 pr-4">
-                  {selectedPlaylist.tracks.map((track) => (
                   {selectedPlaylist.tracks.map((track, index) => (
                     <div key={track.id} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
                       {track.imageUrl ? (
