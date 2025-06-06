@@ -98,7 +98,16 @@ const ProgramSponsorSlideshowPage = () => {
         setCurrentSlideImage(prevImage =>
           prevImage === programImageUrl ? sponsorImageUrl : programImageUrl
         );
-        setIsFading(false);
+        // isFading is still true here. The new image identified by 'key'
+        // will attempt to render with opacity: 0.
+
+        // Use requestAnimationFrame to delay setting isFading to false,
+        // ensuring the opacity transition for fade-in occurs.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => { // Double rAF for robustness against browser rendering quirks
+            setIsFading(false);
+          });
+        });
       }, 3000); // Changed to 3s for fade-out
     }, 10000); // Changed to 10 seconds total cycle time (3s fade + 4s visible + 3s fade)
 
