@@ -1,79 +1,46 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-
 interface MobileNavbarProps {
   onMenuItemClick?: (item: string) => void;
 }
-
-const MobileNavbar = ({ onMenuItemClick }: MobileNavbarProps) => {
+const MobileNavbar = ({
+  onMenuItemClick
+}: MobileNavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
   const handleMenuItemClick = (item: string) => {
     onMenuItemClick?.(item);
     setIsMenuOpen(false);
   };
-
   const menuItems = ["Live", "Podcast", "Palinsesto", "Chi siamo", "Contatti"];
-
-  return (
-    <div className="fixed top-[50px] left-1/2 transform -translate-x-1/2 w-[90%] z-30 md:hidden">
-      <div
-        className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${
-          isMenuOpen 
-            ? "rounded-t-lg rounded-b-lg" 
-            : "rounded-lg"
-        }`}
-      >
+  return <div className="fixed top-[50px] left-1/2 transform -translate-x-1/2 w-[90%] z-30 md:hidden">
+      <div className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? "rounded-t-lg rounded-b-lg" : "rounded-lg"}`}>
         {/* Main navbar */}
-        <div className="flex items-center justify-between p-4">
+        <div className="flex items-center justify-between p-2">
           <div className="w-8 h-8">
-            <img
-              src="/public/lovable-uploads/298d2b4c-882d-4699-ae78-2ef0a6515c91.png"
-              alt="Amblé Radio"
-              className="w-full h-full object-contain"
-            />
+            <img src="/public/lovable-uploads/298d2b4c-882d-4699-ae78-2ef0a6515c91.png" alt="Amblé Radio" className="w-full h-full object-cover" />
           </div>
           
           <div className="flex-1 text-center px-2">
-            <span className="text-sm font-semibold text-gray-800 leading-tight">
-              Amblé Radio fresh sound and podcasts
-            </span>
+            <span className="font-semibold text-gray-800 leading-tight text-xs"></span>
           </div>
           
-          <Button
-            onClick={toggleMenu}
-            variant="ghost"
-            size="sm"
-            className="text-gray-800 hover:bg-gray-100 font-medium text-xs px-2 py-1"
-          >
+          <Button onClick={toggleMenu} variant="ghost" size="sm" className="text-gray-800 font-medium py-1 bg-transparent px-[12px] text-base">
             {isMenuOpen ? "- CLOSE" : "+ MENU"}
           </Button>
         </div>
 
         {/* Expandable menu */}
-        {isMenuOpen && (
-          <div className="border-t border-gray-200 bg-white rounded-b-lg">
+        {isMenuOpen && <div className="border-t border-gray-200 bg-white rounded-b-lg">
             <div className="py-2">
-              {menuItems.map((item, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleMenuItemClick(item)}
-                  className="w-full text-left px-4 py-3 text-gray-800 hover:bg-gray-50 transition-colors text-sm font-medium"
-                >
+              {menuItems.map((item, index) => <button key={index} onClick={() => handleMenuItemClick(item)} className="w-full text-left px-4 py-3 text-gray-800 hover:bg-gray-50 transition-colors text-sm font-medium">
                   {item}
-                </button>
-              ))}
+                </button>)}
             </div>
-          </div>
-        )}
+          </div>}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default MobileNavbar;

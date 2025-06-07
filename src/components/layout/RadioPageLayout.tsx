@@ -1,4 +1,3 @@
-
 import { useState, useRef, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
@@ -10,7 +9,6 @@ import { Playlist } from "@/data/playlists";
 import { useIsMobile } from "@/hooks/use-mobile";
 import MobileNavbar from "@/components/mobile/MobileNavbar";
 import PlayerActionIcons from "@/components/mobile/PlayerActionIcons";
-
 export interface RadioPageLayoutProps {
   backgroundElement: ReactNode;
   children: ReactNode;
@@ -18,14 +16,12 @@ export interface RadioPageLayoutProps {
   headerActions?: ReactNode;
   isPlaying: boolean;
   onTogglePlay: () => void;
-
   playerMode?: 'live' | 'playlist';
   playlist?: Playlist | null;
   currentTrackIndexInPlaylist?: number;
   onNextTrack?: () => void;
   onPrevTrack?: () => void;
 }
-
 const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
   backgroundElement,
   children,
@@ -37,18 +33,16 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
   playlist,
   currentTrackIndexInPlaylist,
   onNextTrack,
-  onPrevTrack,
+  onPrevTrack
 }) => {
   const playerRef = useRef<ReactPlayer>(null);
   const [volume, setVolume] = useState(0.8);
   const [muted, setMuted] = useState(false);
   const isMobile = useIsMobile();
-
   const handleVolumeChange = (newVolume: number[]) => {
     setVolume(newVolume[0]);
     setMuted(false);
   };
-
   const toggleMute = () => {
     const newMuted = !muted;
     setMuted(newMuted);
@@ -56,30 +50,19 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
       setVolume(0.5);
     }
   };
-
   const handleLikeClick = () => {
     console.log("Like clicked - funzione da implementare");
   };
-
   const handleMessageClick = () => {
     console.log("Message clicked - funzione da implementare");
   };
-
   const handleMobileMenuClick = (item: string) => {
     console.log(`Menu item clicked: ${item} - funzione da implementare`);
   };
-
   let audioUrl = "";
   let currentTrackTitle = currentProgramForPlayer?.name || "Live Stream";
   let currentTrackArtist = currentProgramForPlayer?.host || "Radio Amblé";
-
-  if (
-    playerMode === 'playlist' &&
-    playlist &&
-    currentTrackIndexInPlaylist !== undefined &&
-    currentTrackIndexInPlaylist >= 0 &&
-    currentTrackIndexInPlaylist < playlist.tracks.length
-  ) {
+  if (playerMode === 'playlist' && playlist && currentTrackIndexInPlaylist !== undefined && currentTrackIndexInPlaylist >= 0 && currentTrackIndexInPlaylist < playlist.tracks.length) {
     const track = playlist.tracks[currentTrackIndexInPlaylist];
     audioUrl = track.audioUrl;
     currentTrackTitle = track.title;
@@ -87,47 +70,29 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
   } else {
     audioUrl = currentProgramForPlayer?.audioUrl || "";
   }
-
   const handleEnded = () => {
     if (playerMode === 'playlist' && onNextTrack) {
       onNextTrack();
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-900 via-red-900 to-purple-900 relative overflow-hidden">
+  return <div className="min-h-screen bg-gradient-to-br from-orange-900 via-red-900 to-purple-900 relative overflow-hidden">
       {backgroundElement}
       <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px] z-0"></div>
 
-      <ReactPlayer
-        ref={playerRef}
-        url={audioUrl}
-        playing={isPlaying}
-        volume={volume}
-        muted={muted}
-        controls={false}
-        width="0px"
-        height="0px"
-        onPlay={() => { if (!isPlaying) onTogglePlay(); }}
-        onPause={() => { if (isPlaying) onTogglePlay(); }}
-        onEnded={handleEnded}
-      />
+      <ReactPlayer ref={playerRef} url={audioUrl} playing={isPlaying} volume={volume} muted={muted} controls={false} width="0px" height="0px" onPlay={() => {
+      if (!isPlaying) onTogglePlay();
+    }} onPause={() => {
+      if (isPlaying) onTogglePlay();
+    }} onEnded={handleEnded} />
 
       {/* Mobile Navbar */}
-      {isMobile && (
-        <MobileNavbar onMenuItemClick={handleMobileMenuClick} />
-      )}
+      {isMobile && <MobileNavbar onMenuItemClick={handleMobileMenuClick} />}
 
       {/* Desktop Header */}
-      {!isMobile && (
-        <header className="relative z-10 flex items-center justify-between p-6">
+      {!isMobile && <header className="relative z-10 flex items-center justify-between p-6">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s"
-                alt="Amblé Radio"
-                className="w-10 h-8 object-contain"
-              />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" alt="Amblé Radio" className="w-10 h-8 object-contain" />
             </div>
             <div>
               <h1 className="text-white font-bold text-xl">Amblé Radio</h1>
@@ -147,23 +112,15 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
             {headerActions}
             <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full"></div>
           </nav>
-        </header>
-      )}
+        </header>}
 
       {/* Main Content Grid - Hidden on mobile */}
-      {!isMobile && (
-        <div className="relative z-10 flex justify-between h-[calc(100vh-200px)] px-12">
+      {!isMobile && <div className="relative z-10 flex justify-between h-[calc(100vh-200px)] px-12">
           {children}
-        </div>
-      )}
+        </div>}
 
       {/* Mobile Action Icons */}
-      {isMobile && (
-        <PlayerActionIcons 
-          onLikeClick={handleLikeClick}
-          onMessageClick={handleMessageClick}
-        />
-      )}
+      {isMobile && <PlayerActionIcons onLikeClick={handleLikeClick} onMessageClick={handleMessageClick} />}
 
       {/* Bottom Player */}
       <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 z-20">
@@ -179,28 +136,11 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
           </div>
 
           <div className="flex items-center space-x-6">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-white hover:bg-white/10"
-              onClick={playerMode === 'playlist' ? onPrevTrack : undefined}
-              disabled={playerMode !== 'playlist' || !onPrevTrack}
-            >
-              <SkipBack className="w-5 h-5" />
-            </Button>
-            <Button
-              onClick={onTogglePlay}
-              className="w-12 h-12 rounded-full bg-white text-black hover:bg-white/90"
-            >
+            
+            <Button onClick={onTogglePlay} className="w-12 h-12 rounded-full bg-white text-black hover:bg-white/90">
               {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
             </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-white hover:bg-white/10"
-              onClick={playerMode === 'playlist' ? onNextTrack : undefined}
-              disabled={playerMode !== 'playlist' || !onNextTrack}
-            >
+            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10" onClick={playerMode === 'playlist' ? onNextTrack : undefined} disabled={playerMode !== 'playlist' || !onNextTrack}>
               <SkipForward className="w-5 h-5" />
             </Button>
           </div>
@@ -212,18 +152,10 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
             <Button variant="ghost" size="icon" onClick={toggleMute} className="text-white hover:bg-white/10">
               {muted || volume === 0 ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
             </Button>
-            <Slider
-              value={[muted ? 0 : volume]}
-              onValueChange={handleVolumeChange}
-              max={1}
-              step={0.01}
-              className="w-20 h-1 bg-white/20 rounded-full [&>span:first-child]:bg-white"
-            />
+            <Slider value={[muted ? 0 : volume]} onValueChange={handleVolumeChange} max={1} step={0.01} className="w-20 h-1 bg-white/20 rounded-full [&>span:first-child]:bg-white" />
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default RadioPageLayout;
