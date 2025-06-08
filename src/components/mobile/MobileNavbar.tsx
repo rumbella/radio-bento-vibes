@@ -20,11 +20,13 @@ const MobileNavbar = ({
         {/* Main navbar */}
         <div className="flex items-center justify-between p-2">
           <div className="w-8 h-8">
-            <img src="/public/lovable-uploads/298d2b4c-882d-4699-ae78-2ef0a6515c91.png" alt="Amblé Radio" className="w-full h-full object-cover" />
+            <img src="https://res.cloudinary.com/thinkdigital/image/upload/v1749389697/logo_fenicottero_zohwaw.png" alt="Amblé Radio" className="w-full h-full object-cover" />
           </div>
           
           <div className="flex-1 text-center px-2">
-            <span className="font-semibold text-gray-800 leading-tight text-xs"></span>
+            <span className="font-semibold text-gray-800 leading-tight text-xs">
+              fresh sounds and podcasts
+            </span>
           </div>
           
           <Button onClick={toggleMenu} variant="ghost" size="sm" className="text-gray-800 font-medium py-1 bg-transparent px-[12px] text-base">
