@@ -82,7 +82,5 @@ const MobileNavbar = ({
         ></div>
       )}
     </div>
-  );
-};
 
 export default MobileNavbar;
