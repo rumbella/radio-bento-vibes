@@ -20,8 +20,7 @@ const MobileNavbar = ({
         {/* Main navbar */}
         <div className="flex items-center justify-between p-2">
           <div className="w-8 h-8">
-            <img src="https://res.cloudinary.com/thinkdigital/image/upload/v1749389697/logo_fenicottero_zohwaw.png" alt="Amblé Radio" className="w-full h-full object-cover" />
-          </div>
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" alt="Amblé Radio" className="w-10 h-8 object-contain" />
           
           <div className="flex-1 text-center px-2">
               <div>
