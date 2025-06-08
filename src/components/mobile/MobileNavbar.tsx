@@ -1,143 +1,46 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-
 interface MobileNavbarProps {
   onMenuItemClick?: (item: string) => void;
 }
-
 const MobileNavbar = ({
   onMenuItemClick
 }: MobileNavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
   const handleMenuItemClick = (item: string) => {
     onMenuItemClick?.(item);
-    setIsMenuOpen(false); // Close menu on item click
+    setIsMenuOpen(false);
   };
-
   const menuItems = ["Live", "Podcast", "Palinsesto", "Chi siamo", "Contatti"];
-
-  return (
-    <div className="fixed top-[5px] left-1/2 transform -translate-x-1/2 w-[90%] z-30 md:hidden">
-      {/* Main Navbar Card */}
- fix/mobile-navbar-unterminated-regex
-      <div className="bg-transparent shadow-lg rounded-lg relative">
+  return <div className="fixed top-[5px] left-1/2 transform -translate-x-1/2 w-[90%] z-30 md:hidden">
+      <div className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? "rounded-t-lg rounded-b-lg" : "rounded-lg"}`}>
+        {/* Main navbar */}
         <div className="flex items-center justify-between p-2">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s"
-                alt="Amblé Radio"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div>
-
-      <div className="bg-transparent shadow-lg rounded-lg relative"> {/* Step 1: Added relative */}
-        <div className="flex items-center justify-between p-2">
-          {/* Step 2: New grouping div */}
-          <div className="flex items-center space-x-3"> 
-            {/* Logo Div with flex-shrink-0 (Step 3) */}
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
-              <img 
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" 
-                alt="Amblé Radio" 
-                className="w-full h-full object-contain" 
-              />
-            </div>
-            {/* Text Div */}
-            <div> 
-main
-              <h1 className="text-white font-bold text-xl">Amblé Radio</h1>
-              <p className="text-white text-sm">Fresh Sound & Podcasts</p>
-            </div>
+          <div className="w-8 h-8">
+            <img src="/public/lovable-uploads/298d2b4c-882d-4699-ae78-2ef0a6515c91.png" alt="Amblé Radio" className="w-full h-full object-cover" />
           </div>
-          {/* The Button is positioned absolutely relative to the parent "bg-transparent..." div */}
+          
+          <div className="flex-1 text-center px-2">
+            <span className="font-semibold text-gray-800 leading-tight text-xs"></span>
+          </div>
+          
+          <Button onClick={toggleMenu} variant="ghost" size="sm" className="text-gray-800 font-medium py-1 bg-transparent px-[12px] text-base">
+            {isMenuOpen ? "- CLOSE" : "+ MENU"}
+          </Button>
         </div>
- fix/mobile-navbar-unterminated-regex
-        <Button
-          onClick={toggleMenu}
-          variant="ghost"
-          size="sm"
 
-        <Button 
-          onClick={toggleMenu} 
-          variant="ghost" 
-          size="sm" 
- main
-          className="text-white font-medium py-1 bg-transparent px-[12px] text-base absolute top-1/2 right-2 transform -translate-y-1/2"
-        >
-          {isMenuOpen ? "CLOSE" : "MENU"}
-        </Button>
+        {/* Expandable menu */}
+        {isMenuOpen && <div className="border-t border-gray-200 bg-white rounded-b-lg">
+            <div className="py-2">
+              {menuItems.map((item, index) => <button key={index} onClick={() => handleMenuItemClick(item)} className="w-full text-left px-4 py-3 text-gray-800 hover:bg-gray-50 transition-colors text-sm font-medium">
+                  {item}
+                </button>)}
+            </div>
+          </div>}
       </div>
-
-      {/* Full-Page Slide-In Menu */}
-      <div
-        className={`fixed inset-0 bg-white shadow-xl p-4 transform transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        onClick={toggleMenu} // Click on background closes menu
-      >
- fix/mobile-navbar-unterminated-regex
-        {/* Content wrapper to prevent click propagation */}
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className="relative w-full h-full flex flex-col items-center justify-center" // Centering content
-
-        <button 
-          onClick={toggleMenu} 
-          className="absolute top-3 right-3 text-white text-2xl font-bold p-2 leading-none"
-          aria-label="Close menu"
- main
-        >
-          <button
-            onClick={toggleMenu}
-            className="absolute top-4 right-4 text-neutral-800 text-3xl font-bold p-2 leading-none" // Adjusted styling for visibility
-            aria-label="Close menu"
-          >
-            &times;
-          </button>
-
-          {/* Menu Items Container */}
-          <div className="mt-12 space-y-4 text-center"> {/* Centered text for menu items */}
-            {menuItems.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => handleMenuItemClick(item)}
-                className="w-full block text-left px-6 py-5 text-neutral-800 hover:bg-neutral-100 transition-colors text-xl font-semibold border-b border-gray-300"
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-          <div className="mt-8 flex justify-center py-4"> {/* Wrapper for centering and top margin */}
-            <button
-              onClick={toggleMenu}
-              className="py-3 px-8 bg-neutral-200 text-neutral-800 font-semibold rounded-lg hover:bg-neutral-300 transition-colors"
-            >
-              Chiudi
-            </button>
-          </div>
-        </div>
-      </div>
- fix/mobile-navbar-unterminated-regex
-      {/* Old overlay is removed */}
-
-
-      {/* Overlay for background click to close */}
-      {isMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 z-40"
-          onClick={toggleMenu}
-          aria-hidden="true"
-        ></div>
-      )}
- main
-    </div>
-  )
+    </div>;
 };
-
 export default MobileNavbar;
-
