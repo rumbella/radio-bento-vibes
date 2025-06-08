@@ -19,10 +19,9 @@ const MobileNavbar = ({
       <div className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? "rounded-t-lg rounded-b-lg" : "rounded-lg"}`}>
         {/* Main navbar */}
         <div className="flex items-center justify-between p-2">
-          <div className="w-8 h-8">
-           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" alt="Amblé Radio" className="w-10 h-8 object-contain" />
-          
-          <div className="flex-1 text-center px-2">
+          <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" alt="Amblé Radio" className="w-10 h-8 object-contain" />
+            </div>
               <div>
               <h1 className="text-white font-bold text-xl">Amblé Radio</h1>
               <p className="text-white/70 text-sm">Fresh Sound & Podcasts</p>
