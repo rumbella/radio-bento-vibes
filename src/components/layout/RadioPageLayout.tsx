@@ -125,7 +125,18 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
       {/* Bottom Player */}
       <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 z-20">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
+ fix/mobile-navbar-unterminated-regex
           <div className="flex items-center space-x-4 sm:w-64 w-40">
+
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+              <img 
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" 
+                alt="Amblé Radio" 
+                className="w-10 h-10 object-contain"
+              />
+            </div>
+ main
             <div>
               <p className="text-white font-medium truncate w-48" title={currentTrackTitle}>{currentTrackTitle}</p>
               <p className="text-white/60 text-sm truncate w-48" title={currentTrackArtist}>{currentTrackArtist}</p>
