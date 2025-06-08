@@ -15,7 +15,7 @@ const MobileNavbar = ({
     setIsMenuOpen(false);
   };
   const menuItems = ["Live", "Podcast", "Palinsesto", "Chi siamo", "Contatti"];
-  return <div className="fixed top-[50px] left-1/2 transform -translate-x-1/2 w-[90%] z-30 md:hidden">
+  return <div className="fixed top-[5px] left-1/2 transform -translate-x-1/2 w-[90%] z-30 md:hidden">
       <div className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? "rounded-t-lg rounded-b-lg" : "rounded-lg"}`}>
         {/* Main navbar */}
         <div className="flex items-center justify-between p-2">
