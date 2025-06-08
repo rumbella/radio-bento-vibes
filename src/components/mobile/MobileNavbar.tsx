@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button"; // Assuming Button component is used for the X, if not, replace with <button>
+import { Button } from "@/components/ui/button";
 
 interface MobileNavbarProps {
   onMenuItemClick?: (item: string) => void;
@@ -24,6 +24,19 @@ const MobileNavbar = ({
   return (
     <div className="fixed top-[5px] left-1/2 transform -translate-x-1/2 w-[90%] z-30 md:hidden">
       {/* Main Navbar Card */}
+ fix/mobile-navbar-unterminated-regex
+      <div className="bg-transparent shadow-lg rounded-lg relative">
+        <div className="flex items-center justify-between p-2">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s"
+                alt="Amblé Radio"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+
       <div className="bg-transparent shadow-lg rounded-lg relative"> {/* Step 1: Added relative */}
         <div className="flex items-center justify-between p-2">
           {/* Step 2: New grouping div */}
@@ -38,45 +51,80 @@ const MobileNavbar = ({
             </div>
             {/* Text Div */}
             <div> 
+main
               <h1 className="text-white font-bold text-xl">Amblé Radio</h1>
               <p className="text-white text-sm">Fresh Sound & Podcasts</p>
             </div>
           </div>
           {/* The Button is positioned absolutely relative to the parent "bg-transparent..." div */}
         </div>
+ fix/mobile-navbar-unterminated-regex
+        <Button
+          onClick={toggleMenu}
+          variant="ghost"
+          size="sm"
+
         <Button 
           onClick={toggleMenu} 
           variant="ghost" 
           size="sm" 
+ main
           className="text-white font-medium py-1 bg-transparent px-[12px] text-base absolute top-1/2 right-2 transform -translate-y-1/2"
         >
           {isMenuOpen ? "CLOSE" : "MENU"}
         </Button>
       </div>
 
-      {/* Slide-In Menu */}
+      {/* Full-Page Slide-In Menu */}
       <div
-        className={`fixed inset-y-0 right-0 w-3/4 max-w-xs bg-neutral-800 shadow-xl p-4 transform transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed inset-0 bg-white shadow-xl p-4 transform transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        onClick={toggleMenu} // Click on background closes menu
       >
+ fix/mobile-navbar-unterminated-regex
+        {/* Content wrapper to prevent click propagation */}
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="relative w-full h-full flex flex-col items-center justify-center" // Centering content
+
         <button 
           onClick={toggleMenu} 
           className="absolute top-3 right-3 text-white text-2xl font-bold p-2 leading-none"
           aria-label="Close menu"
+ main
         >
-          &times;
-        </button>
-        <div className="mt-12 space-y-2">
-          {menuItems.map((item, index) => (
+          <button
+            onClick={toggleMenu}
+            className="absolute top-4 right-4 text-neutral-800 text-3xl font-bold p-2 leading-none" // Adjusted styling for visibility
+            aria-label="Close menu"
+          >
+            &times;
+          </button>
+
+          {/* Menu Items Container */}
+          <div className="mt-12 space-y-4 text-center"> {/* Centered text for menu items */}
+            {menuItems.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => handleMenuItemClick(item)}
+                className="w-full block text-left px-6 py-5 text-neutral-800 hover:bg-neutral-100 transition-colors text-xl font-semibold border-b border-gray-300"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+          <div className="mt-8 flex justify-center py-4"> {/* Wrapper for centering and top margin */}
             <button
-              key={index}
-              onClick={() => handleMenuItemClick(item)}
-              className="w-full text-left block px-3 py-2 text-white hover:bg-neutral-700 transition-colors text-base font-medium rounded-md"
+              onClick={toggleMenu}
+              className="py-3 px-8 bg-neutral-200 text-neutral-800 font-semibold rounded-lg hover:bg-neutral-300 transition-colors"
             >
-              {item}
+              Chiudi
             </button>
-          ))}
+          </div>
         </div>
       </div>
+ fix/mobile-navbar-unterminated-regex
+      {/* Old overlay is removed */}
+
 
       {/* Overlay for background click to close */}
       {isMenuOpen && (
@@ -86,6 +134,7 @@ const MobileNavbar = ({
           aria-hidden="true"
         ></div>
       )}
+ main
     </div>
   )
 };
