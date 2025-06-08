@@ -126,9 +126,6 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
       <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 z-20">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-orange-500 rounded-lg flex items-center justify-center">
-              <Radio className="w-6 h-6 text-white" />
-            </div>
             <div>
               <p className="text-white font-medium truncate w-48" title={currentTrackTitle}>{currentTrackTitle}</p>
               <p className="text-white/60 text-sm truncate w-48" title={currentTrackArtist}>{currentTrackArtist}</p>
