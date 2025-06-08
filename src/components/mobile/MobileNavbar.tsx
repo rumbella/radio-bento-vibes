@@ -24,9 +24,10 @@ const MobileNavbar = ({
           </div>
           
           <div className="flex-1 text-center px-2">
-            <span className="font-semibold text-gray-800 leading-tight text-xs">
-              fresh sounds and podcasts
-            </span>
+              <div>
+              <h1 className="text-white font-bold text-xl">Amblé Radio</h1>
+              <p className="text-white/70 text-sm">Fresh Sound & Podcasts</p>
+            </div>
           </div>
           
           <Button onClick={toggleMenu} variant="ghost" size="sm" className="text-gray-800 font-medium py-1 bg-transparent px-[12px] text-base">
