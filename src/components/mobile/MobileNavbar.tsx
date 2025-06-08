@@ -19,13 +19,14 @@ const MobileNavbar = ({
       <div className={`bg-transparent shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? "rounded-t-lg rounded-b-lg" : "rounded-lg"}`}>
         {/* Main navbar */}
         <div className="flex items-center justify-between p-2">
-          <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" alt="Amblé Radio" className="w-10 h-8 object-contain" />
-          </div>
-          
-          <div className="flex-1 text-center px-2">
-            <span className="text-white font-bold text-base">Amblé Radio</span>
-            <p className="text-white/70 text-xs">Fresh Sound & Podcasts</p>
+          <div className="flex items-center space-x-2"> {/* New wrapper div */}
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" alt="Amblé Radio" className="w-10 h-8 object-contain" />
+            </div>
+            <div className="text-left"> {/* Modified text div */}
+              <span className="text-white font-bold text-base">Amblé Radio</span>
+              <p className="text-white/70 text-xs">Fresh Sound & Podcasts</p>
+            </div>
           </div>
           
           <Button onClick={toggleMenu} variant="ghost" size="sm" className="text-white font-medium py-1 bg-transparent px-[12px] text-base">
