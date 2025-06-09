@@ -147,7 +147,7 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
             </Button>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className={`items-center space-x-4 ${isMobile ? 'hidden' : 'flex'}`}>
             <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
               <Heart className="w-5 h-5" />
             </Button>
