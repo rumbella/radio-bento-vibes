@@ -16,7 +16,7 @@ const MobileNavbar = ({
   };
   const menuItems = ["Live", "Podcast", "Palinsesto", "Chi siamo", "Contatti"];
   return <div className={isMenuOpen ? "md:hidden fixed inset-0 z-50 bg-white flex flex-col" : "md:hidden fixed top-[5px] left-1/2 transform -translate-x-1/2 w-[90%] z-30"}>
-      <div className={isMenuOpen ? 'flex flex-col h-full translate-y-0 transition-transform duration-300 ease-in-out' : 'bg-transparent shadow-lg rounded-lg -translate-y-full transition-transform duration-300 ease-in-out'}>
+      <div className={isMenuOpen ? 'flex flex-col h-full translate-y-0 transition-transform duration-300 ease-in-out' : 'bg-transparent shadow-lg rounded-lg'}>
         {/* Main navbar */}
         <div className={`flex items-center p-2 ${isMenuOpen ? '' : 'justify-between'}`}>
           <div className={`flex items-center space-x-2 ${isMenuOpen ? 'flex-1' : ''}`}> {/* New wrapper div */}
