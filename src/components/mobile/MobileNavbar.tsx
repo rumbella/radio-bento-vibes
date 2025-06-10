@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './MobileMenu.css';
+import { Button } from '@/components/ui/button'; // Import Button
 
 const MobileMenu = ({ isOpen, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -46,11 +47,24 @@ const MobileMenu = ({ isOpen, onClose }) => {
   return (
     <div
       className={`mobile-menu-overlay ${isVisible ? 'visible' : ''}`}
-      onClick={handleClose}
+      onClick={handleClose} // Overlay click closes
     >
+      {/* Close Button - direct child of overlay */}
+      <Button
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent overlay click handler from firing as well
+          handleClose();
+        }}
+        variant="ghost"
+        size="sm"
+        className="fixed top-6 right-6 text-black font-medium py-1 px-[12px] text-base z-[10000]"
+      >
+        - CLOSE
+      </Button>
+
       <div
         className="mobile-menu-content"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()} // Content click does not close
       >
         <nav className="mobile-menu-nav">
           {menuItems.map((item, index) => (
