@@ -94,16 +94,36 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
       {/* Mobile Menu Toggle Button and Menu */}
       {isMobile && (
         <>
-          <div className="fixed top-4 right-4 z-50">
-            <Button
-              onClick={() => setIsMobileMenuOpen(true)}
-              variant="outline" // Changed for better visibility
-              size="icon"
-              className="text-white bg-neutral-900 hover:bg-neutral-700 border-neutral-700" // Style for visibility
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </Button>
+          <div className="md:hidden fixed top-[5px] left-1/2 transform -translate-x-1/2 w-[90%] z-30">
+            <div className="bg-transparent shadow-lg rounded-lg flex items-center p-2 justify-between">
+              {/* Logo and Text Div */}
+              <div className="flex items-center space-x-2">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s"
+                    alt="Amblé Radio"
+                    className="w-10 h-8 object-contain"
+                  />
+                </div>
+                <div className="text-left">
+                  <span className="text-white font-bold text-base">Amblé Radio</span>
+                  <p className="text-white/70 text-xs">Fresh Sound & Podcasts</p>
+                </div>
+              </div>
+
+              {/* Existing Menu Toggle Button - This will be updated in the next step */}
+              <Button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} // Changed to toggle
+                variant="ghost"
+                size="sm"
+                className="font-medium py-1 bg-transparent px-[12px] text-base text-white" // Classes from original MobileNavbar button
+              >
+                {isMobileMenuOpen ? "- CLOSE" : "+ MENU"}
+              </Button>
+            </div>
           </div>
+
+          {/* The actual MobileMenu component */}
           <MobileMenu isOpen={isMobileMenuOpen} onClose={handleCloseMobileMenu} />
         </>
       )}
