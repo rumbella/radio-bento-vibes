@@ -7,7 +7,7 @@ import { Slider } from "@/components/ui/slider";
 import { Program } from "@/pages/Index";
 import { Playlist } from "@/data/playlists";
 import { useIsMobile } from "@/hooks/use-mobile";
-import MobileNavbar from "@/components/mobile/MobileNavbar";
+import MobileMenu from "@/components/mobile/MobileNavbar";
 import PlayerActionIcons from "@/components/mobile/PlayerActionIcons";
 export interface RadioPageLayoutProps {
   backgroundElement: ReactNode;
@@ -39,6 +39,7 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
   const [volume, setVolume] = useState(0.8);
   const [muted, setMuted] = useState(false);
   const isMobile = useIsMobile();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const handleVolumeChange = (newVolume: number[]) => {
     setVolume(newVolume[0]);
     setMuted(false);
@@ -61,8 +62,8 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
     console.log("Message clicked in player bar - funzione da implementare");
   };
 
-  const handleMobileMenuClick = (item: string) => {
-    console.log(`Menu item clicked: ${item} - funzione da implementare`);
+  const handleCloseMobileMenu = () => {
+    setIsMobileMenuOpen(false);
   };
   let audioUrl = "";
   let currentTrackTitle = currentProgramForPlayer?.name || "Live Stream";
@@ -90,8 +91,22 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
       if (isPlaying) onTogglePlay();
     }} onEnded={handleEnded} />
 
-      {/* Mobile Navbar */}
-      {isMobile && <MobileNavbar onMenuItemClick={handleMobileMenuClick} />}
+      {/* Mobile Menu Toggle Button and Menu */}
+      {isMobile && (
+        <>
+          <div className="fixed top-4 right-4 z-50">
+            <Button
+              onClick={() => setIsMobileMenuOpen(true)}
+              variant="outline" // Changed for better visibility
+              size="icon"
+              className="text-white bg-neutral-900 hover:bg-neutral-700 border-neutral-700" // Style for visibility
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </Button>
+          </div>
+          <MobileMenu isOpen={isMobileMenuOpen} onClose={handleCloseMobileMenu} />
+        </>
+      )}
 
       {/* Desktop Header */}
       {!isMobile && <header className="relative z-10 flex items-center justify-between p-6">

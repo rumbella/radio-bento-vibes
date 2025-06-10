@@ -1,48 +1,79 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-interface MobileNavbarProps {
-  onMenuItemClick?: (item: string) => void;
-}
-const MobileNavbar = ({
-  onMenuItemClick
-}: MobileNavbarProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-  const handleMenuItemClick = (item: string) => {
-    onMenuItemClick?.(item);
-    setIsMenuOpen(false);
-  };
-  const menuItems = ["Live", "Podcast", "Palinsesto", "Chi siamo", "Contatti"];
-  return <div className={isMenuOpen ? "md:hidden fixed inset-0 z-50 bg-white flex flex-col" : "md:hidden fixed top-[5px] left-1/2 transform -translate-x-1/2 w-[90%] z-30"}>
-      <div className={isMenuOpen ? 'flex flex-col h-full translate-y-0 transition-transform duration-500 ease-in-out' : 'bg-transparent shadow-lg rounded-lg'}>
-        {/* Main navbar */}
-        <div className={`flex items-center p-2 ${isMenuOpen ? '' : 'justify-between'}`}>
-          <div className={`flex items-center space-x-2 ${isMenuOpen ? 'flex-1' : ''}`}> {/* New wrapper div */}
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" alt="Amblé Radio" className="w-10 h-8 object-contain" />
-            </div>
-            <div className={`${isMenuOpen ? 'text-center flex-1' : 'text-left'}`}> {/* Modified text div */}
-              <span className={isMenuOpen ? 'text-black font-bold text-base' : 'text-white font-bold text-base'}>Amblé Radio</span>
-              <p className={isMenuOpen ? 'text-black text-xs' : 'text-white/70 text-xs'}>Fresh Sound & Podcasts</p>
-            </div>
-          </div>
-          
-          <Button onClick={toggleMenu} variant="ghost" size="sm" className={`font-medium py-1 bg-transparent px-[12px] text-base ${isMenuOpen ? 'text-black' : 'text-white'}`}>
-            {isMenuOpen ? "- CLOSE" : "+ MENU"}
-          </Button>
-        </div>
+import React, { useState, useEffect } from 'react';
+import './MobileMenu.css';
 
-        {/* Expandable menu */}
-        {isMenuOpen && <div className="border-t border-gray-200 flex-grow overflow-y-auto">
-            <div className="py-2">
-              {menuItems.map((item, index) => <button key={index} onClick={() => handleMenuItemClick(item)} style={{ transitionDelay: isMenuOpen ? `${index * 75}ms` : '0ms' }} className={`w-full text-left px-4 py-6 text-gray-800 hover:bg-gray-50 text-lg font-bold uppercase border-b border-dotted border-gray-200 last:border-b-0 transition-all duration-500 ease-out ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                  {item}
-                </button>)}
-            </div>
-          </div>}
+const MobileMenu = ({ isOpen, onClose }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  const menuItems = [
+    { label: 'About Friends', href: '#about' },
+    { label: 'Our Mission', href: '#mission' },
+    { label: 'Our Purpose', href: '#purpose' },
+    { label: 'Our Approach', href: '#approach' },
+    { label: 'Our Services', href: '#services' },
+    { label: 'Leadership Team', href: '#leadership' },
+    { label: 'Our Friends', href: '#friends' },
+    { label: 'Team', href: '#team' },
+    { label: 'Past Performance', href: '#performance' },
+    { label: 'Agency', href: '#agency' },
+    { label: 'Our Information', href: '#information' }
+  ];
+
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+      // Piccolo delay per permettere il render prima dell'animazione
+      setTimeout(() => setIsVisible(true), 10);
+    } else {
+      setIsVisible(false);
+      // Delay per permettere l'animazione di uscita prima di rimuovere dal DOM
+      setTimeout(() => setShouldRender(false), 300);
+    }
+  }, [isOpen]);
+
+  const handleClose = () => {
+    onClose();
+  };
+
+  const handleMenuItemClick = (href) => {
+    // Naviga alla sezione
+    window.location.href = href;
+    handleClose();
+  };
+
+  if (!shouldRender) return null;
+
+  return (
+    <div
+      className={`mobile-menu-overlay ${isVisible ? 'visible' : ''}`}
+      onClick={handleClose}
+    >
+      <div
+        className="mobile-menu-content"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <nav className="mobile-menu-nav">
+          {menuItems.map((item, index) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="mobile-menu-item"
+              style={{
+                animationDelay: isVisible ? `${index * 0.1}s` : '0s',
+                animationDirection: isVisible ? 'normal' : 'reverse'
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                handleMenuItemClick(item.href);
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
       </div>
-    </div>;
+    </div>
+  );
 };
-export default MobileNavbar;
+
+export default MobileMenu;
