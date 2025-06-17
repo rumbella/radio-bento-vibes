@@ -30,7 +30,7 @@ export const mockPrograms: Program[] = [
     name: "Morning Vibes",
     host: "Marco & Sofia",
     imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    audioUrl: "https://mqugxowc-lbmedia.radioca.st/stream?type=http&nocache=43",
   },
   {
     id: "program2",
