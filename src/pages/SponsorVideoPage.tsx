@@ -41,7 +41,6 @@ const mockAdvertisements: Advertisement[] = [
 
 const SponsorVideoPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [videoBackgroundUrl, setVideoBackgroundUrl] = useState("https://res.cloudinary.com/thinkdigital/video/upload/v1749120441/4916813-hd_1920_1080_30fps_rp1dpq.mp4");
   const [currentProgram, setCurrentProgram] = useState<Program | null>(null);
   const [currentAdvertisement, setCurrentAdvertisement] = useState<Advertisement | null>(null);
 
@@ -82,12 +81,11 @@ const SponsorVideoPage = () => {
 
 
   const backgroundVideoElement = (
-    <video
-      key={videoBackgroundUrl} // Add key to force re-render if URL changes
-      autoPlay
-      muted
-      loop
-      playsInline // Important for iOS
+    <iframe
+      src="https://www.youtube.com/embed/QBoMdVFsQkI?autoplay=1&loop=1&playlist=QBoMdVFsQkI&mute=1"
+      frameBorder="0"
+      allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
       style={{
         position: 'absolute',
         width: '100%',
@@ -95,20 +93,15 @@ const SponsorVideoPage = () => {
         objectFit: 'cover',
         top: 0,
         left: 0,
-        // zIndex: -1, // Removed: z-index is handled by RadioPageLayout's overlay
       }}
-      src={videoBackgroundUrl}
-    >
-      Your browser does not support the video tag.
-    </video>
+      title="Sponsor Video"
+    ></iframe>
   );
 
   const headerActionButtons = (
     <>
       <Button onClick={() => setCurrentProgramById("program2")} className="text-white hover:bg-white/10">Set P2 (Sponsor)</Button>
       <Button onClick={() => setCurrentAdvertisementById("ad1")} className="text-white hover:bg-white/10">Set Ad1 (Sponsor)</Button>
-      {/* Add a button to change video for testing */}
-      <Button onClick={() => setVideoBackgroundUrl("https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4")} className="text-white hover:bg-white/10">Change Video BG</Button>
     </>
   );
 
