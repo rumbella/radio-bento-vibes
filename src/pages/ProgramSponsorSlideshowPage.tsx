@@ -27,7 +27,7 @@ const mockAdvertisements: Advertisement[] = [
   {
     id: "ad1",
     name: "Awesome Product",
-    imageUrl: "https://images.pexels.com/photos/1762578/pexels-photo-1762578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Using a different image for sponsor slide
+    imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1750259419/images_k7u0uj.jpg", // Using a different image for sponsor slide
     targetUrl: "https://example.com/product",
   },
   {
@@ -45,9 +45,14 @@ const ProgramSponsorSlideshowPage = () => {
   const [currentAdvertisement, setCurrentAdvertisement] = useState<Advertisement | null>(null);
 
   // Slideshow state
-  const [programImageUrl, setProgramImageUrl] = useState(mockPrograms[0]?.imageUrl || "");
-  const [sponsorImageUrl, setSponsorImageUrl] = useState(mockAdvertisements[0]?.imageUrl || "");
-  const [currentSlideImage, setCurrentSlideImage] = useState(programImageUrl);
+  const banksyImageUrls = [
+    "https://res.cloudinary.com/thinkdigital/image/upload/v1750256924/Banksy-4-Venice-courtesy-photo-Lapo-Simeoni.jpg-1024x681-1_xg8bny.jpg",
+    "https://res.cloudinary.com/thinkdigital/image/upload/v1750256924/Banksy_Balloon_Girl_London_nqkyfg.jpg",
+    "https://res.cloudinary.com/thinkdigital/image/upload/v1750256924/Banksy_rqgrzv.jpg",
+    "https://res.cloudinary.com/thinkdigital/image/upload/v1750256924/BANSKY-e1602249904787_op9kyk.jpg",
+  ];
+  const [currentSlideImage, setCurrentSlideImage] = useState(banksyImageUrls[0]);
+  const [currentSlideshowIndex, setCurrentSlideshowIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
 
   const togglePlay = () => {
@@ -58,8 +63,6 @@ const ProgramSponsorSlideshowPage = () => {
     const program = mockPrograms.find(p => p.id === id);
     if (program) {
       setCurrentProgram(program);
-      // Update program image for slideshow if it changes
-      if(program.imageUrl) setProgramImageUrl(program.imageUrl);
     }
   };
 
@@ -67,37 +70,24 @@ const ProgramSponsorSlideshowPage = () => {
     const ad = mockAdvertisements.find(a => a.id === id);
     if (ad) {
       setCurrentAdvertisement(ad);
-      // Update sponsor image for slideshow if it changes
-      if(ad.imageUrl) setSponsorImageUrl(ad.imageUrl);
     }
   };
 
   useEffect(() => {
     if (mockPrograms.length > 0 && !currentProgram) {
       setCurrentProgram(mockPrograms[0]);
-      if (mockPrograms[0].imageUrl) {
-        setProgramImageUrl(mockPrograms[0].imageUrl);
-        setCurrentSlideImage(mockPrograms[0].imageUrl); // Initialize with program image
-      }
     }
     if (mockAdvertisements.length > 0 && !currentAdvertisement) {
       setCurrentAdvertisement(mockAdvertisements[0]);
-      if (mockAdvertisements[0].imageUrl) {
-        setSponsorImageUrl(mockAdvertisements[0].imageUrl);
-      }
     }
   }, [currentProgram, currentAdvertisement]);
 
   // Slideshow logic
   useEffect(() => {
-    if (!programImageUrl || !sponsorImageUrl) return; // Don't start if images are not set
-
     const intervalId = setInterval(() => {
       setIsFading(true);
       setTimeout(() => {
-        setCurrentSlideImage(prevImage =>
-          prevImage === programImageUrl ? sponsorImageUrl : programImageUrl
-        );
+        setCurrentSlideshowIndex(prevIndex => (prevIndex + 1) % banksyImageUrls.length);
         // isFading is still true here. The new image identified by 'key'
         // will attempt to render with opacity: 0.
 
@@ -112,7 +102,11 @@ const ProgramSponsorSlideshowPage = () => {
     }, 5000); // Changed to 10 seconds total cycle time (3s fade + 4s visible + 3s fade)
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount
-  }, [programImageUrl, sponsorImageUrl]);
+  }, [banksyImageUrls.length]); // Intentionally using banksyImageUrls.length, assuming URLs don't change
+
+  useEffect(() => {
+    setCurrentSlideImage(banksyImageUrls[currentSlideshowIndex]);
+  }, [currentSlideshowIndex]);
 
   useEffect(() => {
     if (currentAdvertisement && currentAdvertisement.videoUrl) {
