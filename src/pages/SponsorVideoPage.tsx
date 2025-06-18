@@ -27,8 +27,8 @@ const mockAdvertisements: Advertisement[] = [
   {
     id: "ad1",
     name: "Awesome Product",
-    imageUrl: "https://placehold.co/600x400/E74C3C/FFFFFF/png?text=Ad+1",
-    targetUrl: "https://example.com/product",
+    imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1750257627/images_kj2qyb.png",
+    targetUrl: "https://www.revolut.com/it-IT/",
   },
   {
     id: "ad2",
