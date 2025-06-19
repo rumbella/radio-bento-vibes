@@ -40,6 +40,8 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
   const [muted, setMuted] = useState(false);
   const isMobile = useIsMobile();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false); // New state for desktop menu
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // New state for auth
   const handleVolumeChange = (newVolume: number[]) => {
     setVolume(newVolume[0]);
     setMuted(false);
@@ -64,6 +66,9 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
 
   const handleCloseMobileMenu = () => {
     setIsMobileMenuOpen(false);
+  };
+  const handleCloseDesktopMenu = () => { // New handler for desktop menu
+    setIsDesktopMenuOpen(false);
   };
   let audioUrl = "";
   let currentTrackTitle = currentProgramForPlayer?.name || "Live Stream";
@@ -139,20 +144,52 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
               <p className="text-white/70 text-sm">Fresh Sound & Podcasts</p>
             </div>
           </div>
+          {/* Center column for navigation */}
+          <div className="flex-grow text-center">
+            <div className="flex justify-center space-x-4">
+              <Button variant="ghost" className="text-white hover:bg-white/10">Live</Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10">Playlist</Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10">Programmi</Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10">Podcast</Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10">Chi Siamo</Button>
+            </div>
+          </div>
           <nav className="flex items-center space-x-6">
-            <Button variant="ghost" className="text-white hover:bg-white/10">Live</Button>
-            <Button variant="ghost" className="text-white hover:bg-white/10">Podcasts</Button>
-            <Button variant="ghost" className="text-white hover:bg-white/10">Schedule</Button>
-
-            <Link to="/"><Button variant="ghost" className="text-white hover:bg-white/10">Image BG</Button></Link>
-            <Link to="/sponsor-video"><Button variant="ghost" className="text-white hover:bg-white/10">Video BG</Button></Link>
-            <Link to="/program-slideshow"><Button variant="ghost" className="text-white hover:bg-white/10">Slideshow BG</Button></Link>
-            <Link to="/playlist"><Button variant="ghost" className="text-white hover:bg-white/10">Playlist</Button></Link>
-
+            {/* Login/Logout Button and Avatar */}
+            {isAuthenticated ? (
+              <>
+                <Button
+                  onClick={() => setIsAuthenticated(false)}
+                  variant="ghost"
+                  className="text-white hover:bg-white/10"
+                >
+                  Logout
+                </Button>
+                <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full"></div>
+              </>
+            ) : (
+              <Button
+                onClick={() => setIsAuthenticated(true)}
+                variant="ghost"
+                className="text-white hover:bg-white/10"
+              >
+                Login
+              </Button>
+            )}
             {headerActions}
-            <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full"></div>
+            <Button
+              onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
+              variant="ghost"
+              className="text-white hover:bg-white/10"
+            >
+              {isDesktopMenuOpen ? "- CLOSE" : "+ MENU"}
+            </Button>
+            {/* Avatar is now conditional, so removing the standalone one if not authenticated */}
           </nav>
         </header>}
+
+      {/* Desktop Menu */}
+      {!isMobile && <MobileMenu isOpen={isDesktopMenuOpen} onClose={handleCloseDesktopMenu} />}
 
       {/* Main Content Grid - Hidden on mobile */}
       {!isMobile && <div className="relative z-10 flex justify-between h-[calc(100vh-200px)] px-12">
