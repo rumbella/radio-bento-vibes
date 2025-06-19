@@ -11,7 +11,13 @@ const MobileMenu = ({ isOpen, onClose }) => {
     { label: 'Playlist', href: '/playlist' },
     { label: 'Programmi', href: '/programmi' },
     { label: 'Podcast', href: '/podcast' },
+<<<<<feat/desktop-navbar-3col
+    { label: 'Chi Siamo', href: '/chi-siamo' },
+    { label: 'Pagina Slideshow', href: '/program-slideshow' },
+    { label: 'Pagina Video Background', href: '/sponsor-video' }
+
     { label: 'Chi Siamo', href: '/chi-siamo' }
+main
   ];
 
   useEffect(() => {
