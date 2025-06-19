@@ -7,17 +7,13 @@ const MobileMenu = ({ isOpen, onClose }) => {
   const [shouldRender, setShouldRender] = useState(false);
 
   const menuItems = [
-    { label: 'About Friends', href: '#about' },
-    { label: 'Our Mission', href: '#mission' },
-    { label: 'Our Purpose', href: '#purpose' },
-    { label: 'Our Approach', href: '#approach' },
-    { label: 'Our Services', href: '#services' },
-    { label: 'Leadership Team', href: '#leadership' },
-    { label: 'Our Friends', href: '#friends' },
-    { label: 'Team', href: '#team' },
-    { label: 'Past Performance', href: '#performance' },
-    { label: 'Agency', href: '#agency' },
-    { label: 'Our Information', href: '#information' }
+    { label: 'Live', href: '/live' },
+    { label: 'Playlist', href: '/playlist' },
+    { label: 'Programmi', href: '/programmi' },
+    { label: 'Podcast', href: '/podcast' },
+    { label: 'Chi Siamo', href: '/chi-siamo' },
+    { label: 'Pagina Slideshow', href: '/program-slideshow' },
+    { label: 'Pagina Video Background', href: '/sponsor-video' }
   ];
 
   useEffect(() => {
