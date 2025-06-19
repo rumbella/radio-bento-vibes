@@ -194,7 +194,7 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
                 Login
               </Button>
             )}
-            {headerActions} {/* Assuming headerActions might be null or contain other elements */}
+            {/* {headerActions}  Removed as per requirement to eliminate potential red buttons from this area */}
             <Button
               onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
               variant="ghost"
