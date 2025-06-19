@@ -134,28 +134,46 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
       )}
 
       {/* Desktop Header */}
-      {!isMobile && <header className="relative z-10 flex items-center justify-between p-6">
+      {!isMobile && (
+        <header className="relative z-10 flex items-center justify-between p-6">
+          {/* Left Column: Logo and Site Title */}
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s" alt="Amblé Radio" className="w-10 h-8 object-contain" />
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RFZ_DjLPAbpKy6YRptoo6QFCSVF3PFLNLQ&s"
+                alt="Amblé Radio"
+                className="w-10 h-8 object-contain"
+              />
             </div>
             <div>
               <h1 className="text-white font-bold text-xl">Amblé Radio</h1>
               <p className="text-white/70 text-sm">Fresh Sound & Podcasts</p>
             </div>
           </div>
-          {/* Center column for navigation */}
-          <div className="flex-grow text-center">
-            <div className="flex justify-center space-x-4">
-              <Button variant="ghost" className="text-white hover:bg-white/10">Live</Button>
-              <Button variant="ghost" className="text-white hover:bg-white/10">Playlist</Button>
-              <Button variant="ghost" className="text-white hover:bg-white/10">Programmi</Button>
-              <Button variant="ghost" className="text-white hover:bg-white/10">Podcast</Button>
-              <Button variant="ghost" className="text-white hover:bg-white/10">Chi Siamo</Button>
+
+          {/* Center Column: Navigation Links */}
+          <div className="flex-grow flex justify-center">
+            <div className="flex space-x-2">
+              <Button variant="ghost" className="text-white hover:bg-white/10">
+                Live
+              </Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10">
+                Playlist
+              </Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10">
+                Programmi
+              </Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10">
+                Podcast
+              </Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10">
+                Chi Siamo
+              </Button>
             </div>
           </div>
-          <nav className="flex items-center space-x-6">
-            {/* Login/Logout Button and Avatar */}
+
+          {/* Right Column: Auth and Menu Toggle */}
+          <div className="flex items-center space-x-4">
             {isAuthenticated ? (
               <>
                 <Button
@@ -176,7 +194,7 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
                 Login
               </Button>
             )}
-            {headerActions}
+            {headerActions} {/* Assuming headerActions might be null or contain other elements */}
             <Button
               onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
               variant="ghost"
@@ -184,9 +202,9 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
             >
               {isDesktopMenuOpen ? "- CLOSE" : "+ MENU"}
             </Button>
-            {/* Avatar is now conditional, so removing the standalone one if not authenticated */}
-          </nav>
-        </header>}
+          </div>
+        </header>
+      )}
 
       {/* Desktop Menu */}
       {!isMobile && <MobileMenu isOpen={isDesktopMenuOpen} onClose={handleCloseDesktopMenu} />}
