@@ -137,51 +137,7 @@ const Index = () => {
     >
       {/* Children: Left and Right Sidebars passed to the layout */}
       <div className="w-1/4 grid grid-cols-2 gap-4">
-        {/* Current Show Card */}
-        <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-4 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center space-x-2 mb-2">
-              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-              <span className="text-red-400 text-xs font-medium">LIVE NOW</span>
-            </div>
-            <h2 className="text-white text-xl font-bold mb-1">{currentProgram ? currentProgram.name : "Loading..."}</h2>
-            <p className="text-white/70 text-sm mb-2">with {currentProgram ? currentProgram.host : "..."}</p>
-            <p className="text-white/60 text-xs">Broadcasting live with the latest hits and talks.</p>
-          </div>
-          <div className="flex items-center justify-between mt-4">
-            <Button
-              onClick={togglePlay}
-              className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600"
-            >
-              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
-            </Button>
-            <div className="text-white flex-1 ml-3">
-              <p className="text-xs opacity-70">Now Playing</p>
-              <p className="font-medium text-sm">Tame Impala</p> {/* Placeholder */}
-            </div>
-          </div>
-        </Card>
-
-        {/* Popular Podcasts Card */}
-        <Card className="col-span-2 bg-black/30 backdrop-blur-lg border-white/10 p-3">
-          <h3 className="text-white font-semibold mb-3 text-sm">Popular Podcasts</h3>
-          <div className="grid grid-cols-2 gap-2">
-            <div className="bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-colors cursor-pointer">
-              <div className="w-full h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-1">
-                <img className="rounded-lg" src="https://placehold.co/400x100/cccccc/FFFFFF/png" />
-              </div>
-              <p className="text-white text-xs font-medium">Tech & Innovation</p>
-              <p className="text-white/60 text-xs">24 ep</p>
-            </div>
-            <div className="bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-colors cursor-pointer">
-              <div className="w-full h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-1">
-                <img className="rounded-lg" src="https://placehold.co/400x100/cccccc/FFFFFF/png" />
-              </div>
-              <p className="text-white text-xs font-medium">Culture & Arts</p>
-              <p className="text-white/60 text-xs">18 ep</p>
-            </div>
-          </div>
-        </Card>
+        {/* This left column is now empty as per user request */}
       </div>
 
       <div className="w-1/4 grid grid-cols-1 md:grid-cols-2 gap-4">
