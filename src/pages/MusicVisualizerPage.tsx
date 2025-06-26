@@ -1,6 +1,5 @@
-
 import { useState, useEffect, ReactNode } from "react";
-import { Play, Pause, SkipBack, SkipForward, Heart, Volume2, VolumeX, Maximize, Minimize, FullScreen } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Heart, Volume2, VolumeX, Maximize, Minimize, Fullscreen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
@@ -100,7 +99,7 @@ const MusicVisualizerPage = () => {
                 {isFullScreen ? "Minimize" : "Minimize"}
               </Button>
               <Button variant="ghost" size="sm" onClick={toggleFullScreen} className="text-white">
-                <FullScreen className="w-4 h-4 mr-1" />
+                <Fullscreen className="w-4 h-4 mr-1" />
                 Full Screen
               </Button>
               <Button variant="ghost" size="sm" className="text-white">
@@ -120,7 +119,7 @@ const MusicVisualizerPage = () => {
                 Minimize
               </Button>
               <Button size="sm" className="bg-black/20 text-white hover:bg-black/30">
-                <FullScreen className="w-4 h-4 mr-1" />
+                <Fullscreen className="w-4 h-4 mr-1" />
                 Full Screen
               </Button>
             </div>
@@ -240,7 +239,7 @@ const MusicVisualizerPage = () => {
               className="w-20 h-1 bg-gray-600 rounded-full"
             />
             <Button variant="ghost" size="icon" className="text-white">
-              <FullScreen className="w-4 h-4" />
+              <Fullscreen className="w-4 h-4" />
             </Button>
           </div>
         </div>
