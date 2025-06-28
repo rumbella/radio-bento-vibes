@@ -107,8 +107,8 @@ const SiteHeader: React.FC = () => {
 };
 
 const PlayerFooterContent: React.FC = () => {
-  const { isPlaying, volume, muted, currentTrack, playerMode, playedSeconds, duration } = usePlayerState();
-  const { togglePlay, setVolume, toggleMute, seekTo } = usePlayerActions();
+  const { isPlaying, volume, muted, currentTrack, playerMode, playedSeconds, duration, currentPlaylistTracks } = usePlayerState();
+  const { togglePlay, setVolume, toggleMute, seekTo, nextTrack, prevTrack } = usePlayerActions();
   const isMobile = useIsMobile();
 
 
@@ -119,10 +119,12 @@ const PlayerFooterContent: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 p-3 z-30 text-white">
+    // Removed: "fixed bottom-0 left-0 right-0 z-30"
+    // Added: "mt-auto" to push to bottom of flex container if content is short, basic padding/margin for spacing
+    <div className="bg-neutral-800/70 backdrop-blur-md border-t border-neutral-700 p-3 text-white w-full mt-auto">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Track Info & Progress Bar */}
-        <div className="flex items-center space-x-3 w-1/3">
+        <div className="flex items-center space-x-3 w-1/3 min-w-0"> {/* Added min-w-0 for better truncation handling */}
           {currentTrack?.imageUrl && (
             <img src={currentTrack.imageUrl} alt={currentTrack.title} className="w-10 h-10 rounded object-cover" />
           )}
@@ -136,21 +138,21 @@ const PlayerFooterContent: React.FC = () => {
         {/* Center: Controls & Seek Bar */}
         <div className="flex flex-col items-center flex-grow mx-4">
           <div className="flex items-center space-x-2 sm:space-x-4">
-            {(playerMode === 'playlist' || playerMode === 'podcast') && (
-              <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={() => console.log("Prev clicked") /* TODO: actions.prevTrack */}>
+            {(playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 1 && (
+              <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={prevTrack}>
                 <SkipBack className="w-5 h-5" />
               </Button>
             )}
             <Button onClick={togglePlay} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-black hover:bg-white/90 flex items-center justify-center">
               {isPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6 ml-0.5" />}
             </Button>
-            {(playerMode === 'playlist' || playerMode === 'podcast') && (
-              <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={() => console.log("Next clicked") /* TODO: actions.nextTrack */}>
+            {(playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 1 && (
+              <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={nextTrack}>
                 <SkipForward className="w-5 h-5" />
               </Button>
             )}
           </div>
-          {!isMobile && duration > 0 && (
+          {!isMobile && duration > 0 && playerMode !== 'live' && ( // Hide seek bar for live streams as duration is often 0 or irrelevant
             <div className="w-full max-w-xs lg:max-w-md flex items-center space-x-2 mt-1">
               <span className="text-xs text-white/70 w-8">{formatTime(playedSeconds)}</span>
               <Slider
@@ -213,12 +215,16 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-800 to-black flex flex-col">
       <SiteHeader />
-      <main className="flex-grow relative z-10 pt-[60px] md:pt-0"> {/* Adjust pt for mobile header height */}
-        {children}
+      <main className="flex-grow relative z-10 pt-[60px] md:pt-0 flex flex-col"> {/* Ensure main can use flex-col for ordering */}
+        <div className="flex-grow"> {/* This div will take up available space for page content */}
+          {children}
+        </div>
+        {/* Player UI moved here, at the end of the main content flow */}
+        <PlayerFooterContent />
       </main>
-      <PlayerFooterContent />
+      {/* ReactPlayer remains a hidden utility component, not directly part of the visual layout flow here */}
       <ReactPlayer
-          ref={playerRef} // This ref can be used by actions in context if needed
+          ref={playerRef}
           url={currentTrack?.audioUrl || undefined}
           playing={isPlaying}
           volume={volume}
@@ -227,7 +233,9 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
           onProgress={handleProgress}
           onDuration={handleDuration}
           onEnded={handleEnded}
-          onError={(e) => console.error('ReactPlayer Error:', e)}
+          onPlay={() => console.log("ReactPlayer: onPlay event. Context isPlaying:", isPlaying, "URL:", currentTrack?.audioUrl)}
+          onPause={() => console.log("ReactPlayer: onPause event. Context isPlaying:", isPlaying)}
+          onError={(e) => console.error('ReactPlayer Error:', e, 'Attempted URL:', currentTrack?.audioUrl)}
           width="0"
           height="0"
           config={{ file: { forceAudio: true } }} // Ensures it's treated as audio

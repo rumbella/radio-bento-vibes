@@ -21,18 +21,22 @@ const NewHomePage: React.FC = () => {
   // This logic might be better suited in PlayerProvider for a truly global default,
   // or if NewHomePage is THE landing page that should always start a stream.
   useEffect(() => {
-    if (!currentTrack && mockPrograms.length > 0) {
-      // Example: Play the first mock program if nothing is loaded yet.
-      // Adjust this logic based on desired default behavior.
-      // playStream(mockPrograms[0]);
+    // If no track is playing OR if the current track is not a live stream, play the default live stream.
+    // This makes sure the homepage always tries to play live content.
+    if (mockPrograms.length > 0 && (!currentTrack || currentTrack.playerMode !== 'live')) {
+      // Check if mockPrograms[0] is already the current track to avoid restarting it if it was just paused.
+      if (!currentTrack || currentTrack.id !== mockPrograms[0].id || currentTrack.playerMode !== 'live') {
+        console.log("NewHomePage: Setting default live stream mockPrograms[0]");
+        playStream(mockPrograms[0]);
+      }
     }
   }, [currentTrack, playStream]);
 
   // Use currentTrack from context for display
   const displayImageUrl = currentTrack?.imageUrl || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg"; // Fallback image
-  const displayTitle = currentTrack?.title || "Free Fall (Visualizer) (feat. J. Cole)"; // Fallback title
-  const displayArtist = currentTrack?.artist || "Tems • Born in the Wild • 2024 • 4:15"; // Fallback artist info
-  const songOrContentType = currentTrack?.originalProgram?.id || currentTrack?.id ? (currentTrack.playerMode === 'podcast' ? 'Podcast' : 'Song') : 'Song';
+  const displayTitle = currentTrack?.title || "Select a Stream"; // Fallback title
+  const displayArtist = currentTrack?.artist || "Amblé Radio"; // Fallback artist info
+  const songOrContentType = currentTrack?.playerMode === 'live' ? 'Live Stream' : (currentTrack?.playerMode === 'podcast' ? 'Podcast' : 'Song');
 
 
   return (
