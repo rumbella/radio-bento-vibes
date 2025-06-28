@@ -146,8 +146,10 @@ const PlayerFooterContent: React.FC = () => {
               </Button>
             )}
             <Button onClick={togglePlay} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-black hover:bg-white/90 flex items-center justify-center">
-              {isPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6 ml-0.5" />}
+              {isPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6" />} {/* Removed ml-0.5 from Play icon for testing */}
             </Button>
+            {/* DEBUG: Display isPlaying state */}
+            <span className="text-xs text-cyan-400 ml-2">DBG: isPlaying: {isPlaying.toString()}</span>
             {(playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 1 && (
               <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={nextTrack}>
                 <SkipForward className="w-5 h-5" />

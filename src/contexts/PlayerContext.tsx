@@ -68,8 +68,13 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
 
 
   const togglePlay = useCallback(() => {
-    setIsPlaying(prev => !prev);
-  }, []);
+    console.log('[PlayerContext] togglePlay called. Current isPlaying before setIsPlaying:', isPlaying);
+    setIsPlaying(prevIsPlaying => {
+      const newIsPlaying = !prevIsPlaying;
+      console.log('[PlayerContext] setIsPlaying. Previous:', prevIsPlaying, 'New:', newIsPlaying);
+      return newIsPlaying;
+    });
+  }, [isPlaying]); // Added isPlaying to dependency array for the initial console.log, though setIsPlaying itself doesn't need it.
 
   const internalSetVolume = useCallback((vol: number) => {
     setVolume(vol);
