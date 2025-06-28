@@ -21,15 +21,22 @@ const NewHomePage: React.FC = () => {
   // This logic might be better suited in PlayerProvider for a truly global default,
   // or if NewHomePage is THE landing page that should always start a stream.
   useEffect(() => {
-    // If no track is playing OR if the current track is not a live stream, play the default live stream.
-    // This makes sure the homepage always tries to play live content.
-    if (mockPrograms.length > 0 && (!currentTrack || currentTrack.playerMode !== 'live')) {
-      // Check if mockPrograms[0] is already the current track to avoid restarting it if it was just paused.
-      if (!currentTrack || currentTrack.id !== mockPrograms[0].id || currentTrack.playerMode !== 'live') {
-        console.log("NewHomePage: Setting default live stream mockPrograms[0]");
-        playStream(mockPrograms[0]);
+    const defaultLiveProgram = mockPrograms[0];
+    if (defaultLiveProgram) {
+      // If no track is currently set, OR
+      // if a track is set but it's NOT the default live program, OR
+      // if a track is set, IS the default live program, but is NOT in 'live' mode (e.g. error/stalled state changed mode)
+      // THEN, set (or reset) to the default live stream.
+      // This ensures that navigating to the homepage attempts to play the live stream.
+      // PlayerContext's playStream action sets isPlaying to true.
+      if (!currentTrack || currentTrack.id !== defaultLiveProgram.id || currentTrack.playerMode !== 'live') {
+        console.log("NewHomePage useEffect: Setting/Resetting to default live stream.");
+        playStream(defaultLiveProgram);
       }
     }
+    // This effect depends on currentTrack. If currentTrack changes to something else (e.g. user plays a playlist),
+    // and then they navigate back to NewHomePage, this effect will re-evaluate.
+    // playStream is memoized, so it won't cause loops unless currentTrack changes in a way that re-triggers the condition.
   }, [currentTrack, playStream]);
 
   // Use currentTrack from context for display
