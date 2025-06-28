@@ -171,6 +171,11 @@ const RadioPageLayout: React.FC<RadioPageLayoutProps> = ({
                   Podcast Demo
                 </Button>
               </Link>
+              <Link to="/new-home">
+                <Button variant="ghost" className="text-white hover:bg-white/10">
+                  New Home
+                </Button>
+              </Link>
               <Button variant="ghost" className="text-white hover:bg-white/10">
                 Chi Siamo
               </Button>
