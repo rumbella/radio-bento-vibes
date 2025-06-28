@@ -15,8 +15,9 @@ export interface Advertisement {
 }
 
 export const mockPrograms: Program[] = [
+  // Force re-typing the first object to clear potential hidden characters/syntax issues
   {
-    id: "program1", // Ensuring comma is here
+    id: "program1",
     name: "Morning Vibes",
     host: "Marco & Sofia",
     imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
