@@ -111,6 +111,8 @@ const PlayerFooterContent: React.FC = () => {
   const { togglePlay, setVolume, toggleMute, seekTo, nextTrack, prevTrack } = usePlayerActions();
   const isMobile = useIsMobile();
 
+  console.log('PlayerFooterContent rendering, isPlaying:', isPlaying, 'currentTrack:', currentTrack?.title);
+
 
   const formatTime = (seconds: number) => {
     const date = new Date(0);
@@ -119,12 +121,12 @@ const PlayerFooterContent: React.FC = () => {
   };
 
   return (
-    // Removed: "fixed bottom-0 left-0 right-0 z-30"
-    // Added: "mt-auto" to push to bottom of flex container if content is short, basic padding/margin for spacing
-    <div className="bg-neutral-800/70 backdrop-blur-md border-t border-neutral-700 p-3 text-white w-full mt-auto">
+    // Apply requested styles: bg-black/80 backdrop-blur-xl border-t border-white/10 p-4
+    // Retain w-full and mt-auto for positioning within the flex layout. z-20 omitted as it's in normal flow.
+    <div className="bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 text-white w-full mt-auto">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Track Info & Progress Bar */}
-        <div className="flex items-center space-x-3 w-1/3 min-w-0"> {/* Added min-w-0 for better truncation handling */}
+        <div className="flex items-center space-x-3 w-1/3 min-w-0">
           {currentTrack?.imageUrl && (
             <img src={currentTrack.imageUrl} alt={currentTrack.title} className="w-10 h-10 rounded object-cover" />
           )}
