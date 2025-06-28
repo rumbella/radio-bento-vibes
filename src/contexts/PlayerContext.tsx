@@ -24,6 +24,8 @@ interface PlayerState {
   currentTrack: TrackInfo | null;
   playerMode: PlayerMode;
   loop: boolean;
+  currentPlaylistTracks: TrackInfo[];
+  currentTrackIndexInPlaylist: number | null;
 }
 
 interface PlayerActions {
@@ -32,12 +34,13 @@ interface PlayerActions {
   toggleMute: () => void;
   seekTo: (seconds: number) => void;
   playStream: (program: Program) => void;
-  playPlaylistTrack: (track: TrackInfo, playlist?: TrackInfo[]) => void; // playlist is optional for now
-  playPodcastEpisode: (episode: TrackInfo) => void;
+  playPlaylistTrack: (track: TrackInfo, playlist: TrackInfo[], initialIndex: number) => void;
+  playPodcastEpisode: (episode: TrackInfo, series?: TrackInfo[], initialIndex?: number) => void; // series and index for podcast
   handleProgress: (progress: { playedSeconds: number; loadedSeconds: number }) => void;
   handleDuration: (duration: number) => void;
   handleEnded: () => void;
-  // TODO: nextTrack, prevTrack for playlist/podcast series
+  nextTrack: () => void;
+  prevTrack: () => void;
 }
 
 const PlayerStateContext = createContext<PlayerState | undefined>(undefined);
@@ -58,7 +61,10 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
   const [seeking, setSeeking] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<TrackInfo | null>(null);
   const [playerMode, setPlayerMode] = useState<PlayerMode>(null);
-  const [loop, setLoop] = useState(false); // Example: for single track loop
+  const [loop, setLoop] = useState(false);
+  const [currentPlaylistTracks, setCurrentPlaylistTracks] = useState<TrackInfo[]>([]);
+  const [currentTrackIndexInPlaylist, setCurrentTrackIndexInPlaylist] = useState<number | null>(null);
+
 
   const togglePlay = useCallback(() => {
     setIsPlaying(prev => !prev);
@@ -92,24 +98,58 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     });
     setPlayerMode('live');
     setIsPlaying(true);
+    setPlayerMode('live');
+    setIsPlaying(true);
     setLoop(false);
+    setCurrentPlaylistTracks([]);
+    setCurrentTrackIndexInPlaylist(null);
   }, []);
 
-  const playPlaylistTrack = useCallback((track: TrackInfo, playlist?: TrackInfo[]) => {
+  const playPlaylistTrack = useCallback((track: TrackInfo, playlist: TrackInfo[], initialIndex: number) => {
     setCurrentTrack(track);
+    setCurrentPlaylistTracks(playlist);
+    setCurrentTrackIndexInPlaylist(initialIndex);
     setPlayerMode('playlist');
     setIsPlaying(true);
     setLoop(false);
-    // TODO: Set current playlist for next/prev functionality
   }, []);
 
-  const playPodcastEpisode = useCallback((episode: TrackInfo) => {
+  const playPodcastEpisode = useCallback((episode: TrackInfo, series?: TrackInfo[], initialIndex?: number) => {
     setCurrentTrack(episode);
+    // Assuming a podcast series is also a list of 'TrackInfo' like objects
+    setCurrentPlaylistTracks(series || [episode]); // If no series, playlist is just the episode
+    setCurrentTrackIndexInPlaylist(initialIndex !== undefined ? initialIndex : 0);
     setPlayerMode('podcast');
     setIsPlaying(true);
     setLoop(false);
-     // TODO: Set current podcast series for next/prev functionality
   }, []);
+
+  const nextTrackInternal = useCallback(() => {
+    if ((playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 0 && currentTrackIndexInPlaylist !== null) {
+      const nextIndex = (currentTrackIndexInPlaylist + 1) % currentPlaylistTracks.length;
+      setCurrentTrack(currentPlaylistTracks[nextIndex]);
+      setCurrentTrackIndexInPlaylist(nextIndex);
+      setIsPlaying(true); // Auto-play next track
+    }
+  }, [playerMode, currentPlaylistTracks, currentTrackIndexInPlaylist]);
+
+  const prevTrackInternal = useCallback(() => {
+    if ((playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 0 && currentTrackIndexInPlaylist !== null) {
+      const prevIndex = (currentTrackIndexInPlaylist - 1 + currentPlaylistTracks.length) % currentPlaylistTracks.length;
+      setCurrentTrack(currentPlaylistTracks[prevIndex]);
+      setCurrentTrackIndexInPlaylist(prevIndex);
+      setIsPlaying(true); // Auto-play previous track
+    }
+  }, [playerMode, currentPlaylistTracks, currentTrackIndexInPlaylist]);
+
+  const nextTrack = useCallback(() => {
+    nextTrackInternal();
+  }, [nextTrackInternal]);
+
+  const prevTrack = useCallback(() => {
+    prevTrackInternal();
+  }, [prevTrackInternal]);
+
 
   const handleProgress = useCallback((progress: { playedSeconds: number; loadedSeconds: number }) => {
     if (!seeking) {
@@ -124,18 +164,19 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
 
   const handleEnded = useCallback(() => {
     if (playerMode === 'playlist' || playerMode === 'podcast') {
-      // TODO: Implement nextTrack logic here
-      console.log(`${playerMode} track ended, implement next track.`);
-      // For now, just stop playing
-      // setIsPlaying(false);
+      if (loop && currentPlaylistTracks.length === 1) { // If looping a single track playlist/podcast
+        playerRef.current?.seekTo(0);
+        setIsPlaying(true);
+      } else if (!loop) { // If not looping the whole playlist (loop prop on ReactPlayer handles that)
+        nextTrackInternal(); // Go to next track
+      }
+      // If ReactPlayer's loop prop is true, it handles playlist loop automatically.
+      // This handleEnded is more for custom behavior like "play next then stop" or single track loop.
     } else if (playerMode === 'live') {
-      // Live streams might try to reconnect or just stop.
-      // Or, if it's a finite live event, it ends.
       console.log("Live stream ended or was interrupted.");
       setIsPlaying(false);
     }
-     // If loop is true for a single track, ReactPlayer's loop prop handles it.
-  }, [playerMode]);
+  }, [playerMode, loop, nextTrackInternal, currentPlaylistTracks.length]);
 
 
   // Load a default stream on mount
@@ -144,11 +185,11 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     // This effect runs once on mount to potentially initialize a default stream.
     // Currently, auto-play is disabled. Uncomment playStream to enable.
     if (mockPrograms.length > 0 && !currentTrack && playerMode !== 'live') { // Check playerMode to avoid re-triggering if already live
-      // console.log("PlayerProvider: Initializing default stream.");
-      // playStream(mockPrograms[0]); // Auto-play first mock program - Uncomment to enable
+      console.log("PlayerProvider: Initializing default stream with mockPrograms[0].");
+      playStream(mockPrograms[0]); // Auto-play first mock program - Uncomment to enable
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Run once on mount. playStream is memoized with useCallback. currentTrack check prevents re-triggering.
+  }, [playStream]); // Added playStream to dependency array as it's used in the effect. It's memoized via useCallback.
 
 
   const stateValue: PlayerState = {
@@ -162,6 +203,8 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     currentTrack,
     playerMode,
     loop,
+    currentPlaylistTracks,
+    currentTrackIndexInPlaylist,
   };
 
   const actionsValue: PlayerActions = {
@@ -175,6 +218,8 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     handleProgress,
     handleDuration,
     handleEnded,
+    nextTrack,
+    prevTrack,
   };
 
   return (
