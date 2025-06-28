@@ -5,7 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "@/components/layout/MainLayout"; // Import MainLayout
-import Index from "./pages/Index";
+// Index will be removed
 import NewHomePage from "./pages/NewHomePage";
 import SponsorVideoPage from "./pages/SponsorVideoPage";
 import ProgramSponsorSlideshowPage from "./pages/ProgramSponsorSlideshowPage";
@@ -26,8 +26,10 @@ const App = () => (
         {/* For pages that should not have MainLayout (e.g., a dedicated sponsor video page), define them outside MainLayout routes */}
         <Routes>
           {/* Routes with MainLayout */}
-          <Route path="/" element={<MainLayout><Index /></MainLayout>} />
-          <Route path="/new-home" element={<MainLayout><NewHomePage /></MainLayout>} />
+          <Route path="/" element={<MainLayout><NewHomePage /></MainLayout>} /> {/* Default route now NewHomePage */}
+          {/* The /new-home route can be removed if / is the only way to access NewHomePage, or kept for legacy/specific links */}
+          {/* For now, let's remove it to avoid confusion, assuming / is the new primary home */}
+          {/* <Route path="/new-home" element={<MainLayout><NewHomePage /></MainLayout>} /> */}
           <Route path="/playlist" element={<MainLayout><PlaylistPage /></MainLayout>} />
           <Route path="/podcast-demo" element={<MainLayout><PodcastDemoPage /></MainLayout>} />
           <Route path="/music-visualizer" element={<MainLayout><MusicVisualizerPage /></MainLayout>} />

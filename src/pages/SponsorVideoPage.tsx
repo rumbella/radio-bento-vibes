@@ -3,10 +3,10 @@ import { Play, Pause, Heart, Mic, Radio, Users, Clock } from "lucide-react"; // 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import RadioPageLayout from "@/components/layout/RadioPageLayout";
-import { Program, Advertisement } from "./Index"; // Assuming interfaces are exported from Index.tsx
+import { Program, Advertisement, mockPrograms, mockAdvertisements } from "@/data/mockData"; // Updated import paths
 
-// Mock Data (copied from Index.tsx for now, ideally this would be shared or fetched)
-const mockPrograms: Program[] = [
+// Mock Data definitions removed, now using imported ones.
+// const mockPrograms: Program[] = [
   {
     id: "program1",
     name: "Morning Vibes",
@@ -21,23 +21,11 @@ const mockPrograms: Program[] = [
     imageUrl: "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
   },
-];
+]; // This closing bracket was for the local mockPrograms, which is now fully removed.
 
-const mockAdvertisements: Advertisement[] = [
-  {
-    id: "ad1",
-    name: "Awesome Product",
-    imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1750257627/images_kj2qyb.png",
-    targetUrl: "https://www.revolut.com/it-IT/",
-  },
-  {
-    id: "ad2",
-    name: "Amazing Service",
-    imageUrl: "https://placehold.co/600x400/3498DB/FFFFFF/png?text=Ad+2",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", // Using this for video background
-    targetUrl: "https://example.com/service",
-  },
-];
+// const mockAdvertisements: Advertisement[] = [ // This local definition is also removed.
+// ...
+// ];
 
 const SponsorVideoPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);

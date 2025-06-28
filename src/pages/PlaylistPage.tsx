@@ -1,6 +1,6 @@
 import { useState, useEffect, ReactNode } from "react";
 import RadioPageLayout from "@/components/layout/RadioPageLayout";
-import { Program, Advertisement, mockPrograms, mockAdvertisements } from "./Index"; // Import Program, Ad interfaces and mockData
+import { Program, Advertisement, mockPrograms, mockAdvertisements } from "@/data/mockData"; // Updated import path
 import { mockPlaylists, Playlist, Track } from "@/data/playlists";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
