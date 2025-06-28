@@ -78,8 +78,8 @@ const SiteHeader: React.FC = () => {
 
           <nav className="flex-grow flex justify-center">
             <div className="flex space-x-1">
-              <Link to="/"><Button variant="ghost" className="text-white hover:bg-white/10 text-sm">Home (Old)</Button></Link>
-              <Link to="/new-home"><Button variant="ghost" className="text-white hover:bg-white/10 text-sm">Home</Button></Link>
+              {/* Removed "Home (Old)" link */}
+              <Link to="/"><Button variant="ghost" className="text-white hover:bg-white/10 text-sm">Home</Button></Link>
               {/* Add other main navigation links here */}
               <Link to="/playlist"><Button variant="ghost" className="text-white hover:bg-white/10 text-sm">Playlist</Button></Link>
               <Link to="/podcast-demo"><Button variant="ghost" className="text-white hover:bg-white/10 text-sm">Podcast Demo</Button></Link>
