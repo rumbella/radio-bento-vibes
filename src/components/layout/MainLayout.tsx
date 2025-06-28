@@ -194,7 +194,7 @@ const PlayerFooterContent: React.FC = () => {
 
 const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
   const { currentTrack, isPlaying, volume, muted, loop } = usePlayerState();
-  const { handleProgress, handleDuration, handleEnded } = usePlayerActions();
+  const { handleProgress, handleDuration, handleEnded, handleError } = usePlayerActions(); // Import handleError
   const playerRef = useRef<ReactPlayer>(null);
 
   // Sync playerRef with context if needed, though direct control is via context actions
@@ -235,7 +235,7 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
           onEnded={handleEnded}
           onPlay={() => console.log("ReactPlayer: onPlay event. Context isPlaying:", isPlaying, "URL:", currentTrack?.audioUrl)}
           onPause={() => console.log("ReactPlayer: onPause event. Context isPlaying:", isPlaying)}
-          onError={(e) => console.error('ReactPlayer Error:', e, 'Attempted URL:', currentTrack?.audioUrl)}
+          onError={handleError} // Use context's handleError
           width="0"
           height="0"
           config={{ file: { forceAudio: true } }} // Ensures it's treated as audio

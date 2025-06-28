@@ -39,6 +39,7 @@ interface PlayerActions {
   handleProgress: (progress: { playedSeconds: number; loadedSeconds: number }) => void;
   handleDuration: (duration: number) => void;
   handleEnded: () => void;
+  handleError: (error: any) => void; // Add error handler
   nextTrack: () => void;
   prevTrack: () => void;
 }
@@ -174,9 +175,14 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
       // This handleEnded is more for custom behavior like "play next then stop" or single track loop.
     } else if (playerMode === 'live') {
       console.log("Live stream ended or was interrupted.");
-      setIsPlaying(false);
+       setIsPlaying(false); // Stop playing if live stream ends
     }
   }, [playerMode, loop, nextTrackInternal, currentPlaylistTracks.length]);
+
+  const handleError = useCallback((error: any) => {
+    console.error("PlayerContext: ReactPlayer error:", error);
+    setIsPlaying(false); // Set isPlaying to false on error
+  }, []);
 
 
   // Load a default stream on mount
@@ -218,6 +224,7 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     handleProgress,
     handleDuration,
     handleEnded,
+    handleError, // Add handleError to actions
     nextTrack,
     prevTrack,
   };
