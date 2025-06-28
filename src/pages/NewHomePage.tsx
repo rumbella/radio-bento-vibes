@@ -36,6 +36,7 @@ const NewHomePage: React.FC = () => {
 
 
   return (
+
     // No RadioPageLayout here. MainLayout will wrap this page via App.tsx
     // The outer div helps to constrain the page content if MainLayout doesn't impose padding/margins on its children container
     <div className="p-4 h-full text-white"> {/* Ensure h-full if it's inside a flex container in MainLayout */}
@@ -65,6 +66,40 @@ const NewHomePage: React.FC = () => {
       </div>
       {/* The PlayerBar component is removed from here, as it's now part of MainLayout's footer */}
     </div>
+
+    <RadioPageLayout
+      backgroundElement={
+        // The main content will have its own background, so this might not be needed or could be a generic one.
+        // For now, let's keep it simple and rely on the main content's background.
+        // Or, we can set a default, less prominent background for the overall page layout.
+        <div
+          className="absolute inset-0 w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-900"
+        />
+      }
+      currentProgramForPlayer={currentProgram}
+      // headerActions={headerActionButtons} // Header actions not specified for the new page
+      isPlaying={isPlaying}
+      onTogglePlay={togglePlay}
+    >
+      <main className="p-4 h-full flex flex-col text-white"> {/* Added text-white for default text color */}
+        <div className="flex flex-grow space-x-4 overflow-hidden">
+          <div className="relative flex-1">
+            <img src="https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg" className="w-full h-full object-cover rounded-lg" />
+            <div className="absolute bottom-4 left-4 bg-black/60 p-4 rounded-lg">
+              <p className="text-sm text-gray-300">Song</p>
+              <h2 className="font-semibold">Free Fall (Visualizer) (feat. J. Cole)</h2>
+              <p className="text-xs text-gray-400">Tems • Born in the Wild • 2024 • 4:15</p>
+            </div>
+          </div>
+          <div className="w-2/5 flex flex-col space-y-4">
+            <LyricsPanel />
+            <RelatedVideos />
+          </div>
+        </div>
+ 
+      </main>
+    </RadioPageLayout>
+
   );
 };
 
