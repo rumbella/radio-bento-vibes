@@ -142,10 +142,6 @@ const NewHomePage = () => {
       onTogglePlay={togglePlay}
     >
       <main className="p-4 h-full flex flex-col text-white"> {/* Added text-white for default text color */}
-        <div className="flex justify-between text-gray-400 mb-4">
-          <span>Minimize</span>
-          <span>Full Screen</span>
-        </div>
         <div className="flex flex-grow space-x-4 overflow-hidden">
           <div className="relative flex-1">
             <img src="https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg" className="w-full h-full object-cover rounded-lg" />
@@ -160,23 +156,7 @@ const NewHomePage = () => {
             <RelatedVideos />
           </div>
         </div>
-        {/* PlayerBar will be part of the RadioPageLayout's fixed bottom player,
-            so it's not placed here directly. The task asks to keep header and player,
-            which implies using the existing RadioPageLayout's player.
-            If a *new* PlayerBar component is meant to replace RadioPageLayout's player,
-            that's a bigger change to RadioPageLayout itself.
-            For now, assuming the user means the main content area should include these elements,
-            and the existing player in RadioPageLayout remains.
-            The request "il resto inserisci questo codice nel main" suggests this new JSX
-            is the *child* of RadioPageLayout.
-            The PlayerBar mentioned in the user's code snippet might be a conceptual placeholder
-            or they intend for it to be a new, separate component *within* this main content area,
-            distinct from the main site-wide player. Let's assume the latter for now.
-            If `PlayerBar` is meant to be the site-wide player, it should not be here.
-            Given the plan step "Create a new file src/components/music/PlayerBar.tsx",
-            it seems a new, perhaps distinct, player component is intended.
-        */}
-        <PlayerBar /> {/* Using the new PlayerBar component as per user's code and plan */}
+ 
       </main>
     </RadioPageLayout>
   );
