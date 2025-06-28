@@ -213,7 +213,7 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-800 to-black flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-900 to-black flex flex-col">
       <SiteHeader />
       <main className="flex-grow relative z-10 pt-[60px] md:pt-0 flex flex-col"> {/* Ensure main can use flex-col for ordering */}
         <div className="flex-grow"> {/* This div will take up available space for page content */}
