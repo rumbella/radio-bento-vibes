@@ -141,6 +141,8 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
   // Load a default stream on mount
   // Using useEffect for initialization that depends on playStream
   React.useEffect(() => {
+    // This effect runs once on mount to potentially initialize a default stream.
+    // Currently, auto-play is disabled. Uncomment playStream to enable.
     if (mockPrograms.length > 0 && !currentTrack && playerMode !== 'live') { // Check playerMode to avoid re-triggering if already live
       // console.log("PlayerProvider: Initializing default stream.");
       // playStream(mockPrograms[0]); // Auto-play first mock program - Uncomment to enable
