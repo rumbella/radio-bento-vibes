@@ -16,14 +16,14 @@ export interface Advertisement {
 
 export const mockPrograms: Program[] = [
   {
-    id: "program1",
+    id: "program1", // Ensuring comma is here
     name: "Morning Vibes",
     host: "Marco & Sofia",
     imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
     audioUrl: "https://mqugxowc-lbmedia.radioca.st/stream?type=http&nocache=43",
   },
   {
-    id: "program2",
+    id: "program2", // Ensuring comma is here for consistency if more props were added
     name: "Tech Talk",
     host: "Alessandro R.",
     imageUrl: "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
