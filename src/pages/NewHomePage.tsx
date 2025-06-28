@@ -39,11 +39,7 @@ const NewHomePage: React.FC = () => {
     // No RadioPageLayout here. MainLayout will wrap this page via App.tsx
     // The outer div helps to constrain the page content if MainLayout doesn't impose padding/margins on its children container
     <div className="p-4 h-full text-white"> {/* Ensure h-full if it's inside a flex container in MainLayout */}
-      <div className="flex justify-between text-gray-400 mb-4">
-        {/* These could be actual controls or just decorative */}
-        <span>Minimize</span>
-        <span>Full Screen</span>
-      </div>
+   
       {/* flex-grow and overflow-hidden should allow this container to fill space provided by MainLayout's main tag */}
       <div className="flex flex-grow space-x-4 overflow-hidden">
         <div className="relative flex-1">
