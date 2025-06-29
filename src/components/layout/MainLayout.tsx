@@ -7,7 +7,7 @@ import { Slider } from '@/components/ui/slider';
 import { PlayerProvider, usePlayerState, usePlayerActions } from '@/contexts/PlayerContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 import MobileMenu from '@/components/mobile/MobileNavbar'; // Assuming MobileMenu is suitable for reuse
-// import PlayerActionIcons from '@/components/mobile/PlayerActionIcons'; // This was specific to RadioPageLayout's old structure
+import PlayerActionIcons from '@/components/mobile/PlayerActionIcons'; // Import the component
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -106,86 +106,92 @@ const SiteHeader: React.FC = () => {
   );
 };
 
-const PlayerFooterContent: React.FC = () => {
-  const { isPlaying, volume, muted, currentTrack, playerMode, playedSeconds, duration, currentPlaylistTracks } = usePlayerState();
-  const { togglePlay, setVolume, toggleMute, seekTo, nextTrack, prevTrack } = usePlayerActions();
+// Renamed to NewPlayerFooterContent to reflect the change, was PlayerFooterContent
+const NewPlayerFooterContent: React.FC = () => {
+  const {
+    isPlaying,
+    volume,
+    muted,
+    currentTrack,
+    playerMode,
+    currentPlaylistTracks
+  } = usePlayerState();
+
+  const {
+    togglePlay,
+    setVolume,
+    toggleMute,
+    nextTrack,
+    prevTrack
+  } = usePlayerActions();
+
   const isMobile = useIsMobile();
 
-  console.log('PlayerFooterContent rendering, isPlaying:', isPlaying, 'currentTrack:', currentTrack?.title);
+  // Placeholder actions, same as in RadioPageLayout
+  const handleLikeClick = () => console.log("Like clicked - (NewPlayerFooterContent)");
+  const handleMessageClickInBar = () => console.log("Message clicked in player bar - (NewPlayerFooterContent)");
 
+  const displayTitle = currentTrack?.title || "Nessuna traccia";
+  const displayArtist = currentTrack?.artist || "Radio Amblé";
 
-  const formatTime = (seconds: number) => {
-    const date = new Date(0);
-    date.setSeconds(seconds || 0);
-    return date.toISOString().substr(14, 5); // MM:SS
+  // Direct volume change handler for the slider
+  const handleVolumeSliderChange = (newVolume: number[]) => {
+    setVolume(newVolume[0]);
   };
 
+  // Fixed class for the main div to match RadioPageLayout's player
+  // It's no longer "mt-auto" as it's fixed, but the parent main tag has flex-col, so it should be fine.
+  // The original RadioPageLayout player was `fixed bottom-0...`
+  // The current PlayerFooterContent was `bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 text-white w-full mt-auto`
+  // We'll use the fixed positioning and styling from RadioPageLayout's player.
   return (
-    // Apply requested styles: bg-black/80 backdrop-blur-xl border-t border-white/10 p-4
-    // Retain w-full and mt-auto for positioning within the flex layout. z-20 omitted as it's in normal flow.
-    <div className="bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 text-white w-full mt-auto">
+    <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 z-20 text-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Left: Track Info & Progress Bar */}
-        <div className="flex items-center space-x-3 w-1/3 min-w-0">
-          {currentTrack?.imageUrl && (
-            <img src={currentTrack.imageUrl} alt={currentTrack.title} className="w-10 h-10 rounded object-cover" />
-          )}
-          {!currentTrack?.imageUrl && <div className="w-10 h-10 rounded bg-neutral-700 flex items-center justify-center"><Radio size={20} /></div>}
+        {/* Left: Track Info - No album art here, as per RadioPageLayout player bar design */}
+        <div className="flex items-center space-x-4">
           <div>
-            <p className="font-semibold text-sm truncate w-40 md:w-60" title={currentTrack?.title}>{currentTrack?.title || "Nessuna traccia"}</p>
-            <p className="text-xs text-white/70 truncate w-40 md:w-60" title={currentTrack?.artist}>{currentTrack?.artist || "Radio Amblé"}</p>
+            <p className="text-white font-medium truncate w-48" title={displayTitle}>{displayTitle}</p>
+            <p className="text-white/60 text-sm truncate w-48" title={displayArtist}>{displayArtist}</p>
           </div>
         </div>
 
-        {/* Center: Controls & Seek Bar */}
-        <div className="flex flex-col items-center flex-grow mx-4">
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            {(playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 1 && (
-              <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={prevTrack}>
-                <SkipBack className="w-5 h-5" />
-              </Button>
-            )}
-            <Button onClick={togglePlay} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-black hover:bg-white/90 flex items-center justify-center">
-              {isPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6 ml-0.5" />}
+        {/* Center: Controls - Matched styling from PlayerFooterContent for buttons, added SkipBack */}
+        <div className="flex items-center space-x-2 sm:space-x-4">
+          {(playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 1 && (
+            <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={prevTrack}>
+              <SkipBack className="w-5 h-5" />
             </Button>
-            {(playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 1 && (
-              <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={nextTrack}>
-                <SkipForward className="w-5 h-5" />
-              </Button>
-            )}
-          </div>
-          {!isMobile && duration > 0 && playerMode !== 'live' && ( // Hide seek bar for live streams as duration is often 0 or irrelevant
-            <div className="w-full max-w-xs lg:max-w-md flex items-center space-x-2 mt-1">
-              <span className="text-xs text-white/70 w-8">{formatTime(playedSeconds)}</span>
-              <Slider
-                value={[playedSeconds]}
-                max={duration}
-                step={1}
-                onValueChange={(value) => seekTo(value[0])}
-                className="w-full h-1.5 bg-white/20 rounded-full [&>span:first-child]:bg-white"
-              />
-              <span className="text-xs text-white/70 w-8">{formatTime(duration)}</span>
-            </div>
+          )}
+          <Button
+            onClick={togglePlay}
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-black hover:bg-white/90 flex items-center justify-center"
+          >
+            {isPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6 ml-0.5" />}
+          </Button>
+          {(playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 1 && (
+            <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={nextTrack}>
+              <SkipForward className="w-5 h-5" />
+            </Button>
           )}
         </div>
 
-        {/* Right: Volume & Other Actions (Desktop) */}
-        <div className={`items-center space-x-2 w-1/3 justify-end ${isMobile ? 'hidden' : 'flex'}`}>
-          <Button variant="ghost" size="icon" className="text-white/70 hover:text-white">
-            <Heart className="w-4 h-4" />
+        {/* Right: Volume & Other Actions (Desktop) - Kept from RadioPageLayout player */}
+        <div className={`items-center space-x-4 ${isMobile ? 'hidden' : 'flex'}`}>
+          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10" onClick={handleLikeClick}>
+            <Heart className="w-5 h-5" />
           </Button>
-          <Button variant="ghost" size="icon" className="text-white/70 hover:text-white">
-            <MessageCircle className="w-4 h-4" />
+          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10" onClick={handleMessageClickInBar}>
+            <MessageCircle className="w-5 h-5" />
           </Button>
-          <Button variant="ghost" size="icon" onClick={toggleMute} className="text-white/70 hover:text-white">
+          <Button variant="ghost" size="icon" onClick={toggleMute} className="text-white hover:bg-white/10">
             {muted || volume === 0 ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
           </Button>
           <Slider
             value={[muted ? 0 : volume]}
-            onValueChange={(value) => setVolume(value[0])}
+            onValueChange={handleVolumeSliderChange}
             max={1}
             step={0.01}
-            className="w-20 h-1.5 bg-white/20 rounded-full [&>span:first-child]:bg-white"
+            className="w-20 h-1 bg-white/20 rounded-full [&>span:first-child]:bg-white"
           />
         </div>
       </div>
@@ -198,6 +204,16 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
   const { currentTrack, isPlaying, volume, muted, loop } = usePlayerState();
   const { handleProgress, handleDuration, handleEnded, handleError } = usePlayerActions(); // Import handleError
   const playerRef = useRef<ReactPlayer>(null);
+  const isMobile = useIsMobile(); // Get mobile state for conditional rendering
+
+  // Placeholder handlers for PlayerActionIcons
+  const handleMobileLikeClick = () => {
+    console.log("Mobile PlayerActionIcons: Like clicked");
+  };
+
+  const handleMobileMessageClick = () => {
+    console.log("Mobile PlayerActionIcons: Message clicked");
+  };
 
   // Sync playerRef with context if needed, though direct control is via context actions
   // This is primarily for the seekTo action in PlayerContext to access the player instance.
@@ -222,7 +238,9 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
           {children}
         </div>
         {/* Player UI moved here, at the end of the main content flow */}
-        <PlayerFooterContent />
+        <NewPlayerFooterContent />
+        {/* Conditionally render PlayerActionIcons for mobile */}
+        {isMobile && <PlayerActionIcons onLikeClick={handleMobileLikeClick} onMessageClick={handleMobileMessageClick} />}
       </main>
       {/* ReactPlayer remains a hidden utility component, not directly part of the visual layout flow here */}
       <ReactPlayer
