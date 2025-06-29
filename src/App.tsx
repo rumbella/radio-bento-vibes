@@ -7,11 +7,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "@/components/layout/MainLayout"; // Import MainLayout
 import Index from "./pages/Index";
 // import NewHomePage from "./pages/NewHomePage"; // Commentato o rimosso
-import SponsorVideoPage from "./pages/SponsorVideoPage";
-import ProgramSponsorSlideshowPage from "./pages/ProgramSponsorSlideshowPage";
-import PlaylistPage from "./pages/PlaylistPage";
-import PodcastDemoPage from "./pages/PodcastDemoPage";
-import MusicVisualizerPage from "./pages/MusicVisualizerPage";
+// import SponsorVideoPage from "./pages/SponsorVideoPage"; // Rimosso
+// import ProgramSponsorSlideshowPage from "./pages/ProgramSponsorSlideshowPage"; // Rimosso
+// import PlaylistPage from "./pages/PlaylistPage"; // Rimosso
+// import PodcastDemoPage from "./pages/PodcastDemoPage"; // Rimosso
+// import MusicVisualizerPage from "./pages/MusicVisualizerPage"; // Rimosso
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,13 +28,13 @@ const App = () => (
           {/* Routes with MainLayout */}
           <Route path="/" element={<MainLayout><Index /></MainLayout>} />
           {/* <Route path="/new-home" element={<MainLayout><NewHomePage /></MainLayout>} /> // Commentato o rimosso */}
-          <Route path="/playlist" element={<MainLayout><PlaylistPage /></MainLayout>} />
-          <Route path="/podcast-demo" element={<MainLayout><PodcastDemoPage /></MainLayout>} />
-          <Route path="/music-visualizer" element={<MainLayout><MusicVisualizerPage /></MainLayout>} />
+          {/* <Route path="/playlist" element={<MainLayout><PlaylistPage /></MainLayout>} /> // Rimosso */}
+          {/* <Route path="/podcast-demo" element={<MainLayout><PodcastDemoPage /></MainLayout>} /> // Rimosso */}
+          {/* <Route path="/music-visualizer" element={<MainLayout><MusicVisualizerPage /></MainLayout>} /> // Rimosso */}
 
           {/* Routes without MainLayout (examples) */}
-          <Route path="/sponsor-video" element={<SponsorVideoPage />} />
-          <Route path="/program-slideshow" element={<ProgramSponsorSlideshowPage />} />
+          {/* <Route path="/sponsor-video" element={<SponsorVideoPage />} /> // Rimosso */}
+          {/* <Route path="/program-slideshow" element={<ProgramSponsorSlideshowPage />} /> // Rimosso */}
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           {/* Catch-all NotFound route can be inside or outside MainLayout depending on desired appearance */}
