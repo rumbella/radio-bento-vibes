@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useRef, ReactNode, useCallback } from 'react';
 import ReactPlayer from 'react-player';
-import { Program, mockPrograms } from '@/pages/Index'; // Assuming Program and mockPrograms are needed for default state
+import { Program, mockPrograms } from '@/data/playlists'; // Corrected import path
 
 export type PlayerMode = 'live' | 'playlist' | 'podcast' | null;
 

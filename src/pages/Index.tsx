@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { usePlayerState, usePlayerActions } from '@/contexts/PlayerContext';
 import LyricsPanel from '@/components/music/LyricsPanel';
 import RelatedVideos from '@/components/music/RelatedVideos';
-import { mockPrograms } from './Index'; // Assuming mockPrograms is still relevant for default content
+import { mockPrograms } from '@/data/playlists'; // Corrected import path
 
 // Remove local Program interface if it's identical to what PlayerContext might provide or handle internally
 // export interface Program {
