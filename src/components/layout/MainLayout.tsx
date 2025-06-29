@@ -121,65 +121,69 @@ const PlayerFooterContent: React.FC = () => {
   };
 
   return (
-    // Apply requested styles: bg-black/80 backdrop-blur-xl border-t border-white/10 p-4
-    // Retain w-full and mt-auto for positioning within the flex layout. z-20 omitted as it's in normal flow.
-    <div className="bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 text-white w-full mt-auto">
+    // Applying user-requested classes for the player, keeping w-full and mt-auto for layout.
+    // z-20 is added as requested, though its effect might be minimal if not fixed/absolute.
+    <div className="bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 z-20 text-white w-full mt-auto">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Left: Track Info & Progress Bar */}
-        <div className="flex items-center space-x-3 w-1/3 min-w-0">
+        {/* Left Section (Track Info) - similar to RadioPageLayout */}
+        <div className="flex items-center space-x-4 w-1/3 min-w-0"> {/* Retaining w-1/3 for balance, can be adjusted */}
           {currentTrack?.imageUrl && (
             <img src={currentTrack.imageUrl} alt={currentTrack.title} className="w-10 h-10 rounded object-cover" />
           )}
-          {!currentTrack?.imageUrl && <div className="w-10 h-10 rounded bg-neutral-700 flex items-center justify-center"><Radio size={20} /></div>}
+          {!currentTrack?.imageUrl && currentTrack && <div className="w-10 h-10 rounded bg-neutral-700 flex items-center justify-center"><Radio size={20} /></div>}
+          {!currentTrack && <div className="w-10 h-10 rounded bg-neutral-700 flex items-center justify-center"><Radio size={20} /></div>} {/* Placeholder if no track */}
           <div>
             <p className="font-semibold text-sm truncate w-40 md:w-60" title={currentTrack?.title}>{currentTrack?.title || "Nessuna traccia"}</p>
             <p className="text-xs text-white/70 truncate w-40 md:w-60" title={currentTrack?.artist}>{currentTrack?.artist || "Radio Amblé"}</p>
           </div>
         </div>
 
-        {/* Center: Controls & Seek Bar */}
-        <div className="flex flex-col items-center flex-grow mx-4">
+        {/* Center Section (Main Controls + Seek Bar) - Adapted structure */}
+        <div className="flex flex-col items-center flex-grow mx-4"> {/* flex-grow to take available space */}
           <div className="flex items-center space-x-2 sm:space-x-4">
+            {/* SkipBack Button - Adding it here for consistency with typical players */}
             {(playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 1 && (
-              <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={prevTrack}>
+              <Button variant="ghost" size="sm" className="text-white hover:text-white/70" onClick={prevTrack}>
                 <SkipBack className="w-5 h-5" />
               </Button>
             )}
             <Button onClick={togglePlay} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-black hover:bg-white/90 flex items-center justify-center">
               {isPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6" />}
             </Button>
-            {/* DEBUG: Display isPlaying state */}
+            {/* DEBUG: Display isPlaying state - can be removed once confirmed fixed */}
             <span className="text-xs text-cyan-400 ml-2">DBG: isPlaying: {isPlaying.toString()}</span>
             {(playerMode === 'playlist' || playerMode === 'podcast') && currentPlaylistTracks.length > 1 && (
-              <Button variant="ghost" size="sm" className="text-white/70 hover:text-white" onClick={nextTrack}>
+              <Button variant="ghost" size="sm" className="text-white hover:text-white/70" onClick={nextTrack}>
                 <SkipForward className="w-5 h-5" />
               </Button>
             )}
           </div>
-          {!isMobile && duration > 0 && playerMode !== 'live' && ( // Hide seek bar for live streams as duration is often 0 or irrelevant
-            <div className="w-full max-w-xs lg:max-w-md flex items-center space-x-2 mt-1">
-              <span className="text-xs text-white/70 w-8">{formatTime(playedSeconds)}</span>
+          {/* Seek Bar - Placed below main controls, hidden on mobile and for live streams */}
+          {!isMobile && duration > 0 && playerMode !== 'live' && (
+            <div className="w-full max-w-xs lg:max-w-md flex items-center space-x-2 mt-2"> {/* Added mt-2 for spacing */}
+              <span className="text-xs text-white/70 w-8 text-right">{formatTime(playedSeconds)}</span>
               <Slider
                 value={[playedSeconds]}
                 max={duration}
                 step={1}
                 onValueChange={(value) => seekTo(value[0])}
-                className="w-full h-1.5 bg-white/20 rounded-full [&>span:first-child]:bg-white"
+                // Style from RadioPageLayout's volume slider, adapted
+                className="w-full h-1 bg-white/20 rounded-full [&>span:first-child]:bg-white"
               />
-              <span className="text-xs text-white/70 w-8">{formatTime(duration)}</span>
+              <span className="text-xs text-white/70 w-8 text-left">{formatTime(duration)}</span>
             </div>
           )}
         </div>
 
-        {/* Right: Volume & Other Actions (Desktop) */}
-        <div className={`items-center space-x-2 w-1/3 justify-end ${isMobile ? 'hidden' : 'flex'}`}>
-          <Button variant="ghost" size="icon" className="text-white/70 hover:text-white">
-            <Heart className="w-4 h-4" />
+        {/* Right Section (Secondary Controls & Volume - Desktop Only) - similar to RadioPageLayout */}
+        <div className={`items-center space-x-2 w-1/3 justify-end ${isMobile ? 'hidden' : 'flex'}`}> {/* Retaining w-1/3 for balance */}
+          <Button variant="ghost" size="icon" className="text-white hover:text-white/70"> {/* Adjusted hover color */}
+            <Heart className="w-5 h-5" /> {/* Matched size from RadioPageLayout */}
           </Button>
-          <Button variant="ghost" size="icon" className="text-white/70 hover:text-white">
-            <MessageCircle className="w-4 h-4" />
+          <Button variant="ghost" size="icon" className="text-white hover:text-white/70"> {/* Adjusted hover color */}
+            <MessageCircle className="w-5 h-5" /> {/* Matched size from RadioPageLayout */}
           </Button>
-          <Button variant="ghost" size="icon" onClick={toggleMute} className="text-white/70 hover:text-white">
+          <Button variant="ghost" size="icon" onClick={toggleMute} className="text-white hover:text-white/70"> {/* Adjusted hover color */}
             {muted || volume === 0 ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
           </Button>
           <Slider
@@ -187,7 +191,8 @@ const PlayerFooterContent: React.FC = () => {
             onValueChange={(value) => setVolume(value[0])}
             max={1}
             step={0.01}
-            className="w-20 h-1.5 bg-white/20 rounded-full [&>span:first-child]:bg-white"
+            // Style from RadioPageLayout
+            className="w-20 h-1 bg-white/20 rounded-full [&>span:first-child]:bg-white"
           />
         </div>
       </div>
@@ -220,7 +225,7 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
     <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-900 to-black flex flex-col">
       <SiteHeader />
       <main className="flex-grow relative z-10 pt-[60px] md:pt-0 flex flex-col"> {/* Ensure main can use flex-col for ordering */}
-        <div className="flex-grow"> {/* This div will take up available space for page content */}
+        <div className="flex-grow bg-black"> {/* Added bg-black here */}
           {children}
         </div>
         {/* Player UI moved here, at the end of the main content flow */}
