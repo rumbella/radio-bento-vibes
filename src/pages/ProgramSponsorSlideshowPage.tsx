@@ -3,9 +3,41 @@ import { Play, Pause, Heart, Mic, Radio, Users, Clock } from "lucide-react"; // 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import RadioPageLayout from "@/components/layout/RadioPageLayout";
-import { Program, Advertisement, mockPrograms, mockAdvertisements } from "@/data/mockData"; // Updated import paths
+import { Program, Advertisement } from "./Index"; // Assuming interfaces are exported from Index.tsx
 
-// Local mock data definitions are removed, now using imported ones.
+// Mock Data (copied from Index.tsx for now)
+const mockPrograms: Program[] = [
+  {
+    id: "program1",
+    name: "Morning Vibes",
+    host: "Marco & Sofia",
+    imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272969/pexels-pixabay-64002_to8eao.jpg",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  },
+  {
+    id: "program2",
+    name: "Tech Talk",
+    host: "Alessandro R.",
+    imageUrl: "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+  },
+];
+
+const mockAdvertisements: Advertisement[] = [
+  {
+    id: "ad1",
+    name: "Awesome Product",
+    imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1750259419/images_k7u0uj.jpg", // Using a different image for sponsor slide
+    targetUrl: "https://example.com/product",
+  },
+  {
+    id: "ad2",
+    name: "Amazing Service",
+    imageUrl: "https://placehold.co/600x400/3498DB/FFFFFF/png?text=Ad+2",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    targetUrl: "https://example.com/service",
+  },
+];
 
 const ProgramSponsorSlideshowPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);

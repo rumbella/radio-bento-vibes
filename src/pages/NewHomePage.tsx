@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { usePlayerState, usePlayerActions } from '@/contexts/PlayerContext';
 import LyricsPanel from '@/components/music/LyricsPanel';
 import RelatedVideos from '@/components/music/RelatedVideos';
-import { mockPrograms } from '@/data/mockData'; // Updated import path
+import { mockPrograms } from './Index'; // Assuming mockPrograms is still relevant for default content
 
 // Remove local Program interface if it's identical to what PlayerContext might provide or handle internally
 // export interface Program {
@@ -21,39 +21,23 @@ const NewHomePage: React.FC = () => {
   // This logic might be better suited in PlayerProvider for a truly global default,
   // or if NewHomePage is THE landing page that should always start a stream.
   useEffect(() => {
-    const defaultLiveProgram = mockPrograms[0]; // Assuming mockPrograms is available and has at least one entry
-    const { isPlaying, playerMode } = currentTrack || {}; // Destructure from currentTrack if it exists
-
+    const defaultLiveProgram = mockPrograms[0];
     if (defaultLiveProgram) {
-      // Condition 1: No track is currently loaded. Load and play default live stream.
-      if (!currentTrack) {
-        console.log("NewHomePage useEffect: No current track. Playing default live stream.");
+      // If no track is currently set, OR
+      // if a track is set but it's NOT the default live program, OR
+      // if a track is set, IS the default live program, but is NOT in 'live' mode (e.g. error/stalled state changed mode)
+      // THEN, set (or reset) to the default live stream.
+      // This ensures that navigating to the homepage attempts to play the live stream.
+      // PlayerContext's playStream action sets isPlaying to true.
+      if (!currentTrack || currentTrack.id !== defaultLiveProgram.id || currentTrack.playerMode !== 'live') {
+        console.log("NewHomePage useEffect: Setting/Resetting to default live stream.");
         playStream(defaultLiveProgram);
       }
-      // Condition 2: A track is loaded, but it's not the default live stream. Switch to default.
-      else if (currentTrack.id !== defaultLiveProgram.id) {
-        console.log("NewHomePage useEffect: Different track loaded. Switching to default live stream.");
-        playStream(defaultLiveProgram);
-      }
-      // Condition 3: The current track IS the default live stream, but its mode is not 'live' (e.g., error occurred)
-      // OR if it IS the default live stream, in 'live' mode, BUT isPlaying is false (meaning it was paused or stopped by error)
-      // In this specific case for NewHomePage, we want to ensure it attempts to play if it's the designated page for live content.
-      // However, this could override a user's explicit pause of the live stream if they are on NewHomePage.
-      // Let's refine this: only auto-play if mode is wrong, or if it's the right track but wasn't playing due to an error (now resolved perhaps)
-      // This part is tricky to not override user's pause action on the live stream itself.
-      // The PlayerProvider's initial playStream handles the very first load.
-      // This useEffect should mostly handle ensuring the *correct content* (default live) is loaded for NewHomePage.
-      // The decision to auto-play it if it's already loaded but paused is debatable.
-      // For now, let's ensure it loads the correct stream. PlayerProvider's playStream sets isPlaying=true.
-      // If the user pauses *that stream*, togglePlay sets isPlaying=false. This effect should not then force it back to true.
-      else if (currentTrack.id === defaultLiveProgram.id && playerMode !== 'live') {
-         console.log("NewHomePage useEffect: Default live stream loaded but not in 'live' mode. Resetting.");
-         playStream(defaultLiveProgram); // playStream will set it to 'live' and isPlaying to true
-      }
-      // If currentTrack.id === defaultLiveProgram.id AND playerMode === 'live', we do nothing.
-      // This respects if the user paused the live stream while on NewHomePage.
     }
-  }, [currentTrack, playStream]); // playStream is stable. currentTrack is the main dependency.
+    // This effect depends on currentTrack. If currentTrack changes to something else (e.g. user plays a playlist),
+    // and then they navigate back to NewHomePage, this effect will re-evaluate.
+    // playStream is memoized, so it won't cause loops unless currentTrack changes in a way that re-triggers the condition.
+  }, [currentTrack, playStream]);
 
   // Use currentTrack from context for display
   const displayImageUrl = currentTrack?.imageUrl || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg"; // Fallback image

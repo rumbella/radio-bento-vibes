@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useRef, ReactNode, useCallback } from 'react';
 import ReactPlayer from 'react-player';
-import { Program, mockPrograms } from '@/data/mockData'; // Updated import path
+import { Program, mockPrograms } from '@/pages/Index'; // Assuming Program and mockPrograms are needed for default state
 
 export type PlayerMode = 'live' | 'playlist' | 'podcast' | null;
 
@@ -68,13 +68,8 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
 
 
   const togglePlay = useCallback(() => {
-    console.log('[PlayerContext] togglePlay called. Current isPlaying before setIsPlaying:', isPlaying);
-    setIsPlaying(prevIsPlaying => {
-      const newIsPlaying = !prevIsPlaying;
-      console.log('[PlayerContext] setIsPlaying. Previous:', prevIsPlaying, 'New:', newIsPlaying);
-      return newIsPlaying;
-    });
-  }, [isPlaying]); // Added isPlaying to dependency array for the initial console.log, though setIsPlaying itself doesn't need it.
+    setIsPlaying(prev => !prev);
+  }, []);
 
   const internalSetVolume = useCallback((vol: number) => {
     setVolume(vol);
