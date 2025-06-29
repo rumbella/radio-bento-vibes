@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "@/components/layout/MainLayout"; // Import MainLayout
 import Index from "./pages/Index";
-import NewHomePage from "./pages/NewHomePage";
+// import NewHomePage from "./pages/NewHomePage"; // Commentato o rimosso
 import SponsorVideoPage from "./pages/SponsorVideoPage";
 import ProgramSponsorSlideshowPage from "./pages/ProgramSponsorSlideshowPage";
 import PlaylistPage from "./pages/PlaylistPage";
@@ -27,7 +27,7 @@ const App = () => (
         <Routes>
           {/* Routes with MainLayout */}
           <Route path="/" element={<MainLayout><Index /></MainLayout>} />
-          <Route path="/new-home" element={<MainLayout><NewHomePage /></MainLayout>} />
+          {/* <Route path="/new-home" element={<MainLayout><NewHomePage /></MainLayout>} /> // Commentato o rimosso */}
           <Route path="/playlist" element={<MainLayout><PlaylistPage /></MainLayout>} />
           <Route path="/podcast-demo" element={<MainLayout><PodcastDemoPage /></MainLayout>} />
           <Route path="/music-visualizer" element={<MainLayout><MusicVisualizerPage /></MainLayout>} />
