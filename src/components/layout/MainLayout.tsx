@@ -197,24 +197,9 @@ const PlayerFooterContent: React.FC = () => {
 
 
 const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
-  const { currentTrack, isPlaying, volume, muted, loop } = usePlayerState();
-  const { handleProgress, handleDuration, handleEnded, handleError } = usePlayerActions(); // Import handleError
-  const playerRef = useRef<ReactPlayer>(null);
-
-  // Sync playerRef with context if needed, though direct control is via context actions
-  // This is primarily for the seekTo action in PlayerContext to access the player instance.
-  // A more robust way might be to pass the ref to the context, but this is simpler for now.
-   useState(() => {
-    if (playerRef.current && usePlayerActions // Check if actions exist, implies context is ready
-    ) {
-      // Allow PlayerContext to access this ref if needed for direct manipulations like seek.
-      // This is a bit of a workaround. Ideally, PlayerProvider itself would host ReactPlayer.
-      // For now, let's assume PlayerContext's seekTo will update `playedSeconds` and ReactPlayer will catch up.
-      // Or, we can enhance PlayerContext to accept a ref.
-      // Let's move ReactPlayer here as it's part of the layout.
-    }
-  });
-
+  // ReactPlayer instance and its direct state dependencies (currentTrack, isPlaying, etc.)
+  // are now managed within PlayerProvider.
+  // MainLayoutContent remains responsible for rendering the site structure and PlayerFooterContent.
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-900 to-black flex flex-col">
@@ -226,24 +211,7 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({ children }) => {
         {/* Player UI moved here, at the end of the main content flow */}
         <PlayerFooterContent />
       </main>
-      {/* ReactPlayer remains a hidden utility component, not directly part of the visual layout flow here */}
-      <ReactPlayer
-          ref={playerRef}
-          url={currentTrack?.audioUrl || undefined}
-          playing={isPlaying}
-          volume={volume}
-          muted={muted}
-          loop={loop}
-          onProgress={handleProgress}
-          onDuration={handleDuration}
-          onEnded={handleEnded}
-          onPlay={() => console.log("ReactPlayer: onPlay event. Context isPlaying:", isPlaying, "URL:", currentTrack?.audioUrl)}
-          onPause={() => console.log("ReactPlayer: onPause event. Context isPlaying:", isPlaying)}
-          onError={handleError} // Use context's handleError
-          width="0"
-          height="0"
-          config={{ file: { forceAudio: true } }} // Ensures it's treated as audio
-        />
+      {/* ReactPlayer has been moved to PlayerContext.tsx to ensure the context's playerRef is used. */}
     </div>
   );
 };

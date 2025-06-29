@@ -237,9 +237,9 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     <PlayerStateContext.Provider value={stateValue}>
       <PlayerActionsContext.Provider value={actionsValue}>
         {children}
-        {/* Hidden ReactPlayer, controlled by context. To be moved to MainLayout */}
-        {/* <ReactPlayer
-          ref={playerRef}
+        {/* ReactPlayer is now managed here directly by the context */}
+        <ReactPlayer
+          ref={playerRef} // This ref is internal to PlayerContext
           url={currentTrack?.audioUrl || undefined}
           playing={isPlaying}
           volume={volume}
@@ -248,11 +248,13 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
           onProgress={handleProgress}
           onDuration={handleDuration}
           onEnded={handleEnded}
-          onError={(e) => console.error('ReactPlayer Error:', e)}
+          onPlay={() => console.log("[PlayerContext] ReactPlayer: onPlay. Global isPlaying:", isPlaying, "URL:", currentTrack?.audioUrl)}
+          onPause={() => console.log("[PlayerContext] ReactPlayer: onPause. Global isPlaying:", isPlaying)}
+          onError={handleError} // Use context's handleError
           width="0"
           height="0"
-          config={{ file: { forceAudio: true } }}
-        /> */}
+          config={{ file: { forceAudio: true } }} // Ensures it's treated as audio
+        />
       </PlayerActionsContext.Provider>
     </PlayerStateContext.Provider>
   );
