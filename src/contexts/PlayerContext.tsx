@@ -74,7 +74,7 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
       console.log('[PlayerContext] setIsPlaying. Previous:', prevIsPlaying, 'New:', newIsPlaying);
       return newIsPlaying;
     });
-  }, [isPlaying]); // Added isPlaying to dependency array for the initial console.log, though setIsPlaying itself doesn't need it.
+  }, []); // setIsPlaying dispatch is stable and prevIsPlaying gives current state.
 
   const internalSetVolume = useCallback((vol: number) => {
     setVolume(vol);
@@ -104,12 +104,12 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     });
     setPlayerMode('live');
     setIsPlaying(true);
-    setPlayerMode('live');
-    setIsPlaying(true);
+    // setPlayerMode('live'); // Redundant
+    // setIsPlaying(true); // Redundant
     setLoop(false);
     setCurrentPlaylistTracks([]);
     setCurrentTrackIndexInPlaylist(null);
-  }, []);
+  }, []); // Correct: only uses stable state setters
 
   const playPlaylistTrack = useCallback((track: TrackInfo, playlist: TrackInfo[], initialIndex: number) => {
     setCurrentTrack(track);
@@ -197,10 +197,9 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
     // Currently, auto-play is disabled. Uncomment playStream to enable.
     if (mockPrograms.length > 0 && !currentTrack && playerMode !== 'live') { // Check playerMode to avoid re-triggering if already live
       console.log("PlayerProvider: Initializing default stream with mockPrograms[0].");
-      playStream(mockPrograms[0]); // Auto-play first mock program - Uncomment to enable
+      playStream(mockPrograms[0]); // Auto-play first mock program
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playStream]); // Added playStream to dependency array as it's used in the effect. It's memoized via useCallback.
+  }, [currentTrack, playerMode, playStream, mockPrograms]); // Ensure all external values used in the effect are listed
 
 
   const stateValue: PlayerState = {
