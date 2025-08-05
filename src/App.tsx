@@ -1,49 +1,33 @@
+import React, { useState } from 'react';
+import Layout from './components/Layout';
+import HomePage from './components/HomePage';
+import PlaylistsPage from './components/PlaylistsPage';
+import PodcastsPage from './components/PodcastsPage';
+import ResidentsPage from './components/ResidentsPage';
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainLayout from "@/components/layout/MainLayout"; // Import MainLayout
-import Index from "./pages/Index";
-// import NewHomePage from "./pages/NewHomePage"; // Commentato o rimosso
-// import SponsorVideoPage from "./pages/SponsorVideoPage"; // Rimosso
-// import ProgramSponsorSlideshowPage from "./pages/ProgramSponsorSlideshowPage"; // Rimosso
-// import PlaylistPage from "./pages/PlaylistPage"; // Rimosso
-// import PodcastDemoPage from "./pages/PodcastDemoPage"; // Rimosso
-// import MusicVisualizerPage from "./pages/MusicVisualizerPage"; // Rimosso
-import NotFound from "./pages/NotFound";
+function App() {
+  const [currentPage, setCurrentPage] = useState('home');
 
-const queryClient = new QueryClient();
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <HomePage />;
+      case 'playlists':
+        return <PlaylistsPage />;
+      case 'podcasts':
+        return <PodcastsPage />;
+      case 'residents':
+        return <ResidentsPage />;
+      default:
+        return <HomePage />;
+    }
+  };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        {/* Wrap routes that need MainLayout with it */}
-        {/* For pages that should not have MainLayout (e.g., a dedicated sponsor video page), define them outside MainLayout routes */}
-        <Routes>
-          {/* Routes with MainLayout */}
-          <Route path="/" element={<MainLayout><Index /></MainLayout>} />
-          {/* <Route path="/new-home" element={<MainLayout><NewHomePage /></MainLayout>} /> // Commentato o rimosso */}
-          {/* <Route path="/playlist" element={<MainLayout><PlaylistPage /></MainLayout>} /> // Rimosso */}
-          {/* <Route path="/podcast-demo" element={<MainLayout><PodcastDemoPage /></MainLayout>} /> // Rimosso */}
-          {/* <Route path="/music-visualizer" element={<MainLayout><MusicVisualizerPage /></MainLayout>} /> // Rimosso */}
-
-          {/* Routes without MainLayout (examples) */}
-          {/* <Route path="/sponsor-video" element={<SponsorVideoPage />} /> // Rimosso */}
-          {/* <Route path="/program-slideshow" element={<ProgramSponsorSlideshowPage />} /> // Rimosso */}
-
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          {/* Catch-all NotFound route can be inside or outside MainLayout depending on desired appearance */}
-          <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
-          {/* Or simply: <Route path="*" element={<NotFound />} /> if NotFound page has its own full styling */}
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  return (
+    <Layout currentPage={currentPage} onPageChange={setCurrentPage}>
+      {renderPage()}
+    </Layout>
+  );
+}
 
 export default App;
