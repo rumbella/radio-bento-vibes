@@ -1,0 +1,26 @@
+{
+  "name": "Radio Amblè - Fresh Sound and Podcasts",
+  "short_name": "Radio Amblè",
+  "description": "Fresh sound and podcasts - La tua radio digitale",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#444444",
+  "theme_color": "#F56E0F",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["music", "entertainment"],
+  "lang": "it"
+}
