@@ -54,7 +54,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
         }}
         variant="ghost"
         size="sm"
-        className="fixed top-6 right-6 text-black font-medium py-1 px-[12px] text-base z-[10000]"
+        className="fixed top-6 right-6 text-[#FFF4E0] font-medium py-1 px-[12px] text-base z-[10000]"
       >
         - CLOSE
       </Button>

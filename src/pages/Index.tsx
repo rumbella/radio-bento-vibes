@@ -14,7 +14,7 @@ import { mockPrograms } from '@/data/playlists'; // Corrected import path
 // }
 
 const NewHomePage: React.FC = () => {
-  const { currentTrack } = usePlayerState();
+  const { currentTrack, playerMode } = usePlayerState();
   const { playStream } = usePlayerActions();
 
   // Effect to play a default stream when the page loads if nothing is playing
@@ -29,7 +29,7 @@ const NewHomePage: React.FC = () => {
       // THEN, set (or reset) to the default live stream.
       // This ensures that navigating to the homepage attempts to play the live stream.
       // PlayerContext's playStream action sets isPlaying to true.
-      if (!currentTrack || currentTrack.id !== defaultLiveProgram.id || currentTrack.playerMode !== 'live') {
+        if (!currentTrack || currentTrack.id !== defaultLiveProgram.id || playerMode !== 'live') {
         console.log("NewHomePage useEffect: Setting/Resetting to default live stream.");
         playStream(defaultLiveProgram);
       }
@@ -43,7 +43,7 @@ const NewHomePage: React.FC = () => {
   const displayImageUrl = currentTrack?.imageUrl || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg"; // Fallback image
   const displayTitle = currentTrack?.title || "Select a Stream"; // Fallback title
   const displayArtist = currentTrack?.artist || "Amblé Radio"; // Fallback artist info
-  const songOrContentType = currentTrack?.playerMode === 'live' ? 'Live Stream' : (currentTrack?.playerMode === 'podcast' ? 'Podcast' : 'Song');
+  const songOrContentType = playerMode === 'live' ? 'Live Stream' : (playerMode === 'podcast' ? 'Podcast' : 'Song');
 
 
   return (

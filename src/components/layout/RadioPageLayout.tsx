@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Heart, Radio, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { Program } from "@/pages/Index";
+import type { Program } from "@/data/playlists";
 import { Playlist } from "@/data/playlists";
 import { useIsMobile } from "@/hooks/use-mobile";
 import MobileMenu from "@/components/mobile/MobileNavbar";

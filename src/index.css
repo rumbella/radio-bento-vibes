@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Mobile color scheme override */
+@media (max-width: 767px) {
+  :root {
+    --background: 0 0% 27%; /* #444444 */
+    --foreground: 40 100% 94%; /* cream white */
+  }
+
+  html, body, #root {
+    background-color: #444444;
+    color: #FFF4E0;
+  }
+}
+
