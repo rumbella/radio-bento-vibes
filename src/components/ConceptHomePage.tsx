@@ -8,7 +8,7 @@ const ConceptHomePage: React.FC = () => {
       <div 
         className="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat z-[-1]"
         style={{
-          backgroundImage: `url('/concept-bg.jpg')`
+          backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1756910411/500501bc6a3eaca283c3c4951e15cc01_esu1fv.jpg')`
         }}
       >
         {/* Dark overlay for better contrast */}
