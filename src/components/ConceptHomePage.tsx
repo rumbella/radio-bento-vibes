@@ -14,35 +14,15 @@ const ConceptHomePage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Vibrant Background with Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-red-500 to-pink-600">
-        {/* Grid Pattern Overlay */}
-        <div 
-          className="absolute bottom-0 left-0 right-0 h-1/3 opacity-20"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '20px 20px'
-          }}
-        />
-        
-        {/* Decorative Dots */}
-        <div className="absolute inset-0">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-white/30 rounded-full animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`,
-                animationDuration: `${2 + Math.random() * 2}s`
-              }}
-            />
-          ))}
-        </div>
+      {/* Full Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('/public/Picsart_25-08-03_14-09-09-058.jpg')`
+        }}
+      >
+        {/* Dark Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Main Content */}
