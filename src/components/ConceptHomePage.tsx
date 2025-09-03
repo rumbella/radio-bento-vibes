@@ -1,123 +1,99 @@
 import React from 'react';
-import { Play, Pause, Volume2, VolumeX, Heart, Share2, Music } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Slider } from '@/components/ui/slider';
 import { usePlayerState, usePlayerActions } from '@/contexts/PlayerContext';
+import { Play, Pause, Heart, MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
 
 const ConceptHomePage: React.FC = () => {
-  const { isPlaying, currentTrack, volume, muted } = usePlayerState();
-  const { togglePlay, setVolume, toggleMute } = usePlayerActions();
-
-  const handleVolumeChange = (newVolume: number[]) => {
-    setVolume(newVolume[0]);
-  };
+  const { isPlaying } = usePlayerState();
+  const { togglePlay } = usePlayerActions();
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="h-full flex flex-col lg:flex-row">
       {/* Full Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="flex-1 bg-cover bg-center bg-no-repeat relative lg:absolute lg:inset-0"
         style={{
-          backgroundImage: `url('/public/Picsart_25-08-03_14-09-09-058.jpg')`
+          backgroundImage: `url('/concept-bg.jpg')`
         }}
       >
-        {/* Dark Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/40" />
+        {/* Dark overlay for better contrast */}
+        <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-200px)] px-4">
-        {/* Central Character/Hero Section */}
-        <div className="relative mb-8">
-          <div className="w-80 h-80 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
-            <div className="w-64 h-64 bg-gradient-to-br from-white/20 to-transparent rounded-full flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-32 h-32 mx-auto mb-4 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                  <Music className="w-16 h-16 text-white" />
-                </div>
-                <h1 className="text-4xl font-bold text-white mb-2">SUONO AL</h1>
-                <h2 className="text-4xl font-bold text-white">QUADRATO</h2>
-                <p className="text-white/80 mt-2 font-mono text-sm">
-                  con DJ Marco & Plus
-                </p>
+      {/* Desktop Player Sidebar */}
+      <div className="hidden lg:flex lg:w-1/3 lg:relative lg:z-10">
+        <div className="w-full bg-black/50 backdrop-blur-md p-6 flex flex-col justify-center">
+          <div className="text-center space-y-4">
+            <div>
+              <p className="text-white font-semibold text-lg">Suono al Quadrato</p>
+              <p className="text-gray-400 text-sm">Free Fall - Tems</p>
+            </div>
+            
+            {/* Player Controls */}
+            <div className="flex items-center justify-center space-x-4">
+              <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
+                <Heart className="w-5 h-5" />
+              </Button>
+              <Button 
+                onClick={togglePlay} 
+                className="w-12 h-12 rounded-full bg-white text-black hover:bg-white/90"
+              >
+                {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-0.5" />}
+              </Button>
+              <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
+                <MessageCircle className="w-5 h-5" />
+              </Button>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="space-y-2">
+              <Slider
+                value={[30]}
+                max={100}
+                step={1}
+                className="w-full h-1 bg-gray-600 rounded-full"
+              />
+              <div className="flex justify-between text-xs text-gray-400">
+                <span>0:10</span>
+                <span>3:24</span>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Feature Text */}
-        <div className="text-center mb-8">
-          <h3 className="text-2xl font-bold text-white mb-2">NOTHING IFD</h3>
-          <p className="text-white/80 text-sm font-mono">Fresh experimental sounds</p>
-        </div>
       </div>
 
-      {/* Bottom Player - Translucent Anthracite with Blur */}
-      <div className="fixed bottom-20 left-4 right-4 z-20">
-        <div className="bg-gray-800/70 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl">
+      {/* Mobile Bottom Player */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-xl border-t border-gray-800 p-4 z-50">
+        <div className="flex items-center justify-between">
+          {/* Program Info */}
+          <div className="flex-1">
+            <p className="text-white font-medium text-sm">Suono al Quadrato</p>
+            <p className="text-gray-400 text-xs">Free Fall - Tems</p>
+          </div>
+
+          {/* Player Controls */}
           <div className="flex items-center space-x-4">
-            {/* Album Art */}
-            <div className="w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-orange-400 to-red-500 flex-shrink-0">
-              <img
-                src={currentTrack?.imageUrl || "/lovable-uploads/dccdbdf7-8622-4cce-b368-a753a520f74d.png"}
-                alt={currentTrack?.title || "Now Playing"}
-                className="w-full h-full object-cover"
+            <Button variant="ghost" size="icon" className="text-white">
+              <Heart className="w-4 h-4" />
+            </Button>
+            <Button onClick={togglePlay} className="w-10 h-10 rounded-full bg-white text-black hover:bg-white/90">
+              {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
+            </Button>
+            <Button variant="ghost" size="icon" className="text-white">
+              <MessageCircle className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Progress */}
+          <div className="flex-1 flex justify-end">
+            <div className="w-20">
+              <Slider
+                value={[30]}
+                max={100}
+                step={1}
+                className="h-1 bg-gray-600 rounded-full"
               />
-            </div>
-
-            {/* Track Info */}
-            <div className="flex-1 min-w-0">
-              <h4 className="text-white font-semibold text-sm truncate">
-                {currentTrack?.title || "Select a Track"}
-              </h4>
-              <p className="text-gray-300 text-xs truncate">
-                {currentTrack?.artist || "Amblé Radio"}
-              </p>
-              
-              {/* Progress Bar */}
-              <div className="mt-2">
-                <div className="w-full h-1 bg-gray-600 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-gradient-to-r from-orange-400 to-red-500 transition-all duration-300"
-                    style={{ width: '35%' }}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Controls */}
-            <div className="flex items-center space-x-2 flex-shrink-0">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="w-8 h-8 text-gray-300 hover:text-white hover:bg-white/10"
-              >
-                <Heart className="w-4 h-4" />
-              </Button>
-              
-              <Button
-                onClick={togglePlay}
-                className="w-12 h-12 rounded-full bg-gradient-to-r from-orange-400 to-red-500 hover:from-orange-500 hover:to-red-600 text-white border-0"
-              >
-                {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
-              </Button>
-
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleMute}
-                className="w-8 h-8 text-gray-300 hover:text-white hover:bg-white/10"
-              >
-                {muted || volume === 0 ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-              </Button>
-
-              <Button
-                variant="ghost"
-                size="icon"
-                className="w-8 h-8 text-gray-300 hover:text-white hover:bg-white/10"
-              >
-                <Share2 className="w-4 h-4" />
-              </Button>
             </div>
           </div>
         </div>
