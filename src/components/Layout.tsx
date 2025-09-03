@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
   ];
 
   return (
-    <div className="min-h-screen bg-dark-void">
+    <div className="min-h-screen">
       {/* Header */}
       <header className=" backdrop-blur-md sticky top-0 z-50">
         <div className=" mx-auto px-4 py-4">
@@ -39,12 +39,12 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 pb-20">
+      <main className="flex-1 pb-20 relative z-10">
         {children}
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0  backdrop-blur-md ">
+      <nav className="fixed bottom-0 left-0 right-0  backdrop-blur-md z-50">
         <div className="max-w-md mx-auto lg:max-w-4xl px-4">
           <div className="flex justify-around py-2">
             {navItems.map((item) => {
