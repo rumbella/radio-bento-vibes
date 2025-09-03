@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
+import ConceptHomePage from './components/ConceptHomePage';
 import PlaylistsPage from './components/PlaylistsPage';
 import PodcastsPage from './components/PodcastsPage';
 import ResidentsPage from './components/ResidentsPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState('concept');
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
         return <HomePage />;
+      case 'concept':
+        return <ConceptHomePage />;
       case 'playlists':
         return <PlaylistsPage />;
       case 'podcasts':
@@ -19,7 +22,7 @@ function App() {
       case 'residents':
         return <ResidentsPage />;
       default:
-        return <HomePage />;
+        return <ConceptHomePage />;
     }
   };
 
