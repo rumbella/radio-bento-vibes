@@ -3,10 +3,10 @@ import RadioPlayer from './RadioPlayer';
 
 const ConceptHomePage: React.FC = () => {
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8">
+    <div className="h-full flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8">
       {/* Full Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat z-[-1]"
         style={{
           backgroundImage: `url('/concept-bg.jpg')`
         }}
