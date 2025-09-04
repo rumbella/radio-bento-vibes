@@ -21,7 +21,7 @@ const RadioPlayer: React.FC = () => {
   return (
     <>
       {/* Mobile Layout */}
-      <div className="lg:hidden flex flex-col h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-4">
+      <div className="lg:hidden flex flex-col h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-3">
         {/* Header */}
         <header className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
