@@ -103,9 +103,7 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
       originalProgram: program,
     });
     setPlayerMode('live');
-    setIsPlaying(true);
-    // setPlayerMode('live'); // Redundant
-    // setIsPlaying(true); // Redundant
+    // setIsPlaying(true); // MODIFIED: Autoplay disabled for stream loading
     setLoop(false);
     setCurrentPlaylistTracks([]);
     setCurrentTrackIndexInPlaylist(null);

@@ -123,7 +123,7 @@ const PlayerFooterContent: React.FC = () => {
   return (
     // Apply requested styles: bg-black/80 backdrop-blur-xl border-t border-white/10 p-4
     // Retain w-full and mt-auto for positioning within the flex layout. z-20 omitted as it's in normal flow.
-    <div className="bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 text-white w-full mt-auto">
+    <div className="bg-black/80 backdrop-blur-xl border-t border-white/10 p-4 text-white w-full mt-auto min-h-[120px] lg:min-h-0">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Track Info & Progress Bar */}
         <div className="flex items-center space-x-3 w-1/3 min-w-0">
@@ -145,8 +145,8 @@ const PlayerFooterContent: React.FC = () => {
                 <SkipBack className="w-5 h-5" />
               </Button>
             )}
-            <Button onClick={togglePlay} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-black hover:bg-white/90 flex items-center justify-center">
-              {isPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6" />} {/* Removed ml-0.5 from Play icon for testing */}
+            <Button onClick={togglePlay} className="w-16 h-16 rounded-full bg-transparent border-[1.5px] border-white text-white flex items-center justify-center">
+              {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8" />}
             </Button>
             {/* DEBUG: Display isPlaying state */}
             <span className="text-xs text-cyan-400 ml-2">DBG: isPlaying: {isPlaying.toString()}</span>
