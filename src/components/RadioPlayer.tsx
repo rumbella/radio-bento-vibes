@@ -21,39 +21,41 @@ const RadioPlayer: React.FC = () => {
   return (
     <>
       {/* Mobile Layout */}
-      <div className="lg:hidden flex flex-col h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-4">
-        {/* Header */}
-        <header className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-                <img
-                    src={currentShow.image}
-                    alt={currentShow.title}
-                    className="w-10 h-10 rounded-full object-cover"
-                />
-                <div>
-                    <h2 className="font-bold text-base">{currentShow.title}</h2>
+      <div className="lg:hidden h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl">
+        <div className="relative h-full w-full p-4">
+            {/* Header */}
+            <header className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                    <img
+                        src={currentShow.image}
+                        alt={currentShow.title}
+                        className="w-10 h-10 rounded-full object-cover"
+                    />
+                    <div className="w-24 break-words">
+                        <h2 className="font-bold text-sm">{currentShow.title}</h2>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <p className="text-xs">{currentShow.host}</p>
-            </div>
-        </header>
+                <div>
+                    <p className="text-xs">{currentShow.host}</p>
+                </div>
+            </header>
 
-        {/* Body (Play Button) */}
-        <div className="flex-1 flex items-center justify-center py-2">
-            <button
-                onClick={togglePlay}
-                className="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-                {isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" />}
-            </button>
+            {/* Body (Play Button) */}
+            <div className="h-full flex items-center justify-center">
+                <button
+                    onClick={togglePlay}
+                    className="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+                >
+                    {isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" />}
+                </button>
+            </div>
+
+            {/* Footer */}
+            <footer className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                <p className="text-xs">{currentShow.artist}</p>
+                <p className="text-xs font-bold">{currentShow.songTitle}</p>
+            </footer>
         </div>
-
-        {/* Footer */}
-        <footer className="flex items-center justify-between">
-            <p className="text-xs">{currentShow.artist}</p>
-            <p className="text-xs font-bold">{currentShow.songTitle}</p>
-        </footer>
       </div>
 
       {/* Desktop Layout */}
