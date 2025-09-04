@@ -1,4 +1,5 @@
 import React from 'react';
+import { Users, Radio } from 'lucide-react';
 import RadioPlayer from './RadioPlayer';
 
 const ConceptHomePage: React.FC = () => {
@@ -13,6 +14,31 @@ const ConceptHomePage: React.FC = () => {
       >
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 bg-black/30"></div>
+      </div>
+
+      {/* Info Header above player - Mobile only */}
+      <div className="fixed bottom-[240px] left-4 right-4 lg:hidden z-10">
+        <div className="flex items-center justify-between mb-4 bg-gluon-grey/80 backdrop-blur-md rounded-lg p-3">
+          {/* Live + Listeners (sinistra) */}
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-liquid-lava rounded-full animate-pulse"></div>
+              <span className="text-liquid-lava font-semibold text-sm uppercase tracking-wide">
+                Live
+              </span>
+            </div>
+            <div className="flex items-center space-x-1 text-dusty-grey">
+              <Users size={14} />
+              <span className="text-xs">1247</span>
+            </div>
+          </div>
+          
+          {/* Genre (destra) */}
+          <div className="flex items-center space-x-2 text-dusty-grey">
+            <Radio size={16} />
+            <span className="text-sm">Deep House</span>
+          </div>
+        </div>
       </div>
 
       {/* Radio Player - Mobile: fixed bottom with 90px from navigation, Desktop: right side matching homepage */}
