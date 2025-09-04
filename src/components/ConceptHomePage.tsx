@@ -7,7 +7,7 @@ const ConceptHomePage: React.FC = () => {
     <div className="h-[calc(100vh-8rem)] flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8">
       {/* Full Background Image */}
       <div 
-        className="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
+        className="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat bg-fixed z-0"
         style={{
           backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1756910411/500501bc6a3eaca283c3c4951e15cc01_esu1fv.jpg')`
         }}
