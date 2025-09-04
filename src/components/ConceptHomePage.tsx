@@ -16,8 +16,10 @@ const ConceptHomePage: React.FC = () => {
       </div>
 
       {/* Radio Player - Mobile: fixed bottom with 90px from navigation, Desktop: right side matching homepage */}
-      <div className="fixed bottom-[90px] left-4 right-4 h-[120px] lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-full lg:ml-auto relative z-10">
-        <RadioPlayer />
+      <div className="fixed bottom-[110px] left-4 right-4 h-[120px] lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-full lg:ml-auto z-10">
+        <div className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl p-4 lg:p-6 h-full flex flex-col lg:border lg:border-slate-grey/50">
+          <RadioPlayer />
+        </div>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ const RadioPlayer: React.FC = () => {
   };
 
   return (
-    <div className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl border border-slate-grey/50 p-4 lg:p-6 h-full flex flex-col">
+    <div className="h-full flex flex-col">
       {/* Mobile Layout */}
       <div className="lg:hidden h-full flex flex-col">
         {/* Header Mobile - Live, Listeners, Genre */}
