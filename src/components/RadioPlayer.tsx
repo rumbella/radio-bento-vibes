@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
-import { Play, Pause, Volume2, VolumeX, Users, Radio } from 'lucide-react';
+import React from 'react';
+import { Play, Pause } from 'lucide-react';
+import { usePlayerState, usePlayerActions } from '../contexts/PlayerContext';
 
 const RadioPlayer: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { isPlaying, currentTrack } = usePlayerState();
+  const { togglePlay } = usePlayerActions();
 
-  const currentShow = {
-    title: "Morning Vibes",
-    host: "DJ Marco",
-    listeners: 1247,
-    genre: "Deep House",
-    image: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
-    artist: "Solomun",
-    songTitle: "Home"
-  };
-
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
+  // Fallback data if no track is loaded
+  const displayData = {
+    title: currentTrack?.title || "Radio Amblè",
+    host: currentTrack?.artist || "Live Stream",
+    image: currentTrack?.imageUrl || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
+    artist: currentTrack?.artist || "",
+    songTitle: currentTrack?.title || "Tune in to discover"
   };
 
   return (
@@ -27,16 +24,16 @@ const RadioPlayer: React.FC = () => {
             <header className="absolute top-4 left-4 right-4 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                     <img
-                        src={currentShow.image}
-                        alt={currentShow.title}
+                        src={displayData.image}
+                        alt={displayData.title}
                         className="w-10 h-10 rounded-full object-cover"
                     />
                     <div className="w-24 break-words">
-                        <h2 className="font-bold text-sm">{currentShow.title}</h2>
+                        <h2 className="font-bold text-sm">{displayData.title}</h2>
                     </div>
                 </div>
                 <div>
-                    <p className="text-xs">{currentShow.host}</p>
+                    <p className="text-xs">{displayData.host}</p>
                 </div>
             </header>
 
@@ -52,8 +49,8 @@ const RadioPlayer: React.FC = () => {
 
             {/* Footer */}
             <footer className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <p className="text-xs">{currentShow.artist}</p>
-                <p className="text-xs font-bold">{currentShow.songTitle}</p>
+                <p className="text-xs">{displayData.artist}</p>
+                <p className="text-xs font-bold">{displayData.songTitle}</p>
             </footer>
         </div>
       </div>
@@ -64,16 +61,16 @@ const RadioPlayer: React.FC = () => {
         <header className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
                 <img
-                    src={currentShow.image}
-                    alt={currentShow.title}
+                    src={displayData.image}
+                    alt={displayData.title}
                     className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
-                    <h2 className="font-bold text-lg">{currentShow.title}</h2>
+                    <h2 className="font-bold text-lg">{displayData.title}</h2>
                 </div>
             </div>
             <div>
-                <p className="text-sm">{currentShow.host}</p>
+                <p className="text-sm">{displayData.host}</p>
             </div>
         </header>
 
@@ -89,8 +86,8 @@ const RadioPlayer: React.FC = () => {
 
         {/* Footer */}
         <footer className="flex items-center justify-between">
-            <p className="text-sm">{currentShow.artist}</p>
-            <p className="text-sm font-bold">{currentShow.songTitle}</p>
+            <p className="text-sm">{displayData.artist}</p>
+            <p className="text-sm font-bold">{displayData.songTitle}</p>
         </footer>
       </div>
     </>
