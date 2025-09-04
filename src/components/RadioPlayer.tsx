@@ -41,9 +41,9 @@ const RadioPlayer: React.FC = () => {
             <div className="h-full flex items-center justify-center">
                 <button
                     onClick={togglePlay}
-                    className="bg-transparent hover:bg-transparent text-white p-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-white"
+                    className="bg-transparent hover:bg-transparent text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-white"
                 >
-                    {isPlaying ? <Pause size={48} fill="currentColor" /> : <Play size={48} fill="currentColor" />}
+                    {isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" />}
                 </button>
             </div>
 
