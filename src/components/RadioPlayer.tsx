@@ -9,7 +9,9 @@ const RadioPlayer: React.FC = () => {
     host: "DJ Marco",
     listeners: 1247,
     genre: "Deep House",
-    image: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg"
+    image: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
+    artist: "Solomun",
+    songTitle: "Home"
   };
 
   const togglePlay = () => {
@@ -17,95 +19,79 @@ const RadioPlayer: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col">
+    <>
       {/* Mobile Layout */}
-      <div className="lg:hidden h-full flex flex-col">
-        {/* Centro Mobile - Immagine, Titolo, Play Button */}
-        <div className="flex-1 flex flex-col items-center justify-center text-center">
-          {/* Immagine Show */}
-          <div className="flex justify-center mb-8">
-            <button
-              onClick={togglePlay}
-              className="bg-gluon-grey hover:bg-slate-grey text-snow p-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg border border-slate-grey/50"
-            >
-              {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}
-            </button>
-          </div>
-          
-          {/* Titolo con Immagine a sinistra */}
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <img
-              src={currentShow.image}
-              alt={currentShow.title}
-              className="w-12 h-12 rounded-full object-cover border-2 border-liquid-lava/30 flex-shrink-0"
-            />
-            <div className="text-left">
-              <h2 className="text-snow font-bold text-xl mb-1">
-                {currentShow.title}
-              </h2>
-              <p className="text-dusty-grey text-sm">
-                con {currentShow.host}
-              </p>
+      <div className="lg:hidden fixed bottom-4 left-4 right-4 flex flex-col h-auto bg-black/30 backdrop-blur-lg border-none text-white rounded-lg p-4">
+        {/* Header */}
+        <header className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+                <img
+                    src={currentShow.image}
+                    alt={currentShow.title}
+                    className="w-10 h-10 rounded-full object-cover"
+                />
+                <div>
+                    <h2 className="font-bold text-base">{currentShow.title}</h2>
+                </div>
             </div>
-          </div>
+            <div>
+                <p className="text-xs">{currentShow.host}</p>
+            </div>
+        </header>
+
+        {/* Body (Play Button) */}
+        <div className="flex-1 flex items-center justify-center py-2">
+            <button
+                onClick={togglePlay}
+                className="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+                {isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" />}
+            </button>
         </div>
+
+        {/* Footer */}
+        <footer className="flex items-center justify-between">
+            <p className="text-xs">{currentShow.artist}</p>
+            <p className="text-xs font-bold">{currentShow.songTitle}</p>
+        </footer>
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:flex lg:flex-col lg:h-full">
-        {/* Live Indicator Desktop */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-liquid-lava rounded-full animate-pulse"></div>
-              <span className="text-liquid-lava font-semibold text-sm uppercase tracking-wide">
-                Live
-              </span>
+      <div className="hidden lg:flex lg:flex-col lg:h-full bg-black/30 backdrop-blur-lg border-none text-white rounded-lg p-4">
+        {/* Header */}
+        <header className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+                <img
+                    src={currentShow.image}
+                    alt={currentShow.title}
+                    className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                    <h2 className="font-bold text-lg">{currentShow.title}</h2>
+                </div>
             </div>
-          </div>
-          <div className="flex items-center space-x-2 text-dusty-grey">
-            <Radio size={16} />
-            <span className="text-sm">{currentShow.genre}</span>
-          </div>
+            <div>
+                <p className="text-sm">{currentShow.host}</p>
+            </div>
+        </header>
+
+        {/* Body (Play Button) */}
+        <div className="flex-1 flex items-center justify-center">
+            <button
+                onClick={togglePlay}
+                className="bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+                {isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" />}
+            </button>
         </div>
 
-        {/* Listeners Count Desktop */}
-        <div className="mb-4">
-          <div className="flex items-center space-x-2 text-dusty-grey">
-            <Users size={16} />
-            <span className="text-sm">{currentShow.listeners.toLocaleString()} ascoltatori</span>
-          </div>
-        </div>
-
-        {/* Show Info Desktop */}
-        <div className="text-center mb-6 flex-1 flex flex-col justify-center">
-          <div className="flex justify-center mb-3">
-            <img
-              src={currentShow.image}
-              alt={currentShow.title}
-              className="w-20 h-20 rounded-full object-cover border-2 border-liquid-lava/30"
-            />
-          </div>
-          
-          <h2 className="text-snow font-bold text-2xl mb-2">
-            {currentShow.title}
-          </h2>
-          <p className="text-dusty-grey text-base">
-            con {currentShow.host}
-          </p>
-        </div>
-
-        {/* Main Controls Desktop */}
-        <div className="flex items-center justify-center">
-          <button
-            onClick={togglePlay}
-            className="bg-[#d41b29] hover:bg-[#d41b29]/80 text-snow p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            {isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" />}
-          </button>
-        </div>
+        {/* Footer */}
+        <footer className="flex items-center justify-between">
+            <p className="text-sm">{currentShow.artist}</p>
+            <p className="text-sm font-bold">{currentShow.songTitle}</p>
+        </footer>
       </div>
-    </div>
+    </>
   );
 };
 
