@@ -20,29 +20,6 @@ const RadioPlayer: React.FC = () => {
     <div className="h-full flex flex-col">
       {/* Mobile Layout */}
       <div className="lg:hidden h-full flex flex-col">
-        {/* Header Mobile - Live, Listeners, Genre */}
-        <div className="flex items-center justify-between mb-4">
-          {/* Live + Listeners (sinistra) */}
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-liquid-lava rounded-full animate-pulse"></div>
-              <span className="text-liquid-lava font-semibold text-sm uppercase tracking-wide">
-                Live
-              </span>
-            </div>
-            <div className="flex items-center space-x-1 text-dusty-grey">
-              <Users size={14} />
-              <span className="text-xs">{currentShow.listeners.toLocaleString()}</span>
-            </div>
-          </div>
-          
-          {/* Genre (destra) */}
-          <div className="flex items-center space-x-2 text-dusty-grey">
-            <Radio size={16} />
-            <span className="text-sm">{currentShow.genre}</span>
-          </div>
-        </div>
-
         {/* Centro Mobile - Immagine, Titolo, Play Button */}
         <div className="flex-1 flex flex-col items-center justify-center text-center">
           {/* Immagine Show */}
