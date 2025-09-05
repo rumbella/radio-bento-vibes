@@ -97,7 +97,7 @@ export const mockPrograms: Program[] = [
     name: "Radio Amblé Live",
     host: "Amblé Radio",
     imageUrl: "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg", // Immagine di fallback usata in NewHomePage
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // URL audio d'esempio
+    audioUrl: "https://mqugxowc-lbmedia.radioca.st/stream?type=http&nocache=43", // URL audio d'esempio
   },
   // Aggiungi altri programmi mock qui se necessario
 ];
