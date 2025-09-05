@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-app-bg">
       {/* Header */}
       <header className=" backdrop-blur-md sticky top-0 z-50">
         <div className=" mx-auto px-4 py-4">
@@ -29,11 +29,11 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
                 className="h-10"
               />
               <div>
-                <h1 className="text-xl font-bold text-snow">Radio Amblè</h1>
-                <p className="text-sm text-liquid-lava">Fresh Sound and Podcasts</p>
+                <h1 className="text-xl font-bold text-white">Radio Amblè</h1>
+                <p className="text-sm text-white">Fresh Sound and Podcasts</p>
               </div>
             </div>
-            <div className="w-3 h-3 bg-liquid-lava rounded-full animate-pulse"></div>
+            <div className="w-3 h-3 bg-white rounded-full"></div>
           </div>
         </div>
       </header>
@@ -56,8 +56,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
                   onClick={() => onPageChange(item.id)}
                   className={`flex flex-col items-center py-2 px-3 rounded-lg transition-all ${
                     isActive 
-                      ? 'text-liquid-lava bg-liquid-lava/20' 
-                      : 'text-dusty-grey hover:text-snow'
+                      ? 'text-white bg-white/20'
+                      : 'text-gray-400 hover:text-white'
                   }`}
                 >
                   <Icon size={20} />
