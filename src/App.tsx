@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
+import ModernHomePage from './components/ModernHomePage';
 import ConceptHomePage from './components/ConceptHomePage';
 import PlaylistsPage from './components/PlaylistsPage';
 import PodcastsPage from './components/PodcastsPage';
@@ -13,6 +14,8 @@ function App() {
     switch (currentPage) {
       case 'home':
         return <HomePage />;
+      case 'modern':
+        return <ModernHomePage />;
       case 'concept':
         return <ConceptHomePage />;
       case 'playlists':
