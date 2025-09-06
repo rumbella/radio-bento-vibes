@@ -56,7 +56,7 @@ const RadioPlayer: React.FC = () => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:flex lg:flex-col lg:h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-6">
+      <div className="hidden lg:flex lg:flex-col lg:h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-6 mt-5 shadow-2xl">
         {/* Header */}
         <header className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
