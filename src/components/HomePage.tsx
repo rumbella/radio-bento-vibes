@@ -10,8 +10,8 @@ const HomePage: React.FC = () => {
         <HeroSection />
       </div>
       
-      {/* Radio Player - Stream Component - Hidden on mobile, Desktop: 30% width */}
-      <div className="hidden lg:block lg:w-[30%] lg:h-full">
+        {/* Radio Player - Mobile: fixed bottom with 90px from navigation, Desktop: right side matching homepage */}
+      <div className="fixed bottom-[110px] left-4 right-4 h-[160px] lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-[calc(100vh-12rem)] lg:ml-auto z-10">
         <RadioPlayer />
       </div>
     </div>
