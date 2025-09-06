@@ -10,7 +10,6 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) => {
   const navItems = [
     { id: 'home', label: 'Home', icon: Home },
-    { id: 'modern', label: 'Modern', icon: Music },
     { id: 'concept', label: 'Concept', icon: Music },
     { id: 'playlists', label: 'Playlist', icon: Music },
     { id: 'podcasts', label: 'Podcast', icon: Mic },
