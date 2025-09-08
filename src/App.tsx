@@ -5,6 +5,7 @@ import ConceptHomePage from './components/ConceptHomePage';
 import PlaylistsPage from './components/PlaylistsPage';
 import PodcastsPage from './components/PodcastsPage';
 import ResidentsPage from './components/ResidentsPage';
+import GridLayoutPage from './components/GridLayoutPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('concept');
@@ -21,6 +22,8 @@ function App() {
         return <PodcastsPage />;
       case 'residents':
         return <ResidentsPage />;
+      case 'grid':
+        return <GridLayoutPage />;
       default:
         return <ConceptHomePage />;
     }
