@@ -29,7 +29,7 @@ const ModernPlayer: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto bg-black/80 backdrop-blur-xl rounded-3xl overflow-hidden text-white shadow-2xl">
+    <div className="relative w-full max-w-sm mx-auto bg-black/80 backdrop-blur-xl rounded-3xl overflow-hidden text-white shadow-2xl">
       {/* Header with Profile and Actions */}
       <div className="flex items-center justify-between p-4 pb-2">
         <div className="flex items-center space-x-3">
@@ -63,6 +63,16 @@ const ModernPlayer: React.FC = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        {/* Center Play Button */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <button
+            onClick={togglePlay}
+            aria-label={isPlaying ? 'Pausa' : 'Play'}
+            className="w-20 h-20 rounded-full bg-white/90 text-black flex items-center justify-center shadow-2xl hover:scale-105 transition-transform"
+          >
+            {isPlaying ? <Pause size={32} /> : <Play size={32} />}
+          </button>
+        </div>
       </div>
 
       {/* Progress Bar */}
