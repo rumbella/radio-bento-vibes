@@ -14,8 +14,8 @@ const ModernPlayer: React.FC = () => {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const remainingTime = duration - playedSeconds;
-  
+  const remainingTime = Math.max(0, duration - playedSeconds);
+  const isLive = !duration || !Number.isFinite(duration) || duration <= 0;
   // Fallback data if no track is loaded
   const displayData = {
     title: currentTrack?.title || "Radio Amblè",
@@ -29,7 +29,7 @@ const ModernPlayer: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full max-w-sm mx-auto bg-black/80 backdrop-blur-xl rounded-3xl overflow-hidden text-white shadow-2xl">
+    <div className="relative w-full mx-auto bg-black/80 backdrop-blur-xl rounded-3xl overflow-hidden text-white shadow-2xl">
       {/* Header with Profile and Actions */}
       <div className="flex items-center justify-between p-4 pb-2">
         <div className="flex items-center space-x-3">
@@ -56,7 +56,7 @@ const ModernPlayer: React.FC = () => {
       </div>
 
       {/* Artwork */}
-      <div className="relative aspect-square mx-4 mb-4 rounded-2xl overflow-hidden">
+      <div className="relative aspect-[4/5] sm:aspect-square mx-4 mb-4 rounded-2xl overflow-hidden">
         <img
           src={displayData.image}
           alt={displayData.title}
@@ -86,7 +86,7 @@ const ModernPlayer: React.FC = () => {
         />
         <div className="flex justify-between text-xs text-gray-400 mt-1">
           <span>{formatTime(playedSeconds)}</span>
-          <span>-{formatTime(remainingTime)}</span>
+          <span>{isLive ? 'Live' : `-${formatTime(remainingTime)}`}</span>
         </div>
       </div>
 

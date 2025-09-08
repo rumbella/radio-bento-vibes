@@ -3,13 +3,13 @@ import ModernPlayer from './music/ModernPlayer';
 
 const GridLayoutPage: React.FC = () => {
   return (
-    <div className="h-[calc(100vh-8rem)] mx-auto px-4 lg:px-8">
+    <div className="min-h-[calc(100vh-8rem)] mx-auto px-4 lg:px-8">
       {/* Desktop: CSS Grid Layout, Mobile: Vertical Stack */}
-      <div className="h-full grid grid-cols-1 lg:grid-cols-2 grid-rows-4 lg:grid-rows-2 gap-4">
+      <div className="flex flex-col gap-4 lg:h-full lg:grid lg:grid-cols-2 lg:grid-rows-2">
         
         {/* Dark Gray Div - Full Background Image */}
         <div 
-          className="row-span-2 lg:row-span-2 col-span-1 rounded-2xl overflow-hidden relative bg-gray-800"
+          className="lg:row-span-2 col-span-1 rounded-2xl overflow-hidden relative bg-gray-800"
           style={{
             backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg')`,
             backgroundSize: 'cover',
@@ -22,7 +22,7 @@ const GridLayoutPage: React.FC = () => {
         </div>
 
         {/* Light Gray Div - Weather/Info Widget */}
-        <div className="row-span-1 col-span-1 bg-gray-300 rounded-2xl p-6 flex flex-col justify-center text-gray-800">
+        <div className="col-span-1 bg-gray-300 rounded-2xl p-6 flex flex-col justify-center text-gray-800">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold">Milano, IT</h3>
@@ -44,8 +44,8 @@ const GridLayoutPage: React.FC = () => {
         </div>
 
         {/* Acid Green Div - Modern Player */}
-        <div className="row-span-1 col-span-1 bg-lime-400 rounded-2xl p-4 flex items-center justify-center">
-          <div className="w-full max-w-sm">
+        <div className="col-span-1 bg-lime-400 rounded-2xl p-4 flex items-center justify-center">
+          <div className="w-full max-w-xs sm:max-w-sm mx-auto">
             <ModernPlayer />
           </div>
         </div>
