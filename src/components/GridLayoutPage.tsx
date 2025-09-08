@@ -9,7 +9,7 @@ const GridLayoutPage: React.FC = () => {
         
         {/* Dark Gray Div - Full Background Image */}
         <div 
-          className="lg:row-span-2 col-span-1 rounded-2xl overflow-hidden relative bg-gray-800"
+          className="h-64 lg:row-span-2 col-span-1 rounded-2xl overflow-hidden relative bg-gray-800"
           style={{
             backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg')`,
             backgroundSize: 'cover',
