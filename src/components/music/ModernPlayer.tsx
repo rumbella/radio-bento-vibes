@@ -90,29 +90,6 @@ const ModernPlayer: React.FC = () => {
         </div>
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center justify-center space-x-6 px-4 pb-6">
-        <button
-          onClick={prevTrack}
-          className="p-2 hover:bg-white/10 rounded-full transition-colors"
-        >
-          <SkipBack size={20} />
-        </button>
-        
-        <button
-          onClick={togglePlay}
-          className="bg-white text-black p-3 rounded-full hover:scale-105 transition-transform shadow-lg"
-        >
-          {isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" />}
-        </button>
-        
-        <button
-          onClick={nextTrack}
-          className="p-2 hover:bg-white/10 rounded-full transition-colors"
-        >
-          <SkipForward size={20} />
-        </button>
-      </div>
     </div>
   );
 };
