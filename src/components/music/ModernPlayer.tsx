@@ -29,7 +29,7 @@ const ModernPlayer: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full mx-auto bg-black/80 backdrop-blur-xl rounded-3xl overflow-hidden text-white shadow-2xl">
+    <div className="relative w-full mx-auto  backdrop-blur-xl rounded-3xl overflow-hidden text-white shadow-2xl">
       {/* Header with Profile and Actions */}
       <div className="flex items-center justify-between p-4 pb-2">
         <div className="flex items-center space-x-3">
