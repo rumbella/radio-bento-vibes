@@ -6,7 +6,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="h-[calc(100vh-8rem)] flex flex-col lg:flex-row gap-4 mx-auto px-4 lg:px-8">
       {/* Left Sidebar - Hidden on mobile, visible on desktop */}
-      <div className="hidden lg:block lg:w-[25%]">
+      <div className="hidden lg:block lg:w-[25%] p-4">
         <div className="h-[calc(100vh-12rem)] bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl p-6">
           <div className="text-white">
             <h3 className="text-lg font-semibold mb-4">Radio Info</h3>
@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* Hero Section - Slideshow Component - Mobile: full height, Desktop: 45% width */}
-      <div className="w-full h-full lg:w-[45%]">
+      <div className="w-full h-full lg:w-[45%] p-4">
         <div className="h-full lg:h-[calc(100vh-12rem)]">
           <HeroSection />
         </div>
