@@ -16,6 +16,25 @@ const ConceptHomePage: React.FC = () => {
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
+      {/* Content Section - Hidden on mobile, visible on desktop */}
+      <div className="hidden lg:block lg:w-[65%] p-4">
+        <div className="h-[calc(100vh-12rem)] bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl p-6">
+          <div className="text-white">
+            <h3 className="text-lg font-semibold mb-4">Radio Fenicottero</h3>
+            <div className="space-y-3">
+              <div className="text-sm opacity-80">
+                <p>Benvenuti su Radio Fenicottero</p>
+                <p className="font-medium">La vostra radio preferita</p>
+              </div>
+              <div className="text-sm opacity-80">
+                <p>In onda ora</p>
+                <p className="font-medium">Musica Live 24/7</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Radio Player - Mobile: fixed bottom with 90px from navigation, Desktop: right side matching homepage */}
       <div className="fixed bottom-[110px] left-4 right-4 h-[160px] lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-[calc(100vh-12rem)] lg:ml-auto z-10">
         <RadioPlayer />
