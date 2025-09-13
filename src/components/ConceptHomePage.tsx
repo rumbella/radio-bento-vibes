@@ -45,12 +45,12 @@ const ConceptHomePage: React.FC = () => {
 
         {/* Desktop Layout */}
         <div className="hidden lg:flex flex-row h-full justify-between">
-          <div className="w-[65%] h-full p-4">
+          <div className="w-[65%] h-full">
             <BlurPanel className="h-full">
                 <Content />
             </BlurPanel>
           </div>
-          <div className="w-[30%] h-full p-4">
+          <div className="w-[30%] h-full">
             <RadioPlayer />
           </div>
         </div>
