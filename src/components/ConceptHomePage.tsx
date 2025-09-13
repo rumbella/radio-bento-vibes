@@ -44,13 +44,13 @@ const ConceptHomePage: React.FC = () => {
       <div className="relative z-10 h-full">
 
         {/* Desktop Layout */}
-        <div className="hidden lg:flex flex-row h-full">
+        <div className="hidden lg:flex flex-row h-full justify-between">
           <div className="w-[65%] h-full p-4">
             <BlurPanel className="h-full">
                 <Content />
             </BlurPanel>
           </div>
-          <div className="w-[30%] h-full ml-auto">
+          <div className="w-[30%] h-full p-4">
             <RadioPlayer />
           </div>
         </div>
