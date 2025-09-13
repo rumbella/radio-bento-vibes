@@ -41,13 +41,13 @@ const ConceptHomePage: React.FC = () => {
       </div>
 
       {/* Content Section - MOBILE */}
-      <div className="lg:hidden absolute inset-0 p-4">
+      <div className="lg:hidden absolute top-4 left-4 right-4 bottom-[190px] p-2">
         <div className="h-full bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl p-6">
           <Content />
         </div>
       </div>
 
-      {/* Radio Player - Mobile: fixed bottom with 90px from navigation, Desktop: right side matching homepage */}
+      {/* Radio Player - Mobile: fixed bottom with margin, Desktop: right side matching homepage */}
       <div className="fixed bottom-[110px] left-4 right-4 h-[160px] lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-[calc(100vh-12rem)] lg:ml-auto z-10">
         <RadioPlayer />
       </div>
