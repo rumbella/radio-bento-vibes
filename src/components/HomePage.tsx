@@ -6,7 +6,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       {/* Mobile Layout */}
-      <div className="lg:hidden flex flex-col h-[calc(100vh-8rem)] p-4 gap-4">
+      <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4">
         {/* Top section */}
         <div className="flex h-[35%] w-full gap-4">
           <div className="w-1/2">
