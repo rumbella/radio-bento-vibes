@@ -21,10 +21,10 @@ const Content = () => (
 
 const ConceptHomePage: React.FC = () => {
   return (
-    <div className="h-[calc(100vh-12rem)] flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8">
+    <div className="h-[calc(100vh-12rem)] flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8 overflow-hidden lg:overflow-auto">
       {/* Full Background Image */}
       <div 
-        className="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat bg-fixed z-0"
+        className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat lg:bg-fixed z-0"
         style={{
           backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1756910411/500501bc6a3eaca283c3c4951e15cc01_esu1fv.jpg')`
         }}
