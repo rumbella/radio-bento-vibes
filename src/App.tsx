@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
-import VideoHomePage from './components/VideoHomePage';
+import ConceptHomePage from './components/ConceptHomePage';
 import PlaylistsPage from './components/PlaylistsPage';
 import PodcastsPage from './components/PodcastsPage';
 import ResidentsPage from './components/ResidentsPage';
+import GridLayoutPage from './components/GridLayoutPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState('concept');
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <VideoHomePage />;
+        return <HomePage />;
+      case 'concept':
+        return <ConceptHomePage />;
       case 'playlists':
         return <PlaylistsPage />;
       case 'podcasts':
         return <PodcastsPage />;
       case 'residents':
         return <ResidentsPage />;
+      case 'grid':
+        return <GridLayoutPage />;
       default:
-        return <VideoHomePage />;
+        return <ConceptHomePage />;
     }
   };
 
