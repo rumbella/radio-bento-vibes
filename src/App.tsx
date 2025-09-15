@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
-import ConceptHomePage from './components/ConceptHomePage';
+import Videobg from './components/Videobg';
 import PlaylistsPage from './components/PlaylistsPage';
 import PodcastsPage from './components/PodcastsPage';
 import ResidentsPage from './components/ResidentsPage';
@@ -14,7 +14,7 @@ function App() {
       case 'home':
         return <HomePage />;
       case 'concept':
-        return <ConceptHomePage />;
+        return <Videobg />;
       case 'playlists':
         return <PlaylistsPage />;
       case 'podcasts':
@@ -22,7 +22,7 @@ function App() {
       case 'residents':
         return <ResidentsPage />;
       default:
-        return <ConceptHomePage />;
+        return <Videobg />;
     }
   };
 
