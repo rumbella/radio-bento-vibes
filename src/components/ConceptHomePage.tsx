@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Users, Radio } from 'lucide-react';
 import RadioPlayer from './RadioPlayer';
+
+const images = [
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1757056080/gemini-2.5-flash-image-preview_nano-banana__fai_tenere_il_cartel_zu02pm.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1756910311/gemini-2.5-flash-image-preview_nano-banana__Uomo_deve_tenere_in__1_mn4h6g.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1756910298/gemini-2.5-flash-image-preview_nano-banana__Deve_tenere_tra_le_d_dv12zs.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1756910295/gemini-2.5-flash-image-preview_nano-banana__Uomo_deve_tenere_in__wpaftp.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1756648391/AI/gemini-2.5-flash-image-preview_nano-banana__Steeve_Macqueen_che_.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1756650537/AI/gemini-2.5-flash-image-preview_nano-banana__cambia_contesto_e_i.png'
+];
 
 const Content = () => (
   <div className="text-white">
@@ -20,15 +29,33 @@ const Content = () => (
 
 
 const ConceptHomePage: React.FC = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 4000); // Change image every 4 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="h-[calc(100vh-12rem)] flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8">
-      {/* Full Background Image */}
-      <div 
-        className="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat bg-fixed z-0"
-        style={{
-          backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1756910411/500501bc6a3eaca283c3c4951e15cc01_esu1fv.jpg')`
-        }}
-      >
+      {/* Full Background Slideshow */}
+      <div className="fixed top-0 left-0 w-full h-full z-0">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: `url('${image}')`
+            }}
+          />
+        ))}
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
