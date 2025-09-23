@@ -1,6 +1,6 @@
 import React from 'react';
 import { Users, Radio } from 'lucide-react';
-import RadioPlayer from './RadioPlayer';
+import NewRadioPlayer from './NewRadioPlayer';
 
 const Content = () => (
   <div className="text-white">
