@@ -6,7 +6,7 @@ const images = [
   'https://res.cloudinary.com/thinkdigital/image/upload/c_pad,b_gen_fill,ar_16:9/v1758625184/radio%20amble%20immagini/gemini-2.5-flash-image-preview_nano-banana__Steeve_Macqueen_che_.png',
   'https://res.cloudinary.com/thinkdigital/image/upload/c_pad,b_gen_fill,ar_16:9/v1757056076/gemini-2.5-flash-image-preview_nano-banana__cambia_contesto_e_i_rvyutz.png',
   'https://res.cloudinary.com/thinkdigital/image/upload/v1756648346/AI/1756575824154.png',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1758625122/radio%20amble%20immagini/gemini-2.5-flash-image-preview_nano-banana__Sostituzione_con_Yod.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/c_pad,b_gen_fill,ar_16:9/v1758625122/radio%20amble%20immagini/gemini-2.5-flash-image-preview_nano-banana__Sostituzione_con_Yod.png',
   'https://res.cloudinary.com/thinkdigital/image/upload/v1758625066/radio%20amble%20immagini/Generated_Image_September_23_2025_-_11_38AM.png',
   'https://res.cloudinary.com/thinkdigital/image/upload/v1758625015/radio%20amble%20immagini/Generated_Image_September_23_2025_-_11_36AM.png'
 ];
