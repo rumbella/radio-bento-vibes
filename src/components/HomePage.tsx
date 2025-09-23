@@ -38,7 +38,7 @@ const HomePage: React.FC = () => {
     <>
       {/* Mobile Layout */}
       <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4">
-        <div className="w-full h-[30%] rounded-lg overflow-hidden">
+        <div className="w-full h-[50%] rounded-lg overflow-hidden rounded-3xl ">
           <HeroSection slides={slides} onSlideChange={handleSlideChange} />
         </div>
         <DynamicTicker slide={currentSlide} />
@@ -70,7 +70,7 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Hero Section - Slideshow Component - Top-right on mobile */}
-          <div className="col-start-2 row-start-1 p-4 lg:w-[45%]">
+          <div className="col-start-2 row-start-1 p-4 lg:w-[45%] rounded-3xl ">
             <div className="h-full lg:h-[calc(100vh-12rem)]">
               <HeroSection slides={slides} onSlideChange={handleSlideChange} />
             </div>
