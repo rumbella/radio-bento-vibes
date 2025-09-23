@@ -8,7 +8,7 @@ import PodcastsPage from './components/PodcastsPage';
 import ResidentsPage from './components/ResidentsPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('concept');
+  const [currentPage, setCurrentPage] = useState('home');
 
   const renderPage = () => {
     switch (currentPage) {
