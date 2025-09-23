@@ -39,12 +39,14 @@ const RadioPlayer: React.FC = () => {
 
             {/* Body (Play Button) */}
             <div className="h-full flex items-center justify-center">
-                <button
-                    onClick={togglePlay}
-                    className="bg-transparent hover:bg-transparent text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-white"
-                >
-                    {isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" />}
-                </button>
+                <div className={isPlaying ? 'pulse-effect' : ''}>
+                    <button
+                        onClick={togglePlay}
+                        className="bg-transparent hover:bg-transparent text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-white"
+                    >
+                        {isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" />}
+                    </button>
+                </div>
             </div>
 
             {/* Footer */}
@@ -76,12 +78,14 @@ const RadioPlayer: React.FC = () => {
 
         {/* Body (Play Button) */}
         <div className="flex-1 flex items-center justify-center">
-            <button
-                onClick={togglePlay}
-                className="bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-                {isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" />}
-            </button>
+            <div className={isPlaying ? 'pulse-effect' : ''}>
+                <button
+                    onClick={togglePlay}
+                    className="bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+                >
+                    {isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" />}
+                </button>
+            </div>
         </div>
 
         {/* Footer */}
