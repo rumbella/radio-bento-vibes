@@ -49,3 +49,16 @@
 .pulse-effect::after {
   animation-delay: 1s;
 }
+
+@keyframes idle-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.idle-pulse {
+  animation: idle-pulse 3s infinite;
+}
