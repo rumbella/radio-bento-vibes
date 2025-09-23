@@ -5,12 +5,11 @@
 /* Mobile color scheme override */
 @media (max-width: 767px) {
   :root {
-    --background: 0 0% 27%; /* #444444 */
-    --foreground: 40 100% 94%; /* cream white */
+   background-color: #151419;
   }
 
   html, body, #root {
-    background-color: #444444;
+    background-color: #151419;
     color: #FFF4E0;
   }
 }
