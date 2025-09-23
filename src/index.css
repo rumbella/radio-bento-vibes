@@ -43,6 +43,7 @@
   border: 2px solid white;
   border-radius: 50%;
   animation: pulse-animation 2s infinite;
+  pointer-events: none;
 }
 
 .pulse-effect::after {
