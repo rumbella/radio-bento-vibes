@@ -55,10 +55,10 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
                 <button
                   key={item.id}
                   onClick={() => onPageChange(item.id)}
-                  className={`flex flex-col items-center py-2 px-3 rounded-lg transition-all ${
+                  className={`flex flex-col items-center py-2 px-3 transition-all ${
                     isActive 
-                      ? 'text-white bg-white/20'
-                      : 'text-gray-400 hover:text-white'
+                      ? 'text-white bg-white/20 rounded-full'
+                      : 'text-gray-400 hover:text-white rounded-lg'
                   }`}
                 >
                   <Icon size={20} />
