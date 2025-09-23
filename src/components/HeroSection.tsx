@@ -36,7 +36,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSlideChange, slides }) => {
   }
 
   return (
-    <div className="relative h-full overflow-hidden">
+    <div className="relative h-full overflow-hidden rounded-3xl">
       {/* Background Slides */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
