@@ -70,7 +70,7 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Hero Section - Slideshow Component - Top-right on mobile */}
-          <div className="col-start-2 row-start-1 p-4 lg:w-[45%] rounded-3xl shadow-2xl rounded-lg">
+          <div className="col-start-2 row-start-1 p-4 lg:w-[45%] rounded-3xl rounded-lg">
             <div className="h-full lg:h-[calc(100vh-12rem)]">
               <HeroSection slides={slides} onSlideChange={handleSlideChange} />
             </div>
