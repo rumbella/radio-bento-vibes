@@ -3,12 +3,12 @@ import { Users, Radio } from 'lucide-react';
 import RadioPlayer from './RadioPlayer';
 
 const images = [
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1757056080/gemini-2.5-flash-image-preview_nano-banana__fai_tenere_il_cartel_zu02pm.png',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1756910311/gemini-2.5-flash-image-preview_nano-banana__Uomo_deve_tenere_in__1_mn4h6g.png',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1756910298/gemini-2.5-flash-image-preview_nano-banana__Deve_tenere_tra_le_d_dv12zs.png',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1756910295/gemini-2.5-flash-image-preview_nano-banana__Uomo_deve_tenere_in__wpaftp.png',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1756648391/AI/gemini-2.5-flash-image-preview_nano-banana__Steeve_Macqueen_che_.png',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1756650537/AI/gemini-2.5-flash-image-preview_nano-banana__cambia_contesto_e_i.png'
+  'https://res.cloudinary.com/thinkdigital/image/upload/c_pad,b_gen_fill,ar_16:9/v1758625184/radio%20amble%20immagini/gemini-2.5-flash-image-preview_nano-banana__Steeve_Macqueen_che_.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/c_pad,b_gen_fill,ar_16:9/v1757056076/gemini-2.5-flash-image-preview_nano-banana__cambia_contesto_e_i_rvyutz.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1757056075/1756376933817_uin09f_tlothe.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1758625122/radio%20amble%20immagini/gemini-2.5-flash-image-preview_nano-banana__Sostituzione_con_Yod.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1758625066/radio%20amble%20immagini/Generated_Image_September_23_2025_-_11_38AM.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1758625015/radio%20amble%20immagini/Generated_Image_September_23_2025_-_11_36AM.png'
 ];
 
 const Content = () => (
