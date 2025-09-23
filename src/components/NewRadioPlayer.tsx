@@ -18,7 +18,7 @@ const NewRadioPlayer: React.FC = () => {
   return (
     <>
       {/* Mobile Layout */}
-      <div className="lg:hidden h-full bg-[#444] backdrop-blur-md border-none text-white rounded-2xl">
+      <div className="lg:hidden h-full bg-[#262626] backdrop-blur-md border-none text-white rounded-2xl">
         <div className="relative h-full w-full p-4">
             {/* Header */}
             <header className="absolute top-4 left-4 right-4 flex items-center justify-between">
@@ -58,7 +58,7 @@ const NewRadioPlayer: React.FC = () => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:flex lg:flex-col lg:h-full bg-[#444] backdrop-blur-md border-none text-white rounded-2xl p-6 mt-5 shadow-2xl">
+      <div className="hidden lg:flex lg:flex-col lg:h-full bg-[#262626] backdrop-blur-md border-none text-white rounded-2xl p-6 mt-5 shadow-2xl">
         {/* Header */}
         <header className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
