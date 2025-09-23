@@ -18,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
   ];
 
   return (
-    <div className="min-h-screen bg-app-bg flex flex-col">
+    <div className="min-h-screen  flex flex-col">
       {/* Header */}
       <header className=" backdrop-blur-md sticky top-0 z-50">
         <div className=" mx-auto px-4 py-4">
