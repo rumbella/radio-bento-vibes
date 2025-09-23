@@ -81,7 +81,7 @@ const NewRadioPlayer: React.FC = () => {
             <div className={isPlaying ? 'pulse-effect' : ''}>
                 <button
                     onClick={togglePlay}
-                    className={`bg-gray-800 hover:bg-gray-700 text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg ${!isPlaying ? 'idle-pulse' : ''}`}
+                    className={`bg-black hover:bg-gray-800 text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg ${!isPlaying ? 'idle-pulse' : ''}`}
                 >
                     {isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" />}
                 </button>
