@@ -18,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
   ];
 
   return (
-    <div className="min-h-screen bg-app-bg flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[#000000] ">
       {/* Header */}
       <header className=" backdrop-blur-md sticky top-0 z-50">
         <div className=" mx-auto px-4 py-4">
@@ -55,7 +55,11 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
                 <button
                   key={item.id}
                   onClick={() => onPageChange(item.id)}
+
                   className={`flex flex-col items-center py-2 px-3 transition-all ${
+
+                  className={`flex flex-col items-center py-2 px-3 rounded-lg  rounded-full transition-all ${
+
                     isActive 
                       ? 'text-white bg-white/20 rounded-full'
                       : 'text-gray-400 hover:text-white rounded-lg'

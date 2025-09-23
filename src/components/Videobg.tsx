@@ -1,6 +1,6 @@
 import React from 'react';
 import { Users, Radio } from 'lucide-react';
-import RadioPlayer from './RadioPlayer';
+import NewRadioPlayer from './NewRadioPlayer';
 
 const Content = () => (
   <div className="text-white">
@@ -22,6 +22,8 @@ const Content = () => (
 const Videobg: React.FC = () => {
   return (
     <div className="h-[calc(100vh-12rem)] flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8">
+       {/* Dark overlay for better contrast */}
+        <div className="absolute inset-0 bg-black/30"></div>
       {/* Full Background Video */}
       <video
         autoPlay
@@ -31,8 +33,7 @@ const Videobg: React.FC = () => {
       >
         <source src="https://res.cloudinary.com/thinkdigital/video/upload/v1751534019/videoplayback_rm5v5m.mp4" type="video/mp4" />
       </video>
-        {/* Dark overlay for better contrast */}
-        <div className="absolute inset-0 bg-black/30"></div>
+       
       {/* Content Section - DESKTOP */}
       <div className="hidden lg:block lg:w-[65%] p-4">
         <div className="h-[calc(100vh-12rem)]  p-6">
@@ -49,7 +50,7 @@ const Videobg: React.FC = () => {
 
       {/* Radio Player - Mobile: fixed bottom with margin, Desktop: right side matching homepage */}
       <div className="fixed bottom-[110px] left-4 right-4 h-[160px] lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-[calc(100vh-12rem)] lg:ml-auto z-10">
-        <RadioPlayer />
+        <NewRadioPlayer />
       </div>
     </div>
   );

@@ -2,14 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
-  background-color: #000;
-}
-
 /* Mobile color scheme override */
 @media (max-width: 767px) {
   :root {
-   background-color: #000;
+   background-color: #151419;
   }
 
   html, body, #root {
