@@ -37,8 +37,8 @@ const HomePage: React.FC = () => {
   return (
     <>
       {/* Mobile Layout */}
-      <div className="lg:hidden flex flex-col h-screen p-4 gap-4">
-        <div className="w-full h-[60%] rounded-lg overflow-hidden">
+      <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4">
+        <div className="w-full h-[30%] rounded-lg overflow-hidden">
           <HeroSection slides={slides} onSlideChange={handleSlideChange} />
         </div>
         <DynamicTicker slide={currentSlide} />
