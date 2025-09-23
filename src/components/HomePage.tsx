@@ -8,21 +8,21 @@ const slides: HeroSlide[] = [
     id: '1',
     title: 'Live Now: Morning Vibes',
     subtitle: 'Fresh beats to start your day right',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
+    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1758625050/radio%20amble%20immagini/gemini-2.5-flash-image-preview_nano-banana__Uomo_deve_tenere_in_.png',
     type: 'show'
   },
   {
     id: '2',
     title: 'New Podcast Episode',
     subtitle: 'Deep dive into electronic music culture',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1753024181/dj-8049453_640_svyxm9.jpg',
+    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1758625066/radio%20amble%20immagini/Generated_Image_September_23_2025_-_11_38AM.png',
     type: 'news'
   },
   {
     id: '3',
     title: 'Weekend Special',
     subtitle: 'Non-stop mix sessions all weekend',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1753024181/concert-3084876_640_cr5n4b.jpg',
+    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1758625015/radio%20amble%20immagini/Generated_Image_September_23_2025_-_11_36AM.png',
     type: 'event'
   }
 ];
