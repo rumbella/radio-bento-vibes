@@ -37,8 +37,8 @@ const HomePage: React.FC = () => {
   return (
     <>
       {/* Mobile Layout */}
-      <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4">
-        <div className="w-full h-[50%] rounded-lg overflow-hidden rounded-3xl rounded-3xl shadow-2xl rounded">
+      <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4 bg-[#000]">
+        <div className="w-full h-[50%] rounded-lg overflow-hidden rounded-3xl rounded-3xl shadow-2xl rounded bg-[#151419]">
           <HeroSection slides={slides} onSlideChange={handleSlideChange} />
         </div>
         <DynamicTicker slide={currentSlide} />
@@ -49,10 +49,10 @@ const HomePage: React.FC = () => {
 
       {/* Desktop Layout */}
       <div className="hidden lg:block">
-        <div className="grid h-screen grid-cols-2 grid-rows-[35%_auto] gap-4 px-4 mx-auto lg:flex lg:flex-row lg:h-[calc(100vh-8rem)] lg:px-8">
+        <div className="grid h-screen grid-cols-2 grid-rows-[35%_auto] gap-4 px-4 mx-auto lg:flex lg:flex-row lg:h-[calc(100vh-8rem)] lg:px-8 bg-[#000]">
           {/* Left Sidebar - Top-left on mobile, visible on all screens */}
-          <div className="col-start-1 row-start-1 p-4 lg:w-[25%]">
-            <div className="h-full p-6 bg-[#902124] backdrop-blur-xl rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)]">
+          <div className="col-start-1 row-start-1 p-4 lg:w-[25%] bg-[#151419]">
+            <div className="h-full p-6 backdrop-blur-xl rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)]">
               <div className="text-white">
                 <h3 className="mb-4 text-lg font-semibold">Radio Info</h3>
                 <div className="space-y-3">
@@ -70,7 +70,7 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Hero Section - Slideshow Component - Top-right on mobile */}
-          <div className="col-start-2 row-start-1 p-4 lg:w-[45%] rounded-3xl rounded-lg">
+          <div className="col-start-2 row-start-1 p-4 lg:w-[45%] rounded-3xl shadow-2xl rounded-lg">
             <div className="h-full lg:h-[calc(100vh-12rem)]">
               <HeroSection slides={slides} onSlideChange={handleSlideChange} />
             </div>
