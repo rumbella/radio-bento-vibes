@@ -48,3 +48,7 @@
 .pulse-effect::after {
   animation-delay: 1s;
 }
+
+.text-bright-custom {
+  color: white;
+}

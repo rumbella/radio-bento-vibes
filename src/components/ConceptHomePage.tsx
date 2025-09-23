@@ -12,19 +12,12 @@ const images = [
 ];
 
 const Content = () => (
-  <div className="text-white">
-    <h3 className="text-lg font-semibold mb-4">Radio Fenicottero</h3>
-    <div className="space-y-3">
-      <div className="text-sm opacity-80">
-        <p>Benvenuti su Radio Fenicottero</p>
-        <p className="font-medium">La vostra radio preferita</p>
-      </div>
-      <div className="text-sm opacity-80">
-        <p>In onda ora</p>
-        <p className="font-medium">Musica Live 24/7</p>
-      </div>
+    <div className="bg-black/50 backdrop-blur-md rounded-lg p-8 text-5xl text-gray-400 font-normal leading-tight tracking-tight">
+      It's <span className="text-bright-custom font-bold">3°</span> <span className="font-bold">now</span><br />
+      in <span className="text-bright-custom font-bold">Tokyo.</span><br />
+      Will be <span className="text-bright-custom font-bold">rainy</span><br />
+      and <span className="text-bright-custom font-bold">cold.</span>
     </div>
-  </div>
 );
 
 
