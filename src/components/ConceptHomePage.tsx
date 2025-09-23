@@ -12,7 +12,7 @@ const images = [
 ];
 
 const Content = () => (
-    <div className="bg-black/50 backdrop-blur-md rounded-lg p-8 text-5xl text-gray-400 font-normal leading-tight tracking-tight">
+    <div className="p-8 text-5xl text-gray-400 font-normal leading-tight tracking-tight">
       It's <span className="text-bright-custom font-bold">3°</span> <span className="font-bold">now</span><br />
       in <span className="text-bright-custom font-bold">Tokyo.</span><br />
       Will be <span className="text-bright-custom font-bold">rainy</span><br />
