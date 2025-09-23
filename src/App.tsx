@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
 import ConceptHomePage from './components/ConceptHomePage';
+import NewConceptPage from './components/NewConceptPage';
 import Videobg from './components/Videobg';
 import PlaylistsPage from './components/PlaylistsPage';
 import PodcastsPage from './components/PodcastsPage';
 import ResidentsPage from './components/ResidentsPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('concept');
+  const [currentPage, setCurrentPage] = useState('new-concept');
 
   const renderPage = () => {
     switch (currentPage) {
@@ -16,6 +17,8 @@ function App() {
         return <HomePage />;
       case 'concept':
         return <ConceptHomePage />;
+      case 'new-concept':
+        return <NewConceptPage />;
       case 'video':
         return <Videobg />;
       case 'playlists':
