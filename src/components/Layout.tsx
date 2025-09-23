@@ -57,7 +57,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
                   onClick={() => onPageChange(item.id)}
                   className={`flex flex-col items-center py-2 px-3 rounded-lg  rounded-full transition-all ${
                     isActive 
-                      ? 'text-white bg-white/20'
+                      ? 'text-white bg-white/20 border-2 border-rose-500'
                       : 'text-gray-400 hover:text-white'
                   }`}
                 >
