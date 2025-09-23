@@ -51,7 +51,7 @@ const HomePage: React.FC = () => {
       <div className="hidden lg:block">
         <div className="grid h-screen grid-cols-2 grid-rows-[35%_auto] gap-4 px-4 mx-auto lg:flex lg:flex-row lg:h-[calc(100vh-8rem)] lg:px-8">
           {/* Left Sidebar - Top-left on mobile, visible on all screens */}
-          <div className="col-start-1 row-start-1 p-4 lg:w-[25%]">
+          <div className="col-start-1 row-start-1 p-4 lg:w-[25%] bg-[#151419]">
             <div className="h-full p-6 bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)]">
               <div className="text-white">
                 <h3 className="mb-4 text-lg font-semibold">Radio Info</h3>
