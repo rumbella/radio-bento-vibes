@@ -33,7 +33,7 @@ const Videobg: React.FC = () => {
         <source src="https://res.cloudinary.com/thinkdigital/video/upload/v1751534019/videoplayback_rm5v5m.mp4" type="video/mp4" />
       </video>
         {/* Dark overlay for better contrast */}
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0"></div>
       {/* Content Section - DESKTOP */}
       <div className="hidden lg:block lg:w-[65%] p-4">
         <div className="h-[calc(100vh-12rem)]  p-6">
