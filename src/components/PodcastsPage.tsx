@@ -48,7 +48,7 @@ const PodcastsPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-background-dark max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
+    <div className="max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
       <div className="flex items-center space-x-2 mb-6">
         <Mic className="text-liquid-lava" size={24} />
         <h2 className="text-text-main font-bold text-2xl">Podcasts</h2>
