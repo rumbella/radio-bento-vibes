@@ -1,23 +1,21 @@
 import React from 'react';
-import { Users, Radio } from 'lucide-react';
 import RadioPlayer from './RadioPlayer';
+import MobileTicker from './mobile/MobileTicker';
 
-const Content = () => (
-  <div className="text-white">
-    <h3 className="text-lg font-semibold mb-4">Radio Fenicottero</h3>
-    <div className="space-y-3">
-      <div className="text-2xl lg:text-4xl opacity-80">
-        <p>Benvenuti su Radio Amble</p>
-        <p className="text-xl lg:text-2xl">Fresh Sound and Podcasts</p>
-      </div>
-      <div className="text-2xl lg:text-4xl opacity-80">
-        <p>In onda ora</p>
-        <p className="text-xl lg:text-2xl">Musica Live 24/7</p>
-      </div>
-    </div>
-  </div>
-);
+const desktopContent = {
+  title: 'Radio Fenicottero',
+  welcome: 'Benvenuti su Radio Amble',
+  welcomeSubtitle: 'Fresh Sound and Podcasts',
+  nowPlaying: 'In onda ora',
+  nowPlayingSubtitle: 'Musica Live 24/7'
+};
 
+const mobileContent = {
+  title: 'Benvenuti su Radio Amble',
+  subtitle: 'Fresh Sound and Podcasts',
+  show: 'In onda ora',
+  showSubtitle: 'Musica Live 24/7'
+};
 
 const Videobg: React.FC = () => {
   return (
@@ -36,15 +34,25 @@ const Videobg: React.FC = () => {
         <div className="absolute inset-0"></div>
       {/* Content Section - DESKTOP */}
       <div className="hidden lg:block lg:w-[65%] p-4">
-        <div className="h-[calc(100vh-12rem)]  p-6">
-          <Content />
+        <div className="h-[calc(100vh-12rem)]  p-6 text-white">
+          <h3 className="text-lg font-semibold mb-4">{desktopContent.title}</h3>
+          <div className="space-y-3">
+            <div className="text-2xl lg:text-4xl opacity-80">
+              <p>{desktopContent.welcome}</p>
+              <p className="text-xl lg:text-2xl">{desktopContent.welcomeSubtitle}</p>
+            </div>
+            <div className="text-2xl lg:text-4xl opacity-80">
+              <p>{desktopContent.nowPlaying}</p>
+              <p className="text-xl lg:text-2xl">{desktopContent.nowPlayingSubtitle}</p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Content Section - MOBILE */}
       <div className="lg:hidden absolute top-4 left-4 right-4 bottom-[220px] p-2">
         <div className="h-full">
-          <Content />
+          <MobileTicker content={mobileContent} />
         </div>
       </div>
 
