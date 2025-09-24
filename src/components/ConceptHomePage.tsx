@@ -16,8 +16,8 @@ const Content = () => (
     <h3 className="text-lg font-semibold mb-4">Radio Fenicottero</h3>
     <div className="space-y-3">
       <div className="text-4xl opacity-80">
-        <p>Benvenuti su Radio Fenicottero</p>
-        <p className="text-2xl">La vostra radio preferita</p>
+        <p>Benvenuti su Radio Amblè</p>
+        <p className="text-2xl">Fresh Sound and Podcasts</p>
       </div>
       <div className="text-4xl opacity-80">
         <p>In onda ora</p>
