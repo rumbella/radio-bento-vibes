@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 html, body, #root {
-  background-color: #000;
+  background-color: #151419;
 }
 
 /* Mobile color scheme override */
 @media (max-width: 767px) {
   :root {
-   background-color: #000;
+   background-color: #151419;
   }
 
   html, body, #root {
-    background-color: #000;
+    background-color: #151419;
     color: #FFF4E0;
   }
 }
