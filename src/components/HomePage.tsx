@@ -56,15 +56,15 @@ const HomePage: React.FC = () => {
               <div className="text-white">
                 <h3 className="mb-4 text-4xl font-semibold">Radio Info</h3>
                 <div className="space-y-3">
-                  <div className="text-3xl opacity-80">
+                  <div className="text-2xl opacity-80">
                     <p>Now Playing</p>
                     <p className="font-medium">Live Stream</p>
                   </div>
-                  <div className="text-3xl opacity-80">
+                  <div className="text-2xl opacity-80">
                     <p>Next Show</p>
                     <p className="font-medium">20:00 - Deep House Mix</p>
                   </div>
-                    <div className="text-3xl opacity-80">
+                    <div className="text-2xl opacity-80">
                       <h3 className="mb-4 text-4xl font-semibold">Radio Info</h3>
                     <p>Next Show</p>
                        
