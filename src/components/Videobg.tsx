@@ -43,7 +43,7 @@ const Videobg: React.FC = () => {
 
       {/* Content Section - MOBILE */}
       <div className="lg:hidden absolute top-4 left-4 right-4 bottom-[220px] p-2">
-        <div className="h-full  p-6">
+        <div className="h-full">
           <Content />
         </div>
       </div>
