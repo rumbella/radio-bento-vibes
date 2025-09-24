@@ -42,8 +42,6 @@ const ConceptHomePage: React.FC = () => {
   }, []);
 
   return (
-     {/* Dark overlay for better contrast */}
-        <div className="absolute inset-0 bg-black/30"></div>
     <div className="h-[calc(100vh-12rem)] flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8">
       {/* Full Background Slideshow */}
       <div className="fixed top-0 left-0 w-full h-full z-0">
