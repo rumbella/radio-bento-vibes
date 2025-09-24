@@ -3,8 +3,9 @@ export interface Track {
   title: string;
   artist: string;
   audioUrl: string;
-  imageUrl?: string; // Optional album/track art
-  duration?: string; // Optional, e.g., "3:45"
+  imageUrl?: string;
+  duration?: string;
+  listenCount?: number;
 }
 
 export interface Playlist {
@@ -24,35 +25,39 @@ export const mockPlaylists: Playlist[] = [
     tracks: [
       {
         id: "track1",
-        title: "Sunset Drive",
-        artist: "Synthwave Explorer",
+        title: "Stay Forever",
+        artist: "Poets of the Fall",
         audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        imageUrl: "https://placehold.co/100x100/FF6347/FFFFFF/png?text=Sunset",
-        duration: "3:30",
+        imageUrl: "https://i.scdn.co/image/ab67616d00004851f53434b3e035a4a5dc5127f8",
+        duration: "3:43",
+        listenCount: 198000,
       },
       {
         id: "track2",
-        title: "Morning Coffee",
-        artist: "Chill Beats Collective",
+        title: "Turn Around",
+        artist: "Early Winters",
         audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-        imageUrl: "https://placehold.co/100x100/4682B4/FFFFFF/png?text=Coffee",
-        duration: "2:45",
+        imageUrl: "https://i.scdn.co/image/ab67616d00004851c9a3c396c4597b415174f475",
+        duration: "4:04",
+        listenCount: 122000,
       },
       {
         id: "track3",
-        title: "Neon Nights",
-        artist: "Retro Future",
+        title: "Colour Me In",
+        artist: "Damien Rice",
         audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-        imageUrl: "https://placehold.co/100x100/8A2BE2/FFFFFF/png?text=Neon",
-        duration: "4:15",
+        imageUrl: "https://i.scdn.co/image/ab67616d00004851ff13136206c6ad10597371f6",
+        duration: "5:18",
+        listenCount: 98000,
       },
       {
         id: "track4",
-        title: "Ocean Breeze",
-        artist: "Island Grooves",
+        title: "Hypnotic",
+        artist: "Zella Day",
         audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-        // No imageUrl for this track to test fallback
-        duration: "3:50",
+        imageUrl: "https://i.scdn.co/image/ab67616d000048511392e2815f376f989d532822",
+        duration: "3:34",
+        listenCount: 94000,
       },
     ],
   },
