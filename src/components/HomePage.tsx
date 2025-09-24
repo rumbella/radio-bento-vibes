@@ -54,18 +54,18 @@ const HomePage: React.FC = () => {
           <div className="col-start-1 row-start-1 p-4 lg:w-[25%]">
             <div className="h-full p-6 bg-[#1b1b1e] rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)]">
               <div className="text-white">
-                <h3 className="mb-4 text-4xl font-semibold">Radio Info</h3>
+                <h3 className="mb-4 text-3xl font-semibold">Radio Info</h3>
                 <div className="space-y-3">
-                  <div className="text-2xl opacity-80">
+                  <div className="text-1xl opacity-80">
                     <p>Now Playing</p>
                     <p className="font-medium">Live Stream</p>
                   </div>
-                  <div className="text-2xl opacity-80">
+                  <div className="text-1xl opacity-80">
                     <p>Next Show</p>
                     <p className="font-medium">20:00 - Deep House Mix</p>
                   </div>
-                    <div className="text-2xl opacity-80">
-                      <h3 className="mb-4 text-4xl font-semibold">Radio Info</h3>
+                    <div className="text-1xl opacity-80">
+                      <h3 className="mb-4 text-3xl font-semibold">Radio Info</h3>
                     <p>Next Show</p>
                        
                     <p className="font-medium">20:00 - Deep House Mix</p>
