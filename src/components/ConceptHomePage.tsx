@@ -77,8 +77,13 @@ const ConceptHomePage: React.FC = () => {
       {/* Content Section - MOBILE */}
       <div className="lg:hidden absolute top-4 left-4 right-4 bottom-[220px] p-2">
         <div className="h-full p-6">
-          <MobileTicker content={mobileContent} />
+          {/* Ticker has been moved to be above the player */}
         </div>
+      </div>
+
+      {/* Mobile Ticker */}
+      <div className="lg:hidden fixed bottom-[275px] left-0 right-0 z-10 px-4">
+        <MobileTicker content={mobileContent} />
       </div>
 
       {/* Radio Player - Mobile: fixed bottom with margin, Desktop: right side matching homepage */}
