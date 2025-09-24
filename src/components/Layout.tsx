@@ -17,8 +17,15 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
     { id: 'residents', label: 'Residents', icon: Users },
   ];
 
+  const getBackgroundClass = () => {
+    if (currentPage === 'playlists' || currentPage === 'podcasts') {
+      return 'bg-background-dark';
+    }
+    return 'bg-global-bg';
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-background-dark">
+    <div className={`min-h-screen flex flex-col ${getBackgroundClass()}`}>
       {/* Header */}
       <header className="sticky top-0 z-50">
         <div className=" mx-auto px-4 py-4">
