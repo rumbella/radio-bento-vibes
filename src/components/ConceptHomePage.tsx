@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Radio } from 'lucide-react';
 import RadioPlayer from './RadioPlayer';
+import MobileTicker from './mobile/MobileTicker';
 
 const images = [
   'https://res.cloudinary.com/thinkdigital/image/upload/c_pad,b_gen_fill,ar_16:9/v1758625184/radio%20amble%20immagini/gemini-2.5-flash-image-preview_nano-banana__Steeve_Macqueen_che_.png',
@@ -10,22 +10,20 @@ const images = [
   'https://res.cloudinary.com/thinkdigital/image/upload/v1758716754/1758715806855-177b2083-d42a-4ea7-951c-bfcdc1838437_ejvwya.png'
 ];
 
-const Content = () => (
-  <div className="text-white">
-    <h3 className="text-lg font-semibold mb-4">Radio Fenicottero</h3>
-    <div className="space-y-3">
-      <div className="text-2xl lg:text-4xl opacity-80">
-        <p>Benvenuti su Radio Amblè</p>
-        <p className="text-xl lg:text-2xl">Fresh Sound and Podcasts</p>
-      </div>
-      <div className="text-2xl lg:text-4xl opacity-80">
-        <p>In onda ora</p>
-        <p className="text-xl lg:text-2xl">Musica Live 24/7</p>
-      </div>
-    </div>
-  </div>
-);
+const desktopContent = {
+  title: 'Radio Fenicottero',
+  welcome: 'Benvenuti su Radio Amblè',
+  welcomeSubtitle: 'Fresh Sound and Podcasts',
+  nowPlaying: 'In onda ora',
+  nowPlayingSubtitle: 'Musica Live 24/7'
+};
 
+const mobileContent = {
+  title: 'Benvenuti su Radio Amblè',
+  subtitle: 'Fresh Sound and Podcasts',
+  show: 'In onda ora',
+  showSubtitle: 'Musica Live 24/7'
+};
 
 const ConceptHomePage: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -61,15 +59,25 @@ const ConceptHomePage: React.FC = () => {
 
       {/* Content Section - DESKTOP */}
       <div className="hidden lg:block lg:w-[65%] p-4">
-        <div className="h-[calc(100vh-12rem)]">
-          <Content />
+        <div className="h-[calc(100vh-12rem)] text-white">
+          <h3 className="text-lg font-semibold mb-4">{desktopContent.title}</h3>
+          <div className="space-y-3">
+            <div className="text-2xl lg:text-4xl opacity-80">
+              <p>{desktopContent.welcome}</p>
+              <p className="text-xl lg:text-2xl">{desktopContent.welcomeSubtitle}</p>
+            </div>
+            <div className="text-2xl lg:text-4xl opacity-80">
+              <p>{desktopContent.nowPlaying}</p>
+              <p className="text-xl lg:text-2xl">{desktopContent.nowPlayingSubtitle}</p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Content Section - MOBILE */}
       <div className="lg:hidden absolute top-4 left-4 right-4 bottom-[220px] p-2">
         <div className="h-full p-6">
-          <Content />
+          <MobileTicker content={mobileContent} />
         </div>
       </div>
 

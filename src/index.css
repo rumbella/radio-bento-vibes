@@ -66,3 +66,16 @@ html, body, #root {
 .idle-pulse {
   animation: idle-pulse 3s infinite;
 }
+
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+}
