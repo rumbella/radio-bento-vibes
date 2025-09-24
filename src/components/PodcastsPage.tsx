@@ -48,14 +48,14 @@ const PodcastsPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
+    <div className="bg-background-dark max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
       <div className="flex items-center space-x-2 mb-6">
         <Mic className="text-liquid-lava" size={24} />
-        <h2 className="text-snow font-bold text-2xl">Podcasts</h2>
+        <h2 className="text-text-main font-bold text-2xl">Podcasts</h2>
       </div>
 
       {/* Featured Podcast */}
-      <div className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl border border-slate-grey/50 overflow-hidden">
+      <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden">
         <div className="relative h-56">
           <img
             src={podcasts[0].image}
@@ -64,17 +64,17 @@ const PodcastsPage: React.FC = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
           <div className="absolute top-4 left-4">
-            <span className="bg-liquid-lava text-snow text-xs px-3 py-1 rounded-full font-medium">
+            <span className="bg-liquid-lava text-text-main text-xs px-3 py-1 rounded-full font-medium">
               Latest Episode
             </span>
           </div>
           <div className="absolute bottom-4 left-4 right-4">
-            <h3 className="text-snow font-bold text-xl mb-2">{podcasts[0].title}</h3>
-            <p className="text-dusty-grey text-sm mb-4 line-clamp-2">
+            <h3 className="text-text-main font-bold text-xl mb-2">{podcasts[0].title}</h3>
+            <p className="text-gray-400 text-sm mb-4 line-clamp-2">
               {podcasts[0].description}
             </p>
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4 text-dusty-grey text-sm">
+              <div className="flex items-center space-x-4 text-gray-400 text-sm">
                 <div className="flex items-center space-x-1">
                   <Calendar size={14} />
                   <span>{formatDate(podcasts[0].date)}</span>
@@ -84,7 +84,7 @@ const PodcastsPage: React.FC = () => {
                   <span>{podcasts[0].duration}</span>
                 </div>
               </div>
-              <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-snow p-3 rounded-full transition-colors">
+              <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-text-main p-3 rounded-full transition-colors">
                 <Play size={20} />
               </button>
             </div>
@@ -94,12 +94,12 @@ const PodcastsPage: React.FC = () => {
 
       {/* All Episodes */}
       <div>
-        <h3 className="text-snow font-semibold text-lg mb-4">All Episodes</h3>
+        <h3 className="text-text-main font-semibold text-lg mb-4">All Episodes</h3>
         <div className="space-y-4">
           {podcasts.map((podcast) => (
             <div
               key={podcast.id}
-              className="bg-gluon-grey/80 backdrop-blur-md rounded-xl border border-slate-grey/50 p-4 hover:bg-slate-grey/30 transition-colors"
+              className="bg-container-dark backdrop-blur-md rounded-xl p-4 hover:bg-slate-grey/30 transition-colors"
             >
               <div className="flex items-start space-x-4">
                 <img
@@ -108,14 +108,14 @@ const PodcastsPage: React.FC = () => {
                   className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
                 />
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-snow font-medium text-lg mb-2 line-clamp-1">
+                  <h4 className="text-text-main font-medium text-lg mb-2 line-clamp-1">
                     {podcast.title}
                   </h4>
-                  <p className="text-dusty-grey text-sm mb-3 line-clamp-2">
+                  <p className="text-gray-400 text-sm mb-3 line-clamp-2">
                     {podcast.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4 text-dusty-grey text-sm">
+                    <div className="flex items-center space-x-4 text-gray-400 text-sm">
                       <div className="flex items-center space-x-1">
                         <Calendar size={14} />
                         <span>{formatDate(podcast.date)}</span>
@@ -125,7 +125,7 @@ const PodcastsPage: React.FC = () => {
                         <span>{podcast.duration}</span>
                       </div>
                     </div>
-                    <button className="bg-liquid-lava/20 hover:bg-liquid-lava text-liquid-lava hover:text-snow p-2 rounded-full transition-colors">
+                    <button className="bg-liquid-lava/20 hover:bg-liquid-lava text-liquid-lava hover:text-text-main p-2 rounded-full transition-colors">
                       <Play size={16} />
                     </button>
                   </div>
