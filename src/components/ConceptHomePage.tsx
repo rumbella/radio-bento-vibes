@@ -62,7 +62,7 @@ const ConceptHomePage: React.FC = () => {
 
       {/* Content Section - DESKTOP */}
       <div className="hidden lg:block lg:w-[65%] p-4">
-        <div className="h-[calc(100vh-12rem)] p-6">
+        <div className="h-[calc(100vh-12rem)]">
           <Content />
         </div>
       </div>
