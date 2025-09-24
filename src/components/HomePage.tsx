@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       {/* Mobile Layout */}
-      <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4 bg-[#000]">
+      <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4 bg-[#151419]">
         <div className="w-full h-[50%] rounded-lg overflow-hidden rounded-3xl rounded-3xl shadow-2xl rounded bg-[#151419]">
           <HeroSection slides={slides} onSlideChange={handleSlideChange} />
         </div>
@@ -54,13 +54,13 @@ const HomePage: React.FC = () => {
           <div className="col-start-1 row-start-1 p-4 lg:w-[25%]">
             <div className="h-full p-6 bg-[#1b1b1e] rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)]">
               <div className="text-white">
-                <h3 className="mb-4 text-lg font-semibold">Radio Info</h3>
+                <h3 className="mb-4 text-4xl font-semibold">Radio Info</h3>
                 <div className="space-y-3">
-                  <div className="text-sm opacity-80">
+                  <div className="text-3xl opacity-80">
                     <p>Now Playing</p>
                     <p className="font-medium">Live Stream</p>
                   </div>
-                  <div className="text-sm opacity-80">
+                  <div className="text-3xl opacity-80">
                     <p>Next Show</p>
                     <p className="font-medium">20:00 - Deep House Mix</p>
                   </div>
