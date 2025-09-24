@@ -20,6 +20,9 @@ export default {
 		extend: {
 			colors: {
 				'app-bg': '#28252B',
+				'background-dark': '#333237',
+        'container-dark': '#212124',
+        'text-main': '#E2E8F0',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

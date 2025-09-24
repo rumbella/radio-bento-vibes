@@ -50,17 +50,17 @@ tracks: [
   };
 
   return (
-    <div className="max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
+    <div className="bg-background-dark max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
       <div className="flex items-center space-x-2 mb-6">
         <Music className="text-liquid-lava" size={24} />
-        <h2 className="text-snow font-bold text-2xl">Playlists</h2>
+        <h2 className="text-text-main font-bold text-2xl">Playlists</h2>
       </div>
 
       <div className="space-y-6">
         {playlists.map((playlist) => (
           <div
             key={playlist.id}
-            className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl border border-slate-grey/50 overflow-hidden"
+            className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden"
           >
             {/* Playlist Header */}
             <div className="relative h-48">
@@ -71,15 +71,15 @@ tracks: [
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <h3 className="text-snow font-bold text-xl mb-1">{playlist.name}</h3>
-                <p className="text-dusty-grey text-sm mb-3">{playlist.description}</p>
+                <h3 className="text-text-main font-bold text-xl mb-1">{playlist.name}</h3>
+                <p className="text-gray-400 text-sm mb-3">{playlist.description}</p>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-dusty-grey text-sm">
+                  <div className="flex items-center space-x-4 text-gray-400 text-sm">
                     <span>{playlist.tracks.length} tracks</span>
                     <span>•</span>
                     <span>{getTotalDuration(playlist.tracks)}</span>
                   </div>
-                  <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-snow p-3 rounded-full transition-colors">
+                  <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-text-main p-3 rounded-full transition-colors">
                     <Play size={20} />
                   </button>
                 </div>
@@ -94,17 +94,17 @@ tracks: [
                     key={track.id}
                     className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-grey/30 transition-colors group"
                   >
-                    <span className="text-dusty-grey text-sm w-6 text-center group-hover:hidden">
+                    <span className="text-gray-400 text-sm w-6 text-center group-hover:hidden">
                       {index + 1}
                     </span>
                     <button className="text-liquid-lava hidden group-hover:block">
                       <Play size={16} />
                     </button>
                     <div className="flex-1 min-w-0">
-                      <p className="text-snow font-medium truncate">{track.title}</p>
-                      <p className="text-dusty-grey text-sm truncate">{track.artist}</p>
+                      <p className="text-text-main font-medium truncate">{track.title}</p>
+                      <p className="text-gray-400 text-sm truncate">{track.artist}</p>
                     </div>
-                    <div className="flex items-center space-x-2 text-dusty-grey text-sm">
+                    <div className="flex items-center space-x-2 text-gray-400 text-sm">
                       <Clock size={14} />
                       <span>{track.duration}</span>
                     </div>
