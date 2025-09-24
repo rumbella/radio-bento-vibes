@@ -6,13 +6,13 @@ const Content = () => (
   <div className="text-white">
     <h3 className="text-lg font-semibold mb-4">Radio Fenicottero</h3>
     <div className="space-y-3">
-      <div className="text-sm opacity-80">
+      <div className="text-4xl opacity-80">
         <p>Benvenuti su Radio Fenicottero</p>
-        <p className="font-medium">La vostra radio preferita</p>
+        <p className="text-2xl">La vostra radio preferita</p>
       </div>
-      <div className="text-sm opacity-80">
+      <div className="text-4xl opacity-80">
         <p>In onda ora</p>
-        <p className="font-medium">Musica Live 24/7</p>
+        <p className="text-2xl">Musica Live 24/7</p>
       </div>
     </div>
   </div>
