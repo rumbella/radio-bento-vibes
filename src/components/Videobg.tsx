@@ -21,8 +21,7 @@ const Content = () => (
 
 const Videobg: React.FC = () => {
   return (
-     {/* Dark overlay for better contrast */}
-        <div className="absolute inset-0 bg-black/30"></div>
+   
     <div className="h-[calc(100vh-12rem)] flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8">
       {/* Full Background Video */}
       <video
