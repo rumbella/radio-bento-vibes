@@ -7,26 +7,31 @@ import { useUIState } from '../contexts/UIContext';
 
 const HomePage: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<HeroSlide | null>(null);
-  const { showVideo, videoSrc, slides, isLoading } = useUIState();
+  const { showVideo, videoSrc, slides, isLoading, error } = useUIState();
 
   const handleSlideChange = (slide: HeroSlide) => {
     setCurrentSlide(slide);
   };
 
-  if (isLoading) {
-    return <div className="p-8 text-white">Loading...</div>;
-  }
+  const renderContent = () => {
+    if (isLoading) {
+      return <div className="content-container"><div className="spinner"></div></div>;
+    }
+    if (error) {
+      return <div className="content-container text-center p-4"><p>{error}</p></div>;
+    }
+    if (showVideo) {
+      return <VideoBackground videoSrc={videoSrc} />;
+    }
+    return <HeroSection slides={slides} onSlideChange={handleSlideChange} />;
+  };
 
   return (
     <>
       {/* Mobile Layout */}
       <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4 bg-[#151419] relative">
         <div className="w-full h-[50%] rounded-lg overflow-hidden rounded-3xl shadow-2xl bg-[#151419]">
-          {showVideo ? (
-            <VideoBackground videoSrc={videoSrc} />
-          ) : (
-            <HeroSection slides={slides} onSlideChange={handleSlideChange} />
-          )}
+          {renderContent()}
         </div>
         <DynamicTicker slide={currentSlide} />
         <div className="flex-grow">
@@ -55,11 +60,7 @@ const HomePage: React.FC = () => {
           {/* Hero Section or Video Background */}
           <div className="col-start-2 row-start-1 p-4 lg:w-[45%] rounded-3xl shadow-2xl rounded-lg">
             <div className="h-full lg:h-[calc(100vh-12rem)]">
-              {showVideo ? (
-                <VideoBackground videoSrc={videoSrc} />
-              ) : (
-                <HeroSection slides={slides} onSlideChange={handleSlideChange} />
-              )}
+              {renderContent()}
             </div>
           </div>
 

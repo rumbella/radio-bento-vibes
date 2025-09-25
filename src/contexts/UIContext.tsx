@@ -6,6 +6,7 @@ interface UIState {
   videoSrc: string;
   slides: HeroSlide[];
   isLoading: boolean;
+  error: string | null;
 }
 
 interface UIActions {
@@ -26,17 +27,23 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
   const [videoSrc, setVideoSrc] = useState('');
   const [slides, setSlides] = useState<HeroSlide[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchSettings = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/settings');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
         const data = await response.json();
         setShowVideo(data.showVideo);
         setVideoSrc(data.videoSrc);
         setSlides(data.slides);
+        setError(null);
       } catch (error) {
         console.error('Failed to fetch settings:', error);
+        setError('Failed to load settings. Please ensure the backend server is running.');
       } finally {
         setIsLoading(false);
       }
@@ -46,7 +53,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
 
   const toggleShowVideo = () => setShowVideo(prev => !prev);
 
-  const state: UIState = { showVideo, videoSrc, slides, isLoading };
+  const state: UIState = { showVideo, videoSrc, slides, isLoading, error };
   const actions: UIActions = {
     toggleShowVideo,
     setVideoSrc,
