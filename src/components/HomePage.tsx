@@ -49,8 +49,14 @@ const HomePage: React.FC = () => {
                 <h3 className="mb-4 text-3xl font-semibold">Radio Info</h3>
                 <div className="space-y-3">
                   <div className="text-1xl opacity-80 text-xl font-bold text-white">
-                    <p className="text-xl font-bold text-white">Now Playing</p>
-                    <p className="font-medium">Live Stream</p>
+                    <p className="text-xl font-bold text-white">
+                    "Uno dei motivi più forti che conducono gli uomini all'arte e alla scienza è 
+                      la fuga dalla vita quotidiana 
+                      con la sua dolorosa crudezza e 
+                      la tetra mancanza di speranza".
+                      - Albert Einstein -
+                    </p>
+                    
                   </div>
                 </div>
               </div>
