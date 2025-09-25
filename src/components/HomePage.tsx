@@ -49,7 +49,7 @@ const HomePage: React.FC = () => {
                 <h3 className="mb-4 text-3xl font-semibold">Radio Info</h3>
                 <div className="space-y-3">
                   <div className="text-1xl opacity-80 text-xl font-bold text-white">
-                    <p>Now Playing</p>
+                    <p className="text-xl font-bold text-white">Now Playing</p>
                     <p className="font-medium">Live Stream</p>
                   </div>
                 </div>
