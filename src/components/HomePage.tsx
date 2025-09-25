@@ -5,39 +5,13 @@ import DynamicTicker from './DynamicTicker';
 import VideoBackground from './VideoBackground';
 import { useUIState } from '../contexts/UIContext';
 
-const slides: HeroSlide[] = [
-  {
-    id: '1',
-    title: 'Live Now: Morning Vibes',
-    subtitle: 'Fresh beats to start your day right',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1758625050/radio%20amble%20immagini/gemini-2.5-flash-image-preview_nano-banana__Uomo_deve_tenere_in_.png',
-    type: 'show'
-  },
-  {
-    id: '2',
-    title: 'New Podcast Episode',
-    subtitle: 'Deep dive into electronic music culture',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1758625066/radio%20amble%20immagini/Generated_Image_September_23_2025_-_11_38AM.png',
-    type: 'news'
-  },
-  {
-    id: '3',
-    title: 'Weekend Special',
-    subtitle: 'Non-stop mix sessions all weekend',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1758625015/radio%20amble%20immagini/Generated_Image_September_23_2025_-_11_36AM.png',
-    type: 'event'
-  }
-];
-
 const HomePage: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<HeroSlide | null>(null);
-  const { showVideo } = useUIState();
+  const { showVideo, videoSrc, slides } = useUIState();
 
   const handleSlideChange = (slide: HeroSlide) => {
     setCurrentSlide(slide);
   };
-
-  const videoSrc = "https://res.cloudinary.com/thinkdigital/video/upload/v1751534019/videoplayback_rm5v5m.mp4";
 
   return (
     <>
