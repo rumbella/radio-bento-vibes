@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUIState, useUIActions } from '../contexts/UIContext';
 import { HeroSlide } from './HeroSection';
 
@@ -8,6 +8,11 @@ const AdminPage: React.FC = () => {
 
   const [localVideoSrc, setLocalVideoSrc] = useState(videoSrc);
   const [localSlides, setLocalSlides] = useState<HeroSlide[]>(slides);
+
+  useEffect(() => {
+    setLocalVideoSrc(videoSrc);
+    setLocalSlides(slides);
+  }, [videoSrc, slides]);
 
   const handleVideoSave = async () => {
     const newSettings = { showVideo, slides, videoSrc: localVideoSrc };
