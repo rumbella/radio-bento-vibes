@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useUIState } from '../contexts/UIContext';
 import RadioPlayer from './RadioPlayer';
 import MobileTicker from './mobile/MobileTicker';
 
@@ -28,7 +27,6 @@ const mobileContent = {
 
 const ConceptHomePage: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { mainText } = useUIState();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,9 +60,15 @@ const ConceptHomePage: React.FC = () => {
       {/* Content Section - DESKTOP */}
       <div className="hidden lg:block lg:w-[65%] p-4">
         <div className="h-[calc(100vh-12rem)] text-white">
+          <h3 className="text-lg font-semibold mb-4">{desktopContent.title}</h3>
           <div className="space-y-3">
-            <div className="text-xl font-bold text-white">
-              <p>{mainText}</p>
+            <div className="text-2xl lg:text-4xl opacity-80">
+              <p>{desktopContent.welcome}</p>
+              <p className="text-xl lg:text-2xl">{desktopContent.welcomeSubtitle}</p>
+            </div>
+            <div className="text-2xl lg:text-4xl opacity-80">
+              <p>{desktopContent.nowPlaying}</p>
+              <p className="text-xl lg:text-2xl">{desktopContent.nowPlayingSubtitle}</p>
             </div>
           </div>
         </div>
