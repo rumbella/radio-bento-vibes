@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HeroSection, { HeroSlide } from './HeroSection';
 import NewRadioPlayer from './NewRadioPlayer';
 import DynamicTicker from './DynamicTicker';
-import VideoBackground from './VideoBackground';
+import Videobg from './Videobg';
 import { useUIState } from '../contexts/UIContext';
 
 const HomePage: React.FC = () => {
@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
       return <div className="content-container text-center p-4"><p>{error}</p></div>;
     }
     if (showVideo) {
-      return <VideoBackground videoSrc={videoSrc} />;
+      return <Videobg videoSrc={videoSrc} />;
     }
     return <HeroSection slides={slides} onSlideChange={handleSlideChange} />;
   };

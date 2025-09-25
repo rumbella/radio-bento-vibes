@@ -31,11 +31,17 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const fetchSettings = async () => {
-      const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
+      const baseUrl = import.meta.env.VITE_API_BASE_URL;
+      const apiUrl = baseUrl ? `${baseUrl}/api/settings` : 'http://localhost:3001/api/settings';
+
+      if (!baseUrl) {
+          console.warn("VITE_API_BASE_URL is not set. Defaulting to localhost. This is expected for local development.");
+      }
+
       try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error(`Network response was not ok (status: ${response.status})`);
         }
         const data = await response.json();
         setShowVideo(data.showVideo);
@@ -44,7 +50,12 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
         setError(null);
       } catch (error) {
         console.error('Failed to fetch settings:', error);
-        setError('Failed to load settings. Please ensure the backend server is running.');
+        const debugMessage = `Failed to load settings from: ${apiUrl}.
+
+        Troubleshooting tips:
+        1. If you are running locally, ensure the backend server is active ('cd backend && npm start').
+        2. If this is a deployed site, ensure the VITE_API_BASE_URL environment variable is set correctly in your hosting provider's settings and that you have redeployed the frontend.`;
+        setError(debugMessage);
       } finally {
         setIsLoading(false);
       }

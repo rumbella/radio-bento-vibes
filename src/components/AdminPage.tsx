@@ -16,7 +16,8 @@ const AdminPage: React.FC = () => {
 
   const handleVideoSave = async () => {
     const newSettings = { showVideo, slides, videoSrc: localVideoSrc };
-    const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+    const apiUrl = `${baseUrl}/api/settings`;
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -52,7 +53,8 @@ const AdminPage: React.FC = () => {
 
   const handleSlidesSave = async () => {
     const newSettings = { showVideo, videoSrc, slides: localSlides };
-    const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+    const apiUrl = `${baseUrl}/api/settings`;
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -87,7 +89,8 @@ const AdminPage: React.FC = () => {
             <button
               onClick={async () => {
                 const newSettings = { videoSrc, slides, showVideo: !showVideo };
-                const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
+              const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+              const apiUrl = `${baseUrl}/api/settings`;
                 try {
                   const response = await fetch(apiUrl, {
                     method: 'POST',
