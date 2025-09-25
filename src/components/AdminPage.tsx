@@ -34,7 +34,13 @@ const AdminPage: React.FC = () => {
   };
 
   const handleVideoSave = async () => {
-    const success = await handleSaveSettings({ showVideo, slides, mainText, videoSrc: localVideoSrc });
+    const newSettings = {
+      showVideo,
+      slides: localSlides,
+      mainText: localMainText,
+      videoSrc: localVideoSrc,
+    };
+    const success = await handleSaveSettings(newSettings);
     if (success) {
       setVideoSrc(localVideoSrc);
       alert('Video URL saved!');
@@ -42,7 +48,13 @@ const AdminPage: React.FC = () => {
   };
 
   const handleSlidesSave = async () => {
-    const success = await handleSaveSettings({ showVideo, videoSrc, mainText, slides: localSlides });
+    const newSettings = {
+      showVideo,
+      videoSrc: localVideoSrc,
+      mainText: localMainText,
+      slides: localSlides,
+    };
+    const success = await handleSaveSettings(newSettings);
     if (success) {
       setSlides(localSlides);
       alert('Slides data saved!');
@@ -50,7 +62,13 @@ const AdminPage: React.FC = () => {
   };
 
   const handleMainTextSave = async () => {
-    const success = await handleSaveSettings({ showVideo, videoSrc, slides, mainText: localMainText });
+    const newSettings = {
+      showVideo,
+      videoSrc: localVideoSrc,
+      slides: localSlides,
+      mainText: localMainText,
+    };
+    const success = await handleSaveSettings(newSettings);
     if (success) {
       setMainText(localMainText);
       alert('Main text saved!');
@@ -93,7 +111,13 @@ const AdminPage: React.FC = () => {
             <p>Current Mode: {showVideo ? 'Video Background' : 'Slideshow'}</p>
             <button
               onClick={async () => {
-                const success = await handleSaveSettings({ videoSrc, slides, mainText, showVideo: !showVideo });
+                const newSettings = {
+                  videoSrc: localVideoSrc,
+                  slides: localSlides,
+                  mainText: localMainText,
+                  showVideo: !showVideo,
+                };
+                const success = await handleSaveSettings(newSettings);
                 if (success) {
                   toggleShowVideo();
                 }

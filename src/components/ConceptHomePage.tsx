@@ -63,7 +63,7 @@ const ConceptHomePage: React.FC = () => {
       <div className="hidden lg:block lg:w-[65%] p-4">
         <div className="h-[calc(100vh-12rem)] text-white">
           <div className="space-y-3">
-            <div className="text-2xl lg:text-4xl opacity-80">
+            <div className="text-xl font-bold text-white">
               <p>{mainText}</p>
             </div>
           </div>
