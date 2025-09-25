@@ -16,8 +16,9 @@ const AdminPage: React.FC = () => {
 
   const handleVideoSave = async () => {
     const newSettings = { showVideo, slides, videoSrc: localVideoSrc };
+    const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
     try {
-      const response = await fetch('http://localhost:3001/api/settings', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSettings),
@@ -51,8 +52,9 @@ const AdminPage: React.FC = () => {
 
   const handleSlidesSave = async () => {
     const newSettings = { showVideo, videoSrc, slides: localSlides };
+    const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
     try {
-      const response = await fetch('http://localhost:3001/api/settings', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSettings),
@@ -77,8 +79,9 @@ const AdminPage: React.FC = () => {
           <button
             onClick={async () => {
               const newSettings = { videoSrc, slides, showVideo: !showVideo };
+              const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
               try {
-                const response = await fetch('http://localhost:3001/api/settings', {
+                const response = await fetch(apiUrl, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify(newSettings),
