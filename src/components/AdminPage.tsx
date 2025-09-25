@@ -3,19 +3,20 @@ import { useUIState, useUIActions } from '../contexts/UIContext';
 import { HeroSlide } from './HeroSection';
 
 const AdminPage: React.FC = () => {
-  const { showVideo, videoSrc, slides, isLoading, error } = useUIState();
-  const { toggleShowVideo, setVideoSrc, setSlides } = useUIActions();
+  const { showVideo, videoSrc, slides, mainText, isLoading, error } = useUIState();
+  const { toggleShowVideo, setVideoSrc, setSlides, setMainText } = useUIActions();
 
   const [localVideoSrc, setLocalVideoSrc] = useState(videoSrc);
   const [localSlides, setLocalSlides] = useState<HeroSlide[]>(slides);
+  const [localMainText, setLocalMainText] = useState(mainText);
 
   useEffect(() => {
     setLocalVideoSrc(videoSrc);
     setLocalSlides(slides);
-  }, [videoSrc, slides]);
+    setLocalMainText(mainText);
+  }, [videoSrc, slides, mainText]);
 
-  const handleVideoSave = async () => {
-    const newSettings = { showVideo, slides, videoSrc: localVideoSrc };
+  const handleSaveSettings = async (newSettings: any) => {
     const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
     try {
       const response = await fetch(apiUrl, {
@@ -24,11 +25,35 @@ const AdminPage: React.FC = () => {
         body: JSON.stringify(newSettings),
       });
       if (!response.ok) throw new Error('Failed to save settings.');
-      setVideoSrc(localVideoSrc);
-      alert('Video URL saved!');
+      return true;
     } catch (error) {
       console.error(error);
-      alert('Error saving video URL.');
+      alert('Error saving settings.');
+      return false;
+    }
+  };
+
+  const handleVideoSave = async () => {
+    const success = await handleSaveSettings({ showVideo, slides, mainText, videoSrc: localVideoSrc });
+    if (success) {
+      setVideoSrc(localVideoSrc);
+      alert('Video URL saved!');
+    }
+  };
+
+  const handleSlidesSave = async () => {
+    const success = await handleSaveSettings({ showVideo, videoSrc, mainText, slides: localSlides });
+    if (success) {
+      setSlides(localSlides);
+      alert('Slides data saved!');
+    }
+  };
+
+  const handleMainTextSave = async () => {
+    const success = await handleSaveSettings({ showVideo, videoSrc, slides, mainText: localMainText });
+    if (success) {
+      setMainText(localMainText);
+      alert('Main text saved!');
     }
   };
 
@@ -50,24 +75,6 @@ const AdminPage: React.FC = () => {
     setLocalSlides(updatedSlides);
   };
 
-  const handleSlidesSave = async () => {
-    const newSettings = { showVideo, videoSrc, slides: localSlides };
-    const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newSettings),
-      });
-      if (!response.ok) throw new Error('Failed to save settings.');
-      setSlides(localSlides);
-      alert('Slides data saved!');
-    } catch (error) {
-      console.error(error);
-      alert('Error saving slides data.');
-    }
-  };
-
   return (
     <div className="p-8 text-white">
       <h1 className="text-3xl font-bold mb-6">Admin Panel</h1>
@@ -86,19 +93,9 @@ const AdminPage: React.FC = () => {
             <p>Current Mode: {showVideo ? 'Video Background' : 'Slideshow'}</p>
             <button
               onClick={async () => {
-                const newSettings = { videoSrc, slides, showVideo: !showVideo };
-                const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/settings`;
-                try {
-                  const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newSettings),
-                  });
-                  if (!response.ok) throw new Error('Failed to save settings.');
+                const success = await handleSaveSettings({ videoSrc, slides, mainText, showVideo: !showVideo });
+                if (success) {
                   toggleShowVideo();
-                } catch (error) {
-                  console.error(error);
-                  alert('Error saving display mode.');
                 }
               }}
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
@@ -124,6 +121,25 @@ const AdminPage: React.FC = () => {
               className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors self-start"
             >
               Save Video URL
+            </button>
+          </div>
+        </div>
+
+        <div className="bg-gray-800 p-6 rounded-lg opacity-100 disabled:opacity-50">
+          <h2 className="text-xl font-semibold mb-4">Manage Main Content Text</h2>
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="main-text">Text for Sidebar and Content</label>
+            <textarea
+              id="main-text"
+              value={localMainText}
+              onChange={(e) => setLocalMainText(e.target.value)}
+              className="p-2 rounded bg-gray-700 border border-gray-600 h-32"
+            />
+            <button
+              onClick={handleMainTextSave}
+              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors self-start"
+            >
+              Save Main Text
             </button>
           </div>
         </div>

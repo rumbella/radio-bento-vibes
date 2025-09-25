@@ -5,6 +5,7 @@ interface UIState {
   showVideo: boolean;
   videoSrc: string;
   slides: HeroSlide[];
+  mainText: string;
   isLoading: boolean;
   error: string | null;
 }
@@ -13,6 +14,7 @@ interface UIActions {
   toggleShowVideo: () => void;
   setVideoSrc: (url: string) => void;
   setSlides: (slides: HeroSlide[]) => void;
+  setMainText: (text: string) => void;
 }
 
 const UIStateContext = createContext<UIState | undefined>(undefined);
@@ -26,6 +28,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [videoSrc, setVideoSrc] = useState('');
   const [slides, setSlides] = useState<HeroSlide[]>([]);
+  const [mainText, setMainText] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,6 +44,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
         setShowVideo(data.showVideo);
         setVideoSrc(data.videoSrc);
         setSlides(data.slides);
+        setMainText(data.mainText || '');
         setError(null);
       } catch (error) {
         console.error('Failed to fetch settings:', error);
@@ -54,11 +58,12 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
 
   const toggleShowVideo = () => setShowVideo(prev => !prev);
 
-  const state: UIState = { showVideo, videoSrc, slides, isLoading, error };
+  const state: UIState = { showVideo, videoSrc, slides, mainText, isLoading, error };
   const actions: UIActions = {
     toggleShowVideo,
     setVideoSrc,
     setSlides,
+    setMainText,
   };
 
   return (
