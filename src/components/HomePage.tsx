@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
         <div className="w-full h-[50%] rounded-lg overflow-hidden rounded-3xl shadow-2xl bg-[#151419]">
           {renderContent()}
         </div>
-        <DynamicTicker slide={currentSlide} />
+        <DynamicTicker slide={currentSlide} mainText={mainText} />
         <div className="flex-grow">
           <NewRadioPlayer />
         </div>
