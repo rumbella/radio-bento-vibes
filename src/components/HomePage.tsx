@@ -46,10 +46,10 @@ const HomePage: React.FC = () => {
           <div className="col-start-1 row-start-1 p-4 lg:w-[25%]">
             <div className="h-full p-6 bg-[#1b1b1e] rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)]">
               <div className="text-white">
-                <h3 className="mb-4 text-3xl font-semibold">Radio Info</h3>
+               
                 <div className="space-y-3">
                   <div className="text-1xl opacity-80 text-xl font-bold text-white">
-                    <p className="text-xl font-bold text-white">
+                    <p className="text-xl font-bold text-white mt-4 pt-4">
                     "Uno dei motivi più forti che conducono gli uomini all'arte e alla scienza è 
                       la fuga dalla vita quotidiana 
                       con la sua dolorosa crudezza e 
