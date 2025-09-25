@@ -7,11 +7,15 @@ import { useUIState } from '../contexts/UIContext';
 
 const HomePage: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<HeroSlide | null>(null);
-  const { showVideo, videoSrc, slides } = useUIState();
+  const { showVideo, videoSrc, slides, isLoading } = useUIState();
 
   const handleSlideChange = (slide: HeroSlide) => {
     setCurrentSlide(slide);
   };
+
+  if (isLoading) {
+    return <div className="p-8 text-white">Loading...</div>;
+  }
 
   return (
     <>
