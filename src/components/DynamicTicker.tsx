@@ -18,7 +18,7 @@ const DynamicTicker: React.FC<DynamicTickerProps> = ({ slide, mainText }) => {
   return (
     <div className="text-white overflow-hidden w-full">
       <div className="animate-marquee whitespace-nowrap">
-        <span className="mx-4">{mainText}</span>
+        <span className="mx-4 text-xl font-bold text-white">{mainText}</span>
         {slide && (
           <>
             <span className="mx-4 font-bold">{slide.title}</span>
