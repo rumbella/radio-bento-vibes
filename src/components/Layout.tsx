@@ -15,6 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
     { id: 'playlists', label: 'Playlist', icon: Music },
     { id: 'podcasts', label: 'Podcast', icon: Mic },
     { id: 'residents', label: 'Residents', icon: Users },
+    { id: 'admin', label: 'Admin', icon: Grid3X3 },
   ];
 
   const getBackgroundClass = () => {

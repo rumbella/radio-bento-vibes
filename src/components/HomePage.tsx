@@ -3,6 +3,7 @@ import HeroSection, { HeroSlide } from './HeroSection';
 import NewRadioPlayer from './NewRadioPlayer';
 import DynamicTicker from './DynamicTicker';
 import VideoBackground from './VideoBackground';
+import { useUIState } from '../contexts/UIContext';
 
 const slides: HeroSlide[] = [
   {
@@ -30,7 +31,7 @@ const slides: HeroSlide[] = [
 
 const HomePage: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<HeroSlide | null>(null);
-  const [showVideo, setShowVideo] = useState(false);
+  const { showVideo } = useUIState();
 
   const handleSlideChange = (slide: HeroSlide) => {
     setCurrentSlide(slide);
@@ -40,16 +41,6 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      {/* Toggle Button */}
-      <div className="absolute top-20 right-4 z-20">
-        <button
-          onClick={() => setShowVideo(!showVideo)}
-          className="px-4 py-2 bg-gray-800 text-white rounded"
-        >
-          {showVideo ? 'Show Slideshow' : 'Show Video'}
-        </button>
-      </div>
-
       {/* Mobile Layout */}
       <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4 bg-[#151419] relative">
         <div className="w-full h-[50%] rounded-lg overflow-hidden rounded-3xl shadow-2xl bg-[#151419]">
