@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
 import ConceptHomePage from './components/ConceptHomePage';
@@ -11,6 +11,13 @@ import { UIProvider } from './contexts/UIContext';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path === '/admin') {
+      setCurrentPage('admin');
+    }
+  }, []);
 
   const renderPage = () => {
     switch (currentPage) {
