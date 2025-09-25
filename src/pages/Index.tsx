@@ -61,7 +61,7 @@ const NewHomePage: React.FC = () => {
           />
           <div className="absolute bottom-4 left-4 bg-black/60 p-4 rounded-lg">
             <p className="text-sm text-gray-300">{songOrContentType}</p>
-            <h2 className="font-semibold text-lg">{displayTitle}</h2>
+            <h2 className="text-xl font-bold text-white">{displayTitle}</h2>
             <p className="text-xs text-gray-400">{displayArtist}</p>
           </div>
         </div>
