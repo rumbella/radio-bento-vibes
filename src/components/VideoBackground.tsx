@@ -6,7 +6,7 @@ interface VideoBackgroundProps {
 
 const VideoBackground: React.FC<VideoBackgroundProps> = ({ videoSrc }) => {
   return (
-<div className="w-full h-full overflow-hidden">
+<div className="w-full h-full overflow-hidden rounded-3xl shadow-2xl ">
       <video
         autoPlay
         loop
