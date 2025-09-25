@@ -9,9 +9,21 @@ const AdminPage: React.FC = () => {
   const [localVideoSrc, setLocalVideoSrc] = useState(videoSrc);
   const [localSlides, setLocalSlides] = useState<HeroSlide[]>(slides);
 
-  const handleVideoSave = () => {
-    setVideoSrc(localVideoSrc);
-    alert('Video URL saved!');
+  const handleVideoSave = async () => {
+    const newSettings = { showVideo, slides, videoSrc: localVideoSrc };
+    try {
+      const response = await fetch('http://localhost:3001/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newSettings),
+      });
+      if (!response.ok) throw new Error('Failed to save settings.');
+      setVideoSrc(localVideoSrc);
+      alert('Video URL saved!');
+    } catch (error) {
+      console.error(error);
+      alert('Error saving video URL.');
+    }
   };
 
   const handleSlideChange = (index: number, field: keyof HeroSlide, value: string) => {
@@ -32,9 +44,21 @@ const AdminPage: React.FC = () => {
     setLocalSlides(updatedSlides);
   };
 
-  const handleSlidesSave = () => {
-    setSlides(localSlides);
-    alert('Slides data saved!');
+  const handleSlidesSave = async () => {
+    const newSettings = { showVideo, videoSrc, slides: localSlides };
+    try {
+      const response = await fetch('http://localhost:3001/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newSettings),
+      });
+      if (!response.ok) throw new Error('Failed to save settings.');
+      setSlides(localSlides);
+      alert('Slides data saved!');
+    } catch (error) {
+      console.error(error);
+      alert('Error saving slides data.');
+    }
   };
 
   return (
@@ -46,7 +70,21 @@ const AdminPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <p>Current Mode: {showVideo ? 'Video Background' : 'Slideshow'}</p>
           <button
-            onClick={toggleShowVideo}
+            onClick={async () => {
+              const newSettings = { videoSrc, slides, showVideo: !showVideo };
+              try {
+                const response = await fetch('http://localhost:3001/api/settings', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(newSettings),
+                });
+                if (!response.ok) throw new Error('Failed to save settings.');
+                toggleShowVideo();
+              } catch (error) {
+                console.error(error);
+                alert('Error saving display mode.');
+              }
+            }}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
           >
             Switch to {showVideo ? 'Slideshow' : 'Video'}
