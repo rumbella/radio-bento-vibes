@@ -47,7 +47,7 @@ const HomePage: React.FC = () => {
             <div className="h-full p-6 bg-[#1b1b1e] rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)]">
               <div className="text-white">
                 <div className="space-y-3">
-                  <div className="text-xl font-bold text-white">
+                  <div className="text-xl font-bold text-white text-xl font-bold text-white">
                     <p>{mainText}</p>
                   </div>
                 </div>
