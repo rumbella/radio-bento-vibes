@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import HeroSection, { HeroSlide } from './HeroSection';
 import NewRadioPlayer from './NewRadioPlayer';
 import DynamicTicker from './DynamicTicker';
+import VideoBackground from './VideoBackground';
 
 const slides: HeroSlide[] = [
   {
@@ -29,17 +30,34 @@ const slides: HeroSlide[] = [
 
 const HomePage: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<HeroSlide | null>(null);
+  const [showVideo, setShowVideo] = useState(false);
 
   const handleSlideChange = (slide: HeroSlide) => {
     setCurrentSlide(slide);
   };
 
+  const videoSrc = "https://res.cloudinary.com/thinkdigital/video/upload/v1751534019/videoplayback_rm5v5m.mp4";
+
   return (
     <>
+      {/* Toggle Button */}
+      <div className="absolute top-20 right-4 z-20">
+        <button
+          onClick={() => setShowVideo(!showVideo)}
+          className="px-4 py-2 bg-gray-800 text-white rounded"
+        >
+          {showVideo ? 'Show Slideshow' : 'Show Video'}
+        </button>
+      </div>
+
       {/* Mobile Layout */}
-      <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4 bg-[#151419]">
-        <div className="w-full h-[50%] rounded-lg overflow-hidden rounded-3xl rounded-3xl shadow-2xl rounded bg-[#151419]">
-          <HeroSection slides={slides} onSlideChange={handleSlideChange} />
+      <div className="lg:hidden flex flex-col h-[calc(100vh-12rem)] p-4 gap-4 bg-[#151419] relative">
+        <div className="w-full h-[50%] rounded-lg overflow-hidden rounded-3xl shadow-2xl bg-[#151419]">
+          {showVideo ? (
+            <VideoBackground videoSrc={videoSrc} />
+          ) : (
+            <HeroSection slides={slides} onSlideChange={handleSlideChange} />
+          )}
         </div>
         <DynamicTicker slide={currentSlide} />
         <div className="flex-grow">
@@ -48,9 +66,9 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block relative">
         <div className="grid h-screen grid-cols-2 grid-rows-[35%_auto] gap-4 px-4 mx-auto lg:flex lg:flex-row lg:h-[calc(100vh-8rem)] lg:px-8 bg-[#151419]">
-          {/* Left Sidebar - Top-left on mobile, visible on all screens */}
+          {/* Left Sidebar */}
           <div className="col-start-1 row-start-1 p-4 lg:w-[25%]">
             <div className="h-full p-6 bg-[#1b1b1e] rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)]">
               <div className="text-white">
@@ -60,20 +78,23 @@ const HomePage: React.FC = () => {
                     <p>Now Playing</p>
                     <p className="font-medium">Live Stream</p>
                   </div>
-               
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Hero Section - Slideshow Component - Top-right on mobile */}
+          {/* Hero Section or Video Background */}
           <div className="col-start-2 row-start-1 p-4 lg:w-[45%] rounded-3xl shadow-2xl rounded-lg">
             <div className="h-full lg:h-[calc(100vh-12rem)]">
-              <HeroSection slides={slides} onSlideChange={handleSlideChange} />
+              {showVideo ? (
+                <VideoBackground videoSrc={videoSrc} />
+              ) : (
+                <HeroSection slides={slides} onSlideChange={handleSlideChange} />
+              )}
             </div>
           </div>
 
-          {/* Radio Player - Bottom on mobile, right side on desktop */}
+          {/* Radio Player */}
           <div className="col-span-2 row-start-2 lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-[calc(100vh-12rem)]">
             <NewRadioPlayer />
           </div>
