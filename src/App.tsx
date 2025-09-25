@@ -6,6 +6,8 @@ import Videobg from './components/Videobg';
 import PlaylistsPage from './components/PlaylistsPage';
 import PodcastsPage from './components/PodcastsPage';
 import ResidentsPage from './components/ResidentsPage';
+import AdminPage from './components/AdminPage';
+import { UIProvider } from './contexts/UIContext';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -24,15 +26,19 @@ function App() {
         return <PodcastsPage />;
       case 'residents':
         return <ResidentsPage />;
+      case 'admin':
+        return <AdminPage />;
       default:
         return <ConceptHomePage />;
     }
   };
 
   return (
-    <Layout currentPage={currentPage} onPageChange={setCurrentPage}>
-      {renderPage()}
-    </Layout>
+    <UIProvider>
+      <Layout currentPage={currentPage} onPageChange={setCurrentPage}>
+        {renderPage()}
+      </Layout>
+    </UIProvider>
   );
 }
 
