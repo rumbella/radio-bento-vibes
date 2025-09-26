@@ -106,7 +106,7 @@ const PlaylistsPage: React.FC = () => {
             >
               <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden">
                 {/* Playlist Header */}
-                <div className="relative h-48">
+                <div className="relative h-60">
                   <img
                     src={playlist.image}
                     alt={playlist.name}
