@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Play, Clock, Music } from 'lucide-react';
+import { Play, Clock } from 'lucide-react';
 import type { Playlist } from '../types';
 import { cn } from '../lib/utils';
 
@@ -105,12 +105,7 @@ const PlaylistsPage: React.FC = () => {
               )}
             >
               <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden h-full">
-                {/* Playlist Header */}
-
                 <div className="relative h-full">
-
-                <div className="relative">
-
                   <img
                     src={playlist.image}
                     alt={playlist.name}
