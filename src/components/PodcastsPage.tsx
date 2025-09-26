@@ -84,8 +84,8 @@ const PodcastsPage: React.FC = () => {
                   <span>{podcasts[0].duration}</span>
                 </div>
               </div>
-              <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-text-main p-3 rounded-full transition-colors">
-                <Play size={20} />
+              <button className="bg-white hover:bg-gray-200 text-black p-3 rounded-full transition-colors">
+                <Play size={20} fill="black" />
               </button>
             </div>
           </div>
@@ -105,7 +105,7 @@ const PodcastsPage: React.FC = () => {
                 <img
                   src={podcast.image}
                   alt={podcast.title}
-                  className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                  className="w-20 h-20 rounded-full object-cover flex-shrink-0"
                 />
                 <div className="flex-1 min-w-0">
                   <h4 className="text-text-main font-medium text-lg mb-2 line-clamp-1">
@@ -125,8 +125,8 @@ const PodcastsPage: React.FC = () => {
                         <span>{podcast.duration}</span>
                       </div>
                     </div>
-                    <button className="bg-liquid-lava/20 hover:bg-liquid-lava text-liquid-lava hover:text-text-main p-2 rounded-full transition-colors">
-                      <Play size={16} />
+                    <button className="bg-white hover:bg-gray-200 text-black p-2 rounded-full transition-colors">
+                      <Play size={16} fill="black" />
                     </button>
                   </div>
                 </div>
