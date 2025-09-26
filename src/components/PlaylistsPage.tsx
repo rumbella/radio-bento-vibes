@@ -93,7 +93,7 @@ const PlaylistsPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-12rem)] lg:h-[calc(100vh-8rem)] flex flex-col items-center justify-center">
+    <div className="w-full h-[calc(100vh-10rem)] lg:h-[calc(100vh-10rem)] flex flex-col items-center justify-center">
       <div className="overflow-hidden w-full h-full" ref={emblaRef}>
         <div className="flex h-full">
           {playlists.map((playlist, index) => (
