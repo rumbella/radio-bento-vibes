@@ -1,13 +1,10 @@
-const CACHE_NAME = 'radio-amble-v2';
+const CACHE_NAME = 'radio-amble-v1';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
   '/static/css/main.css',
   '/logo_fenicottero_uqhmso.png',
-  '/manifest.json',
-  '/event1.jpg',
-  '/event2.jpg',
-  '/event3.png'
+  '/manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
