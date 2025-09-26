@@ -4,6 +4,7 @@ import NewRadioPlayer from './NewRadioPlayer';
 import DynamicTicker from './DynamicTicker';
 import VideoBackground from './VideoBackground';
 import { useUIState } from '../contexts/UIContext';
+import EventsTicker from './EventsTicker';
 
 const HomePage: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<HeroSlide | null>(null);
@@ -44,22 +45,8 @@ const HomePage: React.FC = () => {
         <div className="grid h-screen grid-cols-2 grid-rows-[35%_auto] gap-4 px-4 mx-auto lg:flex lg:flex-row lg:h-[calc(100vh-8rem)] lg:px-8 bg-[#151419]">
           {/* Left Sidebar */}
           <div className="col-start-1 row-start-1 p-4 lg:w-[25%]">
-            <div className="h-full p-6 bg-[#1b1b1e] rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)]">
-              <div className="text-white">
-               
-                <div className="space-y-3">
-                  <div className="text-1xl opacity-80 text-xl font-bold text-white">
-                    <p className="text-xl font-bold text-white mt-4 pt-4">
-                    "Uno dei motivi più forti che conducono gli uomini all'arte e alla scienza è 
-                      la fuga dalla vita quotidiana 
-                      con la sua dolorosa crudezza e 
-                      la tetra mancanza di speranza".
-                      - Albert Einstein -
-                    </p>
-                    
-                  </div>
-                </div>
-              </div>
+            <div className="h-full bg-[#1b1b1e] rounded-3xl shadow-2xl lg:h-[calc(100vh-12rem)] text-white overflow-hidden">
+              <EventsTicker />
             </div>
           </div>
 
