@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Play, Clock, Music } from 'lucide-react';
+import { Play, Clock } from 'lucide-react';
 import type { Playlist } from '../types';
 import { cn } from '../lib/utils';
 
@@ -93,20 +93,19 @@ const PlaylistsPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-128px)] flex flex-col items-center justify-center">
-      <div className="overflow-hidden w-full" ref={emblaRef}>
-        <div className="flex">
+    <div className="w-full h-[calc(100vh-12rem)] lg:h-[calc(100vh-8rem)] flex flex-col items-center justify-center">
+      <div className="overflow-hidden w-full h-full" ref={emblaRef}>
+        <div className="flex h-full">
           {playlists.map((playlist, index) => (
             <div
               key={playlist.id}
               className={cn(
-                'flex-[0_0_80%] md:flex-[0_0_40%] min-w-0 pl-4 transition-transform duration-300 ease-out',
+                'flex-[0_0_80%] md:flex-[0_0_40%] min-w-0 pl-4 transition-transform duration-300 ease-out h-full',
                 index === selectedIndex ? 'scale-100 opacity-100' : 'scale-90 opacity-50'
               )}
             >
-              <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden">
-                {/* Playlist Header */}
-                <div className="relative">
+              <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden h-full">
+                <div className="relative h-full">
                   <img
                     src={playlist.image}
                     alt={playlist.name}
