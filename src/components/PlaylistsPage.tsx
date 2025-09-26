@@ -128,33 +128,6 @@ const PlaylistsPage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Track List */}
-                <div className={cn("p-4 transition-all duration-300 ease-out", selectedIndex === index ? 'max-h-96' : 'max-h-0 overflow-hidden')}>
-                  <div className="space-y-2">
-                    {playlist.tracks.map((track, trackIndex) => (
-                      <div
-                        key={track.id}
-                        className="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-grey/30 transition-colors group"
-                      >
-                        <span className="text-gray-400 text-sm w-6 text-center group-hover:hidden">
-                          {trackIndex + 1}
-                        </span>
-                        <button className="text-liquid-lava hidden group-hover:block">
-                          <Play size={16} />
-                        </button>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-text-main font-medium truncate">{track.title}</p>
-                          <p className="text-gray-400 text-sm truncate">{track.artist}</p>
-                        </div>
-                        <div className="flex items-center space-x-2 text-gray-400 text-sm">
-                          <Clock size={14} />
-                          <span>{track.duration}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
           ))}
