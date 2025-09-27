@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Play, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 import type { Playlist } from '../types';
 import { cn } from '../lib/utils';
 
@@ -149,6 +150,13 @@ const PlaylistsPage: React.FC = () => {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+                    {index === selectedIndex && (
+                      <button className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-black p-4 rounded-full shadow-lg transition-transform hover:scale-110 z-10">
+                        <Play size={24} className="fill-black" />
+                      </button>
+                    )}
+
                     <div className="absolute bottom-4 left-4 right-4">
                       <h3 className="text-text-main font-bold text-xl mb-1">{playlist.name}</h3>
                       <p className="text-gray-400 text-sm mb-3">{playlist.description}</p>
@@ -158,9 +166,9 @@ const PlaylistsPage: React.FC = () => {
                           <span>•</span>
                           <span>{getTotalDuration(playlist.tracks)}</span>
                         </div>
-                        <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-text-main p-3 rounded-full transition-colors">
-                          <Play size={20} />
-                        </button>
+                        <Link to={`/playlist/${playlist.id}`} className="bg-transparent text-white p-2 rounded-full transition-colors hover:bg-white/10">
+                          <ArrowUpRight size={20} />
+                        </Link>
                       </div>
                     </div>
                   </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Home, Music, Mic, Users, Grid3X3, Video } from 'lucide-react';
 
 interface LayoutProps {
@@ -7,18 +8,18 @@ interface LayoutProps {
   onPageChange: (page: string) => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) => {
+const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
   const navItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'concept', label: 'Concept', icon: Music },
-    { id: 'video', label: 'Video', icon: Video },
-    { id: 'playlists', label: 'Playlist', icon: Music },
-    { id: 'podcasts', label: 'Podcast', icon: Mic },
-    { id: 'residents', label: 'Residents', icon: Users },
+    { id: 'home', path: '/', label: 'Home', icon: Home },
+    { id: 'concept', path: '/concept', label: 'Concept', icon: Music },
+    { id: 'video', path: '/video', label: 'Video', icon: Video },
+    { id: 'playlists', path: '/playlists', label: 'Playlist', icon: Music },
+    { id: 'podcasts', path: '/podcasts', label: 'Podcast', icon: Mic },
+    { id: 'residents', path: '/residents', label: 'Residents', icon: Users },
   ];
 
   const getBackgroundClass = () => {
-    if (currentPage === 'playlists' || currentPage === 'podcasts') {
+    if (currentPage === 'playlists' || currentPage === 'podcasts' || currentPage.startsWith('playlist/')) {
       return 'bg-background-dark';
     }
     return 'bg-global-bg';
@@ -59,9 +60,9 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
               const Icon = item.icon;
               const isActive = currentPage === item.id;
               return (
-                <button
+                <Link
                   key={item.id}
-                  onClick={() => onPageChange(item.id)}
+                  to={item.path}
                   className={`flex flex-col items-center py-2 px-3 transition-all ${
                     isActive 
                       ? 'text-white bg-white/20 rounded-full'
@@ -70,7 +71,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
                 >
                   <Icon size={20} />
                   <span className="text-xs mt-1">{item.label}</span>
-                </button>
+                </Link>
               );
             })}
           </div>
