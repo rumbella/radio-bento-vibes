@@ -129,7 +129,7 @@ const PlaylistsPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-10rem)] lg:h-[calc(100vh-10rem)] flex flex-col items-center justify-center">
+    <div className="w-full h-[60vh] md:h-[calc(100vh-10rem)] flex flex-col items-center justify-center">
       <div className="relative w-full h-full">
         <div className="overflow-hidden w-full h-full" ref={emblaRef}>
           <div className="flex h-full">
@@ -171,13 +171,13 @@ const PlaylistsPage: React.FC = () => {
         </div>
 
         <button
-          className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10"
+          className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hidden md:block"
           onClick={scrollPrev}
         >
           <ChevronLeft size={24} />
         </button>
         <button
-          className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10"
+          className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hidden md:block"
           onClick={scrollNext}
         >
           <ChevronRight size={24} />
