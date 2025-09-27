@@ -5,6 +5,8 @@ import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Playlist } from '../types';
 import { cn } from '../lib/utils';
 
+const AUTOPLAY_DELAY = 4000;
+
 const PlaylistsPage: React.FC = () => {
   const playlists: Playlist[] = [
     {
@@ -70,18 +72,44 @@ const PlaylistsPage: React.FC = () => {
       align: 'center',
       containScroll: 'trimSnaps'
     },
-    [Autoplay({ delay: 4000, stopOnInteraction: false })]
+    [Autoplay({ delay: AUTOPLAY_DELAY, stopOnInteraction: false })]
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-  const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const autoplay = emblaApi.plugins().autoplay;
+    if (!autoplay) return;
+
+    const updateProgress = () => {
+      const remaining = autoplay.timeUntilNext() / AUTOPLAY_DELAY;
+      setProgress(1 - remaining);
+    };
+
+    const timer = setInterval(updateProgress, 50);
+
+    const handleSelect = () => {
+      setProgress(0);
+    };
+
+    emblaApi.on('select', handleSelect);
+
+    return () => {
+      clearInterval(timer);
+      emblaApi.off('select', handleSelect);
+    };
+  }, [emblaApi]);
+
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -155,21 +183,11 @@ const PlaylistsPage: React.FC = () => {
           <ChevronRight size={24} />
         </button>
 
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center space-x-2">
-          {playlists.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTo(index)}
-              className={cn(
-                'w-6 h-6 flex items-center justify-center rounded-full text-sm font-bold',
-                index === selectedIndex
-                  ? 'bg-white text-black'
-                  : 'bg-white/50 text-white'
-              )}
-            >
-              {index + 1}
-            </button>
-          ))}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full">
+          <div
+            className="h-1 bg-white rounded-full"
+            style={{ width: `${progress * 100}%` }}
+          />
         </div>
       </div>
     </div>
