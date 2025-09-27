@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Play, Clock } from 'lucide-react';
+import Autoplay from 'embla-carousel-autoplay';
+import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Playlist } from '../types';
 import { cn } from '../lib/utils';
 
@@ -63,12 +64,19 @@ const PlaylistsPage: React.FC = () => {
       },
   ];
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: 'center',
-    containScroll: 'trimSnaps'
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: 'center',
+      containScroll: 'trimSnaps'
+    },
+    [Autoplay({ delay: 4000, stopOnInteraction: false })]
+  );
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -94,41 +102,73 @@ const PlaylistsPage: React.FC = () => {
 
   return (
     <div className="w-full h-[calc(100vh-10rem)] lg:h-[calc(100vh-10rem)] flex flex-col items-center justify-center">
-      <div className="overflow-hidden w-full h-full" ref={emblaRef}>
-        <div className="flex h-full">
-          {playlists.map((playlist, index) => (
-            <div
-              key={playlist.id}
-              className={cn(
-                'flex-[0_0_80%] md:flex-[0_0_40%] min-w-0 pl-4 transition-transform duration-300 ease-out h-full',
-                index === selectedIndex ? 'scale-100 opacity-100' : 'scale-90 opacity-50'
-              )}
-            >
-              <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden h-full">
-                <div className="relative h-full">
-                  <img
-                    src={playlist.image}
-                    alt={playlist.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-text-main font-bold text-xl mb-1">{playlist.name}</h3>
-                    <p className="text-gray-400 text-sm mb-3">{playlist.description}</p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4 text-gray-400 text-sm">
-                        <span>{playlist.tracks.length} tracks</span>
-                        <span>•</span>
-                        <span>{getTotalDuration(playlist.tracks)}</span>
+      <div className="relative w-full h-full">
+        <div className="overflow-hidden w-full h-full" ref={emblaRef}>
+          <div className="flex h-full">
+            {playlists.map((playlist, index) => (
+              <div
+                key={playlist.id}
+                className={cn(
+                  'flex-[0_0_80%] md:flex-[0_0_40%] min-w-0 pl-4 transition-transform duration-300 ease-out h-full',
+                  index === selectedIndex ? 'scale-100 opacity-100' : 'scale-90 opacity-50'
+                )}
+              >
+                <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden h-full">
+                  <div className="relative h-full">
+                    <img
+                      src={playlist.image}
+                      alt={playlist.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-text-main font-bold text-xl mb-1">{playlist.name}</h3>
+                      <p className="text-gray-400 text-sm mb-3">{playlist.description}</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4 text-gray-400 text-sm">
+                          <span>{playlist.tracks.length} tracks</span>
+                          <span>•</span>
+                          <span>{getTotalDuration(playlist.tracks)}</span>
+                        </div>
+                        <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-text-main p-3 rounded-full transition-colors">
+                          <Play size={20} />
+                        </button>
                       </div>
-                      <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-text-main p-3 rounded-full transition-colors">
-                        <Play size={20} />
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+
+        <button
+          className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10"
+          onClick={scrollPrev}
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10"
+          onClick={scrollNext}
+        >
+          <ChevronRight size={24} />
+        </button>
+
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center space-x-2">
+          {playlists.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollTo(index)}
+              className={cn(
+                'w-6 h-6 flex items-center justify-center rounded-full text-sm font-bold',
+                index === selectedIndex
+                  ? 'bg-white text-black'
+                  : 'bg-white/50 text-white'
+              )}
+            >
+              {index + 1}
+            </button>
           ))}
         </div>
       </div>
