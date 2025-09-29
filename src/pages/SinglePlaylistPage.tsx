@@ -86,7 +86,7 @@ const SinglePlaylistPage: React.FC = () => {
       <div className="flex flex-grow space-x-4 overflow-hidden h-[calc(100vh-160px)]">
         {/* Left Column: Playlist Info */}
         <div
-          className="relative flex-1 bg-cover bg-center rounded-lg shadow-lg"
+          className="relative flex-1 bg-cover bg-center rounded-lg shadow-lg bg-gluon-grey/80 backdrop-blur-md "
           style={{ backgroundImage: `url(${playlist.image})` }}
         >
           <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent rounded-b-lg">
@@ -106,7 +106,7 @@ const SinglePlaylistPage: React.FC = () => {
 
         {/* Right Column: Track List */}
         <div className="w-2/5 flex flex-col">
-          <div className="bg-black/30 rounded-lg p-4 flex-grow overflow-y-auto">
+          <div className="bg-black/30 rounded-lg p-4 flex-grow overflow-y-auto bg-gluon-grey/80 backdrop-blur-md rounded shadow-lg">
             <div className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center text-gray-400 uppercase text-sm border-b border-gray-700 pb-2 mb-2 sticky top-0 bg-black/30 z-10">
               <span className="text-center">#</span>
               <span>Title</span>
