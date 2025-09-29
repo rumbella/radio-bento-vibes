@@ -1,82 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import Autoplay from 'embla-carousel-autoplay';
 import { Link } from 'react-router-dom';
 import { Play, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 import type { Playlist } from '../types';
 import { cn } from '../lib/utils';
-
-const AUTOPLAY_DELAY = 4000;
+import { useUIState } from '../contexts/UIContext';
 
 const PlaylistsPage: React.FC = () => {
-  const playlists: Playlist[] = [
-    {
-      id: '1',
-      name: 'Deep House',
-      description: 'The best deep house tracks for your soul',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
-      tracks: [
-        { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03' },
-        { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
-        { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29' }
-      ]
-    },
-    {
-      id: '2',
-      name: 'Morning Energy',
-      description: 'Uplifting beats to start your day',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
-      tracks: [
-        { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20' },
-        { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02' },
-        { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05' }
-      ]
-    },
-    {
-      id: '3',
-      name: 'Chill Vibes',
-      description: 'Relaxing sounds for peaceful moments',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
-      tracks: [
-        { id: '7', title: 'Weightless', artist: 'Marconi Union', duration: '8:08' },
-        { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01' },
-        { id: '9', title: 'Kiara', artist: 'Bonobo', duration: '5:27' }
-      ]
-    },
-    {
-        id: '4',
-        name: 'Techno',
-        description: 'The best deep house tracks for your soul',
-        image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
-        tracks: [
-          { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03' },
-          { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
-          { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29' }
-        ]
-      },
-      {
-        id: '5',
-        name: 'Afro House',
-        description: 'Uplifting beats to start your day',
-        image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
-        tracks: [
-          { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20' },
-          { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02' },
-          { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05' }
-        ]
-      },
-  ];
+  const { playlists, isLoading, error } = useUIState();
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: true,
-      align: 'center',
-      containScroll: 'trimSnaps'
-    },
-    [Autoplay({ delay: AUTOPLAY_DELAY, stopOnInteraction: false })]
-  );
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'center',
+    containScroll: 'trimSnaps'
+  });
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
@@ -85,32 +23,6 @@ const PlaylistsPage: React.FC = () => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    const autoplay = emblaApi.plugins().autoplay;
-    if (!autoplay) return;
-
-    const updateProgress = () => {
-      const remaining = autoplay.timeUntilNext() / AUTOPLAY_DELAY;
-      setProgress(1 - remaining);
-    };
-
-    const timer = setInterval(updateProgress, 50);
-
-    const handleSelect = () => {
-      setProgress(0);
-    };
-
-    emblaApi.on('select', handleSelect);
-
-    return () => {
-      clearInterval(timer);
-      emblaApi.off('select', handleSelect);
-    };
-  }, [emblaApi]);
-
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -129,6 +41,14 @@ const PlaylistsPage: React.FC = () => {
     return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
   };
 
+  if (isLoading) {
+    return <div className="content-container"><div className="spinner"></div></div>;
+  }
+
+  if (error) {
+    return <div className="content-container text-center p-4"><p>{error}</p></div>;
+  }
+
   return (
     <div className="w-full h-[60vh] md:h-[calc(100vh-10rem)] flex flex-col items-center justify-center">
       <div className="relative w-full h-full">
@@ -143,7 +63,7 @@ const PlaylistsPage: React.FC = () => {
                 )}
               >
                 <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden h-full">
-                  <div className="relative h-full">
+                  <div className="relative h-full group">
                     <img
                       src={playlist.image}
                       alt={playlist.name}
@@ -151,11 +71,11 @@ const PlaylistsPage: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-                    {index === selectedIndex && (
-                      <button className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-black p-4 rounded-full shadow-lg transition-transform hover:scale-110 z-10">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <button className="bg-white text-black p-4 rounded-full shadow-lg transition-all transform scale-0 group-hover:scale-100 hover:!scale-110 z-10">
                         <Play size={24} className="fill-black" />
                       </button>
-                    )}
+                    </div>
 
                     <div className="absolute bottom-4 left-4 right-4">
                       <h3 className="text-text-main font-bold text-xl mb-1">{playlist.name}</h3>
@@ -190,13 +110,6 @@ const PlaylistsPage: React.FC = () => {
         >
           <ChevronRight size={24} />
         </button>
-
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full">
-          <div
-            className="h-1 bg-white rounded-full"
-            style={{ width: `${progress * 100}%` }}
-          />
-        </div>
       </div>
     </div>
   );
