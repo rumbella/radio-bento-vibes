@@ -9,7 +9,7 @@ const playlists: Playlist[] = [
     id: '1',
     name: 'Deep House',
     description: 'The best deep house tracks for your soul',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
+    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
     tracks: [
       { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03' },
       { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
@@ -20,7 +20,7 @@ const playlists: Playlist[] = [
     id: '2',
     name: 'Morning Energy',
     description: 'Uplifting beats to start your day',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
+    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
     tracks: [
       { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20' },
       { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02' },
@@ -31,7 +31,7 @@ const playlists: Playlist[] = [
     id: '3',
     name: 'Chill Vibes',
     description: 'Relaxing sounds for peaceful moments',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
+    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
     tracks: [
       { id: '7', title: 'Weightless', artist: 'Marconi Union', duration: '8:08' },
       { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01' },
@@ -42,7 +42,7 @@ const playlists: Playlist[] = [
       id: '4',
       name: 'Techno',
       description: 'The best deep house tracks for your soul',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
+      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
       tracks: [
         { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03' },
         { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
@@ -53,7 +53,7 @@ const playlists: Playlist[] = [
       id: '5',
       name: 'Afro House',
       description: 'Uplifting beats to start your day',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
+      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
       tracks: [
         { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20' },
         { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02' },
@@ -82,38 +82,47 @@ const SinglePlaylistPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen text-white p-4 md:p-8">
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-full md:w-1/3">
-          <img src={playlist.image} alt={playlist.name} className="w-full h-auto object-cover rounded-lg shadow-lg" />
-          <h1 className="text-3xl font-bold mt-4">{playlist.name}</h1>
-          <p className="text-gray-400 mt-2">{playlist.description}</p>
-          <div className="flex items-center space-x-4 text-gray-400 text-sm mt-4">
-            <span>{playlist.tracks.length} tracks</span>
-            <span>•</span>
-            <span>{getTotalDuration(playlist.tracks)}</span>
+    <div className="p-4 h-full text-white">
+      <div className="flex flex-grow space-x-4 overflow-hidden h-[calc(100vh-160px)]">
+        {/* Left Column: Playlist Info */}
+        <div
+          className="relative flex-1 bg-cover bg-center rounded-lg shadow-lg"
+          style={{ backgroundImage: `url(${playlist.image})` }}
+        >
+          <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent rounded-b-lg">
+            <h1 className="text-5xl font-bold">{playlist.name}</h1>
+            <p className="text-gray-300 mt-2 text-lg">{playlist.description}</p>
+            <div className="flex items-center space-x-4 text-gray-300 text-sm mt-3">
+              <span>{playlist.tracks.length} tracks</span>
+              <span>•</span>
+              <span>{getTotalDuration(playlist.tracks)}</span>
+            </div>
+            <button className="mt-6 bg-liquid-lava text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 font-bold transition-transform hover:scale-105">
+              <Play size={20} className="fill-white" />
+              Play All
+            </button>
           </div>
-          <button className="mt-6 w-full bg-liquid-lava text-white py-3 rounded-full flex items-center justify-center gap-2 font-bold transition-transform hover:scale-105">
-            <Play size={20} className="fill-white" />
-            Play All
-          </button>
         </div>
-        <div className="w-full md:w-2/3">
-          <div className="flex flex-col space-y-2">
-            <div className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center text-gray-400 uppercase text-sm border-b border-gray-700 pb-2">
-              <span>#</span>
+
+        {/* Right Column: Track List */}
+        <div className="w-2/5 flex flex-col">
+          <div className="bg-black/30 rounded-lg p-4 flex-grow overflow-y-auto">
+            <div className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center text-gray-400 uppercase text-sm border-b border-gray-700 pb-2 mb-2 sticky top-0 bg-black/30 z-10">
+              <span className="text-center">#</span>
               <span>Title</span>
               <span>Artist</span>
               <Clock size={16} />
             </div>
-            {playlist.tracks.map((track, index) => (
-              <div key={track.id} className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center p-2 rounded-md hover:bg-white/10 transition-colors">
-                <span className="text-gray-400">{index + 1}</span>
-                <span className="font-medium">{track.title}</span>
-                <span className="text-gray-400">{track.artist}</span>
-                <span className="text-gray-400">{track.duration}</span>
-              </div>
-            ))}
+            <div className="space-y-1">
+              {playlist.tracks.map((track, index) => (
+                <div key={track.id} className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center p-2 rounded-md hover:bg-white/10 transition-colors cursor-pointer">
+                  <span className="text-gray-400 text-center">{index + 1}</span>
+                  <span className="font-medium truncate">{track.title}</span>
+                  <span className="text-gray-400 truncate">{track.artist}</span>
+                  <span className="text-gray-400">{track.duration}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
