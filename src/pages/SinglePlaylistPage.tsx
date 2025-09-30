@@ -63,10 +63,10 @@ const SinglePlaylistPage: React.FC = () => {
         <main className="flex-1 flex flex-row space-x-4 p-4 pt-16 overflow-hidden">
           {/* Left Column: Playlist Info */}
           <div
-            className="relative flex-1 bg-cover bg-center rounded-lg shadow-lg bg-gluon-grey/80 backdrop-blur-md"
+            className="relative flex-1 bg-cover bg-center rounded-lg shadow-lg bg-gluon-grey/20 backdrop-blur-md  rounded-3xl shadow-2xl rounded-lg"
             style={{ backgroundImage: `url(${playlist.image})` }}
           >
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent rounded-b-lg">
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent rounded-b-lg ">
               <h1 className="text-5xl font-bold">{playlist.name}</h1>
               <p className="text-gray-300 mt-2 text-lg">{playlist.description}</p>
               <div className="flex items-center space-x-4 text-gray-300 text-sm mt-3">
@@ -83,7 +83,7 @@ const SinglePlaylistPage: React.FC = () => {
 
           {/* Right Column: Track List */}
           <div className="w-2/5 flex flex-col min-h-0">
-            <div className="bg-black/30 rounded-lg p-4 flex-grow overflow-y-auto bg-gluon-grey/80 backdrop-blur-md rounded shadow-lg">
+            <div className="bg-black/30 rounded-lg p-4 flex-grow overflow-y-auto bg-gluon-grey/80 backdrop-blur-md rounded shadow-lg  rounded-3xl shadow-2xl rounded-lg">
               <div className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center text-gray-400 uppercase text-sm border-b border-gray-700 pb-2 mb-2 sticky top-0 bg-black/30 z-10">
                 <span className="text-center">#</span>
                 <span>Title</span>
