@@ -1,16 +1,15 @@
 import React from 'react';
 import { Play, Pause } from 'lucide-react';
-import { usePlayerState, usePlayerActions } from '../contexts/PlayerContext';
+import { usePlayer } from '../contexts/PlayerContext';
 
 const NewRadioPlayer: React.FC = () => {
-  const { isPlaying, currentTrack } = usePlayerState();
-  const { togglePlay } = usePlayerActions();
+  const { isPlaying, currentTrack, togglePlay } = usePlayer();
 
   // Fallback data if no track is loaded
   const displayData = {
     title: currentTrack?.title || "Radio Amblè",
     host: currentTrack?.artist || "Live Stream",
-    image: currentTrack?.imageUrl || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
+    image: currentTrack?.image || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
     artist: currentTrack?.artist || "",
     songTitle: currentTrack?.title || "Tune in to discover"
   };
