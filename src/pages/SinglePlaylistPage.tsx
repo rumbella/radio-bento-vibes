@@ -90,7 +90,7 @@ const SinglePlaylistPage: React.FC = () => {
         <main className="flex-1 flex flex-row space-x-4 p-4 pt-16 overflow-hidden">
           {/* Left Column: Playlist Info */}
           <div
-            className="relative flex-1 bg-cover bg-center rounded-3xl shadow-lg bg-gluon-grey/80 backdrop-blur-md"
+            className="relative flex-1 bg-cover bg-center rounded-t-3xl shadow-lg bg-gluon-grey/80 backdrop-blur-md overflow-hidden"
             style={{ backgroundImage: `url(${playlist.image})` }}
           >
             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent rounded-b-lg">
@@ -102,7 +102,7 @@ const SinglePlaylistPage: React.FC = () => {
                 <span>{getTotalDuration(playlist.tracks)}</span>
               </div>
               <button className="mt-6 bg-liquid-lava text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 font-bold transition-transform hover:scale-105">
-                <Play size={20} className="fill-white" />
+                <Play size={20} fill="black" />
                 Play All
               </button>
             </div>
@@ -110,7 +110,7 @@ const SinglePlaylistPage: React.FC = () => {
 
           {/* Right Column: Track List */}
           <div className="w-2/5 flex flex-col min-h-0">
-            <div className="bg-black/30 rounded-3xl p-4 flex-grow overflow-y-auto bg-gluon-grey/80 backdrop-blur-md shadow-lg">
+            <div className="bg-black/30 rounded-t-3xl p-4 flex-grow overflow-y-auto bg-gluon-grey/80 backdrop-blur-md shadow-lg">
               <div className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center text-gray-400 uppercase text-sm border-b border-gray-700 pb-2 mb-2 sticky top-0 bg-black/30 z-10">
                 <span className="text-center">#</span>
                 <span>Title</span>
