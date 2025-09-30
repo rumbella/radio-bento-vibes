@@ -14,7 +14,6 @@ import SinglePodcastPage from './pages/SinglePodcastPage';
 import SingleSongPage from './pages/SingleSongPage';
 import SingleEpisodePage from './pages/SingleEpisodePage';
 import { UIProvider } from './contexts/UIContext';
-import { PlayerProvider } from './contexts/PlayerContext';
 
 function App() {
   const location = useLocation();
@@ -23,10 +22,9 @@ function App() {
   const isDetailPage = /^\/(playlist|podcast)\//.test(location.pathname);
 
   return (
-    <PlayerProvider>
-      <UIProvider>
-        {isDetailPage ? (
-          <TransitionGroup>
+    <UIProvider>
+      {isDetailPage ? (
+        <TransitionGroup>
           <CSSTransition key={location.key} classNames="page" timeout={300}>
             <Routes location={location}>
               <Route path="/playlist/:id" element={<SinglePlaylistPage />} />
@@ -51,7 +49,6 @@ function App() {
         </Layout>
       )}
     </UIProvider>
-  </PlayerProvider>
   );
 }
 

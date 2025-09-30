@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import {
   Play,
@@ -10,21 +10,25 @@ import {
   Volume2,
   ListMusic,
 } from 'lucide-react';
-import { usePlayer } from '../contexts/PlayerContext';
 
 const Player: React.FC = () => {
-  const { currentTrack, isPlaying, togglePlay } = usePlayer();
+  // Mock data for the current track
+  const currentTrack = {
+    title: 'Midnight City',
+    artist: 'M83',
+    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
+    url: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3',
+  };
+
+  const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [playedSeconds, setPlayedSeconds] = useState(0);
   const [duration, setDuration] = useState(0);
   const playerRef = useRef<ReactPlayer>(null);
 
-  useEffect(() => {
-    // Reset progress when track changes
-    setProgress(0);
-    setPlayedSeconds(0);
-  }, [currentTrack]);
-
+  const handlePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
 
   const handleProgress = (state: { played: number, playedSeconds: number }) => {
     setProgress(state.played);
@@ -43,10 +47,6 @@ const Player: React.FC = () => {
     return `${minutes}:${seconds}`;
   };
 
-  if (!currentTrack) {
-    return null; // Don't render the player if no track is selected
-  }
-
   return (
     <div className="bg-black/80 backdrop-blur-md text-white p-4 rounded-3xl shadow-lg flex items-center z-50 w-full">
       <ReactPlayer
@@ -61,7 +61,7 @@ const Player: React.FC = () => {
       {/* Track Info */}
       <div className="flex items-center space-x-4 w-1/4">
         <img
-          src={currentTrack.image || 'https://via.placeholder.com/150'}
+          src={currentTrack.image}
           alt={currentTrack.title}
           className="w-14 h-14 rounded-md"
         />
@@ -83,7 +83,7 @@ const Player: React.FC = () => {
             className="text-gray-400 hover:text-white cursor-pointer"
           />
           <button
-            onClick={togglePlay}
+            onClick={handlePlayPause}
             className="bg-white text-black rounded-full p-3 flex items-center justify-center transition-transform hover:scale-105"
           >
             {isPlaying ? <Pause size={24} /> : <Play size={24} />}
