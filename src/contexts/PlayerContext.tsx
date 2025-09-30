@@ -103,7 +103,7 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
       originalProgram: program,
     });
     setPlayerMode('live');
-    // setIsPlaying(true); // MODIFIED: Autoplay disabled for stream loading
+    setIsPlaying(false); // Explicitly stop playback when switching to a stream
     setLoop(false);
     setCurrentPlaylistTracks([]);
     setCurrentTrackIndexInPlaylist(null);
