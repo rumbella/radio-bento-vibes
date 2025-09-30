@@ -31,7 +31,11 @@ const Player: React.FC = () => {
   };
 
   return (
+
+    <div className="bg-black/80 backdrop-blur-md text-white p-4 rounded-3xl shadow-lg flex items-center z-50 w-full">
+
     <div className="bg-white/20 backdrop-blur-md text-white p-4 rounded-lg shadow-lg flex items-center z-50 w-full  rounded-3xl shadow-2xl rounded-lg">
+
       {/* Track Info */}
       <div className="flex items-center space-x-4 w-1/4">
         <img
