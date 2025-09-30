@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react';
-import ReactPlayer from 'react-player';
+import React from 'react';
 import {
   Play,
   Pause,
@@ -14,30 +13,14 @@ import {
 const Player: React.FC = () => {
   // Mock data for the current track
   const currentTrack = {
-    title: 'Midnight City',
-    artist: 'M83',
+    title: 'Love Story',
+    artist: 'John Lennon',
     image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
-    url: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3',
+    duration: 204, // in seconds
   };
 
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [playedSeconds, setPlayedSeconds] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const playerRef = useRef<ReactPlayer>(null);
-
-  const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleProgress = (state: { played: number, playedSeconds: number }) => {
-    setProgress(state.played);
-    setPlayedSeconds(state.playedSeconds);
-  };
-
-  const handleDuration = (duration: number) => {
-    setDuration(duration);
-  };
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [progress, setProgress] = React.useState(10); // in seconds
 
   const formatTime = (timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60);
@@ -49,15 +32,6 @@ const Player: React.FC = () => {
 
   return (
     <div className="bg-black/80 backdrop-blur-md text-white p-4 rounded-3xl shadow-lg flex items-center z-50 w-full">
-      <ReactPlayer
-        ref={playerRef}
-        url={currentTrack.url}
-        playing={isPlaying}
-        onProgress={handleProgress}
-        onDuration={handleDuration}
-        width="0"
-        height="0"
-      />
       {/* Track Info */}
       <div className="flex items-center space-x-4 w-1/4">
         <img
@@ -83,7 +57,7 @@ const Player: React.FC = () => {
             className="text-gray-400 hover:text-white cursor-pointer"
           />
           <button
-            onClick={handlePlayPause}
+            onClick={() => setIsPlaying(!isPlaying)}
             className="bg-white text-black rounded-full p-3 flex items-center justify-center transition-transform hover:scale-105"
           >
             {isPlaying ? <Pause size={24} /> : <Play size={24} />}
@@ -94,15 +68,15 @@ const Player: React.FC = () => {
           />
         </div>
         <div className="w-full flex items-center space-x-2 mt-2">
-          <span className="text-xs text-gray-400">{formatTime(playedSeconds)}</span>
+          <span className="text-xs text-gray-400">{formatTime(progress)}</span>
           <div className="w-full bg-gray-600 rounded-full h-1">
             <div
               className="bg-white h-1 rounded-full"
-              style={{ width: `${progress * 100}%` }}
+              style={{ width: `${(progress / currentTrack.duration) * 100}%` }}
             ></div>
           </div>
           <span className="text-xs text-gray-400">
-            {formatTime(duration)}
+            {formatTime(currentTrack.duration)}
           </span>
         </div>
       </div>
