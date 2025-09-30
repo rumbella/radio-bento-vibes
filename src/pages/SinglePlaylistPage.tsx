@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import DetailLayout from '../components/DetailLayout';
+import Player from '../components/Player';
 import type { Playlist, Track } from '../types';
 import { Clock, Play } from 'lucide-react';
 
@@ -14,7 +15,13 @@ const playlists: Playlist[] = [
     tracks: [
       { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03' },
       { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
-      { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29' }
+      { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29' },
+      { id: '11', title: 'Midnight City', artist: 'M83', duration: '4:03' },
+      { id: '12', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
+      { id: '13', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29' },
+      { id: '21', title: 'Midnight City', artist: 'M83', duration: '4:03' },
+      { id: '22', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
+      { id: '23', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29' },
     ]
   },
   {
@@ -25,42 +32,9 @@ const playlists: Playlist[] = [
     tracks: [
       { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20' },
       { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02' },
-      { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05' }
+      { id: '6', 'title': 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05' }
     ]
   },
-  {
-    id: '3',
-    name: 'Chill Vibes',
-    description: 'Relaxing sounds for peaceful moments',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
-    tracks: [
-      { id: '7', title: 'Weightless', artist: 'Marconi Union', duration: '8:08' },
-      { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01' },
-      { id: '9', title: 'Kiara', artist: 'Bonobo', duration: '5:27' }
-    ]
-  },
-  {
-      id: '4',
-      name: 'Techno',
-      description: 'The best deep house tracks for your soul',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
-      tracks: [
-        { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03' },
-        { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
-        { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29' }
-      ]
-    },
-    {
-      id: '5',
-      name: 'Afro House',
-      description: 'Uplifting beats to start your day',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
-      tracks: [
-        { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20' },
-        { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02' },
-        { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05' }
-      ]
-    },
 ];
 
 
@@ -84,11 +58,12 @@ const SinglePlaylistPage: React.FC = () => {
 
   return (
     <DetailLayout to="/playlists">
-      <div className="p-4 h-full text-white">
-        <div className="flex flex-grow space-x-4 overflow-hidden h-[calc(100vh-160px)]">
+      <div className="flex flex-col h-full text-white">
+        {/* Main content area */}
+        <main className="flex-1 flex flex-row space-x-4 p-4 pt-16 overflow-hidden">
           {/* Left Column: Playlist Info */}
           <div
-            className="relative flex-1 bg-cover bg-center rounded-lg shadow-lg bg-gluon-grey/80 backdrop-blur-md "
+            className="relative flex-1 bg-cover bg-center rounded-lg shadow-lg bg-gluon-grey/80 backdrop-blur-md"
             style={{ backgroundImage: `url(${playlist.image})` }}
           >
             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/70 to-transparent rounded-b-lg">
@@ -107,7 +82,7 @@ const SinglePlaylistPage: React.FC = () => {
           </div>
 
           {/* Right Column: Track List */}
-          <div className="w-2/5 flex flex-col">
+          <div className="w-2/5 flex flex-col min-h-0">
             <div className="bg-black/30 rounded-lg p-4 flex-grow overflow-y-auto bg-gluon-grey/80 backdrop-blur-md rounded shadow-lg">
               <div className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center text-gray-400 uppercase text-sm border-b border-gray-700 pb-2 mb-2 sticky top-0 bg-black/30 z-10">
                 <span className="text-center">#</span>
@@ -131,7 +106,12 @@ const SinglePlaylistPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
+        </main>
+
+        {/* Player */}
+        <footer className="flex-shrink-0 p-4">
+          <Player />
+        </footer>
       </div>
     </DetailLayout>
   );
