@@ -3,6 +3,7 @@ export interface Track {
   title: string;
   artist: string;
   duration: string; // e.g., "4:03"
+  image?: string;
 }
 
 export interface Playlist {
