@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Outlet } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
 import ConceptHomePage from './components/ConceptHomePage';
@@ -10,15 +10,26 @@ import ResidentsPage from './components/ResidentsPage';
 import AdminPage from './components/AdminPage';
 import SinglePlaylistPage from './pages/SinglePlaylistPage';
 import { UIProvider } from './contexts/UIContext';
+import DetailLayout from './components/shell/DetailLayout';
 
-function App() {
+// This wrapper provides the main layout to a group of routes
+const MainLayoutWrapper: React.FC = () => {
   const location = useLocation();
   const currentPage = location.pathname.substring(1) || 'home';
 
   return (
+    <Layout currentPage={currentPage} onPageChange={() => {}}>
+      <Outlet />
+    </Layout>
+  );
+};
+
+function App() {
+  return (
     <UIProvider>
-      <Layout currentPage={currentPage} onPageChange={() => {}}>
-        <Routes>
+      <Routes>
+        {/* Routes with the main layout (header, footer, etc.) */}
+        <Route element={<MainLayoutWrapper />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/concept" element={<ConceptHomePage />} />
           <Route path="/video" element={<Videobg />} />
@@ -26,10 +37,16 @@ function App() {
           <Route path="/podcasts" element={<PodcastsPage />} />
           <Route path="/residents" element={<ResidentsPage />} />
           <Route path="/admin" element={<AdminPage />} />
+        </Route>
+
+        {/* Routes with the detail layout (e.g., for single items) */}
+        <Route element={<DetailLayout />}>
           <Route path="/playlist/:id" element={<SinglePlaylistPage />} />
-          <Route path="*" element={<ConceptHomePage />} />
-        </Routes>
-      </Layout>
+        </Route>
+
+        {/* Fallback route */}
+        <Route path="*" element={<ConceptHomePage />} />
+      </Routes>
     </UIProvider>
   );
 }
