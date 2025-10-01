@@ -147,7 +147,7 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
       />
 
       {/* Mobile Layout */}
-      <div className="lg:hidden bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl">
+      <div className="lg:hidden bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl">
         <div className="relative w-full p-4 flex flex-col justify-between">
           {/* Header */}
           <header className="flex items-center justify-between">
@@ -221,7 +221,7 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:flex lg:flex-col lg:h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-6 shadow-2xl">
+      <div className="hidden lg:flex lg:flex-col lg:h-full bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl p-6 shadow-2xl">
         <header className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
             <img
