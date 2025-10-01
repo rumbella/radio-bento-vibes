@@ -1,10 +1,8 @@
-export interface Track {
+export interface PlaylistTrack {
   id: string;
   title: string;
   artist: string;
   duration: string; // e.g., "4:03"
-  url?: string;
-  image?: string;
 }
 
 export interface Playlist {
@@ -12,21 +10,16 @@ export interface Playlist {
   name: string;
   description: string;
   image: string;
-  tracks: Track[];
-}
-
-export interface Episode {
-  id: string;
-  title: string;
-  duration: string; // e.g., "45:12"
+  tracks: PlaylistTrack[];
 }
 
 export interface Podcast {
   id: string;
-  name: string;
+  title: string;
   description: string;
   image: string;
-  episodes: Episode[];
+  duration: string; // e.g., "45:32"
+  date: string; // ISO date string
 }
 
 export interface ResidentSocialLinks {

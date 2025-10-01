@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Home, Music, Mic, Users, Grid3X3, Video } from 'lucide-react';
-import { usePlayerState, usePlayerActions } from '../contexts/PlayerContext';
-import { mockPrograms } from '@/data/playlists';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,21 +9,6 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
-  const location = useLocation();
-  const { playerMode } = usePlayerState();
-  const { playStream } = usePlayerActions();
-
-  useEffect(() => {
-    const mainPages = ['/', '/concept', '/video', '/playlists', '/podcasts', '/residents'];
-    // If we are on a main page and the player is in playlist mode,
-    // switch back to the default live stream.
-    if (mainPages.includes(location.pathname) && playerMode === 'playlist') {
-      if (mockPrograms.length > 0) {
-        playStream(mockPrograms[0]);
-      }
-    }
-  }, [location, playerMode, playStream]);
-
   const navItems = [
     { id: 'home', path: '/', label: 'Home', icon: Home },
     { id: 'concept', path: '/concept', label: 'Concept', icon: Music },
