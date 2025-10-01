@@ -83,7 +83,7 @@ const SinglePlaylistPage: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col lg:flex-row lg:items-center lg:justify-center lg:gap-x-4 relative mx-auto px-4 lg:px-8">
+    <div className="h-full flex flex-col lg:flex-row lg:items-center lg:justify-between relative mx-auto px-4 lg:px-[90px]">
       {/* Fixed Background Image */}
       <div className="fixed top-0 left-0 w-full h-full z-0">
         <div
