@@ -14,6 +14,7 @@ import SinglePodcastPage from './pages/SinglePodcastPage';
 import SingleSongPage from './pages/SingleSongPage';
 import SingleEpisodePage from './pages/SingleEpisodePage';
 import Player from './components/Player';
+import RadioPlayer from './components/RadioPlayer';
 import { UIProvider } from './contexts/UIContext';
 
 function App() {
@@ -21,6 +22,18 @@ function App() {
   const currentPage = location.pathname.substring(1) || 'home';
 
   const isDetailPage = /^\/(playlist|podcast)\//.test(location.pathname);
+  const isPlaylistPage = /^\/playlist\//.test(location.pathname);
+  const isHomePage = location.pathname === '/';
+
+  const renderFooterPlayer = () => {
+    if (isHomePage) {
+      return null;
+    }
+    if (isPlaylistPage) {
+      return <Player />;
+    }
+    return <RadioPlayer />;
+  };
 
   return (
     <UIProvider>
@@ -53,7 +66,7 @@ function App() {
           )}
         </main>
         <footer className="flex-shrink-0 p-4">
-          <Player />
+          {renderFooterPlayer()}
         </footer>
       </div>
     </UIProvider>
