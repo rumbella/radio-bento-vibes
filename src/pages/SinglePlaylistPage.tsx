@@ -83,7 +83,7 @@ const SinglePlaylistPage: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col lg:flex-row lg:gap-x-4 relative mx-auto px-4 lg:px-8">
+    <div className="h-full flex flex-col lg:flex-row lg:items-center lg:justify-center lg:gap-x-4 relative mx-auto px-4 lg:px-8">
       {/* Fixed Background Image */}
       <div className="fixed top-0 left-0 w-full h-full z-0">
         <div
@@ -96,8 +96,8 @@ const SinglePlaylistPage: React.FC = () => {
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
-      {/* Left Column: Track List - DESKTOP (65%) */}
-      <div className="hidden lg:block lg:w-[65%] relative z-10 h-full pt-20 pb-4">
+      {/* Left Column: Track List - DESKTOP (45%) */}
+      <div className="hidden lg:block lg:w-[45%] relative z-10 lg:h-[60vh]">
         <div className="h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-6 overflow-hidden flex flex-col">
           <h2 className="text-2xl font-bold mb-4">{playlist.name}</h2>
           <p className="text-gray-300 text-sm mb-6">{playlist.description}</p>
@@ -154,7 +154,7 @@ const SinglePlaylistPage: React.FC = () => {
       </div>
 
       {/* Right Column: Playlist Player - Mobile: fixed bottom, Desktop: right side (35%) */}
-      <div className="fixed bottom-4 left-4 right-4 lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[35%] lg:h-full lg:py-4 z-10">
+      <div className="fixed bottom-4 left-4 right-4 lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[35%] lg:h-[60vh] z-10">
         <PlaylistPlayer 
           tracks={playlist.tracks}
           playlistName={playlist.name}
