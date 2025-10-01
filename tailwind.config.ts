@@ -24,6 +24,7 @@ export default {
         'global-bg': '#151419',
         'container-dark': '#212124',
         'text-main': '#E2E8F0',
+        'gluon-grey': '#1a1a1a',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
