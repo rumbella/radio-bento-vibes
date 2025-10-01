@@ -97,7 +97,7 @@ const SinglePlaylistPage: React.FC = () => {
       </div>
 
       {/* Left Column: Track List - DESKTOP (65%) */}
-      <div className="hidden lg:block lg:w-[65%] relative z-10 h-full py-4">
+      <div className="hidden lg:block lg:w-[65%] relative z-10 h-full pt-20 pb-4">
         <div className="h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-6 overflow-hidden flex flex-col">
           <h2 className="text-2xl font-bold mb-4">{playlist.name}</h2>
           <p className="text-gray-300 text-sm mb-6">{playlist.description}</p>
@@ -128,7 +128,7 @@ const SinglePlaylistPage: React.FC = () => {
       </div>
 
       {/* Mobile Track List */}
-      <div className="lg:hidden relative z-10 flex-1 overflow-y-auto mb-[180px] px-2 pt-4">
+      <div className="lg:hidden relative z-10 flex-1 overflow-y-auto mb-[220px] px-2 pt-20">
         <div className="bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-4">
           <h2 className="text-xl font-bold mb-2">{playlist.name}</h2>
           <p className="text-gray-300 text-xs mb-4">{playlist.description}</p>
@@ -154,7 +154,7 @@ const SinglePlaylistPage: React.FC = () => {
       </div>
 
       {/* Right Column: Playlist Player - Mobile: fixed bottom, Desktop: right side (35%) */}
-      <div className="fixed bottom-[110px] left-4 right-4 h-[160px] lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[35%] lg:h-full lg:py-4 z-10">
+      <div className="fixed bottom-4 left-4 right-4 lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[35%] lg:h-full lg:py-4 z-10">
         <PlaylistPlayer 
           tracks={playlist.tracks}
           playlistName={playlist.name}

@@ -147,8 +147,8 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
       />
 
       {/* Mobile Layout */}
-      <div className="lg:hidden h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl">
-        <div className="relative h-full w-full p-4 flex flex-col justify-between">
+      <div className="lg:hidden bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl">
+        <div className="relative w-full p-4 flex flex-col justify-between">
           {/* Header */}
           <header className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
