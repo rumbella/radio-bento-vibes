@@ -138,7 +138,7 @@ const PlaylistsPage: React.FC = () => {
               <div
                 key={playlist.id}
                 className={cn(
-                  'flex-[0_0_80%] md:flex-[0_0_40%] lg:flex-[0_0_40%] min-w-0 pl-4 transition-transform duration-300 ease-out h-full',
+                  'flex-[0_0_80%] md:flex-[0_0_40%] lg:flex-[0_0_45%] min-w-0 pl-4 transition-transform duration-300 ease-out h-full',
                   index === selectedIndex ? 'scale-100 opacity-100' : 'scale-90 opacity-50'
                 )}
               >
