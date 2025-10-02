@@ -89,7 +89,7 @@ const SinglePlaylistPage: React.FC = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1751631394/image-26_gbim0w.png')`
+            backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1759397883/poster_radio_d5376f.jpg')`
           }}
         />
         {/* Dark overlay for better contrast */}
