@@ -89,7 +89,7 @@ const SinglePlaylistPage: React.FC = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1751631394/image-26_gbim0w.png')`
+            backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1759397883/poster_radio_d5376f.jpg')`
           }}
         />
         {/* Dark overlay for better contrast */}
@@ -98,7 +98,7 @@ const SinglePlaylistPage: React.FC = () => {
 
       {/* Left Column: Track List - DESKTOP (45%) */}
       <div className="hidden lg:block lg:w-[45%] relative z-10 lg:h-[60vh]">
-        <div className="h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-6 overflow-hidden flex flex-col">
+        <div className="h-full bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl p-6 overflow-hidden flex flex-col">
           <h2 className="text-2xl font-bold mb-4">{playlist.name}</h2>
           <p className="text-gray-300 text-sm mb-6">{playlist.description}</p>
           
