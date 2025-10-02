@@ -130,7 +130,7 @@ const PlaylistsPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center my-16 md:my-20">
+    <div className="w-full flex flex-col items-center justify-center my-4">
       <div className="relative w-full h-[50vh] md:h-[45vh] lg:h-[40vh] xl:h-[48vh]">
         <div className="overflow-hidden w-full " ref={emblaRef}>
           <div className="flex ">
