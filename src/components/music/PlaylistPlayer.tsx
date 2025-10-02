@@ -6,14 +6,22 @@ interface PlaylistPlayerProps {
   tracks: PlaylistTrack[];
   playlistName: string;
   playlistImage: string;
+  currentTrackIndex?: number;
+  onTrackChange?: (index: number) => void;
 }
 
 const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({ 
   tracks, 
   playlistName,
-  playlistImage 
+  playlistImage,
+  currentTrackIndex: externalTrackIndex,
+  onTrackChange
 }) => {
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [internalTrackIndex, setInternalTrackIndex] = useState(0);
+  
+  // Use external state if provided, otherwise use internal state
+  const currentTrackIndex = externalTrackIndex !== undefined ? externalTrackIndex : internalTrackIndex;
+  const setCurrentTrackIndex = onTrackChange || setInternalTrackIndex;
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);

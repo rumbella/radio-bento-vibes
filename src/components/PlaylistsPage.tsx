@@ -16,9 +16,9 @@ const PlaylistsPage: React.FC = () => {
       description: 'The best deep house tracks for your soul',
       image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
       tracks: [
-        { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03' },
-        { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
-        { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29' }
+        { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
+        { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
+        { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
       ]
     },
     {
@@ -27,9 +27,9 @@ const PlaylistsPage: React.FC = () => {
       description: 'Uplifting beats to start your day',
       image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
       tracks: [
-        { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20' },
-        { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02' },
-        { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05' }
+        { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
+        { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
+        { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
       ]
     },
     {
@@ -38,9 +38,9 @@ const PlaylistsPage: React.FC = () => {
       description: 'Relaxing sounds for peaceful moments',
       image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
       tracks: [
-        { id: '7', title: 'Weightless', artist: 'Marconi Union', duration: '8:08' },
-        { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01' },
-        { id: '9', title: 'Kiara', artist: 'Bonobo', duration: '5:27' }
+        { id: '7', title: 'Weightless', artist: 'Marconi Union', duration: '8:08', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
+        { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
+        { id: '9', title: 'Kiara', artist: 'Bonobo', duration: '5:27', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
       ]
     },
     {
@@ -49,9 +49,9 @@ const PlaylistsPage: React.FC = () => {
         description: 'The best deep house tracks for your soul',
         image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
         tracks: [
-          { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03' },
-          { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32' },
-          { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29' }
+          { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
+          { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
+          { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
         ]
       },
       {
@@ -60,9 +60,9 @@ const PlaylistsPage: React.FC = () => {
         description: 'Uplifting beats to start your day',
         image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1754298552/png_1_odwcbw.png',
         tracks: [
-          { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20' },
-          { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02' },
-          { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05' }
+          { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
+          { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
+          { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
         ]
       },
   ];
@@ -130,8 +130,8 @@ const PlaylistsPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-[50vh] md:h-[calc(100vh-10rem)] flex flex-col items-center justify-center">
-      <div className="relative w-full ">
+    <div className="w-full flex flex-col items-center justify-center my-16 md:my-20">
+      <div className="relative w-full h-[50vh] md:h-[60vh]">
         <div className="overflow-hidden w-full " ref={emblaRef}>
           <div className="flex ">
             {playlists.map((playlist, index) => (
@@ -152,9 +152,9 @@ const PlaylistsPage: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
                     {index === selectedIndex && (
-                      <button className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-black p-4 rounded-full shadow-lg transition-transform hover:scale-110 z-10">
+                      <Link to={`/playlist/${playlist.id}`} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-black p-4 rounded-full shadow-lg transition-transform hover:scale-110 z-10">
                         <Play size={24} className="fill-black" />
-                      </button>
+                      </Link>
                     )}
 
                     <div className="absolute bottom-4 left-4 right-4">
@@ -190,13 +190,14 @@ const PlaylistsPage: React.FC = () => {
         >
           <ChevronRight size={24} />
         </button>
+      </div>
 
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full">
-          <div
-            className="h-1 bg-white rounded-full"
-            style={{ width: `${progress * 100}%` }}
-          />
-        </div>
+      {/* Autoplay Progress Indicator - Outside Slider */}
+      <div className="w-32 h-1 bg-white/30 rounded-full mt-8 mx-auto">
+        <div
+          className="h-1 bg-white rounded-full transition-all"
+          style={{ width: `${progress * 100}%` }}
+        />
       </div>
     </div>
   );

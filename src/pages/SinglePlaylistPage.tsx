@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Playlist } from '../types';
 import { Clock } from 'lucide-react';
 import PlaylistPlayer from '../components/music/PlaylistPlayer';
+
+const DEFAULT_BACKGROUND = 'https://res.cloudinary.com/thinkdigital/image/upload/v1756910411/500501bc6a3eaca283c3c4951e15cc01_esu1fv.jpg';
 
 // Mock data - in a real app, this would come from a context or API call
 const playlists: Playlist[] = [
@@ -67,10 +69,16 @@ const playlists: Playlist[] = [
 const SinglePlaylistPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const playlist = playlists.find(p => p.id === id);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
 
   if (!playlist) {
     return <div className="text-white text-center p-8">Playlist not found</div>;
   }
+
+  // Get background image from current track or use default
+  const currentBackground = playlist.tracks[currentTrackIndex]?.audioUrl 
+    ? DEFAULT_BACKGROUND 
+    : DEFAULT_BACKGROUND;
 
   const getTotalDuration = (tracks: any[]) => {
     const totalSeconds = tracks.reduce((acc, track) => {
@@ -84,20 +92,20 @@ const SinglePlaylistPage: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col lg:flex-row lg:items-center lg:justify-between relative mx-auto px-4 lg:px-[90px]">
-      {/* Fixed Background Image */}
+      {/* Dynamic Background Image */}
       <div className="fixed top-0 left-0 w-full h-full z-0">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
           style={{
-            backgroundImage: `url('https://res.cloudinary.com/thinkdigital/image/upload/v1759328497/5cf0778d-1a1b-41a1-a05a-b605cbc3e274_1_dmbusi.png')`
+            backgroundImage: `url('${currentBackground}')`
           }}
         />
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
-      {/* Left Column: Track List - DESKTOP (45%) */}
-      <div className="hidden lg:block lg:w-[45%] relative z-10 lg:h-[60vh]">
+      {/* Left Column: Track List - DESKTOP (65%) */}
+      <div className="hidden lg:block lg:w-[65%] relative z-10 lg:h-[60vh]">
         <div className="h-full bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl p-6 overflow-hidden flex flex-col">
           <h2 className="text-2xl font-bold mb-4">{playlist.name}</h2>
           <p className="text-gray-300 text-sm mb-6">{playlist.description}</p>
@@ -159,6 +167,8 @@ const SinglePlaylistPage: React.FC = () => {
           tracks={playlist.tracks}
           playlistName={playlist.name}
           playlistImage={playlist.image}
+          currentTrackIndex={currentTrackIndex}
+          onTrackChange={setCurrentTrackIndex}
         />
       </div>
     </div>
