@@ -67,15 +67,14 @@ const ResidentsPage: React.FC = () => {
   return (
     <div className="max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
       <div className="flex items-center space-x-2 mb-6">
-        <Users className="text-liquid-lava" size={24} />
-        <h2 className="text-snow font-bold text-2xl">Our Residents</h2>
+        <h2 className="text-white font-bold text-2xl">Our Residents</h2>
       </div>
 
       <div className="space-y-6">
         {residents.map((resident) => (
           <div
             key={resident.id}
-            className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl border border-slate-grey/50 overflow-hidden"
+            className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl overflow-hidden"
           >
             <div className="relative h-48">
               <img
@@ -85,7 +84,7 @@ const ResidentsPage: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <h3 className="text-snow font-bold text-2xl mb-2">{resident.name}</h3>
+                <h3 className="text-white font-bold text-2xl mb-2">{resident.name}</h3>
                 <div className="flex flex-wrap gap-2">
                   {resident.shows.map((show, index) => (
                     <span
@@ -100,13 +99,13 @@ const ResidentsPage: React.FC = () => {
             </div>
 
             <div className="p-6">
-              <p className="text-dusty-grey text-sm leading-relaxed mb-6">
+              <p className="text-white text-sm leading-relaxed mb-6">
                 {resident.bio}
               </p>
 
               {/* Social Links */}
               <div className="flex items-center space-x-4">
-                <span className="text-dusty-grey text-sm font-medium">Follow:</span>
+                <span className="text-white text-sm font-medium">Follow:</span>
                 {Object.entries(resident.socialLinks).map(([platform, url]) => (
                   <a
                     key={platform}
@@ -126,12 +125,12 @@ const ResidentsPage: React.FC = () => {
       </div>
 
       {/* Join Us Section */}
-      <div className="bg-gradient-to-r from-liquid-lava/20 to-liquid-lava/10 backdrop-blur-md rounded-2xl border border-slate-grey/50 p-6 text-center">
-        <h3 className="text-snow font-bold text-xl mb-3">Want to Join Our Team?</h3>
-        <p className="text-dusty-grey text-sm mb-4">
+      <div className=" backdrop-blur-md rounded-2xl p-6 text-center">
+        <h3 className="text-white font-bold text-xl mb-3">Want to Join Our Team?</h3>
+        <p className="text-white text-sm mb-4">
           We're always looking for passionate DJs and music enthusiasts to join Radio Amblè.
         </p>
-        <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-snow px-6 py-3 rounded-full font-medium transition-colors">
+        <button className="bg-black hover:bg-liquid-lava/80 text-white px-6 py-3 rounded-full font-medium transition-colors">
           Get in Touch
         </button>
       </div>
