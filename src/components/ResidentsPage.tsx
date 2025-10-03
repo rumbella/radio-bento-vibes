@@ -1,6 +1,15 @@
-import React from 'react';
-import { Users, Instagram, Music2, ExternalLink } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+import { Users, Instagram, Music2, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Resident } from '../types';
+import { cn } from '../lib/utils';
+import type { Swiper as SwiperCore } from 'swiper';
+
+const AUTOPLAY_DELAY = 5000;
 
 const ResidentsPage: React.FC = () => {
   const residents: Resident[] = [
@@ -52,6 +61,10 @@ const ResidentsPage: React.FC = () => {
     }
   ];
 
+  const swiperRef = useRef<SwiperCore | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
   const getSocialIcon = (platform: string) => {
     switch (platform) {
       case 'instagram':
@@ -65,68 +78,119 @@ const ResidentsPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
+    <div className="w-full flex flex-col items-center justify-center my-4">
       <div className="flex items-center space-x-2 mb-6">
         <Users className="text-liquid-lava" size={24} />
         <h2 className="text-snow font-bold text-2xl">Our Residents</h2>
       </div>
 
-      <div className="space-y-6">
-        {residents.map((resident) => (
-          <div
-            key={resident.id}
-            className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl border border-slate-grey/50 overflow-hidden"
-          >
-            <div className="relative h-48">
-              <img
-                src={resident.image}
-                alt={resident.name}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <h3 className="text-snow font-bold text-2xl mb-2">{resident.name}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {resident.shows.map((show, index) => (
-                    <span
-                      key={index}
-                      className="bg-liquid-lava/20 text-liquid-lava text-xs px-3 py-1 rounded-full border border-liquid-lava/30"
-                    >
-                      {show}
-                    </span>
-                  ))}
+      <div className="relative w-full h-[70vh] md:h-[65vh] lg:h-[60vh] xl:h-[68vh]">
+        <Swiper
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          modules={[Autoplay, Navigation]}
+          loop={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          spaceBetween={16}
+          autoplay={{
+            delay: AUTOPLAY_DELAY,
+            disableOnInteraction: false,
+          }}
+          navigation={{
+            nextEl: '.swiper-button-next-residents',
+            prevEl: '.swiper-button-prev-residents',
+          }}
+          onSlideChange={(swiper) => setSelectedIndex(swiper.realIndex)}
+          onAutoplayTimeLeft={(s, time, progress) => {
+            setProgress(1 - progress);
+          }}
+          className="w-full h-full"
+        >
+          {residents.map((resident, index) => (
+            <SwiperSlide
+              key={resident.id}
+              className="flex-[0_0_80%] md:flex-[0_0_50%] lg:flex-[0_0_40%] xl:flex-[0_0_35%] min-w-0"
+            >
+              <div className={cn(
+                "bg-gluon-grey/80 backdrop-blur-md rounded-2xl border border-slate-grey/50 overflow-hidden h-full flex flex-col transition-transform duration-300 ease-out",
+                index === selectedIndex ? 'scale-100 opacity-100' : 'scale-90 opacity-50'
+              )}>
+                <div className="relative h-48">
+                  <img
+                    src={resident.image}
+                    alt={resident.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className={cn(
+                      "text-snow font-bold mb-2 transition-all duration-300",
+                      index === selectedIndex ? "text-2xl" : "text-lg"
+                    )}>{resident.name}</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {resident.shows.map((show, idx) => (
+                        <span
+                          key={idx}
+                          className={cn(
+                            "bg-liquid-lava/20 text-liquid-lava px-3 py-1 rounded-full border border-liquid-lava/30 transition-all duration-300",
+                            index === selectedIndex ? "text-xs" : "text-[10px]"
+                          )}
+                        >
+                          {show}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 flex-1 flex flex-col">
+                  <p className={cn(
+                    "text-dusty-grey leading-relaxed mb-6 flex-1 transition-all duration-300",
+                     index === selectedIndex ? "text-sm" : "text-xs"
+                  )}>
+                    {resident.bio}
+                  </p>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-dusty-grey text-sm font-medium">Follow:</span>
+                    {Object.entries(resident.socialLinks).map(([platform, url]) => (
+                      <a
+                        key={platform}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-2 text-dusty-grey hover:text-liquid-lava transition-colors"
+                      >
+                        {getSocialIcon(platform)}
+                        <span className="text-sm capitalize">{platform}</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-            <div className="p-6">
-              <p className="text-dusty-grey text-sm leading-relaxed mb-6">
-                {resident.bio}
-              </p>
-
-              {/* Social Links */}
-              <div className="flex items-center space-x-4">
-                <span className="text-dusty-grey text-sm font-medium">Follow:</span>
-                {Object.entries(resident.socialLinks).map(([platform, url]) => (
-                  <a
-                    key={platform}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-dusty-grey hover:text-liquid-lava transition-colors"
-                  >
-                    {getSocialIcon(platform)}
-                    <span className="text-sm capitalize">{platform}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
+        <button
+          className="swiper-button-prev-residents absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hidden md:block"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          className="swiper-button-next-residents absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hidden md:block"
+        >
+          <ChevronRight size={24} />
+        </button>
       </div>
 
-      {/* Join Us Section */}
-      <div className="bg-gradient-to-r from-liquid-lava/20 to-liquid-lava/10 backdrop-blur-md rounded-2xl border border-slate-grey/50 p-6 text-center">
+      <div className="w-32 h-1 bg-white/30 rounded-full mt-8 mx-auto">
+        <div
+          className="h-1 bg-white rounded-full transition-all"
+          style={{ width: `${progress * 100}%` }}
+        />
+      </div>
+
+      <div className="bg-gradient-to-r from-liquid-lava/20 to-liquid-lava/10 backdrop-blur-md rounded-2xl border border-slate-grey/50 p-6 text-center mt-8 max-w-md">
         <h3 className="text-snow font-bold text-xl mb-3">Want to Join Our Team?</h3>
         <p className="text-dusty-grey text-sm mb-4">
           We're always looking for passionate DJs and music enthusiasts to join Radio Amblè.
