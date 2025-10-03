@@ -62,7 +62,6 @@ const ResidentsPage: React.FC = () => {
   ];
 
   const swiperRef = useRef<SwiperCore | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const [progress, setProgress] = useState(0);
 
   const getSocialIcon = (platform: string) => {
@@ -84,14 +83,14 @@ const ResidentsPage: React.FC = () => {
         <h2 className="text-snow font-bold text-2xl">Our Residents</h2>
       </div>
 
-      <div className="relative w-full h-[70vh] md:h-[65vh] lg:h-[60vh] xl:h-[68vh]">
+      <div className="relative w-full max-w-6xl">
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           modules={[Autoplay, Navigation]}
           loop={true}
           centeredSlides={true}
-          slidesPerView={'auto'}
-          spaceBetween={16}
+          slidesPerView={3}
+          spaceBetween={30}
           autoplay={{
             delay: AUTOPLAY_DELAY,
             disableOnInteraction: false,
@@ -100,21 +99,17 @@ const ResidentsPage: React.FC = () => {
             nextEl: '.swiper-button-next-residents',
             prevEl: '.swiper-button-prev-residents',
           }}
-          onSlideChange={(swiper) => setSelectedIndex(swiper.realIndex)}
           onAutoplayTimeLeft={(s, time, progress) => {
             setProgress(1 - progress);
           }}
-          className="w-full h-full"
+          className="w-full"
         >
-          {residents.map((resident, index) => (
+          {residents.map((resident) => (
             <SwiperSlide
               key={resident.id}
-              className="flex-[0_0_80%] md:flex-[0_0_50%] lg:flex-[0_0_40%] xl:flex-[0_0_35%] min-w-0"
+              className="h-auto"
             >
-              <div className={cn(
-                "bg-gluon-grey/80 backdrop-blur-md rounded-2xl border border-slate-grey/50 overflow-hidden h-full flex flex-col transition-transform duration-300 ease-out",
-                index === selectedIndex ? 'scale-100 opacity-100' : 'scale-90 opacity-50'
-              )}>
+              <div className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl border border-slate-grey/50 overflow-hidden h-full flex flex-col">
                 <div className="relative h-48">
                   <img
                     src={resident.image}
@@ -123,18 +118,12 @@ const ResidentsPage: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className={cn(
-                      "text-snow font-bold mb-2 transition-all duration-300",
-                      index === selectedIndex ? "text-2xl" : "text-lg"
-                    )}>{resident.name}</h3>
+                    <h3 className="text-snow font-bold text-xl mb-2">{resident.name}</h3>
                     <div className="flex flex-wrap gap-2">
                       {resident.shows.map((show, idx) => (
                         <span
                           key={idx}
-                          className={cn(
-                            "bg-liquid-lava/20 text-liquid-lava px-3 py-1 rounded-full border border-liquid-lava/30 transition-all duration-300",
-                            index === selectedIndex ? "text-xs" : "text-[10px]"
-                          )}
+                          className="bg-liquid-lava/20 text-liquid-lava text-xs px-3 py-1 rounded-full border border-liquid-lava/30"
                         >
                           {show}
                         </span>
@@ -144,10 +133,7 @@ const ResidentsPage: React.FC = () => {
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">
-                  <p className={cn(
-                    "text-dusty-grey leading-relaxed mb-6 flex-1 transition-all duration-300",
-                     index === selectedIndex ? "text-sm" : "text-xs"
-                  )}>
+                  <p className="text-dusty-grey text-sm leading-relaxed mb-6 flex-1">
                     {resident.bio}
                   </p>
                   <div className="flex items-center space-x-4">
@@ -172,12 +158,12 @@ const ResidentsPage: React.FC = () => {
         </Swiper>
 
         <button
-          className="swiper-button-prev-residents absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hidden md:block"
+          className="swiper-button-prev-residents absolute top-1/2 left-0 -translate-x-1/2 bg-black/50 text-white p-2 rounded-full z-10"
         >
           <ChevronLeft size={24} />
         </button>
         <button
-          className="swiper-button-next-residents absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hidden md:block"
+          className="swiper-button-next-residents absolute top-1/2 right-0 translate-x-1/2 bg-black/50 text-white p-2 rounded-full z-10"
         >
           <ChevronRight size={24} />
         </button>
