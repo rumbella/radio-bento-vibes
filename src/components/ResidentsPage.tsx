@@ -80,7 +80,7 @@ const ResidentsPage: React.FC = () => {
     <div className="w-full flex flex-col items-center justify-center my-4">
       <div className="flex items-center space-x-2 mb-6">
         <Users className="text-liquid-lava" size={24} />
-        <h2 className="text-snow font-bold text-2xl">Our Residents</h2>
+        <h2 className="text-white font-bold text-2xl">Our Residents</h2>
       </div>
 
       <div className="relative w-full max-w-6xl">
@@ -109,7 +109,7 @@ const ResidentsPage: React.FC = () => {
               key={resident.id}
               className="h-auto"
             >
-              <div className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl border border-slate-grey/50 overflow-hidden h-full flex flex-col">
+              <div className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl overflow-hidden h-full flex flex-col">
                 <div className="relative h-48">
                   <img
                     src={resident.image}
@@ -118,12 +118,12 @@ const ResidentsPage: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-snow font-bold text-xl mb-2">{resident.name}</h3>
+                    <h3 className="text-white font-bold text-xl mb-2">{resident.name}</h3>
                     <div className="flex flex-wrap gap-2">
                       {resident.shows.map((show, idx) => (
                         <span
                           key={idx}
-                          className="bg-liquid-lava/20 text-liquid-lava text-xs px-3 py-1 rounded-full border border-liquid-lava/30"
+                          className="bg-white text-black text-xs px-3 py-1 rounded-full font-medium"
                         >
                           {show}
                         </span>
@@ -133,18 +133,18 @@ const ResidentsPage: React.FC = () => {
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">
-                  <p className="text-dusty-grey text-sm leading-relaxed mb-6 flex-1">
+                  <p className="text-white text-sm leading-relaxed mb-6 flex-1">
                     {resident.bio}
                   </p>
                   <div className="flex items-center space-x-4">
-                    <span className="text-dusty-grey text-sm font-medium">Follow:</span>
+                    <span className="text-white text-sm font-medium">Follow:</span>
                     {Object.entries(resident.socialLinks).map(([platform, url]) => (
                       <a
                         key={platform}
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center space-x-2 text-dusty-grey hover:text-liquid-lava transition-colors"
+                        className="flex items-center space-x-2 text-white hover:text-liquid-lava transition-colors"
                       >
                         {getSocialIcon(platform)}
                         <span className="text-sm capitalize">{platform}</span>
@@ -176,12 +176,12 @@ const ResidentsPage: React.FC = () => {
         />
       </div>
 
-      <div className="bg-gradient-to-r from-liquid-lava/20 to-liquid-lava/10 backdrop-blur-md rounded-2xl border border-slate-grey/50 p-6 text-center mt-8 max-w-md">
-        <h3 className="text-snow font-bold text-xl mb-3">Want to Join Our Team?</h3>
-        <p className="text-dusty-grey text-sm mb-4">
+      <div className="bg-gradient-to-r from-liquid-lava/20 to-liquid-lava/10 backdrop-blur-md rounded-2xl p-6 text-center mt-8 max-w-md">
+        <h3 className="text-white font-bold text-xl mb-3">Want to Join Our Team?</h3>
+        <p className="text-white text-sm mb-4">
           We're always looking for passionate DJs and music enthusiasts to join Radio Amblè.
         </p>
-        <button className="bg-liquid-lava hover:bg-liquid-lava/80 text-snow px-6 py-3 rounded-full font-medium transition-colors">
+        <button className="bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-full font-medium transition-colors">
           Get in Touch
         </button>
       </div>
