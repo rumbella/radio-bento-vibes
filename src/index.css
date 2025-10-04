@@ -79,3 +79,24 @@ html, body, #root {
 .animate-marquee {
   animation: marquee 15s linear infinite;
 }
+
+.swiper-pagination-residents {
+  position: relative !important;
+  bottom: 0 !important;
+  text-align: center;
+}
+
+.swiper-pagination-residents .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: #888;
+  opacity: 1;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  margin: 0 4px !important;
+}
+
+.swiper-pagination-residents .swiper-pagination-bullet-active {
+  width: 24px;
+  background-color: #fff;
+}
