@@ -83,7 +83,7 @@ const ResidentsPage: React.FC = () => {
         <h2 className="text-white font-bold text-2xl">Our Residents</h2>
       </div>
 
-      <div className="relative w-full max-w-6xl">
+      <div className="relative w-screen -translate-x-1/2 left-1/2">
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           modules={[Autoplay, Navigation]}
@@ -105,54 +105,58 @@ const ResidentsPage: React.FC = () => {
           className="w-full"
         >
           {residents.map((resident) => (
-            <SwiperSlide
-              key={resident.id}
-              className="h-auto"
-            >
-              <div className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl overflow-hidden h-full flex flex-col">
-                <div className="relative h-48">
-                  <img
-                    src={resident.image}
-                    alt={resident.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-white font-bold text-xl mb-2">{resident.name}</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {resident.shows.map((show, idx) => (
-                        <span
-                          key={idx}
-                          className="bg-white text-black text-xs px-3 py-1 rounded-full font-medium"
+            <SwiperSlide key={resident.id}>
+              {({ isActive }) => (
+                <div
+                  className={cn(
+                    "bg-gluon-grey/80 backdrop-blur-md rounded-2xl overflow-hidden h-full flex flex-col transition-all duration-300",
+                    isActive ? "scale-100 opacity-100" : "scale-90 opacity-60"
+                  )}
+                >
+                  <div className="relative h-48">
+                    <img
+                      src={resident.image}
+                      alt={resident.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-white font-bold text-xl mb-2">{resident.name}</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {resident.shows.map((show, idx) => (
+                          <span
+                            key={idx}
+                            className="bg-white text-black text-xs px-3 py-1 rounded-full font-medium"
+                          >
+                            {show}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-6 flex-1 flex flex-col">
+                    <p className="text-white text-sm leading-relaxed mb-6 flex-1">
+                      {resident.bio}
+                    </p>
+                    <div className="flex items-center space-x-4">
+                      <span className="text-white text-sm font-medium">Follow:</span>
+                      {Object.entries(resident.socialLinks).map(([platform, url]) => (
+                        <a
+                          key={platform}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center space-x-2 text-white hover:text-liquid-lava transition-colors"
                         >
-                          {show}
-                        </span>
+                          {getSocialIcon(platform)}
+                          <span className="text-sm capitalize">{platform}</span>
+                        </a>
                       ))}
                     </div>
                   </div>
                 </div>
-
-                <div className="p-6 flex-1 flex flex-col">
-                  <p className="text-white text-sm leading-relaxed mb-6 flex-1">
-                    {resident.bio}
-                  </p>
-                  <div className="flex items-center space-x-4">
-                    <span className="text-white text-sm font-medium">Follow:</span>
-                    {Object.entries(resident.socialLinks).map(([platform, url]) => (
-                      <a
-                        key={platform}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center space-x-2 text-white hover:text-liquid-lava transition-colors"
-                      >
-                        {getSocialIcon(platform)}
-                        <span className="text-sm capitalize">{platform}</span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
