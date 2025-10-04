@@ -83,12 +83,11 @@ const ResidentsPage: React.FC = () => {
         <h2 className="text-white font-bold text-2xl">Our Residents</h2>
       </div>
 
-      <div className="relative w-full max-w-6xl">
+      <div className="relative w-screen -translate-x-1/2 left-1/2">
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           modules={[Autoplay, Navigation]}
           loop={true}
-          centeredSlides={true}
           slidesPerView={3}
           spaceBetween={30}
           autoplay={{
