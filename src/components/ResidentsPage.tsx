@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+import 'swiper/css/pagination';
 import { Users, Instagram, Music2, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Resident } from '../types';
 import { cn } from '../lib/utils';
@@ -62,7 +63,6 @@ const ResidentsPage: React.FC = () => {
   ];
 
   const swiperRef = useRef<SwiperCore | null>(null);
-  const [progress, setProgress] = useState(0);
 
   const getSocialIcon = (platform: string) => {
     switch (platform) {
@@ -83,10 +83,10 @@ const ResidentsPage: React.FC = () => {
         <h2 className="text-white font-bold text-2xl">Our Residents</h2>
       </div>
 
-      <div className="relative w-screen -translate-x-1/2 left-1/2">
+      <div className="relative w-full max-w-6xl">
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)}
-          modules={[Autoplay, Navigation]}
+          modules={[Autoplay, Navigation, Pagination]}
           loop={true}
           centeredSlides={true}
           slidesPerView={3}
@@ -95,68 +95,65 @@ const ResidentsPage: React.FC = () => {
             delay: AUTOPLAY_DELAY,
             disableOnInteraction: false,
           }}
+          pagination={{
+            clickable: true,
+            el: '.swiper-pagination-residents',
+          }}
           navigation={{
             nextEl: '.swiper-button-next-residents',
             prevEl: '.swiper-button-prev-residents',
           }}
-          onAutoplayTimeLeft={(s, time, progress) => {
-            setProgress(1 - progress);
-          }}
           className="w-full"
         >
           {residents.map((resident) => (
-            <SwiperSlide key={resident.id}>
-              {({ isActive }) => (
-                <div
-                  className={cn(
-                    "bg-gluon-grey/80 backdrop-blur-md rounded-2xl overflow-hidden h-full flex flex-col transition-all duration-300",
-                    isActive ? "scale-100 opacity-100" : "scale-90 opacity-60"
-                  )}
-                >
-                  <div className="relative h-48">
-                    <img
-                      src={resident.image}
-                      alt={resident.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-white font-bold text-xl mb-2">{resident.name}</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {resident.shows.map((show, idx) => (
-                          <span
-                            key={idx}
-                            className="bg-white text-black text-xs px-3 py-1 rounded-full font-medium"
-                          >
-                            {show}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 flex-1 flex flex-col">
-                    <p className="text-white text-sm leading-relaxed mb-6 flex-1">
-                      {resident.bio}
-                    </p>
-                    <div className="flex items-center space-x-4">
-                      <span className="text-white text-sm font-medium">Follow:</span>
-                      {Object.entries(resident.socialLinks).map(([platform, url]) => (
-                        <a
-                          key={platform}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center space-x-2 text-white hover:text-liquid-lava transition-colors"
+            <SwiperSlide
+              key={resident.id}
+              className="h-auto"
+            >
+              <div className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl overflow-hidden h-full flex flex-col">
+                <div className="relative h-48">
+                  <img
+                    src={resident.image}
+                    alt={resident.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-white font-bold text-xl mb-2">{resident.name}</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {resident.shows.map((show, idx) => (
+                        <span
+                          key={idx}
+                          className="bg-white text-black text-xs px-3 py-1 rounded-full font-medium"
                         >
-                          {getSocialIcon(platform)}
-                          <span className="text-sm capitalize">{platform}</span>
-                        </a>
+                          {show}
+                        </span>
                       ))}
                     </div>
                   </div>
                 </div>
-              )}
+
+                <div className="p-6 flex-1 flex flex-col">
+                  <p className="text-white text-sm leading-relaxed mb-6 flex-1">
+                    {resident.bio}
+                  </p>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-white text-sm font-medium">Follow:</span>
+                    {Object.entries(resident.socialLinks).map(([platform, url]) => (
+                      <a
+                        key={platform}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-2 text-white hover:text-liquid-lava transition-colors"
+                      >
+                        {getSocialIcon(platform)}
+                        <span className="text-sm capitalize">{platform}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -173,12 +170,7 @@ const ResidentsPage: React.FC = () => {
         </button>
       </div>
 
-      <div className="w-32 h-1 bg-white/30 rounded-full mt-8 mx-auto">
-        <div
-          className="h-1 bg-white rounded-full transition-all"
-          style={{ width: `${progress * 100}%` }}
-        />
-      </div>
+      <div className="swiper-pagination-residents mt-8"></div>
 
     </div>
   );
