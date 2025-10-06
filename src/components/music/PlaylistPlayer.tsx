@@ -155,11 +155,11 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
       />
 
       {/* Unified Layout */}
-      <div className="bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl p-4 w-full h-[12rem]">
-        <div className="flex items-center justify-between gap-4 h-full">
+      <div className="bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl p-4 w-full">
+        <div className="flex items-center justify-between gap-4">
 
           {/* Left: Track Info & Volume */}
-          <div className="flex items-center gap-3 w-1/3 h-full">
+          <div className="flex items-center gap-3 w-1/3">
             <img
               src={playlistImage}
               alt={playlistName}
