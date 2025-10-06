@@ -154,62 +154,62 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
         preload="auto"
       />
 
-      {/* Mobile Layout */}
-      <div className="lg:hidden bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl">
-        <div className="relative w-full p-4 flex flex-col justify-between">
-          {/* Header */}
-          <header className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <img
-                src={playlistImage}
-                alt={playlistName}
-                className="w-10 h-10 rounded-lg object-cover"
-              />
-              <div className="w-24 break-words">
-                <h2 className="font-bold text-sm">{playlistName}</h2>
-              </div>
-            </div>
-            <div>
-              <p className="text-xs">Playlist</p>
-            </div>
-          </header>
+      {/* Unified Layout */}
+      <div className="bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl p-4 w-full">
+        <div className="flex items-center justify-between gap-4">
 
-          {/* Body (Play Controls) */}
-          <div className="flex-grow flex flex-col items-center justify-center gap-2">
-            <div className="text-center mb-2">
-                <p className="text-xs text-gray-300">{currentTrack?.artist}</p>
-                <p className="text-sm font-bold truncate">{currentTrack?.title}</p>
+          {/* Left: Track Info & Volume */}
+          <div className="flex items-center gap-3 w-1/3">
+            <img
+              src={playlistImage}
+              alt={playlistName}
+              className="w-14 h-14 rounded-lg object-cover hidden sm:block"
+            />
+            <div className="min-w-0">
+              <p className="text-base font-bold truncate">{currentTrack?.title}</p>
+              <p className="text-sm text-gray-300 truncate">{currentTrack?.artist}</p>
             </div>
-            <div className="flex items-center justify-center gap-4">
+            <div className="hidden lg:flex items-center gap-2 ml-4">
+              <button onClick={toggleMute} className="text-gray-400 hover:text-white">
+                {isMuted || volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
+              </button>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={isMuted ? 0 : volume}
+                onChange={handleVolumeChange}
+                className="w-20 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer range-sm"
+                style={volumeBarBackground}
+              />
+            </div>
+          </div>
+
+          {/* Center: Play Controls & Progress Bar */}
+          <div className="flex flex-col items-center gap-2 w-1/3">
+            <div className="flex items-center gap-4">
               <button
                 onClick={prevTrack}
                 className="bg-transparent hover:bg-white/10 text-white p-2 rounded-full transition-all duration-300"
               >
-                <SkipBack size={24} fill="currentColor" />
+                <SkipBack size={20} fill="currentColor" />
               </button>
-
-              <div className="relative">
-                <button
-                  onClick={togglePlay}
-                  className={`bg-transparent hover:bg-transparent text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-white ${!isPlaying && !isLoading ? 'idle-pulse' : ''}`}
-                  disabled={isLoading}
-                >
-                  {isLoading ? <Loader size={36} className="animate-spin" /> : (isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" />)}
-                </button>
-              </div>
-
+              <button
+                onClick={togglePlay}
+                className={`bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-105 ${!isPlaying && !isLoading ? 'idle-pulse' : ''}`}
+                disabled={isLoading}
+              >
+                {isLoading ? <Loader size={28} className="animate-spin" /> : (isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" />)}
+              </button>
               <button
                 onClick={nextTrack}
                 className="bg-transparent hover:bg-white/10 text-white p-2 rounded-full transition-all duration-300"
               >
-                <SkipForward size={24} fill="currentColor" />
+                <SkipForward size={20} fill="currentColor" />
               </button>
             </div>
-          </div>
-
-          {/* Footer with Progress */}
-          <footer className="w-full">
-            <div className="w-full">
+            <div className="w-full max-w-xs">
               <input
                 type="range"
                 min="0"
@@ -224,96 +224,17 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
                 <span>{formatTime(duration)}</span>
               </div>
             </div>
-          </footer>
+          </div>
+
+          {/* Right: Playlist Info */}
+          <div className="hidden md:flex items-center justify-end gap-3 w-1/3">
+             <div className="text-right">
+                <h2 className="font-bold text-base truncate">{playlistName}</h2>
+                <p className="text-xs text-gray-300">Track {currentTrackIndex + 1} of {tracks.length}</p>
+             </div>
+          </div>
+
         </div>
-      </div>
-
-      {/* Desktop Layout */}
-      <div className="hidden lg:flex lg:flex-col lg:h-full bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl p-6 shadow-2xl">
-        <header className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <img
-              src={playlistImage}
-              alt={playlistName}
-              className="w-12 h-12 rounded-lg object-cover"
-            />
-            <div>
-              <h2 className="font-bold text-lg">{playlistName}</h2>
-              <p className="text-xs text-gray-300">Playlist</p>
-            </div>
-          </div>
-        </header>
-
-        <div className="flex-1 flex flex-col items-center justify-center gap-4">
-          <div className="text-center">
-            <p className="text-lg font-bold">{currentTrack?.title}</p>
-            <p className="text-sm text-gray-300">{currentTrack?.artist}</p>
-          </div>
-
-          <div className="w-full px-4">
-            <input
-              ref={progressBarRef}
-              type="range"
-              min="0"
-              max="100"
-              step="0.1"
-              value={progress}
-              onChange={handleProgressChange}
-              className="w-full h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg"
-              style={progressBarBackground}
-            />
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
-              <span>{formatTime(currentTime)}</span>
-              <span>{formatTime(duration)}</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-6">
-            <button
-              onClick={prevTrack}
-              className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-105"
-            >
-              <SkipBack size={20} fill="currentColor" />
-            </button>
-            
-            <div className="relative">
-              <button
-                onClick={togglePlay}
-                className={`bg-black hover:bg-gray-900 text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg ${!isPlaying && !isLoading ? 'idle-pulse' : ''}`}
-                disabled={isLoading}
-              >
-                {isLoading ? <Loader size={28} className="animate-spin" /> : (isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" />)}
-              </button>
-            </div>
-
-            <button
-              onClick={nextTrack}
-              className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-105"
-            >
-              <SkipForward size={20} fill="currentColor" />
-            </button>
-          </div>
-
-          <div className="w-full flex items-center justify-center gap-3 px-8">
-            <button onClick={toggleMute} className="text-gray-400 hover:text-white">
-              {isMuted || volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
-            </button>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={isMuted ? 0 : volume}
-              onChange={handleVolumeChange}
-              className="w-24 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer range-sm"
-              style={volumeBarBackground}
-            />
-          </div>
-        </div>
-
-        <footer className="text-center text-xs text-gray-400">
-          Track {currentTrackIndex + 1} of {tracks.length}
-        </footer>
       </div>
     </>
   );
