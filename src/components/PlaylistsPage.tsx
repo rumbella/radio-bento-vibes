@@ -1,16 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/autoplay';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Play, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import { Play, ListMusic, ArrowUpRight } from 'lucide-react';
 import type { Playlist } from '../types';
-import { cn } from '../lib/utils';
-import type { Swiper as SwiperCore } from 'swiper';
-
-const AUTOPLAY_DELAY = 4000;
 
 const PlaylistsPage: React.FC = () => {
   const playlists: Playlist[] = [
@@ -62,7 +53,7 @@ const PlaylistsPage: React.FC = () => {
         id: '5',
         name: 'Afro House',
         description: 'Uplifting beats to start your day',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
+        image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
         tracks: [
           { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
           { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
@@ -71,9 +62,8 @@ const PlaylistsPage: React.FC = () => {
       },
   ];
 
-  const swiperRef = useRef<SwiperCore | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const featuredPlaylist = playlists[0];
+  const otherPlaylists = playlists.slice(1);
 
   const getTotalDuration = (tracks: any[]) => {
     const totalSeconds = tracks.reduce((acc, track) => {
@@ -86,94 +76,87 @@ const PlaylistsPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center my-4">
-      <div className="relative w-full h-[50vh] md:h-[45vh] lg:h-[40vh] xl:h-[48vh]">
-        <Swiper
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
-          modules={[Autoplay, Navigation]}
-          loop={true}
-          centeredSlides={true}
-          slidesPerView={'auto'}
-          spaceBetween={16}
-          autoplay={{
-            delay: AUTOPLAY_DELAY,
-            disableOnInteraction: false,
-          }}
-          navigation={{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }}
-          onSlideChange={(swiper) => setSelectedIndex(swiper.realIndex)}
-          onAutoplayTimeLeft={(s, time, progress) => {
-            setProgress(1 - progress);
-          }}
-          className="w-full h-full"
-        >
-          {playlists.map((playlist, index) => (
-            <SwiperSlide
+    <div className="max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
+      <div className="flex items-center space-x-2 mb-6">
+        <ListMusic className="text-liquid-lava" size={24} />
+        <h2 className="text-text-main font-bold text-2xl">Playlists</h2>
+      </div>
+
+      {/* Featured Playlist */}
+      <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden">
+        <div className="relative h-56">
+          <img
+            src={featuredPlaylist.image}
+            alt={featuredPlaylist.name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+          <div className="absolute top-4 left-4">
+            <span className="bg-liquid-lava text-text-main text-xs px-3 py-1 rounded-full font-medium">
+              Featured
+            </span>
+          </div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Link to={`/playlist/${featuredPlaylist.id}`} className="bg-white text-black p-4 rounded-full shadow-lg transition-transform hover:scale-110 z-10">
+              <Play size={24} className="fill-black" />
+            </Link>
+          </div>
+          <div className="absolute bottom-4 left-4 right-4">
+            <h3 className="text-text-main font-bold text-xl mb-2">{featuredPlaylist.name}</h3>
+            <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+              {featuredPlaylist.description}
+            </p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4 text-gray-400 text-sm">
+                <span>{featuredPlaylist.tracks.length} tracks</span>
+                <span>•</span>
+                <span>{getTotalDuration(featuredPlaylist.tracks)}</span>
+              </div>
+               <Link to={`/playlist/${featuredPlaylist.id}`} className="bg-transparent text-white p-2 rounded-full transition-colors hover:bg-white/10">
+                <ArrowUpRight size={20} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* All Playlists */}
+      <div>
+        <h3 className="text-text-main font-semibold text-lg mb-4">All Playlists</h3>
+        <div className="space-y-4">
+          {otherPlaylists.map((playlist) => (
+            <div
               key={playlist.id}
-              className={cn(
-                'flex-[0_0_80%] md:flex-[0_0_40%] lg:flex-[0_0_45%] min-w-0 transition-transform duration-300 ease-out h-full',
-                index === selectedIndex ? 'scale-100 opacity-100' : 'scale-90 opacity-50'
-              )}
-              style={{
-                width: '80%',
-                maxWidth: '400px'
-              }}
+              className="bg-container-dark backdrop-blur-md rounded-xl p-4 hover:bg-slate-grey/30 transition-colors"
             >
-              <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden h-full">
-                <div className="relative h-full">
-                  <img
-                    src={playlist.image}
-                    alt={playlist.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-
-                  {index === selectedIndex && (
-                    <Link to={`/playlist/${playlist.id}`} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-black p-4 rounded-full shadow-lg transition-transform hover:scale-110 z-10">
-                      <Play size={24} className="fill-black" />
-                    </Link>
-                  )}
-
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-text-main font-bold text-xl mb-1">{playlist.name}</h3>
-                    <p className="text-gray-400 text-sm mb-3">{playlist.description}</p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4 text-gray-400 text-sm">
-                        <span>{playlist.tracks.length} tracks</span>
-                        <span>•</span>
-                        <span>{getTotalDuration(playlist.tracks)}</span>
-                      </div>
-                      <Link to={`/playlist/${playlist.id}`} className="bg-transparent text-white p-2 rounded-full transition-colors hover:bg-white/10">
-                        <ArrowUpRight size={20} />
-                      </Link>
+              <div className="flex items-start space-x-4">
+                <img
+                  src={playlist.image}
+                  alt={playlist.name}
+                  className="w-20 h-20 rounded-full object-cover flex-shrink-0"
+                />
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-text-main font-medium text-lg mb-2 line-clamp-1">
+                    {playlist.name}
+                  </h4>
+                  <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+                    {playlist.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4 text-gray-400 text-sm">
+                      <span>{playlist.tracks.length} tracks</span>
+                      <span>•</span>
+                      <span>{getTotalDuration(playlist.tracks)}</span>
                     </div>
+                    <Link to={`/playlist/${playlist.id}`} className="bg-white hover:bg-gray-200 text-black p-2 rounded-full transition-colors">
+                      <Play size={16} fill="black" />
+                    </Link>
                   </div>
                 </div>
               </div>
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
-
-        <button
-          className="swiper-button-prev absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hidden md:block"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <button
-          className="swiper-button-next absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hidden md:block"
-        >
-          <ChevronRight size={24} />
-        </button>
-      </div>
-
-      {/* Autoplay Progress Indicator - Outside Slider */}
-      <div className="w-32 h-1 bg-white/30 rounded-full mt-8 mx-auto">
-        <div
-          className="h-1 bg-white rounded-full transition-all"
-          style={{ width: `${progress * 100}%` }}
-        />
+        </div>
       </div>
     </div>
   );

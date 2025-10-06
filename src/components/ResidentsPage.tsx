@@ -1,16 +1,6 @@
-import React, { useState, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/autoplay';
-import 'swiper/css/pagination';
-import { Users, Instagram, Music2, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { Users, Instagram, Music2, ExternalLink } from 'lucide-react';
 import type { Resident } from '../types';
-import { cn } from '../lib/utils';
-import type { Swiper as SwiperCore } from 'swiper';
-
-const AUTOPLAY_DELAY = 5000;
 
 const ResidentsPage: React.FC = () => {
   const residents: Resident[] = [
@@ -62,7 +52,8 @@ const ResidentsPage: React.FC = () => {
     }
   ];
 
-  const swiperRef = useRef<SwiperCore | null>(null);
+  const featuredResident = residents[0];
+  const otherResidents = residents.slice(1);
 
   const getSocialIcon = (platform: string) => {
     switch (platform) {
@@ -76,102 +67,99 @@ const ResidentsPage: React.FC = () => {
     }
   };
 
+  const SocialLinks: React.FC<{ links: { [key: string]: string } }> = ({ links }) => (
+    <div className="flex items-center flex-wrap gap-4">
+      {Object.entries(links).map(([platform, url]) => (
+        <a
+          key={platform}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center space-x-2 text-gray-400 hover:text-liquid-lava transition-colors"
+        >
+          {getSocialIcon(platform)}
+          <span className="text-sm capitalize">{platform}</span>
+        </a>
+      ))}
+    </div>
+  );
+
   return (
-    <div className="w-full flex flex-col items-center justify-center my-4">
+    <div className="max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
       <div className="flex items-center space-x-2 mb-6">
         <Users className="text-liquid-lava" size={24} />
-        <h2 className="text-white font-bold text-2xl">Our Residents</h2>
+        <h2 className="text-text-main font-bold text-2xl">Our Residents</h2>
       </div>
 
-      <div className="relative w-full max-w-6xl">
-        <Swiper
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
-          modules={[Autoplay, Navigation, Pagination]}
-          loop={true}
-          centeredSlides={true}
-          slidesPerView={3}
-          spaceBetween={30}
-          autoplay={{
-            delay: AUTOPLAY_DELAY,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-            el: '.swiper-pagination-residents',
-          }}
-          navigation={{
-            nextEl: '.swiper-button-next-residents',
-            prevEl: '.swiper-button-prev-residents',
-          }}
-          className="w-full"
-        >
-          {residents.map((resident) => (
-            <SwiperSlide
-              key={resident.id}
-              className="h-auto"
-            >
-              <div className="bg-gluon-grey/80 backdrop-blur-md rounded-2xl overflow-hidden h-full flex flex-col">
-                <div className="relative h-48">
-                  <img
-                    src={resident.image}
-                    alt={resident.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-white font-bold text-xl mb-2">{resident.name}</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {resident.shows.map((show, idx) => (
-                        <span
-                          key={idx}
-                          className="bg-white text-black text-xs px-3 py-1 rounded-full font-medium"
-                        >
-                          {show}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+      {/* Featured Resident */}
+      <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden">
+        <div className="relative h-56">
+          <img
+            src={featuredResident.image}
+            alt={featuredResident.name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+          <div className="absolute top-4 left-4">
+            <span className="bg-liquid-lava text-text-main text-xs px-3 py-1 rounded-full font-medium">
+              Featured
+            </span>
+          </div>
+          <div className="absolute bottom-4 left-4 right-4">
+            <h3 className="text-text-main font-bold text-xl mb-2">{featuredResident.name}</h3>
+            <div className="flex flex-wrap gap-2 mb-4">
+                {featuredResident.shows.map((show, idx) => (
+                    <span key={idx} className="bg-white/20 text-text-main text-xs px-2 py-1 rounded-full font-medium">
+                        {show}
+                    </span>
+                ))}
+            </div>
+          </div>
+        </div>
+        <div className="p-6">
+            <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+                {featuredResident.bio}
+            </p>
+            <SocialLinks links={featuredResident.socialLinks} />
+        </div>
+      </div>
 
-                <div className="p-6 flex-1 flex flex-col">
-                  <p className="text-white text-sm leading-relaxed mb-6 flex-1">
+      {/* All Residents */}
+      <div>
+        <h3 className="text-text-main font-semibold text-lg mb-4">All Residents</h3>
+        <div className="space-y-4">
+          {otherResidents.map((resident) => (
+            <div
+              key={resident.id}
+              className="bg-container-dark backdrop-blur-md rounded-xl p-4 hover:bg-slate-grey/30 transition-colors"
+            >
+              <div className="flex items-start space-x-4">
+                <img
+                  src={resident.image}
+                  alt={resident.name}
+                  className="w-20 h-20 rounded-full object-cover flex-shrink-0"
+                />
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-text-main font-medium text-lg mb-2 line-clamp-1">
+                    {resident.name}
+                  </h4>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                      {resident.shows.map((show, idx) => (
+                          <span key={idx} className="bg-white/10 text-text-main text-xs px-2 py-1 rounded-full font-medium">
+                              {show}
+                          </span>
+                      ))}
+                  </div>
+                  <p className="text-gray-400 text-sm mb-3 line-clamp-2">
                     {resident.bio}
                   </p>
-                  <div className="flex items-center space-x-4">
-                    <span className="text-white text-sm font-medium">Follow:</span>
-                    {Object.entries(resident.socialLinks).map(([platform, url]) => (
-                      <a
-                        key={platform}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center space-x-2 text-white hover:text-liquid-lava transition-colors"
-                      >
-                        {getSocialIcon(platform)}
-                        <span className="text-sm capitalize">{platform}</span>
-                      </a>
-                    ))}
-                  </div>
+                  <SocialLinks links={resident.socialLinks} />
                 </div>
               </div>
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
-
-        <button
-          className="swiper-button-prev-residents absolute top-1/2 left-0 -translate-x-1/2 bg-black/50 text-white p-2 rounded-full z-10"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <button
-          className="swiper-button-next-residents absolute top-1/2 right-0 translate-x-1/2 bg-black/50 text-white p-2 rounded-full z-10"
-        >
-          <ChevronRight size={24} />
-        </button>
+        </div>
       </div>
-
-      <div className="swiper-pagination-residents mt-8"></div>
-
     </div>
   );
 };
