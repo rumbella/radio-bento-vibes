@@ -90,10 +90,12 @@ const SinglePlaylistPage: React.FC = () => {
       </div>
 
       {/* Top Section: Playlist Dropdown */}
-      <PlaylistDropdown playlist={playlist} onTrackSelect={handleTrackSelect} />
+      <div className="w-full max-w-[35rem] mb-4">
+        <PlaylistDropdown playlist={playlist} onTrackSelect={handleTrackSelect} />
+      </div>
 
       {/* Bottom Section: Playlist Player */}
-      <div className="w-full max-w-4xl z-10">
+      <div className="w-full max-w-[35rem] z-10">
         <PlaylistPlayer 
           tracks={playlist.tracks}
           playlistName={playlist.name}

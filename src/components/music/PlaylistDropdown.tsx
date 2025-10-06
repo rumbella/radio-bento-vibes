@@ -11,23 +11,23 @@ const PlaylistDropdown: React.FC<PlaylistDropdownProps> = ({ playlist, onTrackSe
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative z-10 w-full max-w-4xl mx-auto">
+    <div className="relative z-20 w-full max-w-4xl mx-auto">
       <div className={`
         bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl
         transition-all duration-500 ease-in-out overflow-hidden
-        ${isOpen ? 'h-[70vh]' : 'h-24'}
+        ${isOpen ? 'h-[70vh]' : 'h-16'}
       `}>
         <div className="p-6 flex flex-col h-full">
           {/* Header */}
           <div
-            className="flex items-center justify-between cursor-pointer"
+            className={`flex items-center cursor-pointer ${isOpen ? 'justify-between' : 'justify-center'}`}
             onClick={() => setIsOpen(!isOpen)}
           >
             <div className="flex items-center space-x-4">
-              <img src={playlist.image} alt={playlist.name} className="w-12 h-12 rounded-lg object-cover" />
+              <img src={playlist.image} alt={playlist.name} className={`w-12 h-12 rounded-lg object-cover transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`} />
               <div>
                 <h2 className="text-xl font-bold">{playlist.name}</h2>
-                <p className="text-gray-300 text-sm">{playlist.description}</p>
+                <p className={`text-gray-300 text-sm transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>{playlist.description}</p>
               </div>
             </div>
             <ChevronDown
