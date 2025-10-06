@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Playlist } from '../types';
-import { Clock } from 'lucide-react';
 import PlaylistPlayer from '../components/music/PlaylistPlayer';
+import PlaylistDropdown from '../components/music/PlaylistDropdown'; // Import the new component
 
 const DEFAULT_BACKGROUND = 'https://res.cloudinary.com/thinkdigital/image/upload/v1756910411/500501bc6a3eaca283c3c4951e15cc01_esu1fv.jpg';
 
@@ -65,7 +65,6 @@ const playlists: Playlist[] = [
     },
 ];
 
-
 const SinglePlaylistPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const playlist = playlists.find(p => p.id === id);
@@ -75,94 +74,26 @@ const SinglePlaylistPage: React.FC = () => {
     return <div className="text-white text-center p-8">Playlist not found</div>;
   }
 
-  // Get background image from current track or use default
-  const currentBackground = playlist.tracks[currentTrackIndex]?.audioUrl 
-    ? DEFAULT_BACKGROUND 
-    : DEFAULT_BACKGROUND;
-
-  const getTotalDuration = (tracks: any[]) => {
-    const totalSeconds = tracks.reduce((acc, track) => {
-      const [minutes, seconds] = track.duration.split(':').map(Number);
-      return acc + minutes * 60 + seconds;
-    }, 0);
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+  const handleTrackSelect = (index: number) => {
+    setCurrentTrackIndex(index);
   };
 
   return (
-    <div className="h-full flex flex-col lg:flex-row lg:items-center lg:justify-between relative mx-auto px-4 lg:px-[90px]">
+    <div className="h-screen w-full flex flex-col items-center justify-between relative p-4 lg:p-8">
       {/* Dynamic Background Image */}
       <div className="fixed top-0 left-0 w-full h-full z-0">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
-          style={{
-            backgroundImage: `url('${currentBackground}')`
-          }}
+          style={{ backgroundImage: `url('${DEFAULT_BACKGROUND}')` }}
         />
-        {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
-      {/* Left Column: Track List - DESKTOP (65%) */}
-      <div className="hidden lg:block lg:w-[45%] relative z-10 lg:h-[60vh]">
-        <div className="h-full bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl p-6 overflow-hidden flex flex-col">
-          <h2 className="text-2xl font-bold mb-4">{playlist.name}</h2>
-          <p className="text-gray-300 text-sm mb-6">{playlist.description}</p>
-          
-          {/* Track List Header */}
-          <div className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center text-gray-400 uppercase text-xs border-b border-gray-600 pb-3 mb-3">
-            <span className="text-center">#</span>
-            <span>Title</span>
-            <span>Artist</span>
-            <Clock size={14} />
-          </div>
+      {/* Top Section: Playlist Dropdown */}
+      <PlaylistDropdown playlist={playlist} onTrackSelect={handleTrackSelect} />
 
-          {/* Track List - Scrollable */}
-          <div className="flex-1 overflow-y-auto space-y-1">
-            {playlist.tracks.map((track, index) => (
-              <div 
-                key={track.id} 
-                className="grid grid-cols-[2rem_1fr_1fr_auto] gap-4 items-center p-3 rounded-md hover:bg-white/10 transition-colors cursor-pointer group"
-              >
-                <span className="text-gray-400 text-center text-sm">{index + 1}</span>
-                <span className="font-medium truncate group-hover:text-white">{track.title}</span>
-                <span className="text-gray-400 truncate group-hover:text-gray-300">{track.artist}</span>
-                <span className="text-gray-400 text-sm">{track.duration}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Track List */}
-      <div className="lg:hidden relative z-10 flex-1 overflow-y-auto mb-[220px] px-2 pt-20">
-        <div className="bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-4">
-          <h2 className="text-xl font-bold mb-2">{playlist.name}</h2>
-          <p className="text-gray-300 text-xs mb-4">{playlist.description}</p>
-          
-          <div className="space-y-2">
-            {playlist.tracks.map((track, index) => (
-              <div 
-                key={track.id} 
-                className="flex items-center justify-between p-3 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
-              >
-                <div className="flex items-center space-x-3 flex-1 min-w-0">
-                  <span className="text-gray-400 text-sm w-6">{index + 1}</span>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium truncate text-sm">{track.title}</p>
-                    <p className="text-gray-400 text-xs truncate">{track.artist}</p>
-                  </div>
-                </div>
-                <span className="text-gray-400 text-xs ml-2">{track.duration}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Right Column: Playlist Player - Mobile: fixed bottom, Desktop: right side (35%) */}
-      <div className="fixed bottom-4 left-4 right-4 lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[35%] lg:h-[60vh] z-10">
+      {/* Bottom Section: Playlist Player */}
+      <div className="w-full max-w-4xl z-10">
         <PlaylistPlayer 
           tracks={playlist.tracks}
           playlistName={playlist.name}
