@@ -11,7 +11,7 @@ const PlaylistDropdown: React.FC<PlaylistDropdownProps> = ({ playlist, onTrackSe
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative z-10 w-full max-w-4xl mx-auto">
+    <div className="relative z-10 w-full max-w-lg mx-auto h-24">
       <div className={`
         bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl
         transition-all duration-500 ease-in-out overflow-hidden
