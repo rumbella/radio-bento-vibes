@@ -5,9 +5,9 @@ import PlaylistPlayer from '../components/music/PlaylistPlayer';
 import PlaylistDropdown from '../components/music/PlaylistDropdown'; // Import the new component
 
 const BACKGROUND_IMAGES = [
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1759401279/download_1_t66jx6.jpg',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1759401291/download_2_aaubz9.jpg',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1759401302/download_3_k4lpnx.jpg'
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/M83-Midnight-City-Throwback-Thursday_x010fg.webp',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1759787126/deadmau5-press-photo-2016-billboard-1548_ygsmbm.webp',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/maxresdefault_pmyuzy.jpg'
 ];
 
 // Mock data - in a real app, this would come from a context or API call
