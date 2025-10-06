@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Loader } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Loader } from 'lucide-react';
 import type { PlaylistTrack } from '../../types';
 
 interface PlaylistPlayerProps {
@@ -156,10 +156,10 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
 
       {/* Unified Layout */}
       <div className="bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-2xl p-4 w-full">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
 
-          {/* Left: Track Info & Volume */}
-          <div className="flex items-center gap-3 w-1/3">
+          {/* Left: Track Info */}
+          <div className="flex items-center justify-center md:justify-start gap-3 w-full md:w-1/3">
             <img
               src={playlistImage}
               alt={playlistName}
@@ -169,25 +169,10 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
               <p className="text-base font-bold truncate">{currentTrack?.title}</p>
               <p className="text-sm text-gray-300 truncate">{currentTrack?.artist}</p>
             </div>
-            <div className="hidden lg:flex items-center gap-2 ml-4">
-              <button onClick={toggleMute} className="text-gray-400 hover:text-white">
-                {isMuted || volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
-              </button>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={isMuted ? 0 : volume}
-                onChange={handleVolumeChange}
-                className="w-20 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer range-sm"
-                style={volumeBarBackground}
-              />
-            </div>
           </div>
 
           {/* Center: Play Controls & Progress Bar */}
-          <div className="flex flex-col items-center gap-2 w-1/3">
+          <div className="flex flex-col items-center gap-2 w-full md:w-1/3">
             <div className="flex items-center gap-4">
               <button
                 onClick={prevTrack}
@@ -209,7 +194,7 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
                 <SkipForward size={20} fill="currentColor" />
               </button>
             </div>
-            <div className="w-full max-w-xs">
+            <div className="w-full max-w-full md:max-w-xs">
               <input
                 type="range"
                 min="0"
@@ -227,7 +212,7 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
           </div>
 
           {/* Right: Playlist Info */}
-          <div className="hidden md:flex items-center justify-end gap-3 w-1/3">
+          <div className="hidden md:flex items-center justify-end gap-3 md:w-1/3">
              <div className="text-right">
                 <h2 className="font-bold text-base truncate">{playlistName}</h2>
                 <p className="text-xs text-gray-300">Track {currentTrackIndex + 1} of {tracks.length}</p>

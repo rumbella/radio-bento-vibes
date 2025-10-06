@@ -4,7 +4,11 @@ import type { Playlist } from '../types';
 import PlaylistPlayer from '../components/music/PlaylistPlayer';
 import PlaylistDropdown from '../components/music/PlaylistDropdown'; // Import the new component
 
-const DEFAULT_BACKGROUND = 'https://res.cloudinary.com/thinkdigital/image/upload/v1756910411/500501bc6a3eaca283c3c4951e15cc01_esu1fv.jpg';
+const BACKGROUND_IMAGES = [
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1759401279/download_1_t66jx6.jpg',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1759401291/download_2_aaubz9.jpg',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1759401302/download_3_k4lpnx.jpg'
+];
 
 // Mock data - in a real app, this would come from a context or API call
 const playlists: Playlist[] = [
@@ -84,7 +88,7 @@ const SinglePlaylistPage: React.FC = () => {
       <div className="fixed top-0 left-0 w-full h-full z-0">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
-          style={{ backgroundImage: `url('${DEFAULT_BACKGROUND}')` }}
+          style={{ backgroundImage: `url('${BACKGROUND_IMAGES[currentTrackIndex % BACKGROUND_IMAGES.length]}')` }}
         />
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
