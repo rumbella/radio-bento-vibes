@@ -9,6 +9,8 @@ import PodcastsPage from './components/PodcastsPage';
 import ResidentsPage from './components/ResidentsPage';
 import AdminPage from './components/AdminPage';
 import SinglePlaylistPage from './pages/SinglePlaylistPage';
+import SinglePodcastPage from './pages/SinglePodcastPage';
+import SingleResidentPage from './pages/SingleResidentPage';
 import { UIProvider } from './contexts/UIContext';
 import DetailLayout from './components/shell/DetailLayout';
 
@@ -42,6 +44,8 @@ function App() {
         {/* Routes with the detail layout (e.g., for single items) */}
         <Route element={<DetailLayout />}>
           <Route path="/playlist/:id" element={<SinglePlaylistPage />} />
+          <Route path="/podcast/:id" element={<SinglePodcastPage />} />
+          <Route path="/resident/:id" element={<SingleResidentPage />} />
         </Route>
 
         {/* Fallback route */}
