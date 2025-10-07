@@ -1,8 +1,11 @@
 import React from 'react';
-import { Users, Instagram, Music2, ExternalLink } from 'lucide-react';
+import { Users, Instagram, Music2, ExternalLink, Play } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import type { Resident } from '../types';
 
 const ResidentsPage: React.FC = () => {
+  const navigate = useNavigate();
+  
   const residents: Resident[] = [
     {
       id: '1',
@@ -92,7 +95,10 @@ const ResidentsPage: React.FC = () => {
       </div>
 
       {/* Featured Resident */}
-      <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden">
+      <div 
+        className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden cursor-pointer"
+        onClick={() => navigate(`/resident/${featuredResident.id}`)}
+      >
         <div className="relative h-56">
           <img
             src={featuredResident.image}
@@ -120,7 +126,18 @@ const ResidentsPage: React.FC = () => {
             <p className="text-gray-400 text-sm mb-4 line-clamp-3">
                 {featuredResident.bio}
             </p>
-            <SocialLinks links={featuredResident.socialLinks} />
+            <div className="flex items-center justify-between">
+              <SocialLinks links={featuredResident.socialLinks} />
+              <button 
+                className="bg-white hover:bg-gray-200 text-black p-3 rounded-full transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/resident/${featuredResident.id}`);
+                }}
+              >
+                <Play size={20} fill="black" />
+              </button>
+            </div>
         </div>
       </div>
 
@@ -131,7 +148,8 @@ const ResidentsPage: React.FC = () => {
           {otherResidents.map((resident) => (
             <div
               key={resident.id}
-              className="bg-container-dark backdrop-blur-md rounded-xl p-4 hover:bg-slate-grey/30 transition-colors"
+              className="bg-container-dark backdrop-blur-md rounded-xl p-4 hover:bg-slate-grey/30 transition-colors cursor-pointer"
+              onClick={() => navigate(`/resident/${resident.id}`)}
             >
               <div className="flex items-start space-x-4">
                 <img
@@ -153,7 +171,18 @@ const ResidentsPage: React.FC = () => {
                   <p className="text-gray-400 text-sm mb-3 line-clamp-2">
                     {resident.bio}
                   </p>
-                  <SocialLinks links={resident.socialLinks} />
+                  <div className="flex items-center justify-between">
+                    <SocialLinks links={resident.socialLinks} />
+                    <button 
+                      className="bg-white hover:bg-gray-200 text-black p-2 rounded-full transition-colors flex-shrink-0"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/resident/${resident.id}`);
+                      }}
+                    >
+                      <Play size={16} fill="black" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

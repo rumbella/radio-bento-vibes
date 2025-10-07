@@ -1,8 +1,11 @@
 import React from 'react';
 import { Play, Calendar, Clock, Mic } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import type { Podcast } from '../types';
 
 const PodcastsPage: React.FC = () => {
+  const navigate = useNavigate();
+  
   const podcasts: Podcast[] = [
     {
       id: '1',
@@ -55,7 +58,10 @@ const PodcastsPage: React.FC = () => {
       </div>
 
       {/* Featured Podcast */}
-      <div className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden">
+      <div 
+        className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden cursor-pointer"
+        onClick={() => navigate(`/podcast/${podcasts[0].id}`)}
+      >
         <div className="relative h-56">
           <img
             src={podcasts[0].image}
@@ -84,7 +90,13 @@ const PodcastsPage: React.FC = () => {
                   <span>{podcasts[0].duration}</span>
                 </div>
               </div>
-              <button className="bg-white hover:bg-gray-200 text-black p-3 rounded-full transition-colors">
+              <button 
+                className="bg-white hover:bg-gray-200 text-black p-3 rounded-full transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/podcast/${podcasts[0].id}`);
+                }}
+              >
                 <Play size={20} fill="black" />
               </button>
             </div>
@@ -99,7 +111,8 @@ const PodcastsPage: React.FC = () => {
           {podcasts.map((podcast) => (
             <div
               key={podcast.id}
-              className="bg-container-dark backdrop-blur-md rounded-xl p-4 hover:bg-slate-grey/30 transition-colors"
+              className="bg-container-dark backdrop-blur-md rounded-xl p-4 hover:bg-slate-grey/30 transition-colors cursor-pointer"
+              onClick={() => navigate(`/podcast/${podcast.id}`)}
             >
               <div className="flex items-start space-x-4">
                 <img
@@ -125,7 +138,13 @@ const PodcastsPage: React.FC = () => {
                         <span>{podcast.duration}</span>
                       </div>
                     </div>
-                    <button className="bg-white hover:bg-gray-200 text-black p-2 rounded-full transition-colors">
+                    <button 
+                      className="bg-white hover:bg-gray-200 text-black p-2 rounded-full transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/podcast/${podcast.id}`);
+                      }}
+                    >
                       <Play size={16} fill="black" />
                     </button>
                   </div>
