@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Playlist } from '../types';
 import PlaylistPlayer from '../components/music/PlaylistPlayer';
+import DetailNav from '../components/ui/DetailNav';
+import ShareBar from '../components/ui/ShareBar';
 
 const BACKGROUND_IMAGES = [
   'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/M83-Midnight-City-Throwback-Thursday_x010fg.webp',
@@ -72,6 +74,7 @@ const SinglePlaylistPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const playlist = playlists.find(p => p.id === id);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const sponsorName = "Radio Amblé"; // This will be dynamic in a real app
 
   if (!playlist) {
     return <div className="text-white text-center p-8">Playlist not found</div>;
@@ -82,7 +85,7 @@ const SinglePlaylistPage: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-end relative p-4 lg:p-8">
+    <div className="h-screen w-full flex flex-col items-center justify-end relative p-4 lg:p-8 bg-transparent">
       {/* Dynamic Background Image */}
       <div className="fixed top-0 left-0 w-full h-full z-0">
         <div
@@ -92,8 +95,17 @@ const SinglePlaylistPage: React.FC = () => {
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
-      {/* Player Section */}
-      <div className="w-full max-w-lg z-10">
+      {/* Top Navigation */}
+      <DetailNav sponsorName={sponsorName} />
+
+      {/* Main Content Area */}
+      <div className="w-full max-w-lg z-10 flex flex-col gap-2">
+        {/* Share Bar - positioned above the player with a small margin */}
+        <div className="mb-1.5">
+          <ShareBar sponsorName={sponsorName} />
+        </div>
+
+        {/* Player */}
         <PlaylistPlayer
           tracks={playlist.tracks}
           playlistName={playlist.name}

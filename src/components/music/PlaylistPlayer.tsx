@@ -144,23 +144,18 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
         <PlayerHeader playlistName={playlistName} onPlaylistClick={() => setIsModalOpen(true)} />
 
         {/* Main Player UI */}
-        <div className="p-4">
-          <div className="flex flex-col items-center justify-between gap-4">
+        <div className="p-2">
+          <div className="flex flex-col items-center justify-between gap-3">
             {/* Track Info */}
             <div className="flex items-center justify-center gap-4 w-full">
-              <img
-                src={playlistImage}
-                alt={playlistName}
-                className="w-16 h-16 rounded-lg object-cover shadow-md"
-              />
               <div className="min-w-0 text-center">
-                <p className="text-xl font-bold truncate">{currentTrack?.title}</p>
-                <p className="text-base text-gray-300 truncate">{currentTrack?.artist}</p>
+                <p className="text-lg font-bold truncate">{currentTrack?.title}</p>
+                <p className="text-sm text-gray-300 truncate">{currentTrack?.artist}</p>
               </div>
             </div>
 
             {/* Progress Bar */}
-            <div className="w-full max-w-md">
+            <div className="w-full max-w-md px-4">
               <input
                 type="range"
                 min="0"
