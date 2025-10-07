@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Playlist } from '../types';
 import PlaylistPlayer from '../components/music/PlaylistPlayer';
-import PlaylistDropdown from '../components/music/PlaylistDropdown'; // Import the new component
 
 const BACKGROUND_IMAGES = [
   'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/M83-Midnight-City-Throwback-Thursday_x010fg.webp',
@@ -83,7 +82,7 @@ const SinglePlaylistPage: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-between relative p-4 lg:p-8">
+    <div className="h-screen w-full flex flex-col items-center justify-end relative p-4 lg:p-8">
       {/* Dynamic Background Image */}
       <div className="fixed top-0 left-0 w-full h-full z-0">
         <div
@@ -93,12 +92,9 @@ const SinglePlaylistPage: React.FC = () => {
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
-      {/* Top Section: Playlist Dropdown */}
-      <PlaylistDropdown playlist={playlist} onTrackSelect={handleTrackSelect} />
-
-      {/* Bottom Section: Playlist Player */}
+      {/* Player Section */}
       <div className="w-full max-w-lg z-10">
-        <PlaylistPlayer 
+        <PlaylistPlayer
           tracks={playlist.tracks}
           playlistName={playlist.name}
           playlistImage={playlist.image}
