@@ -25,7 +25,7 @@ const ShareBar: React.FC<ShareBarProps> = ({ sponsorName }) => {
     >
       <div className="flex items-center gap-2">
         <span>share the experience</span>
-        <RotatingText text1="powered by" text2={sponsorName} />
+       
       </div>
       <Share2 size={20} />
     </div>
