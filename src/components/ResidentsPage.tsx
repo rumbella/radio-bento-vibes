@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
+import { FreeMode, Autoplay } from 'swiper/modules';
 import type { Resident } from '../types';
 
 import 'swiper/css';
@@ -60,14 +60,19 @@ const ResidentsPage: React.FC = () => {
   ];
 
   return (
-    <div className="h-full flex flex-col px-4 lg:px-8 py-6">
+    <div className="h-full flex flex-col items-center justify-center px-4 lg:px-8">
       <h2 className="text-white font-bold text-2xl mb-6">Ascolta in</h2>
       
       <Swiper
-        modules={[FreeMode]}
+        modules={[FreeMode, Autoplay]}
         slidesPerView="auto"
         spaceBetween={16}
         freeMode={true}
+        loop={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         className="w-full"
       >
         {residents.map((resident) => (
