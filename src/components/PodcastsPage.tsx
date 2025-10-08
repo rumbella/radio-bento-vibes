@@ -75,11 +75,11 @@ const PodcastsPage: React.FC = () => {
         {podcasts.map((podcast, index) => (
           <SwiperSlide key={`${podcast.id}-${index}`} className="!w-auto">
             <div 
-              className="w-[180px] lg:w-[220px] cursor-pointer hover:scale-105 transition-transform"
+              className="w-[160px] lg:w-[180px] cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate(`/podcast/${podcast.id}`)}
             >
               {/* Immagine */}
-              <div className="w-full h-[180px] lg:h-[220px] rounded-3xl overflow-hidden">
+              <div className="w-full h-[160px] lg:h-[180px] rounded-3xl overflow-hidden">
                 <img 
                   src={podcast.image} 
                   alt={podcast.title}
