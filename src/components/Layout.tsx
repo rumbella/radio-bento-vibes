@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Music, Mic, Users, Grid3X3, Video } from 'lucide-react';
+import { useUIState, useUIActions } from '../contexts/UIContext';
+import ResidentsModal from './modals/ResidentsModal';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,6 +11,9 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
+  const { isResidentsModalOpen } = useUIState();
+  const { toggleResidentsModal } = useUIActions();
+
   const navItems = [
     { id: 'home', path: '/', label: 'Home', icon: Home },
     { id: 'concept', path: '/concept', label: 'Concept', icon: Music },
@@ -28,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
   return (
     <div className={`min-h-screen flex flex-col ${getBackgroundClass()}`}>
       {/* Header */}
-      <header className="sticky top-0 z-50">
+      <header className="sticky top-0 z-40">
         <div className=" mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -55,10 +60,28 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 z-50">
         <div className="max-w-md mx-auto lg:max-w-4xl px-4">
-          <div className="flex justify-around py-2">
+          <div className="bg-black/50 backdrop-blur-md rounded-full flex justify-around py-2">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = currentPage === item.id;
+              const isActive = currentPage === item.id || (item.id === 'residents' && isResidentsModalOpen);
+
+              if (item.id === 'residents') {
+                return (
+                  <button
+                    key={item.id}
+                    onClick={toggleResidentsModal}
+                    className={`flex flex-col items-center py-2 px-3 transition-all ${
+                      isActive
+                        ? 'text-white bg-white/20 rounded-full'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    <Icon size={20} />
+                    <span className="text-xs mt-1">{item.label}</span>
+                  </button>
+                );
+              }
+
               return (
                 <Link
                   key={item.id}
@@ -66,7 +89,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
                   className={`flex flex-col items-center py-2 px-3 transition-all ${
                     isActive 
                       ? 'text-white bg-white/20 rounded-full'
-                      : 'text-gray-400 hover:text-white rounded-lg'
+                      : 'text-gray-400 hover:text-white'
                   }`}
                 >
                   <Icon size={20} />
@@ -77,6 +100,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
           </div>
         </div>
       </nav>
+
+      <ResidentsModal isOpen={isResidentsModalOpen} onClose={toggleResidentsModal} />
     </div>
   );
 };
