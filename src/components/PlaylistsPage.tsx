@@ -10,7 +10,7 @@ import 'swiper/css/free-mode';
 const PlaylistsPage: React.FC = () => {
   const navigate = useNavigate();
   
-  const playlists: Playlist[] = [
+  const originalPlaylists: Playlist[] = [
     {
       id: '1',
       name: 'Deep House',
@@ -68,6 +68,8 @@ const PlaylistsPage: React.FC = () => {
     },
   ];
 
+  const playlists = [...originalPlaylists, ...originalPlaylists];
+
   const getTotalDuration = (tracks: any[]) => {
     const totalSeconds = tracks.reduce((acc, track) => {
       const [minutes, seconds] = track.duration.split(':').map(Number);
@@ -88,15 +90,14 @@ const PlaylistsPage: React.FC = () => {
         spaceBetween={16}
         freeMode={true}
         loop={true}
-        loopedSlides={5}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
         }}
         className="w-screen -translate-x-1/2 left-1/2"
       >
-        {playlists.map((playlist) => (
-          <SwiperSlide key={playlist.id} className="!w-auto">
+        {playlists.map((playlist, index) => (
+          <SwiperSlide key={`${playlist.id}-${index}`} className="!w-auto">
             <div 
               className="w-[180px] lg:w-[220px] cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate(`/playlist/${playlist.id}`)}

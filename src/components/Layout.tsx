@@ -58,7 +58,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
 
         {/* Center (Desktop only) */}
         <div className="hidden lg:flex flex-1 justify-center">
-          <span className="text-white/80 text-sm">powered radio amblè</span>
+          <span className="text-white/80 text-sm font-bold">powered radio amblè</span>
         </div>
 
         {/* Right Side */}

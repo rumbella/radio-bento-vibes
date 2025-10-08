@@ -10,7 +10,7 @@ import 'swiper/css/free-mode';
 const PodcastsPage: React.FC = () => {
   const navigate = useNavigate();
   
-  const podcasts: Podcast[] = [
+  const originalPodcasts: Podcast[] = [
     {
       id: '1',
       title: 'Electronic Music Evolution',
@@ -45,6 +45,8 @@ const PodcastsPage: React.FC = () => {
     }
   ];
 
+  const podcasts = [...originalPodcasts, ...originalPodcasts];
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('it-IT', {
@@ -64,15 +66,14 @@ const PodcastsPage: React.FC = () => {
         spaceBetween={16}
         freeMode={true}
         loop={true}
-        loopedSlides={4}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
         }}
         className="w-screen -translate-x-1/2 left-1/2"
       >
-        {podcasts.map((podcast) => (
-          <SwiperSlide key={podcast.id} className="!w-auto">
+        {podcasts.map((podcast, index) => (
+          <SwiperSlide key={`${podcast.id}-${index}`} className="!w-auto">
             <div 
               className="w-[180px] lg:w-[220px] cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate(`/podcast/${podcast.id}`)}
