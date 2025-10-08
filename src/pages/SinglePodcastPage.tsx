@@ -78,7 +78,7 @@ const SinglePodcastPage: React.FC = () => {
         </div>
 
         {/* Player Container */}
-        <div className="w-full lg:w-[30%] lg:h-full flex items-end lg:items-center">
+        <div className="fixed bottom-[30px] left-4 right-4 z-20 lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-full flex lg:items-center">
           <div className="w-full flex flex-col gap-2">
             {/* Share Bar for Mobile - positioned above the player */}
             <div className="lg:hidden mb-1.5">
