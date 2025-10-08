@@ -99,11 +99,11 @@ const PlaylistsPage: React.FC = () => {
         {playlists.map((playlist, index) => (
           <SwiperSlide key={`${playlist.id}-${index}`} className="!w-auto">
             <div 
-              className="w-[160px] lg:w-[180px] cursor-pointer hover:scale-105 transition-transform"
+              className="w-[160px] lg:w-[300px] cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate(`/playlist/${playlist.id}`)}
             >
               {/* Immagine */}
-              <div className="w-full h-[160px] lg:h-[180px] rounded-3xl overflow-hidden">
+              <div className="w-full h-[160px] lg:h-[300px] rounded-3xl overflow-hidden">
                 <img 
                   src={playlist.image} 
                   alt={playlist.name}

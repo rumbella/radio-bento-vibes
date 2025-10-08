@@ -23,7 +23,7 @@ const PodcastsPage: React.FC = () => {
       id: '2',
       title: 'Behind the Mix: Studio Secrets',
       description: 'Discover the techniques and tools used by top DJs and producers to create their signature sounds.',
-      image: 'https://placehold.co/600x400',
+      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
       duration: '32:18',
       date: '2024-01-10'
     },
@@ -31,7 +31,7 @@ const PodcastsPage: React.FC = () => {
       id: '3',
       title: 'Festival Culture Around the World',
       description: 'Exploring the unique festival cultures from Ibiza to Berlin, and how they shape the electronic music scene.',
-      image: 'https://placehold.co/600x400',
+      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
       duration: '38:45',
       date: '2024-01-05'
     },
@@ -39,7 +39,7 @@ const PodcastsPage: React.FC = () => {
       id: '4',
       title: 'The Future of Sound',
       description: 'What does the future hold for electronic music? We discuss emerging technologies and trends.',
-      image: 'https://placehold.co/600x400',
+      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
       duration: '41:22',
       date: '2023-12-28'
     }
@@ -75,11 +75,11 @@ const PodcastsPage: React.FC = () => {
         {podcasts.map((podcast, index) => (
           <SwiperSlide key={`${podcast.id}-${index}`} className="!w-auto">
             <div 
-              className="w-[160px] lg:w-[180px] cursor-pointer hover:scale-105 transition-transform"
+              className="w-[160px] lg:w-[300px] cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate(`/podcast/${podcast.id}`)}
             >
               {/* Immagine */}
-              <div className="w-full h-[160px] lg:h-[180px] rounded-3xl overflow-hidden">
+              <div className="w-full h-[160px] lg:h-[300px] rounded-3xl overflow-hidden">
                 <img 
                   src={podcast.image} 
                   alt={podcast.title}
