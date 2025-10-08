@@ -7,6 +7,15 @@ const DetailLayout: React.FC = () => {
 
   return (
     <div className="h-screen w-screen bg-black">
+      {/* Back button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-6 left-6 z-20 text-white bg-black/50 rounded-full p-2 hover:bg-white/20 transition-colors"
+        aria-label="Go back"
+      >
+        <ChevronLeft size={28} />
+      </button>
+
       {/* Page Content */}
       <main className="h-full w-full">
         <Outlet />

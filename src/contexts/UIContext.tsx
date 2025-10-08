@@ -7,14 +7,12 @@ interface UIState {
   slides: HeroSlide[];
   isLoading: boolean;
   error: string | null;
-  isResidentsModalOpen: boolean;
 }
 
 interface UIActions {
   toggleShowVideo: () => void;
   setVideoSrc: (url: string) => void;
   setSlides: (slides: HeroSlide[]) => void;
-  toggleResidentsModal: () => void;
 }
 
 const UIStateContext = createContext<UIState | undefined>(undefined);
@@ -30,7 +28,6 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
   const [slides, setSlides] = useState<HeroSlide[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isResidentsModalOpen, setIsResidentsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -56,14 +53,12 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
   }, []);
 
   const toggleShowVideo = () => setShowVideo(prev => !prev);
-  const toggleResidentsModal = () => setIsResidentsModalOpen(prev => !prev);
 
-  const state: UIState = { showVideo, videoSrc, slides, isLoading, error, isResidentsModalOpen };
+  const state: UIState = { showVideo, videoSrc, slides, isLoading, error };
   const actions: UIActions = {
     toggleShowVideo,
     setVideoSrc,
     setSlides,
-    toggleResidentsModal,
   };
 
   return (
