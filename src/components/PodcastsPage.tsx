@@ -1,7 +1,11 @@
 import React from 'react';
-import { Play, Calendar, Clock, Mic } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode } from 'swiper/modules';
 import type { Podcast } from '../types';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
 
 const PodcastsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -51,109 +55,44 @@ const PodcastsPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto lg:max-w-4xl p-4 lg:p-8 space-y-6">
-      <div className="flex items-center space-x-2 mb-6">
-        <Mic className="text-liquid-lava" size={24} />
-        <h2 className="text-text-main font-bold text-2xl">Podcasts</h2>
-      </div>
-
-      {/* Featured Podcast */}
-      <div 
-        className="bg-container-dark backdrop-blur-md rounded-2xl overflow-hidden cursor-pointer"
-        onClick={() => navigate(`/podcast/${podcasts[0].id}`)}
+    <div className="h-full flex flex-col px-4 lg:px-8 py-6">
+      <h2 className="text-white font-bold text-2xl mb-6">Ascolta in</h2>
+      
+      <Swiper
+        modules={[FreeMode]}
+        slidesPerView="auto"
+        spaceBetween={16}
+        freeMode={true}
+        className="w-full"
       >
-        <div className="relative h-56">
-          <img
-            src={podcasts[0].image}
-            alt={podcasts[0].title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-          <div className="absolute top-4 left-4">
-            <span className="bg-liquid-lava text-text-main text-xs px-3 py-1 rounded-full font-medium">
-              Latest Episode
-            </span>
-          </div>
-          <div className="absolute bottom-4 left-4 right-4">
-            <h3 className="text-text-main font-bold text-xl mb-2">{podcasts[0].title}</h3>
-            <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-              {podcasts[0].description}
-            </p>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4 text-gray-400 text-sm">
-                <div className="flex items-center space-x-1">
-                  <Calendar size={14} />
-                  <span>{formatDate(podcasts[0].date)}</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <Clock size={14} />
-                  <span>{podcasts[0].duration}</span>
-                </div>
-              </div>
-              <button 
-                className="bg-white hover:bg-gray-200 text-black p-3 rounded-full transition-colors"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(`/podcast/${podcasts[0].id}`);
-                }}
-              >
-                <Play size={20} fill="black" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* All Episodes */}
-      <div>
-        <h3 className="text-text-main font-semibold text-lg mb-4">All Episodes</h3>
-        <div className="space-y-4">
-          {podcasts.map((podcast) => (
-            <div
-              key={podcast.id}
-              className="bg-container-dark backdrop-blur-md rounded-xl p-4 hover:bg-slate-grey/30 transition-colors cursor-pointer"
+        {podcasts.map((podcast) => (
+          <SwiperSlide key={podcast.id} className="!w-auto">
+            <div 
+              className="w-[180px] lg:w-[220px] cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate(`/podcast/${podcast.id}`)}
             >
-              <div className="flex items-start space-x-4">
-                <img
-                  src={podcast.image}
+              {/* Immagine */}
+              <div className="w-full h-[180px] lg:h-[220px] rounded-lg overflow-hidden">
+                <img 
+                  src={podcast.image} 
                   alt={podcast.title}
-                  className="w-20 h-20 rounded-full object-cover flex-shrink-0"
+                  className="w-full h-full object-cover" 
                 />
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-text-main font-medium text-lg mb-2 line-clamp-1">
-                    {podcast.title}
-                  </h4>
-                  <p className="text-gray-400 text-sm mb-3 line-clamp-2">
-                    {podcast.description}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4 text-gray-400 text-sm">
-                      <div className="flex items-center space-x-1">
-                        <Calendar size={14} />
-                        <span>{formatDate(podcast.date)}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Clock size={14} />
-                        <span>{podcast.duration}</span>
-                      </div>
-                    </div>
-                    <button 
-                      className="bg-white hover:bg-gray-200 text-black p-2 rounded-full transition-colors"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/podcast/${podcast.id}`);
-                      }}
-                    >
-                      <Play size={16} fill="black" />
-                    </button>
-                  </div>
-                </div>
+              </div>
+              
+              {/* Testo sotto l'immagine */}
+              <div className="mt-3 px-1">
+                <h3 className="text-white font-semibold text-sm lg:text-base line-clamp-2 mb-1">
+                  {podcast.title}
+                </h3>
+                <p className="text-gray-400 text-xs lg:text-sm">
+                  {podcast.duration} • {formatDate(podcast.date)}
+                </p>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };

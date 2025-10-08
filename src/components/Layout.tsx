@@ -26,36 +26,35 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col ${getBackgroundClass()}`}>
-      {/* Header */}
-      <header className="sticky top-0 z-50">
-        <div className=" mx-auto px-4 py-4">
+    <div className={`h-screen flex flex-col ${getBackgroundClass()} overflow-hidden`}>
+      {/* Header - 5vh */}
+      <header className="h-[5vh] flex items-center z-50">
+        <div className="w-full mx-auto px-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <img 
                 src="https://res.cloudinary.com/thinkdigital/image/upload/e_background_removal/f_png/v1749389697/logo_fenicottero_zohwaw.png" 
                 alt="Radio Amblè" 
-                className="h-10"
+                className="h-8"
               />
               <div>
-                <h1 className="text-xl font-bold text-white">Radio Amblè</h1>
-                <p className="text-sm text-white">Fresh Sound and Podcasts</p>
+                <h1 className="text-lg font-bold text-white">Radio Amblè</h1>
               </div>
             </div>
-            <div className="w-3 h-3 bg-white rounded-full"></div>
+            <div className="w-2 h-2 bg-white rounded-full"></div>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 pb-20 relative z-10">
+      {/* Main Content - 90vh */}
+      <main className="h-[90vh] overflow-hidden relative z-10">
         {children}
       </main>
 
-      {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50">
-        <div className="max-w-md mx-auto lg:max-w-4xl px-4">
-          <div className="flex justify-around py-2">
+      {/* Bottom Navigation - 5vh */}
+      <nav className="h-[5vh] z-50">
+        <div className="h-full max-w-md mx-auto lg:max-w-4xl px-4">
+          <div className="h-full flex justify-around items-center">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = currentPage === item.id;
@@ -63,14 +62,14 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
                 <Link
                   key={item.id}
                   to={item.path}
-                  className={`flex flex-col items-center py-2 px-3 transition-all ${
+                  className={`flex flex-col items-center py-1 px-2 transition-all ${
                     isActive 
                       ? 'text-white bg-white/20 rounded-full'
                       : 'text-gray-400 hover:text-white rounded-lg'
                   }`}
                 >
-                  <Icon size={20} />
-                  <span className="text-xs mt-1">{item.label}</span>
+                  <Icon size={18} />
+                  <span className="text-[10px] mt-0.5">{item.label}</span>
                 </Link>
               );
             })}
