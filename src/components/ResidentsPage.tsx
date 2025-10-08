@@ -80,10 +80,11 @@ const ResidentsPage: React.FC = () => {
         {residents.map((resident, index) => (
           <SwiperSlide key={`${resident.id}-${index}`} className="!w-auto">
             <div 
-              className="w-[160px] lg:w-[180px] cursor-pointer hover:scale-105 transition-transform"
+              className="w-[160px] lg:w-[300px] cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate(`/resident/${resident.id}`)}
             >
-              <div className="w-full h-[160px] lg:h-[180px] rounded-3xl overflow-hidden">
+              {/* Immagine */}
+              <div className="w-full h-[160px] lg:h-[300px] rounded-3xl overflow-hidden">
                 <img 
                   src={resident.image} 
                   alt={resident.name}
@@ -91,6 +92,7 @@ const ResidentsPage: React.FC = () => {
                 />
               </div>
               
+              {/* Testo sotto l'immagine */}
               <div className="mt-3 px-1">
                 <h3 className="text-white font-semibold text-sm lg:text-base line-clamp-2 mb-1">
                   {resident.name}
