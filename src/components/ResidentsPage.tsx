@@ -10,7 +10,7 @@ import 'swiper/css/free-mode';
 const ResidentsPage: React.FC = () => {
   const navigate = useNavigate();
   
-  const residents: Resident[] = [
+  const originalResidents: Resident[] = [
     {
       id: '1',
       name: 'DJ Marco',
@@ -59,6 +59,8 @@ const ResidentsPage: React.FC = () => {
     }
   ];
 
+  const residents = [...originalResidents, ...originalResidents];
+
   return (
     <div className="h-full flex flex-col items-center justify-center px-4 lg:px-8">
       <h2 className="text-white font-bold text-2xl mb-6">Ascolta in</h2>
@@ -69,15 +71,14 @@ const ResidentsPage: React.FC = () => {
         spaceBetween={16}
         freeMode={true}
         loop={true}
-        loopedSlides={4}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
         }}
         className="w-screen -translate-x-1/2 left-1/2"
       >
-        {residents.map((resident) => (
-          <SwiperSlide key={resident.id} className="!w-auto">
+        {residents.map((resident, index) => (
+          <SwiperSlide key={`${resident.id}-${index}`} className="!w-auto">
             <div 
               className="w-[180px] lg:w-[220px] cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate(`/resident/${resident.id}`)}
