@@ -73,7 +73,7 @@ const ResidentsPage: React.FC = () => {
           delay: 3000,
           disableOnInteraction: false,
         }}
-        className="w-full"
+        className="w-screen -translate-x-1/2 left-1/2"
       >
         {residents.map((resident) => (
           <SwiperSlide key={resident.id} className="!w-auto">
@@ -82,7 +82,7 @@ const ResidentsPage: React.FC = () => {
               onClick={() => navigate(`/resident/${resident.id}`)}
             >
               {/* Immagine */}
-              <div className="w-full h-[180px] lg:h-[220px] rounded-lg overflow-hidden">
+              <div className="w-full h-[180px] lg:h-[220px] rounded-3xl overflow-hidden">
                 <img 
                   src={resident.image} 
                   alt={resident.name}
