@@ -28,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
   return (
     <div className={`h-screen flex flex-col ${getBackgroundClass()} overflow-hidden`}>
       {/* Header - 5vh */}
-      <header className="h-[5vh] flex items-center z-50">
+      <header className="h-[10vh] flex items-center z-50">
         <div className="w-full mx-auto px-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -47,12 +47,12 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
       </header>
 
       {/* Main Content - 90vh */}
-      <main className="h-[90vh] overflow-hidden relative z-10">
+      <main className="h-[80vh] overflow-hidden relative z-10">
         {children}
       </main>
 
       {/* Bottom Navigation - 5vh */}
-      <nav className="h-[5vh] z-50">
+      <nav className="h-[10vh] z-50">
         <div className="h-full max-w-md mx-auto lg:max-w-4xl px-4">
           <div className="h-full flex justify-around items-center">
             {navItems.map((item) => {
