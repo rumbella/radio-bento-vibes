@@ -92,7 +92,7 @@ const PlaylistsPage: React.FC = () => {
           delay: 3000,
           disableOnInteraction: false,
         }}
-        className="w-full"
+        className="w-screen -translate-x-1/2 left-1/2"
       >
         {playlists.map((playlist) => (
           <SwiperSlide key={playlist.id} className="!w-auto">
@@ -101,7 +101,7 @@ const PlaylistsPage: React.FC = () => {
               onClick={() => navigate(`/playlist/${playlist.id}`)}
             >
               {/* Immagine */}
-              <div className="w-full h-[180px] lg:h-[220px] rounded-lg overflow-hidden">
+              <div className="w-full h-[180px] lg:h-[220px] rounded-3xl overflow-hidden">
                 <img 
                   src={playlist.image} 
                   alt={playlist.name}
