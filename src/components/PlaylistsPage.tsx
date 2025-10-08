@@ -88,6 +88,7 @@ const PlaylistsPage: React.FC = () => {
         spaceBetween={16}
         freeMode={true}
         loop={true}
+        loopedSlides={5}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,

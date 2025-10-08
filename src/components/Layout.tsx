@@ -32,34 +32,47 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
     <div className={`h-screen flex flex-col ${getBackgroundClass()} overflow-hidden`}>
       {/* Header */}
       <header className="relative z-20 flex items-center justify-between p-5 bg-transparent text-white">
-        {/* Left Side */}
-        <div className="flex items-center space-x-4 flex-1">
-          <img
-            src="https://res.cloudinary.com/thinkdigital/image/upload/e_background_removal/f_png/v1749389697/logo_fenicottero_zohwaw.png"
-            alt="Radio Amblè"
-            className="h-10"
-          />
-          <div>
-            <h1 className="font-bold text-xl">fresh sound</h1>
-            <p className="text-white/70 text-sm">and podcasts</p>
+        <div className="flex-1 flex justify-start">
+          {/* Mobile Header: Logo + Powered by */}
+          <div className="flex lg:hidden items-center space-x-2">
+            <img
+              src="https://res.cloudinary.com/thinkdigital/image/upload/e_background_removal/f_png/v1749389697/logo_fenicottero_zohwaw.png"
+              alt="Radio Amblè"
+              className="h-8"
+            />
+            <span className="text-white/90 text-sm font-bold">powered radio amblè</span>
+          </div>
+          {/* Desktop Header: Logo + Brand Text */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <img
+              src="https://res.cloudinary.com/thinkdigital/image/upload/e_background_removal/f_png/v1749389697/logo_fenicottero_zohwaw.png"
+              alt="Radio Amblè"
+              className="h-10"
+            />
+            <div>
+              <h1 className="font-bold text-xl">fresh sound</h1>
+              <p className="text-white/70 text-sm">and podcasts</p>
+            </div>
           </div>
         </div>
 
-        {/* Center */}
-        <div className="flex-1 flex justify-center">
+        {/* Center (Desktop only) */}
+        <div className="hidden lg:flex flex-1 justify-center">
           <span className="text-white/80 text-sm">powered radio amblè</span>
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center space-x-3 flex-1 justify-end">
-          {isAuthenticated ? (
-            <>
-              <button onClick={toggleAuth} className="text-white hover:bg-white/10 text-sm p-2 rounded-md">Logout</button>
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full" />
-            </>
-          ) : (
-            <button onClick={toggleAuth} className="text-white hover:bg-white/10 text-sm p-2 rounded-md">Login</button>
-          )}
+        <div className="flex-1 flex justify-end">
+          <div className="flex items-center space-x-3">
+            {isAuthenticated ? (
+              <>
+                <button onClick={toggleAuth} className="text-white hover:bg-white/10 text-sm p-2 rounded-md">Logout</button>
+                <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full" />
+              </>
+            ) : (
+              <button onClick={toggleAuth} className="text-white hover:bg-white/10 text-sm p-2 rounded-md">Login</button>
+            )}
+          </div>
         </div>
       </header>
 

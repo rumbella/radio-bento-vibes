@@ -64,6 +64,7 @@ const PodcastsPage: React.FC = () => {
         spaceBetween={16}
         freeMode={true}
         loop={true}
+        loopedSlides={4}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
