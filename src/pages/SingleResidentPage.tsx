@@ -56,7 +56,7 @@ const SingleResidentPage: React.FC = () => {
   }
 
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-end relative p-4 lg:p-8 bg-transparent">
+    <div className="h-screen w-full flex flex-col relative bg-transparent">
       {/* Dynamic Background Image */}
       <div className="fixed top-0 left-0 w-full h-full z-0">
         <div
@@ -67,19 +67,34 @@ const SingleResidentPage: React.FC = () => {
       </div>
 
       {/* Top Navigation */}
-      <DetailNav sponsorName={sponsorName} />
+      <div className="absolute top-0 left-0 right-0 z-20 p-4 lg:p-8">
+        <DetailNav sponsorName={sponsorName} />
+      </div>
 
-      {/* Main Content Area */}
-      <div className="w-full max-w-lg z-10 flex flex-col gap-2">
-        {/* Share Bar - positioned above the player with a small margin */}
-        <div className="mb-1.5">
-          <ShareBar sponsorName={sponsorName} />
+      {/* Main Content Flex Container */}
+      <div className="flex-grow flex flex-col lg:flex-row items-end lg:items-center relative z-10 p-4 lg:p-8 mt-[60px] lg:mt-0">
+
+        {/* Left Content Area (Desktop) / Hidden on Mobile */}
+        <div className="hidden lg:flex lg:flex-col lg:w-[65%] lg:h-full lg:justify-center text-white">
+          <h2 className="text-4xl font-bold mb-2">{resident.name}</h2>
+          <p className="text-lg opacity-80">{resident.bio}</p>
+          <div className="mt-8 w-full max-w-md">
+            <ShareBar sponsorName={sponsorName} />
+          </div>
         </div>
 
-        {/* Player */}
-        <ResidentPlayer
-          resident={resident}
-        />
+        {/* Player Container */}
+        <div className="w-full lg:w-[30%] lg:h-full flex items-end lg:items-center">
+          <div className="w-full flex flex-col gap-2">
+            {/* Share Bar for Mobile - positioned above the player */}
+            <div className="lg:hidden mb-1.5">
+              <ShareBar sponsorName={sponsorName} />
+            </div>
+
+            {/* Player */}
+            <ResidentPlayer resident={resident} />
+          </div>
+        </div>
       </div>
     </div>
   );
