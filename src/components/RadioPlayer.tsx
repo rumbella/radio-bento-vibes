@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, Pause, Share2, Heart } from 'lucide-react';
 import { usePlayerState, usePlayerActions } from '../contexts/PlayerContext';
 
 const RadioPlayer: React.FC = () => {
   const { isPlaying, currentTrack } = usePlayerState();
   const { togglePlay } = usePlayerActions();
+  const [likes, setLikes] = useState(Math.floor(Math.random() * 500) + 1000);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLikes(prevLikes => prevLikes + Math.floor(Math.random() * 5) + 1);
+    }, 5000); // Increment every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatLikes = (num: number): string => {
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'k';
+    }
+    return num.toString();
+  };
 
   // Fallback data if no track is loaded
   const displayData = {
@@ -52,7 +68,7 @@ const RadioPlayer: React.FC = () => {
             <footer className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                 <div className="flex items-center space-x-2" data-testid="like-counter">
                     <Heart size={20} className="text-white" fill="currentColor" />
-                    <span className="text-xs font-bold">1.2k</span>
+                    <span className="text-xs font-bold">{formatLikes(likes)} like</span>
                 </div>
                 <div className="live-tag-container" data-testid="live-tag">
                     <div className="live-dot"></div>
@@ -99,7 +115,7 @@ const RadioPlayer: React.FC = () => {
         <footer className="flex items-center justify-between">
             <div className="flex items-center space-x-2" data-testid="like-counter-desktop">
                 <Heart size={24} className="text-white" fill="currentColor" />
-                <span className="text-sm font-bold">1.2k</span>
+                <span className="text-sm font-bold">{formatLikes(likes)} like</span>
             </div>
             <div className="live-tag-container" data-testid="live-tag-desktop">
                 <div className="live-dot"></div>
