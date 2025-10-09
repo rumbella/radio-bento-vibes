@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Pause } from 'lucide-react';
+import { Play, Pause, Share2, Heart } from 'lucide-react';
 import { usePlayerState, usePlayerActions } from '../contexts/PlayerContext';
 
 const RadioPlayer: React.FC = () => {
@@ -33,7 +33,9 @@ const RadioPlayer: React.FC = () => {
                     </div>
                 </div>
                 <div>
-                    <p className="text-xs">{displayData.host}</p>
+                    <button className="text-white" data-testid="share-button">
+                        <Share2 size={20} />
+                    </button>
                 </div>
             </header>
 
@@ -51,8 +53,14 @@ const RadioPlayer: React.FC = () => {
 
             {/* Footer */}
             <footer className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <p className="text-xs">{displayData.artist}</p>
-                <p className="text-xs font-bold">{displayData.songTitle}</p>
+                <div className="flex items-center space-x-2" data-testid="like-counter">
+                    <Heart size={20} className="text-red-500" fill="currentColor" />
+                    <span className="text-xs font-bold">1.2k</span>
+                </div>
+                <div className="live-tag-container" data-testid="live-tag">
+                    <div className="live-dot"></div>
+                    <span className="text-xs font-bold">LIVE</span>
+                </div>
             </footer>
         </div>
       </div>
@@ -72,7 +80,9 @@ const RadioPlayer: React.FC = () => {
                 </div>
             </div>
             <div>
-                <p className="text-sm">{displayData.host}</p>
+                <button className="text-white" data-testid="share-button-desktop">
+                    <Share2 size={24} />
+                </button>
             </div>
         </header>
 
@@ -90,8 +100,14 @@ const RadioPlayer: React.FC = () => {
 
         {/* Footer */}
         <footer className="flex items-center justify-between">
-            <p className="text-sm">{displayData.artist}</p>
-            <p className="text-sm font-bold">{displayData.songTitle}</p>
+            <div className="flex items-center space-x-2" data-testid="like-counter-desktop">
+                <Heart size={24} className="text-red-500" fill="currentColor" />
+                <span className="text-sm font-bold">1.2k</span>
+            </div>
+            <div className="live-tag-container" data-testid="live-tag-desktop">
+                <div className="live-dot"></div>
+                <span className="text-sm font-bold">LIVE</span>
+            </div>
         </footer>
       </div>
     </>
