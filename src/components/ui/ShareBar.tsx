@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Share2 } from 'lucide-react';
 import RotatingText from './RotatingText';
 
-interface ShareBarProps {
-  sponsorName: string;
-}
+interface ShareBarProps {}
 
-const ShareBar: React.FC<ShareBarProps> = ({ sponsorName }) => {
+const ShareBar: React.FC<ShareBarProps> = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {

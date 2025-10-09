@@ -34,7 +34,7 @@ const residents: Resident[] = [
 const SingleResidentPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const resident = residents.find(r => r.id === id);
-  const sponsorName = "Radio Amblé";
+  const title = "ascolta i nostri djset";
 
   if (!resident) {
     return <div className="text-white text-center p-8">Resident not found</div>;
@@ -44,7 +44,7 @@ const SingleResidentPage: React.FC = () => {
     <div className="h-full w-full flex flex-col relative">
       {/* Top Navigation */}
       <div className="absolute top-0 left-0 right-0 z-20 p-4 lg:p-8">
-        <DetailNav sponsorName={sponsorName} />
+        <DetailNav title={title} />
       </div>
 
       {/* Main Content Flex Container */}
@@ -55,7 +55,7 @@ const SingleResidentPage: React.FC = () => {
           <h2 className="text-4xl font-bold mb-2">{resident.name}</h2>
           <p className="text-lg opacity-80">{resident.bio}</p>
           <div className="mt-8 w-full max-w-md">
-            <ShareBar sponsorName={sponsorName} />
+            <ShareBar />
           </div>
         </div>
 
@@ -64,7 +64,7 @@ const SingleResidentPage: React.FC = () => {
           <div className="w-full flex flex-col gap-2">
             {/* Share Bar for Mobile - positioned above the player */}
             <div className="lg:hidden mb-1.5">
-              <ShareBar sponsorName={sponsorName} />
+              <ShareBar />
             </div>
 
             {/* Player */}
