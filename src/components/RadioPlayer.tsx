@@ -9,16 +9,13 @@ const RadioPlayer: React.FC = () => {
   // Fallback data if no track is loaded
   const displayData = {
     title: currentTrack?.title || "Radio Amblè",
-    host: currentTrack?.artist || "Live Stream",
     image: currentTrack?.imageUrl || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
-    artist: currentTrack?.artist || "",
-    songTitle: currentTrack?.title || "Tune in to discover"
   };
 
   return (
     <>
       {/* Mobile Layout */}
-      <div className="lg:hidden h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl">
+      <div className="lg:hidden h-full bg-black/20 backdrop-blur-lg border border-white/30 text-white rounded-3xl">
         <div className="relative h-full w-full p-4">
             {/* Header */}
             <header className="absolute top-4 left-4 right-4 flex items-center justify-between">
@@ -54,7 +51,7 @@ const RadioPlayer: React.FC = () => {
             {/* Footer */}
             <footer className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                 <div className="flex items-center space-x-2" data-testid="like-counter">
-                    <Heart size={20} className="text-red-500" fill="currentColor" />
+                    <Heart size={20} className="text-white" fill="currentColor" />
                     <span className="text-xs font-bold">1.2k</span>
                 </div>
                 <div className="live-tag-container" data-testid="live-tag">
@@ -66,7 +63,7 @@ const RadioPlayer: React.FC = () => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:flex lg:flex-col lg:h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-6 mt-5 shadow-2xl">
+      <div className="hidden lg:flex lg:flex-col lg:h-full bg-black/20 backdrop-blur-lg border border-white/30 text-white rounded-3xl p-6 mt-5 shadow-2xl">
         {/* Header */}
         <header className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -101,7 +98,7 @@ const RadioPlayer: React.FC = () => {
         {/* Footer */}
         <footer className="flex items-center justify-between">
             <div className="flex items-center space-x-2" data-testid="like-counter-desktop">
-                <Heart size={24} className="text-red-500" fill="currentColor" />
+                <Heart size={24} className="text-white" fill="currentColor" />
                 <span className="text-sm font-bold">1.2k</span>
             </div>
             <div className="live-tag-container" data-testid="live-tag-desktop">
