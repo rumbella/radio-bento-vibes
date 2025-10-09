@@ -82,7 +82,7 @@ const PlaylistsPage: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col items-center justify-center px-4 lg:px-8">
-      <h2 className="text-white font-bold text-2xl mb-6">Ascolta in</h2>
+      <h2 className="text-white font-bold text-2xl mb-6 text-left">le playlist esclusive di Radio Amblè</h2>
       
       <Swiper
         modules={[FreeMode, Autoplay]}
