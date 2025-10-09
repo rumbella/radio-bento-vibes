@@ -1,13 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
-import RotatingText from './RotatingText';
 
 interface DetailNavProps {
-  sponsorName: string;
+  title: string;
 }
 
-const DetailNav: React.FC<DetailNavProps> = ({ sponsorName }) => {
+const DetailNav: React.FC<DetailNavProps> = ({ title }) => {
   const navigate = useNavigate();
 
   return (
@@ -16,7 +15,7 @@ const DetailNav: React.FC<DetailNavProps> = ({ sponsorName }) => {
         <ChevronLeft size={28} />
       </button>
       <div className="font-semibold ml-20">
-        <RotatingText text1="powered by" text2={sponsorName} />
+        <span>{title}</span>
       </div>
     </div>
   );

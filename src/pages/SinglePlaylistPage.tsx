@@ -68,7 +68,7 @@ const SinglePlaylistPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const playlist = playlists.find(p => p.id === id);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const sponsorName = "Radio Amblé"; // This will be dynamic in a real app
+  const title = "le playlist esclusive di Radio Amblè";
 
   if (!playlist) {
     return <div className="text-white text-center p-8">Playlist not found</div>;
@@ -82,7 +82,7 @@ const SinglePlaylistPage: React.FC = () => {
     <div className="h-full w-full flex flex-col relative">
       {/* Top Navigation */}
       <div className="absolute top-0 left-0 right-0 z-20 p-4 lg:p-8">
-        <DetailNav sponsorName={sponsorName} />
+        <DetailNav title={title} />
       </div>
 
       {/* Main Content Flex Container */}
@@ -93,7 +93,7 @@ const SinglePlaylistPage: React.FC = () => {
           <h2 className="text-4xl font-bold mb-2">{playlist.name}</h2>
           <p className="text-lg opacity-80">{playlist.description}</p>
           <div className="mt-8 w-full max-w-md">
-            <ShareBar sponsorName={sponsorName} />
+            <ShareBar />
           </div>
         </div>
 
@@ -102,7 +102,7 @@ const SinglePlaylistPage: React.FC = () => {
           <div className="w-full flex flex-col gap-2">
             {/* Share Bar for Mobile - positioned above the player */}
             <div className="lg:hidden mb-1.5">
-              <ShareBar sponsorName={sponsorName} />
+              <ShareBar />
             </div>
 
             {/* Player */}
