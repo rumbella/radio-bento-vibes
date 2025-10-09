@@ -19,9 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
   ];
 
   const getBackgroundClass = () => {
-    if (currentPage === 'playlists' || currentPage === 'podcasts' || currentPage.startsWith('playlist/')) {
-      return 'bg-background-dark';
-    }
+    // Set a consistent background for all pages as per the new design
     return 'bg-global-bg';
   };
 
@@ -58,7 +56,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
 
         {/* Center (Desktop only) */}
         <div className="hidden lg:flex flex-1 justify-center">
-          <span className="text-white/80 text-sm font-bold">powered radio amblè</span>
+          <span className="text-white/80 text-sm font-bold">powered by radio Amblè</span>
         </div>
 
         {/* Right Side */}
