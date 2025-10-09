@@ -28,12 +28,18 @@ const mobileContent = {
 const ConceptHomePage: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // The user requested a transition similar to SinglePlaylistPage,
+  // but no slideshow exists there. The existing fade transition is kept.
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 4000); // Change image every 4 seconds
+      setCurrentImageIndex(prevIndex => {
+        let newIndex;
+        do {
+          newIndex = Math.floor(Math.random() * images.length);
+        } while (newIndex === prevIndex);
+        return newIndex;
+      });
+    }, 180000); // 3 minutes in milliseconds
 
     return () => clearInterval(interval);
   }, []);
