@@ -5,12 +5,6 @@ import PlaylistPlayer from '../components/music/PlaylistPlayer';
 import DetailNav from '../components/ui/DetailNav';
 import ShareBar from '../components/ui/ShareBar';
 
-const BACKGROUND_IMAGES = [
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/M83-Midnight-City-Throwback-Thursday_x010fg.webp',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1759787126/deadmau5-press-photo-2016-billboard-1548_ygsmbm.webp',
-  'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/maxresdefault_pmyuzy.jpg'
-];
-
 // Mock data - in a real app, this would come from a context or API call
 const playlists: Playlist[] = [
   {
@@ -85,16 +79,7 @@ const SinglePlaylistPage: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-full flex flex-col relative bg-transparent">
-      {/* Dynamic Background Image */}
-      <div className="fixed top-0 left-0 w-full h-full z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
-          style={{ backgroundImage: `url('${BACKGROUND_IMAGES[currentTrackIndex % BACKGROUND_IMAGES.length]}')` }}
-        />
-        <div className="absolute inset-0 bg-black/30"></div>
-      </div>
-
+    <div className="h-full w-full flex flex-col relative">
       {/* Top Navigation */}
       <div className="absolute top-0 left-0 right-0 z-20 p-4 lg:p-8">
         <DetailNav sponsorName={sponsorName} />

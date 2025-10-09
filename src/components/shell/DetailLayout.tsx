@@ -6,7 +6,7 @@ const DetailLayout: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen w-screen bg-black">
+    <div className="h-screen w-screen bg-global-bg">
       {/* Page Content */}
       <main className="h-full w-full">
         <Outlet />
