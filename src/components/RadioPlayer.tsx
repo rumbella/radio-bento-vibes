@@ -1,24 +1,37 @@
-import React from 'react';
-import { Play, Pause } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Play, Pause, Share2, Heart } from 'lucide-react';
 import { usePlayerState, usePlayerActions } from '../contexts/PlayerContext';
 
 const RadioPlayer: React.FC = () => {
   const { isPlaying, currentTrack } = usePlayerState();
   const { togglePlay } = usePlayerActions();
+  const [likes, setLikes] = useState(Math.floor(Math.random() * 500) + 1000);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLikes(prevLikes => prevLikes + Math.floor(Math.random() * 5) + 1);
+    }, 5000); // Increment every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatLikes = (num: number): string => {
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'k';
+    }
+    return num.toString();
+  };
 
   // Fallback data if no track is loaded
   const displayData = {
     title: currentTrack?.title || "Radio Amblè",
-    host: currentTrack?.artist || "Live Stream",
     image: currentTrack?.imageUrl || "https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg",
-    artist: currentTrack?.artist || "",
-    songTitle: currentTrack?.title || "Tune in to discover"
   };
 
   return (
     <>
       {/* Mobile Layout */}
-      <div className="lg:hidden h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl">
+      <div className="lg:hidden h-full bg-black/20 backdrop-blur-lg border border-white/30 text-white rounded-3xl">
         <div className="relative h-full w-full p-4">
             {/* Header */}
             <header className="absolute top-4 left-4 right-4 flex items-center justify-between">
@@ -33,7 +46,9 @@ const RadioPlayer: React.FC = () => {
                     </div>
                 </div>
                 <div>
-                    <p className="text-xs">{displayData.host}</p>
+                    <button className="text-white" data-testid="share-button">
+                        <Share2 size={20} />
+                    </button>
                 </div>
             </header>
 
@@ -51,14 +66,20 @@ const RadioPlayer: React.FC = () => {
 
             {/* Footer */}
             <footer className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <p className="text-xs">{displayData.artist}</p>
-                <p className="text-xs font-bold">{displayData.songTitle}</p>
+                <div className="flex items-center space-x-2" data-testid="like-counter">
+                    <Heart size={20} className="text-white" fill="currentColor" />
+                    <span className="text-xs font-bold">{formatLikes(likes)} like</span>
+                </div>
+                <div className="live-tag-container" data-testid="live-tag">
+                    <div className="live-dot"></div>
+                    <span className="text-xs font-bold">LIVE</span>
+                </div>
             </footer>
         </div>
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:flex lg:flex-col lg:h-full bg-gluon-grey/80 backdrop-blur-md border-none text-white rounded-2xl p-6 mt-5 shadow-2xl">
+      <div className="hidden lg:flex lg:flex-col lg:h-full bg-black/20 backdrop-blur-lg border border-white/30 text-white rounded-3xl p-6 mt-5 shadow-2xl">
         {/* Header */}
         <header className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -72,7 +93,9 @@ const RadioPlayer: React.FC = () => {
                 </div>
             </div>
             <div>
-                <p className="text-sm">{displayData.host}</p>
+                <button className="text-white" data-testid="share-button-desktop">
+                    <Share2 size={24} />
+                </button>
             </div>
         </header>
 
@@ -90,8 +113,14 @@ const RadioPlayer: React.FC = () => {
 
         {/* Footer */}
         <footer className="flex items-center justify-between">
-            <p className="text-sm">{displayData.artist}</p>
-            <p className="text-sm font-bold">{displayData.songTitle}</p>
+            <div className="flex items-center space-x-2" data-testid="like-counter-desktop">
+                <Heart size={24} className="text-white" fill="currentColor" />
+                <span className="text-sm font-bold">{formatLikes(likes)} like</span>
+            </div>
+            <div className="live-tag-container" data-testid="live-tag-desktop">
+                <div className="live-dot"></div>
+                <span className="text-sm font-bold">LIVE</span>
+            </div>
         </footer>
       </div>
     </>

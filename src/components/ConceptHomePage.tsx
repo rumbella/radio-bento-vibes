@@ -30,8 +30,21 @@ const ConceptHomePage: React.FC = () => {
     Math.floor(Math.random() * images.length)
   );
 
-  // The slideshow functionality has been removed to only show a random image on page load.
-  // The useEffect hook that managed the interval has been removed.
+  // The user requested a transition similar to SinglePlaylistPage,
+  // but no slideshow exists there. The existing fade transition is kept.
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prevIndex => {
+        let newIndex;
+        do {
+          newIndex = Math.floor(Math.random() * images.length);
+        } while (newIndex === prevIndex);
+        return newIndex;
+      });
+    }, 180000); // 3 minutes in milliseconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="h-[calc(100vh-12rem)] flex flex-col lg:flex-row relative mx-auto px-4 lg:px-8">
