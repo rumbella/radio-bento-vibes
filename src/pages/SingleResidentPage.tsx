@@ -9,7 +9,7 @@ import ShareBar from '../components/ui/ShareBar';
 const residents: Resident[] = [
   {
     id: '1',
-    name: 'Rufus City sound pr. 4 sett 25 (1)',
+    name: 'Rufus City sound',
     bio: 'Rufus City sound',
     image: 'https://placehold.co/1200x1200',
     shows: ['Friday Night Mix', 'Deep Dive Sessions'],
