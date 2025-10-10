@@ -1,6 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Home, Music, Mic, Users, Grid3X3, Video } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Home, Music, Mic, Users, Grid3X3, Video, LogOut, User as UserIcon } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,6 +13,9 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
+  const navigate = useNavigate();
+  const { user, profile, signOut } = useAuth();
+  
   const navItems = [
     { id: 'home', path: '/', label: 'Home', icon: Home },
     { id: 'concept', path: '/concept', label: 'Concept', icon: Music },
@@ -19,12 +26,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
   ];
 
   const getBackgroundClass = () => {
-    // Set a consistent background for all pages as per the new design
     return 'bg-global-bg';
   };
-
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-  const toggleAuth = () => setIsAuthenticated(prev => !prev);
 
   return (
     <div className={`h-screen flex flex-col ${getBackgroundClass()} overflow-hidden`}>
@@ -62,13 +65,42 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
         {/* Right Side */}
         <div className="flex-1 flex justify-end">
           <div className="flex items-center space-x-3">
-            {isAuthenticated ? (
-              <>
-                <button onClick={toggleAuth} className="text-white hover:bg-white/10 text-sm p-2 rounded-md">Logout</button>
-                <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full" />
-              </>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="focus:outline-none">
+                    <Avatar className="w-8 h-8 cursor-pointer">
+                      <AvatarImage src={profile?.avatar_url || ''} />
+                      <AvatarFallback className="bg-gradient-to-r from-pink-500 to-orange-500 text-white text-sm">
+                        {profile?.username?.[0]?.toUpperCase() || profile?.full_name?.[0]?.toUpperCase() || 'U'}
+                      </AvatarFallback>
+                    </Avatar>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="bg-black/90 border-white/30 text-white">
+                  <DropdownMenuItem 
+                    onClick={() => navigate('/profile')}
+                    className="cursor-pointer hover:bg-white/10 focus:bg-white/10"
+                  >
+                    <UserIcon className="mr-2" size={16} />
+                    Profilo
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={signOut}
+                    className="cursor-pointer hover:bg-white/10 focus:bg-white/10"
+                  >
+                    <LogOut className="mr-2" size={16} />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
-              <button onClick={toggleAuth} className="text-white hover:bg-white/10 text-sm p-2 rounded-md">Login</button>
+              <Button 
+                onClick={() => navigate('/auth')}
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/30 text-sm"
+              >
+                Login
+              </Button>
             )}
           </div>
         </div>

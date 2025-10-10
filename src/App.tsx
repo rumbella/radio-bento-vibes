@@ -12,7 +12,10 @@ import SinglePlaylistPage from './pages/SinglePlaylistPage';
 import SinglePodcastPage from './pages/SinglePodcastPage';
 import SingleResidentPage from './pages/SingleResidentPage';
 import { UIProvider } from './contexts/UIContext';
+import { AuthProvider } from './contexts/AuthContext';
 import DetailLayout from './components/shell/DetailLayout';
+import AuthPage from './pages/AuthPage';
+import ProfilePage from './pages/ProfilePage';
 
 // This wrapper provides the main layout to a group of routes
 const MainLayoutWrapper: React.FC = () => {
@@ -28,30 +31,36 @@ const MainLayoutWrapper: React.FC = () => {
 
 function App() {
   return (
-    <UIProvider>
-      <Routes>
-        {/* Routes with the main layout (header, footer, etc.) */}
-        <Route element={<MainLayoutWrapper />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/concept" element={<ConceptHomePage />} />
-          <Route path="/video" element={<Videobg />} />
-          <Route path="/playlists" element={<PlaylistsPage />} />
-          <Route path="/podcasts" element={<PodcastsPage />} />
-          <Route path="/residents" element={<ResidentsPage />} />
-          <Route path="/admin" element={<AdminPage />} />
-        </Route>
+    <AuthProvider>
+      <UIProvider>
+        <Routes>
+          {/* Routes with the main layout (header, footer, etc.) */}
+          <Route element={<MainLayoutWrapper />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/concept" element={<ConceptHomePage />} />
+            <Route path="/video" element={<Videobg />} />
+            <Route path="/playlists" element={<PlaylistsPage />} />
+            <Route path="/podcasts" element={<PodcastsPage />} />
+            <Route path="/residents" element={<ResidentsPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Route>
 
-        {/* Routes with the detail layout (e.g., for single items) */}
-        <Route element={<DetailLayout />}>
-          <Route path="/playlist/:id" element={<SinglePlaylistPage />} />
-          <Route path="/podcast/:id" element={<SinglePodcastPage />} />
-          <Route path="/resident/:id" element={<SingleResidentPage />} />
-        </Route>
+          {/* Routes with the detail layout (e.g., for single items) */}
+          <Route element={<DetailLayout />}>
+            <Route path="/playlist/:id" element={<SinglePlaylistPage />} />
+            <Route path="/podcast/:id" element={<SinglePodcastPage />} />
+            <Route path="/resident/:id" element={<SingleResidentPage />} />
+          </Route>
 
-        {/* Fallback route */}
-        <Route path="*" element={<ConceptHomePage />} />
-      </Routes>
-    </UIProvider>
+          {/* Auth and Profile routes */}
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+
+          {/* Fallback route */}
+          <Route path="*" element={<ConceptHomePage />} />
+        </Routes>
+      </UIProvider>
+    </AuthProvider>
   );
 }
 
