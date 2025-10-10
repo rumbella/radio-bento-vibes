@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Resident } from '../types';
 import ResidentPlayer from '../components/music/ResidentPlayer';
@@ -16,7 +16,10 @@ const residents: Resident[] = [
     socialLinks: {
       instagram: 'https://instagram.com/djphoenix',
       soundcloud: 'https://soundcloud.com/djphoenix'
-    }
+    },
+    audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3',
+    backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
+    djImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg'
   },
   {
     id: '2',
@@ -27,7 +30,10 @@ const residents: Resident[] = [
     socialLinks: {
       instagram: 'https://instagram.com/lunabeats',
       mixcloud: 'https://mixcloud.com/lunabeats'
-    }
+    },
+    audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3',
+    backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
+    djImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg'
   }
 ];
 
@@ -35,6 +41,23 @@ const SingleResidentPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const resident = residents.find(r => r.id === id);
   const title = "ascolta i nostri djset";
+
+  useEffect(() => {
+    if (resident?.backgroundImageUrl) {
+      document.body.style.backgroundImage = `url(${resident.backgroundImageUrl})`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundRepeat = 'no-repeat';
+    }
+
+    // Cleanup function to remove the background style when the component unmounts
+    return () => {
+      document.body.style.backgroundImage = '';
+      document.body.style.backgroundSize = '';
+      document.body.style.backgroundPosition = '';
+      document.body.style.backgroundRepeat = '';
+    };
+  }, [resident]);
 
   if (!resident) {
     return <div className="text-white text-center p-8">Resident not found</div>;
