@@ -24,9 +24,9 @@ const playlists: Playlist[] = [
     description: 'Uplifting beats to start your day',
     image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
     tracks: [
-      { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20', audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760087542/1366x768_cmsv2_fbd8e6b0-9e66-50c4-aa7f-3d97a2960768-8210240_cvzurc.webp' },
-      { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02', audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3', backgroundImageUrl: 'https://images.genius.com/5cfae047f3f88cdfaf9520279d3a1a28.1000x1000x1.png' },
-      { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05', audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/maxresdefault_pmyuzy.jpg' }
+      { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760101933/Daft_Punk_-_One_More_Time_Official_Video_FGBhQbmPwH8_n29mxw.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760087542/1366x768_cmsv2_fbd8e6b0-9e66-50c4-aa7f-3d97a2960768-8210240_cvzurc.webp' },
+      { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760101928/Avicii_-_Levels__ovdm2yX4MA_xolwf3.mp3', backgroundImageUrl: 'https://images.genius.com/5cfae047f3f88cdfaf9520279d3a1a28.1000x1000x1.png' },
+      { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760101929/David_Guetta_-_Titanium_ft._Sia_Official_Video_JRfuAukYTKg_esnjb4.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/maxresdefault_pmyuzy.jpg' }
     ]
   },
   {
@@ -36,7 +36,7 @@ const playlists: Playlist[] = [
     image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
     tracks: [
       { id: '7', title: 'Weightless', artist: 'Marconi Union', duration: '8:08', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
-      { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
+      { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760102531/Moby_-_Porcelain_13EifDb4GYs_fouwmu.mp3' },
       { id: '9', title: 'Kiara', artist: 'Bonobo', duration: '5:27', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
     ]
   },
