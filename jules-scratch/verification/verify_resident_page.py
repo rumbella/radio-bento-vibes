@@ -12,9 +12,10 @@ def verify_resident_page(page: Page):
     body = page.locator("body")
     expect(body).to_have_css("background-image", re.compile(r"url\("))
 
-    # Check for DJ image in the player
-    dj_image = page.locator("img[alt='DJ Phoenix']")
+    # Check for DJ image in the player with rounded-full class
+    dj_image = page.locator("img[alt='Rufus City sound pr. 4 sett 25 (1)']")
     expect(dj_image).to_be_visible()
+    expect(dj_image).to_have_class(re.compile(r"rounded-full"))
 
     # Take a screenshot
     page.screenshot(path="jules-scratch/verification/resident_page.png")
