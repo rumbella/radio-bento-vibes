@@ -35,9 +35,9 @@ const playlists: Playlist[] = [
     description: 'Relaxing sounds for peaceful moments',
     image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
     tracks: [
-      { id: '7', title: 'Weightless', artist: 'Marconi Union', duration: '8:08', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
-      { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760102531/Moby_-_Porcelain_13EifDb4GYs_fouwmu.mp3' },
-      { id: '9', title: 'Kiara', artist: 'Bonobo', duration: '5:27', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
+      { id: '7', title: 'Weightless', artist: 'Marconi Union', duration: '8:08', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760102531/Marconi_Union_-_Weightless_Official_Video_UfcAVejslrU_qngvzz.mp3',backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760102525/hq720_lrkvna.avif' },
+      { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760102531/Moby_-_Porcelain_13EifDb4GYs_fouwmu.mp3',backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760102524/moby-porcelain-2023-09-28_08-47-33_gkalel.jpg' },
+      { id: '9', title: 'Kiara', artist: 'Bonobo', duration: '5:27', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760102528/Bonobo_-_Kiara_L-kyRh7N-kE_tokkdq.mp3',backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760102525/9c70225d-obr-fialova-4_dvkdnc.jpg' }
     ]
   },
   {
