@@ -17,20 +17,19 @@ const ResidentPlayer: React.FC<ResidentPlayerProps> = ({ resident }) => {
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Mock audio URL - replace with actual resident mix URL
-  const audioUrl = 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3';
-
   useEffect(() => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.play().catch(error => {
-        console.error("Error playing audio:", error);
-        setIsPlaying(false);
-      });
-    } else {
-      audioRef.current.pause();
+    if (audioRef.current) {
+      audioRef.current.src = resident.audioUrl;
+      if (isPlaying) {
+        audioRef.current.play().catch(error => {
+          console.error("Error playing audio:", error);
+          setIsPlaying(false);
+        });
+      } else {
+        audioRef.current.pause();
+      }
     }
-  }, [isPlaying]);
+  }, [isPlaying, resident.audioUrl]);
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
@@ -87,7 +86,6 @@ const ResidentPlayer: React.FC<ResidentPlayerProps> = ({ resident }) => {
     <>
       <audio
         ref={audioRef}
-        src={audioUrl}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onWaiting={() => setIsLoading(true)}
@@ -98,7 +96,7 @@ const ResidentPlayer: React.FC<ResidentPlayerProps> = ({ resident }) => {
 
       {/* Mobile Layout */}
       <div className="lg:hidden bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-3xl w-full overflow-hidden shadow-lg">
-        <PlayerHeader playlistName={resident.name} onPlaylistClick={() => {}} />
+        <PlayerHeader playlistName={resident.name} />
         <div className="p-2">
           <div className="flex flex-col items-center justify-between gap-3">
             <div className="flex items-center justify-center gap-4 w-full">
@@ -132,13 +130,13 @@ const ResidentPlayer: React.FC<ResidentPlayerProps> = ({ resident }) => {
 
       {/* Desktop Layout */}
       <div className="hidden lg:flex lg:flex-col lg:h-full bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-3xl w-full overflow-hidden shadow-lg p-4">
-        <PlayerHeader playlistName={resident.name} onPlaylistClick={() => {}} />
+        <PlayerHeader playlistName={resident.name} />
 
         <div className="flex-1 flex flex-col items-center justify-center text-center gap-3 py-2">
-          <img src={resident.image} alt={resident.name} className="w-40 h-40 xl:w-48 xl:h-48 rounded-2xl object-cover shadow-lg mb-2" />
+          <img src={resident.djImageUrl} alt={resident.name} className="w-40 h-40 xl:w-48 xl:h-48 rounded-2xl object-cover shadow-lg mb-2" />
           <div className="min-w-0">
             <p className="text-xl font-bold truncate">{resident.name}</p>
-            <p className="text-md text-gray-300 truncate">{resident.bio}</p>
+            <p className="text-sm text-gray-300 truncate">{resident.bio}</p>
           </div>
           <div className="flex items-center gap-5 my-2">
             <button onClick={skipBackward} className="bg-transparent hover:bg-white/10 text-white p-3 rounded-full transition-all duration-300">

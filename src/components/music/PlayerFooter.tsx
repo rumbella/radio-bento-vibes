@@ -7,7 +7,7 @@ interface PlayerFooterProps {
 
 const PlayerFooter: React.FC<PlayerFooterProps> = ({ tickerText }) => {
   return (
-    <div className="w-full bg-black/20 backdrop-blur-sm text-white overflow-hidden whitespace-nowrap h-10 flex items-center">
+    <div className="w-full bg-black/20 backdrop-blur-sm text-white overflow-hidden h-10 flex items-center">
       <div className="ticker-wrap">
         <div className="ticker-move">
           <div className="ticker-item">{tickerText}</div>

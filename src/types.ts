@@ -35,4 +35,7 @@ export interface Resident {
   image: string;
   shows: string[];
   socialLinks: ResidentSocialLinks;
+  audioUrl: string;
+  backgroundImageUrl?: string;
+  djImageUrl: string;
 }
