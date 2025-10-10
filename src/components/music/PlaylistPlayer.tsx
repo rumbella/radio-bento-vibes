@@ -158,13 +158,13 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
               </div>
             </div>
             <div className="flex items-center gap-5">
-              <button onClick={prevTrack} className="bg-transparent hover:bg-white/10 text-white p-2 rounded-full transition-all duration-300">
+              <button onClick={prevTrack} data-testid="prev-button" className="bg-transparent hover:bg-white/10 text-white p-2 rounded-full transition-all duration-300">
                 <SkipBack size={22} fill="currentColor" />
               </button>
-              <button onClick={togglePlay} className={`bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 ${!isPlaying && !isLoading ? 'idle-pulse' : ''}`} disabled={isLoading}>
+              <button onClick={togglePlay} data-testid="play-pause-button" className={`bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition-all duration-300 transform hover:scale-105 ${!isPlaying && !isLoading ? 'idle-pulse' : ''}`} disabled={isLoading}>
                 {isLoading ? <Loader size={32} className="animate-spin" /> : (isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} fill="currentColor" />)}
               </button>
-              <button onClick={nextTrack} className="bg-transparent hover:bg-white/10 text-white p-2 rounded-full transition-all duration-300">
+              <button onClick={nextTrack} data-testid="next-button" className="bg-transparent hover:bg-white/10 text-white p-2 rounded-full transition-all duration-300">
                 <SkipForward size={22} fill="currentColor" />
               </button>
             </div>
@@ -184,13 +184,13 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
             <p className="text-md text-gray-300 truncate">{currentTrack?.artist}</p>
           </div>
           <div className="flex items-center gap-5 my-2">
-            <button onClick={prevTrack} className="bg-transparent hover:bg-white/10 text-white p-3 rounded-full transition-all duration-300">
+            <button onClick={prevTrack} data-testid="prev-button-desktop" className="bg-transparent hover:bg-white/10 text-white p-3 rounded-full transition-all duration-300">
               <SkipBack size={24} fill="currentColor" />
             </button>
-            <button onClick={togglePlay} className={`bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all duration-300 transform hover:scale-105 ${!isPlaying && !isLoading ? 'idle-pulse' : ''}`} disabled={isLoading}>
+            <button onClick={togglePlay} data-testid="play-pause-button-desktop" className={`bg-white/10 hover:bg-white/20 text-white p-5 rounded-full transition-all duration-300 transform hover:scale-105 ${!isPlaying && !isLoading ? 'idle-pulse' : ''}`} disabled={isLoading}>
               {isLoading ? <Loader size={36} className="animate-spin" /> : (isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" />)}
             </button>
-            <button onClick={nextTrack} className="bg-transparent hover:bg-white/10 text-white p-3 rounded-full transition-all duration-300">
+            <button onClick={nextTrack} data-testid="next-button-desktop" className="bg-transparent hover:bg-white/10 text-white p-3 rounded-full transition-all duration-300">
               <SkipForward size={24} fill="currentColor" />
             </button>
           </div>

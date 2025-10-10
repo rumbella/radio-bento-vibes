@@ -4,6 +4,7 @@ export interface PlaylistTrack {
   artist: string;
   duration: string; // e.g., "4:03"
   audioUrl: string;
+  backgroundImageUrl?: string;
 }
 
 export interface Playlist {
