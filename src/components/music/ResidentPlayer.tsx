@@ -133,7 +133,7 @@ const ResidentPlayer: React.FC<ResidentPlayerProps> = ({ resident }) => {
         <PlayerHeader playlistName={resident.name} />
 
         <div className="flex-1 flex flex-col items-center justify-center text-center gap-3 py-2">
-          <img src={resident.djImageUrl} alt={resident.name} className="w-40 h-40 xl:w-48 xl:h-48 rounded-2xl object-cover shadow-lg mb-2" />
+          <img src={resident.djImageUrl} alt={resident.name} className="w-40 h-40 xl:w-48 xl:h-48 rounded-full object-cover shadow-lg mb-2" />
           <div className="min-w-0">
             <p className="text-xl font-bold truncate">{resident.name}</p>
             <p className="text-sm text-gray-300 truncate">{resident.bio}</p>

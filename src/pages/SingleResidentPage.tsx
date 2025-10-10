@@ -9,31 +9,31 @@ import ShareBar from '../components/ui/ShareBar';
 const residents: Resident[] = [
   {
     id: '1',
-    name: 'DJ Phoenix',
-    bio: 'Electronic music pioneer with 10 years of experience',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
+    name: 'Rufus City sound pr. 4 sett 25 (1)',
+    bio: 'Rufus City sound',
+    image: 'https://placehold.co/1200x1200',
     shows: ['Friday Night Mix', 'Deep Dive Sessions'],
     socialLinks: {
       instagram: 'https://instagram.com/djphoenix',
       soundcloud: 'https://soundcloud.com/djphoenix'
     },
-    audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3',
-    backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
-    djImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg'
+    audioUrl: 'https://audio.com/lapo-ristori/audio/rufus-city-sound-pr-4-sett-25-1',
+    backgroundImageUrl: 'https://placehold.co/1200x1200',
+    djImageUrl: 'https://placehold.co/200x200'
   },
   {
     id: '2',
-    name: 'Luna Beats',
-    bio: 'Specializing in ambient and downtempo',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
+    name: 'A. Anedda Disco Spektrum',
+    bio: 'A. Anedda Disco Spektrum',
+    image: 'https://placehold.co/1200x1200',
     shows: ['Midnight Chill', 'Sunday Sunrise'],
     socialLinks: {
       instagram: 'https://instagram.com/lunabeats',
       mixcloud: 'https://mixcloud.com/lunabeats'
     },
-    audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3',
-    backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
-    djImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg'
+    audioUrl: 'https://audio.com/lapo-ristori/audio/a-anedda-disco-spektrum-22-agosto-25-1',
+    backgroundImageUrl: 'https://placehold.co/1200x1200',
+    djImageUrl: 'https://placehold.co/200x200'
   }
 ];
 
