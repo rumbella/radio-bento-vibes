@@ -26,7 +26,7 @@ const playlists: Playlist[] = [
     tracks: [
       { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760101933/Daft_Punk_-_One_More_Time_Official_Video_FGBhQbmPwH8_n29mxw.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760087542/1366x768_cmsv2_fbd8e6b0-9e66-50c4-aa7f-3d97a2960768-8210240_cvzurc.webp' },
       { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760101928/Avicii_-_Levels__ovdm2yX4MA_xolwf3.mp3', backgroundImageUrl: 'https://images.genius.com/5cfae047f3f88cdfaf9520279d3a1a28.1000x1000x1.png' },
-      { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760101929/David_Guetta_-_Titanium_ft._Sia_Official_Video_JRfuAukYTKg_esnjb4.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/maxresdefault_pmyuzy.jpg' }
+      { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760101929/David_Guetta_-_Titanium_ft._Sia_Official_Video_JRfuAukYTKg_esnjb4.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760103482/titanium_ozjmgs.jpg' }
     ]
   },
   {
