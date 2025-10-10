@@ -13,9 +13,9 @@ const playlists: Playlist[] = [
     description: 'The best deep house tracks for your soul',
     image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
     tracks: [
-      { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
-      { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
-      { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
+      { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760087524/artworks-000012560643-t526va-t1080x1080_jxlikn.jpg' },
+      { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1759787126/deadmau5-press-photo-2016-billboard-1548_ygsmbm.webp' },
+      { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1759787379/maxresdefault_pmyuzy.jpg' }
     ]
   },
   {
@@ -74,12 +74,17 @@ const SinglePlaylistPage: React.FC = () => {
     return <div className="text-white text-center p-8">Playlist not found</div>;
   }
 
-  const handleTrackSelect = (index: number) => {
-    setCurrentTrackIndex(index);
-  };
+  const backgroundImageUrl = playlist.tracks[currentTrackIndex]?.backgroundImageUrl || playlist.image;
 
   return (
     <div className="h-full w-full flex flex-col relative">
+      {/* Background Image & Overlay */}
+      <div
+        className="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-1000"
+        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+      />
+      <div className="absolute inset-0 w-full h-full bg-black/60 backdrop-blur-sm" />
+
       {/* Top Navigation */}
       <div className="absolute top-0 left-0 right-0 z-20 p-4 lg:p-8">
         <DetailNav title={title} />
