@@ -78,9 +78,9 @@ const SinglePlaylistPage: React.FC = () => {
 
   return (
     <div className="h-full w-full flex flex-col relative">
-      {/* Background Image */}
+      {/* Background Image & Overlay */}
       <div
-        className="fixed inset-0 w-full h-full bg-cover bg-center transition-all duration-1000 -z-10"
+        className="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-1000"
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       />
 
