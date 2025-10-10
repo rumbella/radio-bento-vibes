@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, Pause, Share2, Heart } from 'lucide-react';
 import { usePlayerState, usePlayerActions } from '../contexts/PlayerContext';
-import { useLikes } from '../hooks/useLikes';
 
 const RadioPlayer: React.FC = () => {
   const { isPlaying, currentTrack } = usePlayerState();
   const { togglePlay } = usePlayerActions();
-  const { totalLikes, todayLikes, hasLikedToday, addLike } = useLikes();
+  const [likes, setLikes] = useState(Math.floor(Math.random() * 500) + 1000);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLikes(prevLikes => prevLikes + Math.floor(Math.random() * 5) + 1);
+    }, 5000); // Increment every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   const formatLikes = (num: number): string => {
     if (num >= 1000) {
       return (num / 1000).toFixed(1) + 'k';
     }
     return num.toString();
-  };
-
-  const handleLikeClick = () => {
-    if (!hasLikedToday) {
-      addLike();
-    }
   };
 
   // Fallback data if no track is loaded
@@ -65,23 +66,10 @@ const RadioPlayer: React.FC = () => {
 
             {/* Footer */}
             <footer className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <button 
-                  onClick={handleLikeClick}
-                  className={`flex items-center space-x-2 transition-all ${
-                    hasLikedToday ? 'opacity-60' : 'hover:scale-110 cursor-pointer'
-                  }`}
-                  data-testid="like-counter"
-                >
-                    <Heart 
-                      size={20} 
-                      className="text-white" 
-                      fill={hasLikedToday ? "currentColor" : "none"}
-                    />
-                    <div className="flex flex-col items-start">
-                      <span className="text-xs font-bold">{formatLikes(totalLikes)} like</span>
-                      <span className="text-[10px] text-white/70">+{todayLikes} oggi</span>
-                    </div>
-                </button>
+                <div className="flex items-center space-x-2" data-testid="like-counter">
+                    <Heart size={20} className="text-white" fill="currentColor" />
+                    <span className="text-xs font-bold">{formatLikes(likes)} like</span>
+                </div>
                 <div className="live-tag-container" data-testid="live-tag">
                     <div className="live-dot"></div>
                     <span className="text-xs font-bold">LIVE</span>
@@ -125,23 +113,10 @@ const RadioPlayer: React.FC = () => {
 
         {/* Footer */}
         <footer className="flex items-center justify-between">
-            <button 
-              onClick={handleLikeClick}
-              className={`flex items-center space-x-2 transition-all ${
-                hasLikedToday ? 'opacity-60' : 'hover:scale-110 cursor-pointer'
-              }`}
-              data-testid="like-counter-desktop"
-            >
-                <Heart 
-                  size={24} 
-                  className="text-white" 
-                  fill={hasLikedToday ? "currentColor" : "none"}
-                />
-                <div className="flex flex-col items-start">
-                  <span className="text-sm font-bold">{formatLikes(totalLikes)} like</span>
-                  <span className="text-xs text-white/70">+{todayLikes} oggi</span>
-                </div>
-            </button>
+            <div className="flex items-center space-x-2" data-testid="like-counter-desktop">
+                <Heart size={24} className="text-white" fill="currentColor" />
+                <span className="text-sm font-bold">{formatLikes(likes)} like</span>
+            </div>
             <div className="live-tag-container" data-testid="live-tag-desktop">
                 <div className="live-dot"></div>
                 <span className="text-sm font-bold">LIVE</span>
