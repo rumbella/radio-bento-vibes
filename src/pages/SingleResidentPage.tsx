@@ -17,7 +17,7 @@ const residents: Resident[] = [
       instagram: 'https://instagram.com/djphoenix',
       soundcloud: 'https://soundcloud.com/djphoenix'
     },
-    audioUrl: 'https://ln5.sync.com/dl/3b1a43ac0#utgz5uwr-fxxnpsed-thfcxbim-mw6ftirm',
+    audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760218017/rufus-city-sound-pr-4-sett-25_8navGs9q_grheai.mp3',
     backgroundImageUrl: 'https://placehold.co/1200x1200',
     djImageUrl: 'https://placehold.co/200x200'
   },
