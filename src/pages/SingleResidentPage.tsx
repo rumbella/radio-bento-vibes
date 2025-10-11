@@ -17,7 +17,7 @@ const residents: Resident[] = [
       instagram: 'https://instagram.com/djphoenix',
       soundcloud: 'https://soundcloud.com/djphoenix'
     },
-    audioUrl: 'https://audio.com/lapo-ristori/audio/rufus-city-sound-pr-4-sett-25-1',
+    audioUrl: 'https://ln5.sync.com/dl/3b1a43ac0#utgz5uwr-fxxnpsed-thfcxbim-mw6ftirm',
     backgroundImageUrl: 'https://placehold.co/1200x1200',
     djImageUrl: 'https://placehold.co/200x200'
   },
@@ -31,7 +31,7 @@ const residents: Resident[] = [
       instagram: 'https://instagram.com/lunabeats',
       mixcloud: 'https://mixcloud.com/lunabeats'
     },
-    audioUrl: 'https://audio.com/lapo-ristori/audio/a-anedda-disco-spektrum-22-agosto-25-1',
+    audioUrl: 'https://ln5.sync.com/dl/9d1ccd610#2h8ctj8e-vt9v63ze-3min8y29-d788uuf7',
     backgroundImageUrl: 'https://placehold.co/1200x1200',
     djImageUrl: 'https://placehold.co/200x200'
   }
