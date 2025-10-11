@@ -31,7 +31,7 @@ const residents: Resident[] = [
       instagram: 'https://instagram.com/lunabeats',
       mixcloud: 'https://mixcloud.com/lunabeats'
     },
-    audioUrl: 'https://ln5.sync.com/dl/9d1ccd610#2h8ctj8e-vt9v63ze-3min8y29-d788uuf7',
+    audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760223035/a-anedda-disco-spektrum-22-agosto-25-1-i03iaiuv_OvJciUM8_mmtavk.mp3',
     backgroundImageUrl: 'https://placehold.co/1200x1200',
     djImageUrl: 'https://placehold.co/200x200'
   }
