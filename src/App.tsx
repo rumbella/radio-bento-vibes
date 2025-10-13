@@ -8,9 +8,12 @@ import PlaylistsPage from './components/PlaylistsPage';
 import PodcastsPage from './components/PodcastsPage';
 import ResidentsPage from './components/ResidentsPage';
 import AdminPage from './components/AdminPage';
+import ProtectedRoute from './components/ProtectedRoute';
 import SinglePlaylistPage from './pages/SinglePlaylistPage';
 import SinglePodcastPage from './pages/SinglePodcastPage';
 import SingleResidentPage from './pages/SingleResidentPage';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 import { UIProvider } from './contexts/UIContext';
 import DetailLayout from './components/shell/DetailLayout';
 
@@ -38,7 +41,14 @@ function App() {
           <Route path="/playlists" element={<PlaylistsPage />} />
           <Route path="/podcasts" element={<PodcastsPage />} />
           <Route path="/residents" element={<ResidentsPage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminPage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
         {/* Routes with the detail layout (e.g., for single items) */}
@@ -47,6 +57,10 @@ function App() {
           <Route path="/podcast/:id" element={<SinglePodcastPage />} />
           <Route path="/resident/:id" element={<SingleResidentPage />} />
         </Route>
+
+        {/* Auth routes */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
 
         {/* Fallback route */}
         <Route path="*" element={<ConceptHomePage />} />
