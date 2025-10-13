@@ -22,6 +22,15 @@ const LoginPage = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
+    if (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
@@ -67,6 +76,18 @@ const LoginPage = () => {
             Login
           </button>
         </form>
+        <div className="relative flex py-2 items-center">
+            <div className="flex-grow border-t border-gray-400"></div>
+            <span className="flex-shrink mx-4 text-gray-400">Or</span>
+            <div className="flex-grow border-t border-gray-400"></div>
+        </div>
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          className="w-full px-4 py-2 font-bold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+        >
+          Sign in with Google
+        </button>
         <p className="text-center">
           Don't have an account?{' '}
           <a href="/signup" className="text-blue-500 hover:underline">
