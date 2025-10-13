@@ -70,13 +70,13 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
           <div className="flex items-center space-x-3">
             {user ? (
               <>
-                <button onClick={handleLogout} className="text-white hover:bg-white/10 text-sm p-2 rounded-md">Logout</button>
+                <button onClick={handleLogout} className="text-white bg-black/20 backdrop-blur-md border-none hover:bg-white/30 text-sm py-2 px-4 rounded-full">Logout</button>
                 <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full" />
               </>
             ) : (
               <>
-                <Link to="/login" className="text-white hover:bg-white/10 text-sm p-2 rounded-md">Login</Link>
-                <Link to="/signup" className="text-white bg-blue-500 hover:bg-blue-600 text-sm p-2 rounded-md">Sign Up</Link>
+                <Link to="/login" className="text-white bg-black/20 backdrop-blur-md border-none hover:bg-white/30 text-sm py-2 px-4 rounded-full">Login</Link>
+                <Link to="/signup" className="text-white bg-black/20 backdrop-blur-md border-none hover:bg-white/30 text-sm py-2 px-4 rounded-full">Sign Up</Link>
               </>
             )}
           </div>
