@@ -18,7 +18,11 @@ const residents: Resident[] = [
       soundcloud: 'https://soundcloud.com/djphoenix'
     },
     audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760218017/rufus-city-sound-pr-4-sett-25_8navGs9q_grheai.mp3',
-    backgroundImageUrl: 'https://placehold.co/1200x1200',
+    backgroundImageUrls: [
+      'https://placehold.co/1200x1200',
+      'https://placehold.co/1200x1201',
+      'https://placehold.co/1200x1202'
+    ],
     djImageUrl: 'https://placehold.co/200x200'
   },
   {
@@ -32,7 +36,11 @@ const residents: Resident[] = [
       mixcloud: 'https://mixcloud.com/lunabeats'
     },
     audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760223035/a-anedda-disco-spektrum-22-agosto-25-1-i03iaiuv_OvJciUM8_mmtavk.mp3',
-    backgroundImageUrl: 'https://placehold.co/1200x1200',
+    backgroundImageUrls: [
+      'https://placehold.co/1200x1200',
+      'https://placehold.co/1200x1201',
+      'https://placehold.co/1200x1202'
+    ],
     djImageUrl: 'https://placehold.co/200x200'
   }
 ];
@@ -41,30 +49,44 @@ const SingleResidentPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const resident = residents.find(r => r.id === id);
   const title = "ascolta i nostri djset";
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    if (resident?.backgroundImageUrl) {
-      document.body.style.backgroundImage = `url(${resident.backgroundImageUrl})`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundPosition = 'center';
-      document.body.style.backgroundRepeat = 'no-repeat';
-    }
+    const images = resident?.backgroundImageUrls;
+    if (images && images.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex(prevIndex => (prevIndex + 1) % images.length);
+      }, 5000); // Change image every 5 seconds
 
-    // Cleanup function to remove the background style when the component unmounts
-    return () => {
-      document.body.style.backgroundImage = '';
-      document.body.style.backgroundSize = '';
-      document.body.style.backgroundPosition = '';
-      document.body.style.backgroundRepeat = '';
-    };
+      return () => clearInterval(interval);
+    }
   }, [resident]);
 
   if (!resident) {
     return <div className="text-white text-center p-8">Resident not found</div>;
   }
 
+  const images = resident.backgroundImageUrls || [];
+
   return (
     <div className="h-full w-full flex flex-col relative">
+      {/* Full Background Slideshow */}
+      <div className="fixed top-0 left-0 w-full h-full z-0">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: `url('${image}')`
+            }}
+          />
+        ))}
+        {/* Dark overlay for better contrast */}
+        <div className="absolute inset-0 bg-black/30"></div>
+      </div>
+
       {/* Top Navigation */}
       <div className="absolute top-0 left-0 right-0 z-20 p-4 lg:p-8">
         <DetailNav title={title} />
