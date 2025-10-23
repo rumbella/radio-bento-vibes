@@ -144,9 +144,8 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
         <PlayerHeader onPlaylistClick={() => setIsModalOpen(true)} />
         <div className="p-2">
           <div className="flex flex-col items-center justify-between gap-3">
-            <div className="lg:hidden flex items-center justify-center gap-4 w-full">
-              <img src={playlistImage} alt={playlistName} className="w-12 h-12 rounded-lg object-cover" />
-              <div className="min-w-0 text-left">
+            <div className="flex items-center justify-center gap-4 w-full">
+              <div className="min-w-0 text-center">
                 <p className="text-lg font-bold truncate">{currentTrack?.title}</p>
                 <p className="text-sm text-gray-300 truncate">{currentTrack?.artist}</p>
               </div>
