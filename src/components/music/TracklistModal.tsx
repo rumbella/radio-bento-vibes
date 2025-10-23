@@ -21,13 +21,13 @@ const TracklistModal: React.FC<TracklistModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 z-40 flex items-end justify-center"
+      className={`fixed inset-0 bg-black/50 z-40 flex items-end justify-center transition-opacity duration-500 ease-in-out ${
+        isOpen ? 'opacity-100' : 'opacity-0'
+      }`}
       onClick={onClose}
     >
       <div
-        className={`bg-gluon-grey/80 backdrop-blur-xl text-white w-full max-w-lg rounded-t-3xl shadow-lg transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-y-0' : 'translate-y-full'
-        }`}
+        className="bg-gluon-grey/80 backdrop-blur-xl text-white w-full max-w-lg rounded-t-3xl shadow-lg"
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
       >
         <div className="p-4 border-b border-white/10 flex justify-between items-center">

@@ -141,7 +141,7 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
 
       {/* Mobile Layout */}
       <div className="lg:hidden bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-3xl w-full overflow-hidden shadow-lg">
-        <PlayerHeader playlistName={playlistName} onPlaylistClick={() => setIsModalOpen(true)} />
+        <PlayerHeader onPlaylistClick={() => setIsModalOpen(true)} />
         <div className="p-2">
           <div className="flex flex-col items-center justify-between gap-3">
             <div className="flex items-center justify-center gap-4 w-full">
@@ -175,7 +175,7 @@ const PlaylistPlayer: React.FC<PlaylistPlayerProps> = ({
 
       {/* Desktop Layout */}
       <div className="hidden lg:flex lg:flex-col lg:h-full bg-gluon-grey/20 backdrop-blur-md border-none text-white rounded-3xl w-full overflow-hidden shadow-lg p-4">
-        <PlayerHeader playlistName={playlistName} onPlaylistClick={() => setIsModalOpen(true)} />
+        <PlayerHeader onPlaylistClick={() => setIsModalOpen(true)} />
 
         <div className="flex-1 flex flex-col items-center justify-center text-center gap-3 py-2">
           <img src={playlistImage} alt={playlistName} className="w-40 h-40 xl:w-48 xl:h-48 rounded-2xl object-cover shadow-lg mb-2" />
