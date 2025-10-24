@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Playlist } from '../types';
 import PlaylistPlayer from '../components/music/PlaylistPlayer';
@@ -29,94 +29,65 @@ const playlists: Playlist[] = [
       { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760101929/David_Guetta_-_Titanium_ft._Sia_Official_Video_JRfuAukYTKg_esnjb4.mp3', backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760103482/titanium_ozjmgs.jpg' }
     ]
   },
-  {
-    id: '3',
-    name: 'Chill Vibes',
-    description: 'Relaxing sounds for peaceful moments',
-    image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
-    tracks: [
-      { id: '7', title: 'Weightless', artist: 'Marconi Union', duration: '8:08', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760102531/Marconi_Union_-_Weightless_Official_Video_UfcAVejslrU_qngvzz.mp3',backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760102525/hq720_lrkvna.avif' },
-      { id: '8', title: 'Porcelain', artist: 'Moby', duration: '4:01', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760102531/Moby_-_Porcelain_13EifDb4GYs_fouwmu.mp3',backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760102524/moby-porcelain-2023-09-28_08-47-33_gkalel.jpg' },
-      { id: '9', title: 'Kiara', artist: 'Bonobo', duration: '5:27', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1760102528/Bonobo_-_Kiara_L-kyRh7N-kE_tokkdq.mp3',backgroundImageUrl: 'https://res.cloudinary.com/thinkdigital/image/upload/v1760102525/9c70225d-obr-fialova-4_dvkdnc.jpg' }
-    ]
-  },
-  {
-      id: '4',
-      name: 'Techno',
-      description: 'The best deep house tracks for your soul',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
-      tracks: [
-        { id: '1', title: 'Midnight City', artist: 'M83', duration: '4:03', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
-        { id: '2', title: 'Strobe', artist: 'Deadmau5', duration: '10:32', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
-        { id: '3', title: 'Teardrop', artist: 'Massive Attack', duration: '5:29', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
-      ]
-    },
-    {
-      id: '5',
-      name: 'Afro House',
-      description: 'Uplifting beats to start your day',
-      image: 'https://res.cloudinary.com/thinkdigital/image/upload/v1748272704/pexels-isabella-mendes-107313-860707_qjh3q1.jpg',
-      tracks: [
-        { id: '4', title: 'One More Time', artist: 'Daft Punk', duration: '5:20', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759239844/M83_Midnight_City_Official_video_dX3k_QDnzHE_vm7bf2.mp3' },
-        { id: '5', title: 'Levels', artist: 'Avicii', duration: '6:02', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243379/deadmau5_-_Strobe_tKi9Z-f6qX4_ntmclt.mp3' },
-        { id: '6', title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05', audioUrl: 'https://res.cloudinary.com/thinkdigital/video/upload/v1759243385/Massive_Attack_-_Teardrop_Official_Video_u7K72X4eo_s_ersicy.mp3' }
-      ]
-    },
+  // ... other playlists
 ];
 
 const SinglePlaylistPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const playlist = playlists.find(p => p.id === id);
+  const playlist = playlists.find(p => p.id === id) || playlists[0]; // Fallback to first playlist
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const title = "le playlist esclusive di Radio Amblè";
+
+  const backgroundImageUrl = playlist.tracks[currentTrackIndex]?.backgroundImageUrl || playlist.image;
 
   if (!playlist) {
     return <div className="text-white text-center p-8">Playlist not found</div>;
   }
 
-  const backgroundImageUrl = playlist.tracks[currentTrackIndex]?.backgroundImageUrl || playlist.image;
-
   return (
-    <div className="h-full w-full flex flex-col relative">
-      {/* Background Image & Overlay */}
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-1000"
-        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-      />
+    <div
+      className="h-screen w-screen bg-cover bg-center transition-all duration-1000"
+      style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
 
-      {/* Top Navigation */}
-      <div className="absolute top-0 left-0 right-0 z-20 p-4 lg:p-8">
-        <DetailNav title={title} />
-      </div>
-
-      {/* Main Content Flex Container */}
-      <div className="flex-grow flex flex-col lg:flex-row items-end lg:items-center relative z-10 p-4 lg:p-8 mt-[60px] lg:mt-0">
-
-        {/* Left Content Area (Desktop) / Hidden on Mobile */}
-        <div className="hidden lg:flex lg:flex-col lg:w-[65%] lg:h-full lg:justify-center text-white">
-          <h2 className="text-4xl font-bold mb-2">{playlist.name}</h2>
-          <p className="text-lg opacity-80">{playlist.description}</p>
-          <div className="mt-8 w-full max-w-md">
-            <ShareBar />
-          </div>
+      {/* Content Wrapper */}
+      <div className="relative z-10 flex flex-col h-full w-full">
+        {/* Top Navigation */}
+        <div className="p-4 lg:p-8">
+          <DetailNav title={title} />
         </div>
 
-        {/* Player Container */}
-        <div className="fixed bottom-[30px] left-4 right-4 z-20 lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-full flex lg:items-center">
-          <div className="w-full flex flex-col gap-2">
-            {/* Share Bar for Mobile - positioned above the player */}
-            <div className="lg:hidden mb-1.5">
+        {/* Main Content Flex Container */}
+        <div className="flex-grow flex flex-col lg:flex-row items-end lg:items-center p-4 lg:p-8 pt-0">
+
+          {/* Left Content Area (Desktop) / Hidden on Mobile */}
+          <div className="hidden lg:flex lg:flex-col lg:w-[65%] lg:h-full lg:justify-center text-white">
+            <h2 className="text-4xl font-bold mb-2">{playlist.name}</h2>
+            <p className="text-lg opacity-80">{playlist.description}</p>
+            <div className="mt-8 w-full max-w-md">
               <ShareBar />
             </div>
+          </div>
 
-            {/* Player */}
-            <PlaylistPlayer
-              tracks={playlist.tracks}
-              playlistName={playlist.name}
-              playlistImage={playlist.image}
-              currentTrackIndex={currentTrackIndex}
-              onTrackChange={setCurrentTrackIndex}
-            />
+          {/* Player Container */}
+          <div className="fixed bottom-[30px] left-4 right-4 z-20 lg:relative lg:bottom-auto lg:left-auto lg:right-auto lg:w-[30%] lg:h-full flex lg:items-center">
+            <div className="w-full flex flex-col gap-2">
+              {/* Share Bar for Mobile - positioned above the player */}
+              <div className="lg:hidden mb-1.5">
+                <ShareBar />
+              </div>
+
+              {/* Player */}
+              <PlaylistPlayer
+                tracks={playlist.tracks}
+                playlistName={playlist.name}
+                playlistImage={playlist.image}
+                currentTrackIndex={currentTrackIndex}
+                onTrackChange={setCurrentTrackIndex}
+              />
+            </div>
           </div>
         </div>
       </div>
