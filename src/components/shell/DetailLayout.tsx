@@ -1,15 +1,19 @@
 import React from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
-import { ChevronLeft } from 'lucide-react';
+import { Outlet } from 'react-router-dom';
+import PageTransition from '../ui/PageTransition';
 
-const DetailLayout: React.FC = () => {
-  const navigate = useNavigate();
+interface DetailLayoutProps {
+  children?: React.ReactNode;
+}
 
+const DetailLayout: React.FC<DetailLayoutProps> = ({ children }) => {
   return (
     <div className="h-screen w-screen bg-global-bg">
       {/* Page Content */}
       <main className="h-full w-full">
-        <Outlet />
+        <PageTransition>
+          {children || <Outlet />}
+        </PageTransition>
       </main>
     </div>
   );

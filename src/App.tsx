@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, useLocation, Outlet } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
 import ConceptHomePage from './components/ConceptHomePage';
@@ -16,6 +17,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import { UIProvider } from './contexts/UIContext';
 import DetailLayout from './components/shell/DetailLayout';
+import PageTransition from './components/ui/PageTransition';
 
 // This wrapper provides the main layout to a group of routes
 const MainLayoutWrapper: React.FC = () => {
@@ -24,17 +26,21 @@ const MainLayoutWrapper: React.FC = () => {
 
   return (
     <Layout currentPage={currentPage} onPageChange={() => {}}>
-      <Outlet />
+      <PageTransition>
+        <Outlet />
+      </PageTransition>
     </Layout>
   );
 };
 
 function App() {
+  const location = useLocation();
   return (
     <UIProvider>
-      <Routes>
-        {/* Routes with the main layout (header, footer, etc.) */}
-        <Route element={<MainLayoutWrapper />}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          {/* Routes with the main layout (header, footer, etc.) */}
+          <Route element={<MainLayoutWrapper />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/concept" element={<ConceptHomePage />} />
           <Route path="/video" element={<Videobg />} />
@@ -59,12 +65,34 @@ function App() {
         </Route>
 
         {/* Auth routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
+        <Route
+          path="/login"
+          element={
+            <PageTransition>
+              <LoginPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PageTransition>
+              <SignUpPage />
+            </PageTransition>
+          }
+        />
 
         {/* Fallback route */}
-        <Route path="*" element={<ConceptHomePage />} />
+        <Route
+          path="*"
+          element={
+            <PageTransition>
+              <ConceptHomePage />
+            </PageTransition>
+          }
+        />
       </Routes>
+      </AnimatePresence>
     </UIProvider>
   );
 }
