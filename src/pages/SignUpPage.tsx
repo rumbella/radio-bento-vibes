@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { useNavigate } from 'react-router-dom';
+import DetailNav from '../components/ui/DetailNav';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -35,7 +36,8 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-transparent">
+    <div className="flex justify-center items-center h-screen bg-transparent pt-16">
+      <DetailNav title="" />
       <div className="w-full max-w-sm p-8 space-y-6 bg-black/20 backdrop-blur-md rounded-3xl shadow-lg text-white">
         <h1 className="text-3xl font-bold text-center">SIGN UP</h1>
         <form onSubmit={handleSignUp} className="space-y-6">
