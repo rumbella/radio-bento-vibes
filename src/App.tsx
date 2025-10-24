@@ -15,6 +15,7 @@ import SinglePodcastPage from './pages/SinglePodcastPage';
 import SingleResidentPage from './pages/SingleResidentPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
+import UserProfilePage from './pages/UserProfilePage';
 import { UIProvider } from './contexts/UIContext';
 import DetailLayout from './components/shell/DetailLayout';
 import PageTransition from './components/ui/PageTransition';
@@ -78,6 +79,15 @@ function App() {
           element={
             <PageTransition>
               <SignUpPage />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <PageTransition>
+              <UserProfilePage />
             </PageTransition>
           }
         />
