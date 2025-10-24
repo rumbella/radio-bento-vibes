@@ -18,6 +18,7 @@ import SignUpPage from './pages/SignUpPage';
 import { UIProvider } from './contexts/UIContext';
 import DetailLayout from './components/shell/DetailLayout';
 import PageTransition from './components/ui/PageTransition';
+import ProfilePage from './pages/ProfilePage';
 
 // This wrapper provides the main layout to a group of routes
 const MainLayoutWrapper: React.FC = () => {
@@ -52,6 +53,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AdminPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
               </ProtectedRoute>
             }
           />

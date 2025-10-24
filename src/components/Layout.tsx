@@ -71,7 +71,13 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage }) => {
             {user ? (
               <>
                 <button onClick={handleLogout} className="text-white bg-black/20 backdrop-blur-md border-none hover:bg-white/30 text-sm py-2 px-4 rounded-full">Logout</button>
-                <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full" />
+                <Link to="/profile">
+                  <img
+                    src={user?.user_metadata.avatar_url || 'https://placehold.co/40x40'}
+                    alt="User Profile"
+                    className="w-8 h-8 rounded-full cursor-pointer"
+                  />
+                </Link>
               </>
             ) : (
               <>
