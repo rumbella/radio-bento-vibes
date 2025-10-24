@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { AuthContext } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import PageTransition from '../components/ui/PageTransition';
 
 const UserProfilePage: React.FC = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   const userName = user?.user_metadata?.full_name || 'User';
   const userAvatarUrl = user?.user_metadata?.avatar_url || 'https://randomuser.me/api/portraits/women/44.jpg';
