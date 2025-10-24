@@ -11,7 +11,7 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({ children }) => {
     <div className="h-screen w-screen bg-global-bg">
       {/* Page Content */}
       <main className="h-full w-full">
-        <PageTransition>
+        <PageTransition direction="right">
           {children || <Outlet />}
         </PageTransition>
       </main>
