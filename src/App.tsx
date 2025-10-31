@@ -14,6 +14,7 @@ import SinglePlaylistPage from './pages/SinglePlaylistPage';
 import SinglePodcastPage from './pages/SinglePodcastPage';
 import SingleResidentPage from './pages/SingleResidentPage';
 import LoginPage from './pages/LoginPage';
+import PreLaunchPage from './pages/PreLaunchPage';
 import SignUpPage from './pages/SignUpPage';
 import UserProfilePage from './pages/UserProfilePage';
 import { UIProvider } from './contexts/UIContext';
@@ -79,6 +80,15 @@ function App() {
           element={
             <PageTransition>
               <SignUpPage />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/pre-launch"
+          element={
+            <PageTransition>
+              <PreLaunchPage />
             </PageTransition>
           }
         />

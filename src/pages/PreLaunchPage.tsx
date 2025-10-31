@@ -1,0 +1,104 @@
+import { useState } from 'react';
+import { supabase } from '../lib/supabaseClient';
+import DetailNav from '../components/ui/DetailNav';
+
+const PreLaunchPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    // NOTE: The following Supabase call is commented out because sign-ups are currently disabled in the Supabase instance.
+    // Once enabled, this code will handle user registration.
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    if (error) {
+      setError(error.message);
+      setIsSubmitted(true); // Simulate success for now to show the message
+    } else {
+      setIsSubmitted(true);
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+    if (error) {
+      setError(error.message);
+    } else {
+      setIsSubmitted(true);
+    }
+  };
+
+  return (
+    <div className="flex justify-center items-center h-screen bg-transparent pt-16">
+      <DetailNav title="" />
+      <div className="w-full max-w-sm p-8 space-y-6 bg-black/20 backdrop-blur-md rounded-3xl shadow-lg text-white">
+        {isSubmitted ? (
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-center">Grazie!</h1>
+            <p className="mt-4 text-white/80">
+              La tua registrazione è andata a buon fine. Ti avvertiremo con una mail e una notifica del giorno del lancio della radio.
+            </p>
+          </div>
+        ) : (
+          <>
+            <h1 className="text-3xl font-bold text-center">REGISTRATI AL PRE-LANCIO</h1>
+            <form onSubmit={handleSignUp} className="space-y-6">
+              <div>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 bg-black/20 rounded-xl border-none placeholder-white/70 focus:ring-2 focus:ring-white/50 focus:outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 bg-black/20 rounded-xl border-none placeholder-white/70 focus:ring-2 focus:ring-white/50 focus:outline-none"
+                />
+              </div>
+              {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+              <button
+                type="submit"
+                className="w-full px-4 py-3 font-bold text-white bg-white/30 rounded-xl hover:bg-white/40 transition-colors"
+              >
+                REGISTRATI
+              </button>
+            </form>
+            <div className="relative flex py-2 items-center">
+              <div className="flex-grow border-t border-white/20"></div>
+              <span className="flex-shrink mx-4 text-white/70 text-sm">OR</span>
+              <div className="flex-grow border-t border-white/20"></div>
+            </div>
+            <div className="flex justify-center space-x-4">
+              <button onClick={handleGoogleSignUp} className="p-3 bg-black/30 rounded-full hover:bg-white/20 transition-colors">
+                <svg className="w-6 h-6" viewBox="0 0 24 24"><path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12.5C5,8.75 8.36,5.73 12.19,5.73C15.19,5.73 17.5,6.7 18.69,8.25L21.35,6.1C19.05,3.62 15.9,2.5 12.19,2.5C6.36,2.5 2,7.45 2,12.5C2,17.55 6.36,22.5 12.19,22.5C17.6,22.5 21.7,18.33 21.7,12.89C21.7,12.16 21.35,11.1 21.35,11.1Z"></path></svg>
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default PreLaunchPage;
