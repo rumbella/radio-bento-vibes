@@ -90,7 +90,7 @@ const PreLaunchPage = () => {
           </div>
         ) : (
           <>
-            <h1 className="text-3xl font-bold text-center">REGISTRATI AL PRE-LANCIO</h1>
+            <h1 className="text-2xl font-bold text-center">registrati per il lancio di Radio Amblè !</h1>
             <form onSubmit={handleSignUp} className="space-y-6">
               <div>
                 <input
