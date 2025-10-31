@@ -1,8 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import DetailNav from '../components/ui/DetailNav';
+
+const images = [
+  'https://res.cloudinary.com/thinkdigital/image/upload/c_pad,b_gen_fill,ar_16:9/v1758625184/radio%20amble%20immagini/gemini-2.5-flash-image-preview_nano-banana__Steeve_Macqueen_che_.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1758714158/1758714007182-679c260b-9ed1-4078-8502-2176ff6bfa41_ihqh3f.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1758714241/1758714137173-ac8f5ced-b1f9-48e1-9d1e-e8550fff56ca_chjfs9.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/c_pad,b_gen_fill,ar_16:9/v1758625066/radio%20amble%20immagini/Generated_Image_September_23_2025_-_11_38AM.png',
+  'https://res.cloudinary.com/thinkdigital/image/upload/v1758716754/1758715806855-177b2083-d42a-4ea7-951c-bfcdc1838437_ejvwya.png'
+];
 
 const PreLaunchPage = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(
+    Math.floor(Math.random() * images.length)
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prevIndex => {
+        let newIndex;
+        do {
+          newIndex = Math.floor(Math.random() * images.length);
+        } while (newIndex === prevIndex);
+        return newIndex;
+      });
+    }, 180000); // 3 minutes in milliseconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -40,9 +65,22 @@ const PreLaunchPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-transparent pt-16">
-      <DetailNav title="" />
-      <div className="w-full max-w-sm p-8 space-y-6 bg-black/20 backdrop-blur-md rounded-3xl shadow-lg text-white">
+    <div className="relative flex justify-center items-center h-screen">
+      <div className="fixed top-0 left-0 w-full h-full z-0">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: `url('${image}')`
+            }}
+          />
+        ))}
+        <div className="absolute inset-0 bg-black/30"></div>
+      </div>
+      <div className="relative w-full max-w-sm p-8 space-y-6 bg-black/20 backdrop-blur-md rounded-3xl shadow-lg text-white">
         {isSubmitted ? (
           <div className="text-center">
             <h1 className="text-3xl font-bold text-center">Grazie!</h1>
