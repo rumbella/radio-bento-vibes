@@ -2,7 +2,7 @@
   "name": "Radio Amblè - Fresh Sound and Podcasts",
   "short_name": "Radio Amblè",
   "description": "Fresh sound and podcasts - La tua radio digitale",
-  "start_url": "/",
+  "id": "/",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "fullscreen",
