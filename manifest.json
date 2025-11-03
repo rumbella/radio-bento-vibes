@@ -3,7 +3,7 @@
   "short_name": "Radio Amblè",
   "description": "Fresh sound and podcasts - La tua radio digitale",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",  
   "background_color": "#151419",
   "theme_color": "#151419",
   "orientation": "portrait",
