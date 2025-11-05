@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import PageTransition from '../components/ui/PageTransition';
@@ -7,7 +7,7 @@ import EditProfileModal from '../components/ui/EditProfileModal';
 import { supabase } from '../lib/supabaseClient';
 
 const UserProfilePage: React.FC = () => {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pageBackground, setPageBackground] = useState(user?.user_metadata?.page_background_url || 'https://placehold.co/1200x1200');
@@ -72,12 +72,22 @@ const UserProfilePage: React.FC = () => {
 
     if (updateError) {
       console.error('Error updating user metadata:', updateError);
+    } else {
+      await refreshUser();
     }
 
     setPageBackground(pageBackgroundUrl);
     setCardBackground(cardBackgroundUrl);
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (user) {
+      setPageBackground(user.user_metadata?.page_background_url || 'https://placehold.co/1200x1200');
+      setCardBackground(user.user_metadata?.card_background_url || 'https://placehold.co/300x300');
+      setUserAvatarUrl(user.user_metadata?.avatar_url || 'https://randomuser.me/api/portraits/women/44.jpg');
+    }
+  }, [user]);
 
   return (
     <PageTransition>

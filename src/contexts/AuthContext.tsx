@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabaseClient';
 
@@ -6,18 +6,32 @@ interface AuthContextType {
   session: Session | null;
   user: User | null;
   loading: boolean;
+  refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
   session: null,
   user: null,
   loading: true,
+  refreshUser: async () => {},
 });
 
 export const AuthProvider = (props: React.PropsWithChildren<{}>) => {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const refreshUser = useCallback(async () => {
+    const { data, error } = await supabase.auth.refreshSession();
+    if (error) {
+      console.error('Error refreshing session:', error);
+      setSession(null);
+      setUser(null);
+    } else {
+      setSession(data.session);
+      setUser(data.session?.user ?? null);
+    }
+  }, []);
 
   useEffect(() => {
     const getSession = async () => {
@@ -45,6 +59,7 @@ export const AuthProvider = (props: React.PropsWithChildren<{}>) => {
     session,
     user,
     loading,
+    refreshUser,
   };
 
   return <AuthContext.Provider value={value} {...props} />;
