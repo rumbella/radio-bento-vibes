@@ -22,14 +22,11 @@ export const AuthProvider = (props: React.PropsWithChildren<{}>) => {
   const [loading, setLoading] = useState(true);
 
   const refreshUser = useCallback(async () => {
-    const { data, error } = await supabase.auth.refreshSession();
+    const { data: { user }, error } = await supabase.auth.getUser();
     if (error) {
-      console.error('Error refreshing session:', error);
-      setSession(null);
-      setUser(null);
+      console.error('Error fetching fresh user data:', error);
     } else {
-      setSession(data.session);
-      setUser(data.session?.user ?? null);
+      setUser(user);
     }
   }, []);
 
