@@ -15,8 +15,6 @@ const UserProfilePage: React.FC = () => {
   const [userAvatarUrl, setUserAvatarUrl] = useState(user?.user_metadata?.avatar_url || 'https://randomuser.me/api/portraits/women/44.jpg');
 
   const [newPageBackgroundFile, setNewPageBackgroundFile] = useState<File | null>(null);
-  const [newCardBackgroundFile, setNewCardBackgroundFile] = useState<File | null>(null);
-
   const userName = user?.user_metadata?.full_name || 'User';
 
   const avatars = [
@@ -46,27 +44,11 @@ const UserProfilePage: React.FC = () => {
       }
     }
 
-    let cardBackgroundUrl = cardBackground;
-    if (newCardBackgroundFile) {
-      const fileExt = newCardBackgroundFile.name.split('.').pop();
-      const filePath = `${user.id}/card_background.${fileExt}`;
-      const { data, error } = await supabase.storage.from('backgrounds').upload(filePath, newCardBackgroundFile, {
-        cacheControl: '3600',
-        upsert: true,
-      });
-      if (error) {
-        console.error('Error uploading card background:', error);
-      } else if (data) {
-        const { data: { publicUrl } } = supabase.storage.from('backgrounds').getPublicUrl(data.path);
-        cardBackgroundUrl = publicUrl;
-      }
-    }
-
     const { error: updateError } = await supabase.auth.updateUser({
       data: {
         avatar_url: userAvatarUrl,
         page_background_url: pageBackgroundUrl,
-        card_background_url: cardBackgroundUrl,
+        card_background_url: userAvatarUrl,
       },
     });
 
@@ -75,9 +57,6 @@ const UserProfilePage: React.FC = () => {
     } else {
       await refreshUser();
     }
-
-    setPageBackground(pageBackgroundUrl);
-    setCardBackground(cardBackgroundUrl);
     setIsModalOpen(false);
   };
 
@@ -142,7 +121,6 @@ const UserProfilePage: React.FC = () => {
         selectedAvatar={userAvatarUrl}
         onSelectAvatar={setUserAvatarUrl}
         onPageBackgroundChange={setNewPageBackgroundFile}
-        onCardBackgroundChange={setNewCardBackgroundFile}
         currentPageBackground={pageBackground}
         currentCardBackground={cardBackground}
       />
