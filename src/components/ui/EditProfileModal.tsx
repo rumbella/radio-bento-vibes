@@ -8,8 +8,6 @@ interface EditProfileModalProps {
   avatars: string[];
   selectedAvatar: string;
   onSelectAvatar: (avatarUrl: string) => void;
-  onPageBackgroundChange: (file: File) => void;
-  currentPageBackground: string;
   currentCardBackground: string;
 }
 
@@ -20,24 +18,11 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   avatars,
   selectedAvatar,
   onSelectAvatar,
-  onPageBackgroundChange,
-  currentPageBackground,
   currentCardBackground
 }) => {
-  const [pagePreview, setPagePreview] = useState<string | null>(null);
-
   if (!isOpen) {
     return null;
   }
-
-  const handlePageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setPagePreview(URL.createObjectURL(file));
-      onPageBackgroundChange(file);
-    }
-  };
-
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
@@ -61,20 +46,6 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 className={`w-16 h-16 rounded-full object-cover cursor-pointer border-4 ${selectedAvatar === avatar ? 'border-blue-500' : 'border-transparent'}`}
               />
             ))}
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div>
-            <h4 className="font-semibold mb-2">Upload page background</h4>
-            <input
-              type="file"
-              onChange={handlePageFileChange}
-              className="w-full text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20"
-            />
-            <div className="mt-4">
-              <img src={pagePreview || currentPageBackground} alt="Page background preview" className="w-full h-32 object-cover rounded-lg" />
-            </div>
           </div>
         </div>
 

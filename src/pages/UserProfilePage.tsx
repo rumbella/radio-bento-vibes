@@ -10,11 +10,10 @@ const UserProfilePage: React.FC = () => {
   const { user, refreshUser } = useAuth();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [pageBackground, setPageBackground] = useState(user?.user_metadata?.page_background_url || 'https://placehold.co/1200x1200');
   const [cardBackground, setCardBackground] = useState(user?.user_metadata?.card_background_url || 'https://placehold.co/300x300');
   const [userAvatarUrl, setUserAvatarUrl] = useState(user?.user_metadata?.avatar_url || 'https://randomuser.me/api/portraits/women/44.jpg');
+  const [message, setMessage] = useState('');
 
-  const [newPageBackgroundFile, setNewPageBackgroundFile] = useState<File | null>(null);
   const userName = user?.user_metadata?.full_name || 'User';
 
   const avatars = [
@@ -28,26 +27,9 @@ const UserProfilePage: React.FC = () => {
   const handleSave = async () => {
     if (!user) return;
 
-    let pageBackgroundUrl = pageBackground;
-    if (newPageBackgroundFile) {
-      const fileExt = newPageBackgroundFile.name.split('.').pop();
-      const filePath = `${user.id}/page_background.${fileExt}`;
-      const { data, error } = await supabase.storage.from('backgrounds').upload(filePath, newPageBackgroundFile, {
-        cacheControl: '3600',
-        upsert: true,
-      });
-      if (error) {
-        console.error('Error uploading page background:', error);
-      } else if (data) {
-        const { data: { publicUrl } } = supabase.storage.from('backgrounds').getPublicUrl(data.path);
-        pageBackgroundUrl = publicUrl;
-      }
-    }
-
     const { error: updateError } = await supabase.auth.updateUser({
       data: {
         avatar_url: userAvatarUrl,
-        page_background_url: pageBackgroundUrl,
         card_background_url: userAvatarUrl,
       },
     });
@@ -60,9 +42,20 @@ const UserProfilePage: React.FC = () => {
     setIsModalOpen(false);
   };
 
+  const handleSendMessage = async () => {
+    if (!user || !message.trim()) return;
+
+    const { error } = await supabase.from('messages').insert([{ user_id: user.id, message }]);
+
+    if (error) {
+      console.error('Error sending message:', error);
+    } else {
+      setMessage('');
+    }
+  };
+
   useEffect(() => {
     if (user) {
-      setPageBackground(user.user_metadata?.page_background_url || 'https://placehold.co/1200x1200');
       setCardBackground(user.user_metadata?.card_background_url || 'https://placehold.co/300x300');
       setUserAvatarUrl(user.user_metadata?.avatar_url || 'https://randomuser.me/api/portraits/women/44.jpg');
     }
@@ -70,10 +63,7 @@ const UserProfilePage: React.FC = () => {
 
   return (
     <PageTransition>
-      <div
-        className="relative min-h-screen bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: `url('${pageBackground}')` }}
-      >
+      <div className="relative min-h-screen flex items-center justify-center">
         <DetailNav title="" />
         <div className="pt-16">
           <div className="relative w-full max-w-sm mx-auto">
@@ -111,6 +101,21 @@ const UserProfilePage: React.FC = () => {
                 </div>
               </div>
             </motion.div>
+            <div className="mt-4">
+              <div className="bg-black/20 backdrop-blur-md rounded-3xl p-4 flex items-center">
+                <input
+                  type="text"
+                  placeholder="Send a message..."
+                  className="w-full bg-transparent border-none text-white placeholder-white/70 focus:ring-0"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                />
+                <button className="text-white" onClick={handleSendMessage}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -120,8 +125,6 @@ const UserProfilePage: React.FC = () => {
         avatars={avatars}
         selectedAvatar={userAvatarUrl}
         onSelectAvatar={setUserAvatarUrl}
-        onPageBackgroundChange={setNewPageBackgroundFile}
-        currentPageBackground={pageBackground}
         currentCardBackground={cardBackground}
       />
     </PageTransition>
