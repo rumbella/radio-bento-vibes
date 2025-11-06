@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import PageTransition from '../components/ui/PageTransition';
 import DetailNav from '../components/ui/DetailNav';
 import EditProfileModal from '../components/ui/EditProfileModal';
+import Badge from '../components/ui/Badge';
 import { supabase } from '../lib/supabaseClient';
 
 const UserProfilePage: React.FC = () => {
@@ -64,6 +65,7 @@ const UserProfilePage: React.FC = () => {
   return (
     <PageTransition>
       <div className="relative min-h-screen flex items-center justify-center">
+        <Badge text="Ascoltatore Fedele" />
         <DetailNav title="" />
         <div className="pt-16">
           <div className="relative w-full max-w-sm mx-auto">
@@ -101,6 +103,16 @@ const UserProfilePage: React.FC = () => {
                 </div>
               </div>
             </motion.div>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              <div className="bg-black/20 backdrop-blur-md rounded-3xl p-4 text-center">
+                <h3 className="text-white text-2xl font-bold">1,234</h3>
+                <p className="text-white/70">Likes</p>
+              </div>
+              <div className="bg-black/20 backdrop-blur-md rounded-3xl p-4 text-center">
+                <h3 className="text-white text-2xl font-bold">56</h3>
+                <p className="text-white/70">Listening Hours</p>
+              </div>
+            </div>
             <div className="mt-4">
               <div className="bg-black/20 backdrop-blur-md rounded-3xl p-4 flex items-center">
                 <input
