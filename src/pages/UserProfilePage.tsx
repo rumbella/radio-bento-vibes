@@ -5,7 +5,15 @@ import PageTransition from '../components/ui/PageTransition';
 import DetailNav from '../components/ui/DetailNav';
 import EditProfileModal from '../components/ui/EditProfileModal';
 import Badge from '../components/ui/Badge';
+import Sticker from '../components/ui/Sticker';
 import { supabase } from '../lib/supabaseClient';
+
+interface StickerData {
+  id: number;
+  image_url: string;
+  x: number;
+  y: number;
+}
 
 const UserProfilePage: React.FC = () => {
   const { user, refreshUser } = useAuth();
@@ -14,6 +22,7 @@ const UserProfilePage: React.FC = () => {
   const [cardBackground, setCardBackground] = useState(user?.user_metadata?.card_background_url || 'https://placehold.co/300x300');
   const [userAvatarUrl, setUserAvatarUrl] = useState(user?.user_metadata?.avatar_url || 'https://randomuser.me/api/portraits/women/44.jpg');
   const [message, setMessage] = useState('');
+  const [stickers, setStickers] = useState<StickerData[]>([]);
 
   const userName = user?.user_metadata?.full_name || 'User';
 
@@ -55,8 +64,42 @@ const UserProfilePage: React.FC = () => {
     }
   };
 
+  const addSticker = async () => {
+    if (!user) return;
+
+    const { data, error } = await supabase
+      .from('stickers')
+      .insert([{ user_id: user.id, image_url: 'https://res.cloudinary.com/thinkdigital/image/upload/v1761035884/maskable-icon_bouqpq.png', x: 0, y: 0 }])
+      .select();
+
+    if (error) {
+      console.error('Error adding sticker:', error);
+    } else {
+      setStickers([...stickers, data[0]]);
+    }
+  };
+
+  const updateStickerPosition = async (id: number, x: number, y: number) => {
+    const { error } = await supabase.from('stickers').update({ x, y }).match({ id });
+
+    if (error) {
+      console.error('Error updating sticker position:', error);
+    }
+  };
+
   useEffect(() => {
     if (user) {
+      const fetchStickers = async () => {
+        const { data, error } = await supabase.from('stickers').select('*').eq('user_id', user.id);
+
+        if (error) {
+          console.error('Error fetching stickers:', error);
+        } else {
+          setStickers(data);
+        }
+      };
+
+      fetchStickers();
       setCardBackground(user.user_metadata?.card_background_url || 'https://placehold.co/300x300');
       setUserAvatarUrl(user.user_metadata?.avatar_url || 'https://randomuser.me/api/portraits/women/44.jpg');
     }
@@ -65,8 +108,23 @@ const UserProfilePage: React.FC = () => {
   return (
     <PageTransition>
       <div className="relative min-h-screen flex items-center justify-center">
+        {stickers.map((sticker) => (
+          <Sticker
+            key={sticker.id}
+            id={sticker.id}
+            imageUrl={sticker.image_url}
+            x={sticker.x}
+            y={sticker.y}
+            onStop={updateStickerPosition}
+          />
+        ))}
         <Badge text="Ascoltatore Fedele" />
         <DetailNav title="" />
+        <div className="fixed bottom-4 right-4">
+          <button onClick={addSticker} className="bg-white/30 text-white rounded-full p-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </button>
+        </div>
         <div className="pt-16">
           <div className="relative w-full max-w-sm mx-auto">
             <motion.div
