@@ -6,19 +6,15 @@ import DetailNav from '../components/ui/DetailNav';
 import EditProfileModal from '../components/ui/EditProfileModal';
 import Badge from '../components/ui/Badge';
 import Sticker from '../components/ui/Sticker';
+import StickerModal from '../components/ui/StickerModal';
 import { supabase } from '../lib/supabaseClient';
-
-interface StickerData {
-  id: number;
-  image_url: string;
-  x: number;
-  y: number;
-}
+import { StickerData } from '../types';
 
 const UserProfilePage: React.FC = () => {
   const { user, refreshUser } = useAuth();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isStickerModalOpen, setIsStickerModalOpen] = useState(false);
   const [cardBackground, setCardBackground] = useState(user?.user_metadata?.card_background_url || 'https://placehold.co/300x300');
   const [userAvatarUrl, setUserAvatarUrl] = useState(user?.user_metadata?.avatar_url || 'https://randomuser.me/api/portraits/women/44.jpg');
   const [message, setMessage] = useState('');
@@ -49,7 +45,7 @@ const UserProfilePage: React.FC = () => {
     } else {
       await refreshUser();
     }
-    setIsModalOpen(false);
+    setIsEditModalOpen(false);
   };
 
   const handleSendMessage = async () => {
@@ -64,12 +60,12 @@ const UserProfilePage: React.FC = () => {
     }
   };
 
-  const addSticker = async () => {
+  const addSticker = async (imageUrl: string) => {
     if (!user) return;
 
     const { data, error } = await supabase
       .from('stickers')
-      .insert([{ user_id: user.id, image_url: 'https://res.cloudinary.com/thinkdigital/image/upload/v1761035884/maskable-icon_bouqpq.png', x: 0, y: 0 }])
+      .insert([{ user_id: user.id, image_url: imageUrl, x: 0, y: 0 }])
       .select();
 
     if (error) {
@@ -121,7 +117,7 @@ const UserProfilePage: React.FC = () => {
         <Badge text="Ascoltatore Fedele" />
         <DetailNav title="" />
         <div className="fixed bottom-4 right-4">
-          <button onClick={addSticker} className="bg-white/30 text-white rounded-full p-4">
+          <button onClick={() => setIsStickerModalOpen(true)} className="bg-white/30 text-white rounded-full p-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
           </button>
         </div>
@@ -154,7 +150,7 @@ const UserProfilePage: React.FC = () => {
                         <h2 className="text-white text-lg font-bold">{userName}</h2>
                       </div>
                     </div>
-                    <button onClick={() => setIsModalOpen(true)} className="text-white">
+                    <button onClick={() => setIsEditModalOpen(true)} className="text-white">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83S 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
                     </button>
                   </div>
@@ -190,12 +186,17 @@ const UserProfilePage: React.FC = () => {
         </div>
       </div>
       <EditProfileModal
-        isOpen={isModalOpen}
+        isOpen={isEditModalOpen}
         onClose={handleSave}
         avatars={avatars}
         selectedAvatar={userAvatarUrl}
         onSelectAvatar={setUserAvatarUrl}
         currentCardBackground={cardBackground}
+      />
+      <StickerModal
+        isOpen={isStickerModalOpen}
+        onClose={() => setIsStickerModalOpen(false)}
+        onSelectSticker={addSticker}
       />
     </PageTransition>
   );
